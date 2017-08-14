@@ -7,7 +7,7 @@ export const DashboardRoutes: Routes = [
 
       path: '',
       children: [ {
-        path: 'dashboard',
+        path: 'home',
         component: DashboardComponent
     }]
 }

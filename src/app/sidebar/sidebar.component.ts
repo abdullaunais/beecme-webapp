@@ -218,10 +218,15 @@ export interface ChildrenItems {
 
 //Menu Items
 export const ROUTES: RouteInfo[] = [{
-        path: '/dashboard',
-        title: 'Dashboard',
+        path: '/home',
+        title: 'Home',
         type: 'link',
-        icontype: 'dashboard'
+        icontype: 'home'
+    },{
+        path: '/categories',
+        title: 'Categories',
+        type: 'link',
+        icontype: 'apps'
     },{
         path: '/components',
         title: 'Components',
@@ -258,26 +263,10 @@ export const ROUTES: RouteInfo[] = [{
             {path: 'datatables.net', title: 'Datatables.net', ab:'DT'}
         ]
     },{
-        path: '/maps',
-        title: 'Maps',
-        type: 'sub',
-        icontype: 'place',
-        children: [
-            {path: 'google', title: 'Google Maps', ab:'GM'},
-            {path: 'fullscreen', title: 'Full Screen Map', ab:'FSM'},
-            {path: 'vector', title: 'Vector Map', ab:'VM'}
-        ]
-    },{
         path: '/widgets',
         title: 'Widgets',
         type: 'link',
         icontype: 'widgets'
-
-    },{
-        path: '/charts',
-        title: 'Charts',
-        type: 'link',
-        icontype: 'timeline'
 
     },{
         path: '/calendar',
