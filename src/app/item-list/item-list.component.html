@@ -1,0 +1,40 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-4 col-md-6" *ngFor="let item of itemList">
+                <div class="card card-product">
+                    <div class="card-image cart-item-image-wrapper" data-header-animation="true">
+                        <img class="img cart-item-image" src="assets/img/food.jpg" alt="Item Image">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-actions">
+                            <button type="button" class="btn btn-default btn-simple">Item Description</button>
+                        </div>
+                        <h4 class="card-title">
+                            Item Name
+                        </h4>
+                        <div class="card-description">
+                            <button class="btn btn-info cart-item-btn-comment">Add Comment</button>
+                        </div>
+                        <div class="card-description">
+                            <div class="pull-left cart-item-price">
+                                <span style="font-weight: 300;">2 UNIT X LKR 10 =</span>
+                            </div>
+                            <div class="pull-right cart-item-price">
+                                <span style="font-weight: 400;">LKR 20.00</span>
+                            </div>
+                            <div style="clear: both;"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-default cart-item-action pull-right"><i class="fa fa-trash"></i> &nbsp;Remove</button>
+                        <button class="btn btn-info cart-item-action pull-right"><i class="fa fa-info-circle"></i> &nbsp;Details</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

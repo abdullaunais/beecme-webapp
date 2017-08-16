@@ -19,6 +19,12 @@ export const AppRoutes: Routes = [
             }, {
                 path: 'categories',
                 loadChildren: './categories/categories.module#CategoriesModule',
+            }, {
+                path: 'cart',
+                loadChildren: './cart/cart.module#CartModule',
+            }, {
+                path: 'category/:id',
+                loadChildren: './shop-list/shop-list.module#ShopListModule',
             }
             // , {
             //     path: 'components',

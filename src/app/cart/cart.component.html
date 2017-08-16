@@ -1,0 +1,77 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-sm-12 col-md-12 col-lg-7">
+                <div class="row" style="margin-left:0px; margin-right: 0px;">
+                    <div class="card cart-card">
+                        <div class="card-content">
+                            <h4>Cart Items</h4>
+                            <div class="row cart-item-row" *ngFor="let item of cartList">
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 cart-item-image-wrapper">
+                                    <img src="assets/img/food.jpg" class="img-responsive cart-item-image">
+                                </div>
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 cart-item-details-wrapper">
+                                    <h5 class="cart-item-title">Item Name</h5>
+                                    <button class="btn btn-default cart-item-btn-comment">Add Comment</button>
+                                    <div class="cart-item-price-wrapper">
+                                        <p class="pull-left no-margin"><span style="font-weight: 300;">2 UNIT X 10 LKR = </span></p>
+                                        <p class="pull-right no-margin"><span style="font-weight: 400;">LKR 20.00</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row cart-item-row">
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                </div>
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                    <div>
+                                        <p class="pull-left no-margin"><span style="font-weight: 300;">DELIVERY FEE </span></p>
+                                        <p class="pull-right no-margin"><span style="font-weight: 400;">LKR 20.00</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row cart-item-row">
+                                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    </div>
+                                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <div>
+                                            <p class="pull-left no-margin"><span style="font-weight: 300;">FINAL TOTAL </span></p>
+                                            <p class="pull-right no-margin"><span style="font-weight: 700;">LKR 40.00</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div style="clear: both"></div>
+                        </div>
+                        <!-- <div class="card-footer">
+                            <button class="btn btn-default cart-item-action pull-right"><i class="fa fa-trash"></i> &nbsp;Remove</button>
+                            <button class="btn btn-info cart-item-action pull-right"><i class="fa fa-info-circle"></i> &nbsp;Details</button>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-5">
+                <div class="row" style="margin-left: 0px; margin-right: 0px;">
+                    <div class="card cart-card">
+                        <div class="card-content">
+                            <h4 id="new-address-heading" style="color:#999;">
+                                New Address
+                                <div class="row press pull-right">
+                                    <input type="checkbox" id="unchecked" class="cbx hidden" (change)="toggleNewAddress()" [(ngModel)]="isNewAddress" />
+                                    <label for="unchecked" class="lbl"></label>
+                                </div>
+                            </h4>
+                            <div class="row cart-item-row" *ngIf="isNewAddress">
+                                Add New Address
+                            </div>
+                            <div class="row cart-item-row" *ngIf="!isNewAddress">
+                                    Select Available Address
+                                </div>
+                            <div style="clear: both"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
