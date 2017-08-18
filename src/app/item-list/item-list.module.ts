@@ -15,4 +15,4 @@ import { ItemListComponent } from './item-list.component';
     declarations: [ItemListComponent]
 })
 
-export class CartModule {}
+export class ItemListModule {}

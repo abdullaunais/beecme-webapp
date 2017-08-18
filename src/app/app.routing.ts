@@ -25,6 +25,9 @@ export const AppRoutes: Routes = [
             }, {
                 path: 'category/:id',
                 loadChildren: './shop-list/shop-list.module#ShopListModule',
+            }, {
+                path: 'shop/:id',
+                loadChildren: './item-list/item-list.module#ItemListModule',
             }
             // , {
             //     path: 'components',

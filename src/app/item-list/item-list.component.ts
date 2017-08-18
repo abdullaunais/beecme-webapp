@@ -1,11 +1,66 @@
 import { Component } from '@angular/core';
+import { DeliveryService } from "../services/delivery.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: 'app-item-list',
     templateUrl: './item-list.component.html',
-    styleUrls: ['./item-list.component.css']
+    styleUrls: ['./item-list.component.css'],
+    providers: [DeliveryService]
 })
 export class ItemListComponent {
-    itemList : Array<any> = [1,2,3];
-    constructor() {}
+
+  start: number = 0;
+  offset: number = 20;
+
+  cartCount: number;
+  isLoading: boolean;
+  isAvailable: boolean;
+  noMoreItems: boolean;
+
+  shop: any = {};
+
+    items : Array<any> = [];
+    constructor(        private route: ActivatedRoute,
+        private deliveryService: DeliveryService) {
+        this.isLoading = true;
+        this.isAvailable = true;
+        this.noMoreItems = false;
+    }
+
+    ngOnInit() {
+        this.route.params.subscribe(params => {
+            if (params['id']) {
+                this.shop['userId'] = params.id;
+                this.initialize();
+            }
+        });
+    }
+
+    initialize() {
+        let userId = this.shop['userId'];
+        this.deliveryService.getItemByShop(userId, this.start, this.offset).then((data) => {
+          if (data['itemlist']) {
+            if (data['itemlist'].length > 0) {
+              this.isAvailable = true;
+              let timeout = 0;
+              data['itemlist'].forEach(item => {
+                setTimeout(() => {
+                  this.items.push(item);
+                }, timeout += 100);
+              });
+            } else {
+              this.items = [];
+              this.isAvailable = false;
+            }
+          } else {
+            this.items = [];
+            this.isAvailable = false;
+          }
+          this.isLoading = false;
+        }).catch(err => {
+          this.isLoading = false;
+          this.isAvailable = false;
+        });
+      }
 }
