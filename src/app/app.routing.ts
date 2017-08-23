@@ -28,6 +28,9 @@ export const AppRoutes: Routes = [
             }, {
                 path: 'shop/:id',
                 loadChildren: './item-list/item-list.module#ItemListModule',
+            }, {
+                path: 'item/:id',
+                loadChildren: './details/details.module#DetailsModule',
             }
             // , {
             //     path: 'components',

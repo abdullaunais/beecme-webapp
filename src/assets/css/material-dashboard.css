@@ -28,6 +28,28 @@
  * This mixin contains shared option styles between the select and
  * autocomplete components.
  */
+
+
+.color-primary {
+  color: #2962ff;
+}
+
+.color-secondary {
+  color: #00c853;
+}
+
+.color-warning {
+  color: #ffab00;
+}
+
+.color-danger {
+  color: #d50000;
+}
+
+.color-ui-theme {
+  color: #6200ea;
+}
+
 .noUi-target,
 .noUi-target * {
   -webkit-touch-callout: none;
