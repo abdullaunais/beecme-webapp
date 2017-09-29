@@ -23,15 +23,18 @@ export const AppRoutes: Routes = [
                 path: 'cart',
                 loadChildren: './cart/cart.module#CartModule',
             }, {
+                path: 'orders',
+                loadChildren: './order-history/order-history.module#OrderHistoryModule',
+            }, {
                 path: 'category/:id',
                 loadChildren: './shop-list/shop-list.module#ShopListModule',
             }, {
                 path: 'shop/:id',
                 loadChildren: './item-list/item-list.module#ItemListModule',
             }, {
-                path: 'item/:id',
+                path: 'shop/:shopid/item/:itemid',
                 loadChildren: './details/details.module#DetailsModule',
-            }
+            },
             // , {
             //     path: 'components',
             //     loadChildren: './components/components.module#ComponentsModule'
@@ -47,21 +50,23 @@ export const AppRoutes: Routes = [
             // }, {
             //     path: 'calendar',
             //     loadChildren: './calendar/calendar.module#CalendarModule'
-            // }, {
-            //     path: '',
-            //     loadChildren: './userpage/user.module#UserModule'
-            // }, {
+            // },
+            {
+                path: '',
+                loadChildren: './userpage/user.module#UserModule'
+            }
+            // , {
             //     path: '',
             //     loadChildren: './timeline/timeline.module#TimelineModule'
             // }
         ]
     },
-    // {
-    //     path: '',
-    //     component: AuthLayoutComponent,
-    //     children: [{
-    //         path: 'pages',
-    //         loadChildren: './pages/pages.module#PagesModule'
-    //     }]
-    // }
+    {
+        path: '',
+        component: AuthLayoutComponent,
+        children: [{
+            path: 'pages',
+            loadChildren: './pages/pages.module#PagesModule'
+        }]
+    }
 ];

@@ -1,23 +1,24 @@
 <div class="row">
   <div class="col-lg-4 col-md-6" *ngFor="let category of categories">
-    <div class="card card-product">
-      <div class="card-image category-image-wrapper" data-header-animation="true">
-        <img class="img" [src]="category.imageEn" alt="Category Image">
-      </div>
-      <div class="card-content">
-        <div class="card-actions">
-          <button type="button" class="btn btn-default btn-simple">
+    <a href="/category/{{category.categoryId}}">
+      <div class="card card-product">
+        <div class="card-image category-image-wrapper" data-header-animation="true">
+          <img class="img" [src]="category.imageEn" alt="">
+        </div>
+        <div class="card-content">
+          <div class="card-actions">
+            <button type="button" class="btn btn-default btn-simple">
                         2 Shops Available
                     </button>
+          </div>
+          <h4 class="card-title">
+            {{category.nameEn}}
+          </h4>
+          <div class="card-description">
+            {{category.descriptionEn}}
+          </div>
         </div>
-        <h4 class="card-title">
-          {{category.nameEn}}
-        </h4>
-        <div class="card-description">
-          {{category.descriptionEn}}
-        </div>
-      </div>
-      <!-- <div class="card-footer">
+        <!-- <div class="card-footer">
                 <div class="price">
                     <h4>$899/night</h4>
                 </div>
@@ -25,6 +26,8 @@
                     <p class="category"><i class="material-icons">place</i> Barcelona, Spain</p>
                 </div>
             </div> -->
-    </div>
+      </div>
+
+    </a>
   </div>
 </div>

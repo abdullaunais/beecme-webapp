@@ -3,35 +3,43 @@
         <div class="row">
 
             <div class="col-lg-4 col-md-6" *ngFor="let item of items">
-                <div class="card card-product">
-                    <div class="card-image cart-item-image-wrapper" data-header-animation="true">
-                        <img class="img cart-item-image" [src]="item.img1" alt="Item Image">
-                    </div>
-                    <div class="card-content">
-                        <div class="card-actions">
-                            <button type="button" class="btn btn-default btn-simple">{{item.descriptionEn}}</button>
+                <a href="item/{{item.itemCode}}">
+                    <div class="card card-product">
+                        <div class="card-image card-item-image-wrapper" data-header-animation="true">
+                            <img class="img card-item-image" [src]="item.img1" alt="Item Image">
                         </div>
-                        <h4 class="card-title">
-                            {{item.nameEn}}
-                        </h4>
-                        <!-- <div class="card-description">
+                        <div class="card-content">
+                            <div class="card-actions" style="top:-62px;">
+                                <div class="btn btn-default btn-simple card-item-desc">{{item.descriptionEn}}</div>
+                            </div>
+                            <h4 class="card-title">
+                                {{item.nameEn}}
+                            </h4>
+                            <!-- <div class="card-description">
                             <button class="btn btn-info cart-item-btn-comment">Add Comment</button>
                         </div> -->
-                        <div class="card-description">
-                            <!-- <div class="pull-left cart-item-price">
+                            <div class="card-description">
+                                <!-- <div class="pull-left cart-item-price">
                                 <span style="font-weight: 300;">2 UNIT X LKR 10 =</span>
                             </div> -->
-                            <div class="pull-right cart-item-price">
-                                <span style="font-weight: 400;">LKR 20.00</span>
+                                <div>
+                                    <span class="badge badge-info card-item-pricetag">LKR {{item.price}}.00 / {{ item.unit.toUpperCase() }}</span>
+                                </div>
+                                <div style="clear: both;"></div>
                             </div>
-                            <div style="clear: both;"></div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row" style="margin: 0; display: block;">
+                                <div class="col col-lg-9 col-md-9" style="margin: 0; padding: 0; display: block;">
+                                    <input type="number" class="card-item-quantity" placeholder="Quantity" />
+                                </div>
+                                <div class="col col-lg-3 col-md-3" style="margin: 0; padding: 0; display: block;">
+                                    <button title="Add to Cart" class="btn btn-primary action-item-add-cart col-9"><i class="fa fa-shopping-cart"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- <div class="card-footer">
-                        <button class="btn btn-default cart-item-action pull-right"><i class="fa fa-trash"></i> &nbsp;Remove</button>
-                        <button class="btn btn-info cart-item-action pull-right"><i class="fa fa-info-circle"></i> &nbsp;Details</button>
-                    </div> -->
-                </div>
+                </a>
             </div>
 
 

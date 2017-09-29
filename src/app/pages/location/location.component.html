@@ -17,14 +17,9 @@
                             <i class="material-icons">home</i> Home
                         </a>
                     </li>
-                    <li>
-                        <a href="/pages/location">
-                            <i class="material-icons">my_location</i> Location
-                        </a>
-                    </li>
                     <li class=" active ">
-                        <a href="/pages/register">
-                            <i class="material-icons">person_add</i> Register
+                        <a href="/pages/location">
+                            <i class="material-icons">location</i> Location
                         </a>
                     </li>
                     <li class="">
@@ -46,16 +41,27 @@
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="card card-signup">
-                        <h2 class="card-title text-center">Register</h2>
+                        <h2 class="card-title text-center">Welcome to BeecMe</h2>
                         <div class="row">
                             <div class="col-md-5 col-md-offset-1">
                                 <div class="card-content">
+                                    <div class="info info-horizontal">
+                                        <div class="icon icon-info">
+                                            <i class="material-icons">group</i>
+                                        </div>
+                                        <div class="description">
+                                            <h4 class="info-title">Who are we?</h4>
+                                            <p class="description">
+                                                There is also a Fully Customizable CMS Admin Dashboard for this product.
+                                            </p>
+                                        </div>
+                                    </div>
                                     <div class="info info-horizontal">
                                         <div class="icon icon-rose">
                                             <i class="material-icons">timeline</i>
                                         </div>
                                         <div class="description">
-                                            <h4 class="info-title">Marketing</h4>
+                                            <h4 class="info-title">Why is your location important?</h4>
                                             <p class="description">
                                                 We've created the marketing campaign of the website. It was a very interesting collaboration.
                                             </p>
@@ -66,23 +72,13 @@
                                             <i class="material-icons">code</i>
                                         </div>
                                         <div class="description">
-                                            <h4 class="info-title">Benifits of Registering</h4>
+                                            <h4 class="info-title">Added Benifits of Registering</h4>
                                             <p class="description">
                                                 We've developed the website with HTML5 and CSS3. The client has access to the code using GitHub.
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="info info-horizontal">
-                                        <div class="icon icon-info">
-                                            <i class="material-icons">group</i>
-                                        </div>
-                                        <div class="description">
-                                            <h4 class="info-title">About Us</h4>
-                                            <p class="description">
-                                                There is also a Fully Customizable CMS Admin Dashboard for this product.
-                                            </p>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -98,44 +94,29 @@
                                     </button>
                                     <h4> or be classical </h4>
                                 </div> -->
-                                <form class="form" method="" action="">
-                                    <div class="card-content">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">face</i>
-                                            </span>
-                                            <input type="text" class="form-control" placeholder="Name...">
-                                        </div>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">email</i>
-                                            </span>
-                                            <input type="text" type="email" class="form-control" placeholder="Email...">
-                                        </div>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                    <i class="material-icons">call</i>
-                                            </span>
-                                            <input type="text" class="form-control" placeholder="Phone...">
-                                        </div>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">lock_outline</i>
-                                            </span>
-                                            <input type="password" placeholder="Password..." class="form-control" />
-                                        </div>
-                                        <!-- If you want to add a checkbox to this form, uncomment this code -->
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="optionsCheckboxes" checked> I agree to the
-                                                <a href="#something">terms and conditions</a>.
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="footer text-center">
-                                        <a href="#pablo" class="btn btn-primary btn-round">Get Started</a>
-                                    </div>
-                                </form>
+                                <!-- <form class="form" method="" action=""> -->
+                                <div class="card-content">
+
+                                    <select [(ngModel)]="selectedCountry" (change)="countrySelected()" title="Select Address" style="margin:5px;">
+                                                <option disabled selected>Select Country</option>
+                                                <option *ngFor="let country of countryList" [value]="country.id">{{ country.nameEn }}</option>
+                                            </select>
+
+                                    <select [(ngModel)]="selectedProvince" (change)="countrySelected()" title="Select Address" style="margin:5px;">
+                                                <option disabled selected>Select Province</option>
+                                                <option *ngFor="let province of provinceList" [value]="province.id">{{ province.nameEn }}</option>
+                                            </select>
+
+                                    <select [(ngModel)]="selectedCity" (change)="countrySelected()" title="Select Address" style="margin:5px;">
+                                                <option disabled selected>Select City</option>
+                                                <option *ngFor="let city of cityList" [value]="city.id">{{ city.nameEn }}</option>
+                                            </select>
+
+                                </div>
+                                <div class="footer text-center">
+                                    <a href="#pablo" class="btn btn-primary btn-round">Get Started</a>
+                                </div>
+                                <!-- </form> -->
                             </div>
                         </div>
                     </div>

@@ -10,6 +10,7 @@ import { DeliveryService } from "../services/delivery.service";
 })
 export class DetailsComponent {
     item: any = {};
+    shop: any;
 
     constructor(
         private route: ActivatedRoute,
@@ -18,15 +19,29 @@ export class DetailsComponent {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            if (params['id']) {
-                this.item['itemCode'] = params.id;
-                console.log(this.item['itemCode']);
-                this.initialize();
+            if (params['shopid']) {
+                let shopId = params.id;
+                let shopStr = localStorage.getItem('shop');
+                if (shopStr) {
+                    let shopObj = JSON.parse(shopStr);
+                } else {
+                    // this.deliveryService.getShopById()
+                } 
             }
+
+            if (params['itemid']) {
+                this.item['itemCode'] = params.id;
+            }
+            this.initialize();
         });
     }
 
     initialize() {
+        this.deliveryService.getItemById(this.item['itemCode']).then(item => {
+            this.item = item;
+            // this.deliveryService
+        }).catch(err => {
 
+        })
     }
 }

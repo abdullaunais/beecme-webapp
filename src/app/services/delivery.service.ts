@@ -65,6 +65,13 @@ export class DeliveryService {
       .catch(this.handleError);
   }
 
+  getItemById(itemId: number): Promise<any> {
+    let requestUrl: string = this.serviceRootUrl + this.ITEM_URL + "/" + itemId;
+    return this.http.get(requestUrl, this.options).toPromise()
+      .then(this.extractData)
+      .catch(this.handleError);
+  }
+
   findItem(itemCode: number) {
     let requestUrl: string = this.serviceRootUrl + this.ITEM_URL + "/" + itemCode;
     return this.http.get(requestUrl, this.options).toPromise()

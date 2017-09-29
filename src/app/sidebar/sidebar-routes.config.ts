@@ -3,7 +3,8 @@ import { RouteInfo } from './sidebar.metadata';
 export const ROUTES: RouteInfo[] = [
     { path: '/home', title: 'Home', icon: 'material-icons' },
     { path: '/categories', title: 'Categories', icon: 'material-icons' },
-    { path: '/cart', title: 'My Cart', icon: 'material-icons' }
+    { path: '/cart', title: 'My Cart', icon: 'material-icons' },
+    { path: '/orders', title: 'My Orders', icon: 'material-icons' }
 
     // { path: '/pages/timeline', title: 'Timeline Page', icon: 'material-icons' },
     // { path: '/pages/user', title: 'User Page', icon: 'material-icons' },

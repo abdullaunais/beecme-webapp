@@ -232,6 +232,11 @@ export const ROUTES: RouteInfo[] = [{
         title: 'My Cart',
         type: 'link',
         icontype: 'shopping_cart'
+    },{
+        path: '/orders',
+        title: 'My Orders',
+        type: 'link',
+        icontype: 'shopping_cart'
     }
     // ,{
     //     path: '/components',

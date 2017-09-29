@@ -9,21 +9,21 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-5" style="padding-right: 0;">
                             <div class="card-header card-header-text" data-background-color="purple" style="display: block; margin-right: ">
-                                <h4 class="card-title">Hamburger</h4>
+                                <h4 class="card-title">{{item.nameEn}}</h4>
                                 <p class="category">Active</p>
                             </div>
                             <div class="card-header item-image-active-wrapper">
-                                <img src="assets/img/food.jpg" class="img-responsive item-image-active" />
+                                <img [src]="item.img1" class="img-responsive item-image-active" />
                             </div>
                             <div class="card-header row" style="margin: 10px 5px 20px 15px; padding: 0;">
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding-left: 0; padding-right: 10px;">
-                                    <img src="assets/img/food.jpg" class="img-responsive item-image-inactive image-selected" />
+                                    <img [src]="item.img1" *ngIf="item.img1" class="img-responsive item-image-inactive image-selected" />
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding-left: 0; padding-right: 10px;">
-                                    <img src="assets/img/food2.jpg" class="img-responsive item-image-inactive" />
+                                    <img [src]="item.img2" *ngIf="item.img2" class="img-responsive item-image-inactive" />
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding-left: 0; padding-right: 10px;">
-                                    <img src="assets/img/food3.jpg" class="img-responsive item-image-inactive" />
+                                    <img [src]="item.img3" *ngIf="item.img3" class="img-responsive item-image-inactive" />
                                 </div>
                             </div>
                         </div>
@@ -31,17 +31,11 @@
 
                             <div class="card-content" style="padding: 15px 0px 15px 20px;">
                                 <p style="text-align: justify;">
-                                    Some detailLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                                    ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    {{item.descriptionEn}}
                                 </p>
 
-                                <div class="item-comment">
-                                    <i class="fa fa-quote-left pull-left"></i>
-                                    &nbsp;&nbsp;&nbsp;
-                                    This is a comment added by the shop
+                                <div class="item-comment" *ngIf="item.comment">
+                                    <i class="fa fa-quote-left pull-left"></i> &nbsp;&nbsp;&nbsp; {{item.comment}}
                                     <i class="fa fa-quote-right pull-right"></i>
                                 </div>
 
@@ -49,13 +43,16 @@
                                     <h6 style="margin-bottom: 5px;">Select Quantity and Add to Cart</h6>
                                     <div style="height: 1px; width:100%; background-color: #eee; margin-bottom: 10px;"></div>
                                     <div class="row">
-                                        <div class="col-xs-9 col-lg-9 col-md-9 col-sm-9" style="padding: 0;">
+                                        <div class="col-xs-6 col-lg-6 col-md-6 col-sm-6" style="padding: 0;">
                                             <div style="width: 100%;">
                                                 <button class="btn btn-secondary btn-just-icon item-qty-btn border-right-fix" style="margin-left: 15px;"><i class="fa fa-minus"></i></button>
                                                 <input type="text" class="item-qty-text" value="1" placeholder="Quanity">
                                                 <button class="btn btn-secondary btn-just-icon item-qty-btn border-left-fix" style="margin-left: -4px;"><i class="fa fa-plus"></i></button>
                                             </div>
                                             <div style="clear: both;"></div>
+                                        </div>
+                                        <div class="col-xs-3 col-lg-3 col-md-3 col-sm-3" style="padding: 0;">
+                                            <!-- {{}} / {{item.price}} -->
                                         </div>
                                         <div class="col-xs-3 col-lg-3 col-md-3 col-sm-3" style="padding: 0;">
                                             <button class="btn btn-primary btn-just-icon item-cart-btn" style="float: right; margin: 0 15px;"><i class="fa fa-shopping-cart"></i></button>
