@@ -42,7 +42,11 @@ export class ShopListComponent {
     initialize() {
         let catId = this.category['categoryId'];
         let cityId = 1; //this.city['id'];
-        this.deliveryService.getShops(cityId, catId, this.start, this.offset).then((data) => {
+        this.deliveryService.getShops(cityId, catId, this.start, this.offset).catch((err):any => {
+            this.isAvailable = false;
+            this.isError = true;
+            this.isLoading = false;
+        }).subscribe((data) => {
           let json = JSON.stringify(data);
           let shopsArray = JSON.parse(json);
           this.shops = [];
@@ -68,10 +72,6 @@ export class ShopListComponent {
             this.shops = [];
           }
           this.isLoading = false;
-        }).catch(err => {
-            this.isAvailable = false;
-            this.isError = true;
-            this.isLoading = false;
         });
       }
 }

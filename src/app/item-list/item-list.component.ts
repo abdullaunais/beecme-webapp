@@ -39,7 +39,10 @@ export class ItemListComponent {
 
     initialize() {
         let userId = this.shop['userId'];
-        this.deliveryService.getItemByShop(userId, this.start, this.offset).then((data) => {
+        this.deliveryService.getItemByShop(userId, this.start, this.offset).catch((err):any => {
+          this.isLoading = false;
+          this.isAvailable = false;
+        }).subscribe((data) => {
           if (data['itemlist']) {
             if (data['itemlist'].length > 0) {
               this.isAvailable = true;
@@ -58,9 +61,6 @@ export class ItemListComponent {
             this.isAvailable = false;
           }
           this.isLoading = false;
-        }).catch(err => {
-          this.isLoading = false;
-          this.isAvailable = false;
         });
       }
 }

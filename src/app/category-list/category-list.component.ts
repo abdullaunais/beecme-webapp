@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DeliveryService } from "../services/delivery.service";
+import { ObservableInput } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-category-list',
@@ -20,8 +21,13 @@ export class CategoryListComponent implements OnInit {
     this.isError = false;
   }
 
+
   initialize() {
-    this.deliveryService.getCategories(1).then((data) => {
+    this.deliveryService.getCategories(1).catch((err): any => {
+      this.isLoading = false;
+      this.isError = true;
+      console.log(err);
+    }).subscribe((data: any) => {
       let json = JSON.stringify(data);
       let catArray = JSON.parse(json);
       if (catArray) {
@@ -38,10 +44,6 @@ export class CategoryListComponent implements OnInit {
         this.isError = false;
       }
       this.isLoading = false;
-    }).catch(err => {
-      this.isLoading = false;
-      this.isError = true;
-      console.log(err);
     });
   }
 

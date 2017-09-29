@@ -26,7 +26,7 @@ export class DetailsComponent {
                     let shopObj = JSON.parse(shopStr);
                 } else {
                     // this.deliveryService.getShopById()
-                } 
+                }
             }
 
             if (params['itemid']) {
@@ -37,11 +37,11 @@ export class DetailsComponent {
     }
 
     initialize() {
-        this.deliveryService.getItemById(this.item['itemCode']).then(item => {
+        this.deliveryService.getItemById(this.item['itemCode']).catch((err):any => {
+
+        }).subscribe(item => {
             this.item = item;
             // this.deliveryService
-        }).catch(err => {
-
-        })
+        });
     }
 }

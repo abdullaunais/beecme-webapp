@@ -40,38 +40,36 @@ export class LocationComponent implements OnInit {
     };
     ngOnInit() {
         this.checkFullPageBackgroundImage();
-        this.deliveryService.getLocation(this.type, this.value, this.start, this.offset)
-            .then((data) => {
-                let json = JSON.stringify(data);
-                this.countryList = JSON.parse(json);
-                console.log(this.countryList);
-            }).catch((err) => {
-                console.log("Error ", err);
-            });
+        this.deliveryService.getLocation(this.type, this.value, this.start, this.offset).catch((err): any => {
+            console.log("Error ", err);
+        }).subscribe((data) => {
+            let json = JSON.stringify(data);
+            this.countryList = JSON.parse(json);
+            console.log(this.countryList);
+        });
     }
 
     countrySelected() {
         this.type = 22;
         this.value = this.selectedCountry.id;
-        this.deliveryService.getLocation(this.type, this.value, this.start, this.offset)
-            .then((data) => {
-                let json = JSON.stringify(data);
-                this.provinceList = JSON.parse(json);
-                console.log(this.provinceList);
-            }).catch((err) => {
-                console.log("Error ", err);
-            });
+        this.deliveryService.getLocation(this.type, this.value, this.start, this.offset).catch((err): any => {
+            console.log("Error ", err);
+        }).subscribe((data) => {
+            let json = JSON.stringify(data);
+            this.provinceList = JSON.parse(json);
+            console.log(this.provinceList);
+        });
     }
 
     provinceSelected() {
         this.type = 24;
         this.value = this.selectedProvince.id;
-        this.deliveryService.getLocation(this.type, this.value, this.start, this.offset).then((data) => {
+        this.deliveryService.getLocation(this.type, this.value, this.start, this.offset).catch((err): any => {
+            console.log("Error ", err);
+        }).subscribe((data) => {
             let json = JSON.stringify(data);
             this.cityList = JSON.parse(json);
             console.log(this.cityList);
-        }).catch(err => {
-            console.log("Error ", err);
         });
     }
 
