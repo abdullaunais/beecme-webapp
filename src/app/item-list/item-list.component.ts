@@ -31,15 +31,15 @@ export class ItemListComponent {
     ngOnInit() {
         this.route.params.subscribe(params => {
             if (params['id']) {
-                this.shop['userId'] = params.id;
+                this.shop['shopId'] = params.id;
                 this.initialize();
             }
         });
     }
 
     initialize() {
-        let userId = this.shop['userId'];
-        this.deliveryService.getItemByShop(userId, this.start, this.offset).catch((err):any => {
+        let shopId = this.shop['shopId'];
+        this.deliveryService.getItemByShop(shopId, this.start, this.offset).catch((err):any => {
           this.isLoading = false;
           this.isAvailable = false;
         }).subscribe((data) => {

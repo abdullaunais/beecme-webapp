@@ -41,8 +41,7 @@ export class ShopListComponent {
 
     initialize() {
         let catId = this.category['categoryId'];
-        let cityId = 1; //this.city['id'];
-        this.deliveryService.getShops(cityId, catId, this.start, this.offset).catch((err):any => {
+        this.deliveryService.getShops(catId, this.start, this.offset).catch((err):any => {
             this.isAvailable = false;
             this.isError = true;
             this.isLoading = false;

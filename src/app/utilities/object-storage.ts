@@ -14,7 +14,6 @@ export class ObjectStorage {
             let objString = localStorage.getItem(key);
             return JSON.parse(objString);
         }
-       
     }
 
     public remove(key: string) {

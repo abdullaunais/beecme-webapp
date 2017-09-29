@@ -21,7 +21,7 @@ export class DeliveryService {
   serviceRootUrl: string;
 
   LOCATION_URL = "/locations";
-  SHOPS_URL = "/users";
+  SHOPS_URL = "/shops";
   CATEGORIES_URL = "/categories";
   ITEM_URL = "/items";
   SCHEDULES_URL = "/schedules";
@@ -43,8 +43,8 @@ export class DeliveryService {
     .catch((err) => this.handleError(err));
   }
 
-  getShops(cityId: number, categoryId: number, start: number, offset: number): Observable<any> {
-    let queryParams = "?type=51&value=" + cityId + "&value=" + categoryId + "&start=" + start + "&offset=" + offset;
+  getShops(categoryId: number, start: number, offset: number): Observable<any> {
+    let queryParams = "?type=71&value=" + categoryId + "&start=" + start + "&offset=" + offset;
     let requestUrl: string = this.serviceRootUrl + this.SHOPS_URL + queryParams;
     return this.http.get(requestUrl, this.options)
     .map((res) => this.extractData(res))
