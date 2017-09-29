@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DeliveryService } from "../services/delivery.service";
 import { ObservableInput } from 'rxjs/Observable';
+import { ObjectStorage } from '../utilities/object-storage';
 
 @Component({
   selector: 'app-category-list',
@@ -15,15 +16,23 @@ export class CategoryListComponent implements OnInit {
 
   categories: Array<any> = [];
 
-  constructor(private deliveryService: DeliveryService) {
+  city: any;
+
+  constructor(private deliveryService: DeliveryService, private storage: ObjectStorage) {
     this.isLoading = true;
     this.isAvailable = true;
     this.isError = false;
+
+    if(this.storage.get('location.set')) {
+      this.city = this.storage.get('location.city');
+    } else {
+      return;
+    }
   }
 
 
   initialize() {
-    this.deliveryService.getCategories(1).catch((err): any => {
+    this.deliveryService.getCategories(this.city.id).catch((err): any => {
       this.isLoading = false;
       this.isError = true;
       console.log(err);

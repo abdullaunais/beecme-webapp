@@ -16,6 +16,7 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
 import { Config } from "./services/config";
+import { ObjectStorage } from './utilities/object-storage';
 
 @NgModule({
     imports:      [
@@ -35,6 +36,6 @@ import { Config } from "./services/config";
         AuthLayoutComponent
     ],
     bootstrap:    [ AppComponent ],
-    providers: [Config]
+    providers: [Config, ObjectStorage]
 })
 export class AppModule { }

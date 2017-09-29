@@ -97,24 +97,24 @@
                                 <!-- <form class="form" method="" action=""> -->
                                 <div class="card-content">
 
-                                    <select [(ngModel)]="selectedCountry" (change)="countrySelected()" title="Select Address" style="margin:5px;">
-                                                <option disabled selected>Select Country</option>
+                                    <select [(ngModel)]="selectedCountryId" (change)="countryChanged()" title="Select Address" style="margin:5px;">
+                                                <option disabled selected [value]="-1">Select Country</option>
                                                 <option *ngFor="let country of countryList" [value]="country.id">{{ country.nameEn }}</option>
                                             </select>
 
-                                    <select [(ngModel)]="selectedProvince" (change)="countrySelected()" title="Select Address" style="margin:5px;">
-                                                <option disabled selected>Select Province</option>
+                                    <select [(ngModel)]="selectedProvinceId" (change)="provinceChanged()" title="Select Address" style="margin:5px;">
+                                                <option disabled selected [value]="-1">Select Province</option>
                                                 <option *ngFor="let province of provinceList" [value]="province.id">{{ province.nameEn }}</option>
                                             </select>
 
-                                    <select [(ngModel)]="selectedCity" (change)="countrySelected()" title="Select Address" style="margin:5px;">
-                                                <option disabled selected>Select City</option>
+                                    <select [(ngModel)]="selectedCityId" (change)="cityChanged()" title="Select Address" style="margin:5px;">
+                                                <option disabled selected [value]="-1">Select City</option>
                                                 <option *ngFor="let city of cityList" [value]="city.id">{{ city.nameEn }}</option>
                                             </select>
 
                                 </div>
                                 <div class="footer text-center">
-                                    <a href="#pablo" class="btn btn-primary btn-round">Get Started</a>
+                                    <button class="btn btn-primary btn-round">Get Started</button>
                                 </div>
                                 <!-- </form> -->
                             </div>
