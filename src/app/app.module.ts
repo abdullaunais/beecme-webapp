@@ -11,12 +11,10 @@ import { AppComponent } from './app.component';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
-import { FixedpluginModule } from './shared/fixedplugin/fixedplugin.module';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+
 import { AppRoutes } from './app.routing';
-import { Config } from "./services/config";
-import { ObjectStorage } from './utilities/object-storage';
 
 @NgModule({
     imports:      [
@@ -27,15 +25,13 @@ import { ObjectStorage } from './utilities/object-storage';
         HttpModule,
         SidebarModule,
         NavbarModule,
-        FooterModule,
-        FixedpluginModule
+        FooterModule    
     ],
     declarations: [
         AppComponent,
         AdminLayoutComponent,
         AuthLayoutComponent
     ],
-    bootstrap:    [ AppComponent ],
-    providers: [Config, ObjectStorage]
+    bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

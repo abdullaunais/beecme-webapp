@@ -1,3 +1,5 @@
+// IMPORTANT: this is a plugin which requires jQuery for initialisation and data manipulation
+
 import { Component, OnInit } from '@angular/core';
 declare const swal: any;
 declare const $: any;
@@ -17,7 +19,7 @@ export class CalendarComponent implements OnInit {
         const d = today.getDate();
 
         $calendar.fullCalendar({
-            viewRender: function(view, element) {
+            viewRender: function(view: any, element: any) {
                 // We make sure that we activate the perfect scrollbar when the view isn't on Month
                 if (view.name !== 'month') {
                     const $fc_scroller = $('.fc-scroller');
@@ -45,7 +47,7 @@ export class CalendarComponent implements OnInit {
                 }
             },
 
-            select: function(start, end) {
+            select: function(start: any, end: any) {
 
                 // on select we show the Sweet Alert modal with an input
                 swal({
@@ -57,7 +59,7 @@ export class CalendarComponent implements OnInit {
                     confirmButtonClass: 'btn btn-success',
                     cancelButtonClass: 'btn btn-danger',
                     buttonsStyling: false
-                }).then(function(result) {
+                }).then(function(result: any) {
 
                     let eventData;
                     const event_title = $('#input-field').val();

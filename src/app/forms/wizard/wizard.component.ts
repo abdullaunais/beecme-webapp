@@ -1,3 +1,5 @@
+// IMPORTANT: this is a plugin which requires jQuery for initialisation and data manipulation
+
 import { Component, OnInit, OnChanges, AfterViewInit, SimpleChanges } from '@angular/core';
 
 declare const $: any;
@@ -14,7 +16,7 @@ interface FileReaderEvent extends Event {
 })
 
 export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
-    readURL(input) {
+    readURL(input: any) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
 
@@ -42,7 +44,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
               }
             },
 
-            errorPlacement: function(error, element) {
+            errorPlacement: function(error: any, element: any) {
                 $(element).parent('div').addClass('has-error');
              }
          });
@@ -53,7 +55,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
             'nextSelector': '.btn-next',
             'previousSelector': '.btn-previous',
 
-            onNext: function(tab, navigation, index) {
+            onNext: function(tab: any, navigation: any, index: any) {
                 const $valid = $('.wizard-card form').valid();
                 if (!$valid) {
                     $validator.focusInvalid();
@@ -61,7 +63,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
                 }
             },
 
-            onInit: function(tab, navigation, index){
+            onInit: function(tab: any, navigation: any, index: any){
 
               // check number of tabs and fill the entire row
               const $total = navigation.find('li').length;
@@ -103,7 +105,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
                $('.moving-tab').css('transition', 'transform 0s');
            },
 
-            onTabClick : function(tab, navigation, index){
+            onTabClick : function(tab: any, navigation: any, index: any){
 
                 const $valid = $('.wizard-card form').valid();
 
@@ -114,7 +116,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
                 }
             },
 
-            onTabShow: function(tab, navigation, index) {
+            onTabShow: function(tab: any, navigation: any, index: any) {
                 const $total = navigation.find('li').length;
                 let $current = index + 1;
 
@@ -206,7 +208,7 @@ export class WizardComponent implements OnInit, OnChanges, AfterViewInit {
         if (input.files && input.files[0]) {
             const reader: any = new FileReader();
 
-            reader.onload = function (e) {
+            reader.onload = function (e: any) {
                 $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
             };
             reader.readAsDataURL(input.files[0]);

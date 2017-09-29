@@ -468,11 +468,25 @@ html * {
 }
 .header-filter .container {
   z-index: 2;
-  position: relative;
-  padding-top: 15vh;
+  height: 100%;
+  text-align: center;
+}
+.page-header .container > .content-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #FFFFFF;
+    width: 100%;
+    max-width: 880px;
+    z-index: 3;
 }
 .page-header{
-    min-height: 400px;
+    max-height: 1050px;
+    height: 100vh !important;
 }
 .page-header .title{
     font-weight: 700;

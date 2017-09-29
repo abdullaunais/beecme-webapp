@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { TableData } from '../../md/md-table/md-table.component';
 
 declare var $: any;
+declare interface TableData {
+  headerRow: string[];
+  dataRows: string[][];
+}
 declare interface TableWithCheckboxes {
     id?: number;
     ischecked?: boolean;
