@@ -3,18 +3,18 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { DashboardRoutes } from './dashboard.routing';
-import { DashboardComponent } from './dashboard.component';
+import { CategoriesRoutes } from './categories.routing';
+import { CategoriesComponent } from './categories.component';
 import { CategoryListModule } from "../category-list/category-list.module";
 
 @NgModule({
     imports: [
         CategoryListModule,
         CommonModule,
-        RouterModule.forChild(DashboardRoutes),
+        RouterModule.forChild(CategoriesRoutes),
         FormsModule
     ],
-    declarations: [DashboardComponent]
+    declarations: [CategoriesComponent]
 })
 
-export class DashboardModule {}
+export class CategoriesModule {}

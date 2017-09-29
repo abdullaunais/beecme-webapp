@@ -3,10 +3,10 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 declare const $: any;
 
 @Component({
-    selector: 'app-dashboard',
-    templateUrl: './dashboard.component.html'
+    selector: 'app-order-history',
+    templateUrl: './order-history.component.html'
 })
-export class DashboardComponent implements OnInit, AfterViewInit {
+export class OrderHistoryComponent implements OnInit, AfterViewInit {
     // constructor(private navbarTitleService: NavbarTitleService, private notificationService: NotificationService) { }
 
     // constructor(private navbarTitleService: NavbarTitleService) { }

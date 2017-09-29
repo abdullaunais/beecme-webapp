@@ -1,0 +1,142 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-sm-12 col-md-12 col-lg-7">
+
+                <div class="row justify-content-md-center" style="margin-left:0px; margin-right: 0px;">
+                    <div class="card cart-card">
+                        <div class="card-content" style="padding:15px;">
+                            <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2" style="padding:0px;">
+                                <img src="assets/img/food.jpg" class="img-responsive cart-shop-image">
+                            </div>
+                            <div class="col-xs-9 col-sm-8 col-md-8 col-lg-8" style="padding:0px;">
+                                <h4 style="font-weight: 400; margin: 0;">Dinemore Restaurent</h4>
+                                <div>
+                                    255, Main Street, Pettah
+                                </div>
+                                <div class="shop-status-wrapper color-secondary">
+                                    <i class="fa fa-shopping-cart" style="font-size:18px;"></i> &nbsp;Active Shop
+                                </div>
+                            </div>
+                            <div class="hidden-xs col-sm-2 col-md-2 col-lg-2" style="padding:0px;">
+                                <button class="btn btn-default btn-round btn-just-icon btn-cart-shop-details">
+                                    <i class="fa fa-info-circle"></i>
+                                    <div class="ripple-container"></div>
+                                </button>
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-left:0px; margin-right: 0px;">
+                    <div class="card cart-card">
+                        <div class="card-content">
+                            <h4>Cart Items</h4>
+                            <div class="row cart-item-row" *ngFor="let item of cartList">
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 cart-item-image-wrapper">
+                                    <img src="assets/img/food.jpg" class="img-responsive cart-item-image">
+                                </div>
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 cart-item-details-wrapper">
+                                    <h5 class="cart-item-title">Item Name</h5>
+                                    <button class="btn btn-default cart-item-btn-comment">Add Comment</button>
+                                    <div class="cart-item-price-wrapper">
+                                        <p class="pull-left no-margin"><span style="font-weight: 300;">2 UNIT X 10 LKR = </span></p>
+                                        <p class="pull-right no-margin"><span style="font-weight: 400;">LKR 20.00</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row cart-item-row">
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                </div>
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                    <div>
+                                        <p class="pull-left no-margin"><span style="font-weight: 300;">DELIVERY FEE </span></p>
+                                        <p class="pull-right no-margin"><span style="font-weight: 400;">LKR 20.00</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row cart-item-row">
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                </div>
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                    <div>
+                                        <p class="pull-left no-margin"><span style="font-weight: 300;">FINAL TOTAL </span></p>
+                                        <p class="pull-right no-margin"><span style="font-weight: 700;">LKR 40.00</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+                        <!-- <div class="card-footer">
+                            <button class="btn btn-default cart-item-action pull-right"><i class="fa fa-trash"></i> &nbsp;Remove</button>
+                            <button class="btn btn-info cart-item-action pull-right"><i class="fa fa-info-circle"></i> &nbsp;Details</button>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-5">
+                <div class="row" style="margin-left: 0px; margin-right: 0px;">
+                    <div class="card cart-card">
+                        <div class="card-content">
+                            <h4 id="new-address-heading" style="color:#999;">
+                                New Address
+                                <div class="togglebutton pull-right">
+                                    <label>
+                                            <input type="checkbox" (change)="toggleNewAddress()" [(ngModel)]="isNewAddress">
+                                        </label>
+                                </div>
+                            </h4>
+                            <div class="row cart-item-row" *ngIf="isNewAddress" style="padding:15px;">
+                                <ul class="list-group" style="margin:0;">
+                                    <li class="list-group-item justify-content-between" style="border:none; padding:0px;">
+                                        <i class="fa fa-address-card" style="font-size: 18px;"></i> &nbsp;&nbsp;Enter adress
+                                        details
+                                    </li>
+                                </ul>
+                                <div class="animated flipInX">
+                                    <div class="form-group label-floating" style="padding-bottom: 0;">
+                                        <label class="control-label">Nickname</label>
+                                        <input type="text" [(ngModel)]="nickname" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="animated flipInX">
+                                    <div class="form-group label-floating" style="padding-bottom: 0;">
+                                        <label class="control-label">Street</label>
+                                        <input type="text" [(ngModel)]="address" class="form-control">
+                                    </div>
+                                </div>
+                                <ul class="list-group animated flipInX" style="margin: 20px 0 0 0;">
+                                        <li class="list-group-item justify-content-between" style="border:none; padding:0px;">
+                                            Al Malaaz, Riyadh, Saudi Arabia.
+                                        </li>
+                                    </ul>
+                            </div>
+                            <div class="row cart-item-row" *ngIf="!isNewAddress">
+
+                                <ul class="list-group" style="margin:0;">
+                                    <li class="list-group-item justify-content-between" style="border:none; padding:5px;">
+                                        <i class="fa fa-address-card" style="font-size: 18px;"></i> &nbsp;&nbsp;Choose a
+                                        shipping address from existing addresses
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="row" *ngIf="!isNewAddress" style="padding:0 15px;">
+                                <select class="selectpicker" [(ngModel)]="selectedAddress" data-style="btn btn-primary" title="Select Address" data-size="5"
+                                    style="margin:5px;">
+                                        <option disabled selected>Select Address</option>
+                                        <option *ngFor="let address of addressList" [value]="address">{{ address.nickName }}</option>
+                                    </select>
+                            </div>
+
+                            <div style="clear: both"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
