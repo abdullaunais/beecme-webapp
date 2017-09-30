@@ -18,7 +18,7 @@ export class AdminLayoutComponent implements OnInit {
     private _router: Subscription;
     url: string;
     location: Location;
-    @ViewChild('sidebar') sidebar;
+    @ViewChild('sidebar') sidebar: any;
     @ViewChild(NavbarComponent) navbar: NavbarComponent;
     constructor( private router: Router, location: Location ) {
       this.location = location;

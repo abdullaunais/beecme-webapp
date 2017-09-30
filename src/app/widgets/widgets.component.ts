@@ -61,7 +61,4 @@ export class WidgetsComponent implements OnInit, AfterViewInit {
         //  Activate the tooltips
         $('[rel="tooltip"]').tooltip();
     }
-
-
-
 }

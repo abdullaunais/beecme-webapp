@@ -9,7 +9,7 @@ import { PagesRoutes } from './pages.routing';
 
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { LocationComponent } from "./location/location.component";
+import { LocationComponent } from './location/location.component';
 
 @NgModule({
   imports: [

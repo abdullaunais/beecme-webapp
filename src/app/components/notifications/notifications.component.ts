@@ -1,3 +1,5 @@
+// IMPORTANT: this is a plugin which requires jQuery for initialisation and data manipulation
+
 import { Component } from '@angular/core';
 
 declare const $: any;
@@ -7,7 +9,7 @@ declare const $: any;
     templateUrl: 'notifications.component.html'
 })
 export class NotificationsComponent {
-    showNotification(from, align) {
+    showNotification(from: any, align: any) {
         const type = ['', 'info', 'success', 'warning', 'danger', 'rose', 'primary'];
 
         const color = Math.floor((Math.random() * 6) + 1);

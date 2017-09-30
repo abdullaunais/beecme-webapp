@@ -12,6 +12,7 @@ export const AppRoutes: Routes = [
     {
         path: '',
         component: AdminLayoutComponent,
+
         children: [
             {
                 path: '',
@@ -32,33 +33,33 @@ export const AppRoutes: Routes = [
                 path: 'shop/:id',
                 loadChildren: './item-list/item-list.module#ItemListModule',
             }, {
-                path: 'shop/:shopid/item/:itemid',
+                path: 'item/:itemid',
                 loadChildren: './details/details.module#DetailsModule',
             },
-            // , {
-            //     path: 'components',
-            //     loadChildren: './components/components.module#ComponentsModule'
-            // }, {
-            //     path: 'forms',
-            //     loadChildren: './forms/forms.module#Forms'
-            // }, {
-            //     path: 'tables',
-            //     loadChildren: './tables/tables.module#TablesModule'
-            // }, {
-            //     path: 'widgets',
-            //     loadChildren: './widgets/widgets.module#WidgetsModule'
-            // }, {
-            //     path: 'calendar',
-            //     loadChildren: './calendar/calendar.module#CalendarModule'
-            // },
+            // , { 
+            //     path: 'components', 
+            //     loadChildren: './components/components.module#ComponentsModule' 
+            // }, { 
+            //     path: 'forms', 
+            //     loadChildren: './forms/forms.module#Forms' 
+            // }, { 
+            //     path: 'tables', 
+            //     loadChildren: './tables/tables.module#TablesModule' 
+            // }, { 
+            //     path: 'widgets', 
+            //     loadChildren: './widgets/widgets.module#WidgetsModule' 
+            // }, { 
+            //     path: 'calendar', 
+            //     loadChildren: './calendar/calendar.module#CalendarModule' 
+            // }, 
             {
                 path: '',
                 loadChildren: './userpage/user.module#UserModule'
             }
-            // , {
-            //     path: '',
-            //     loadChildren: './timeline/timeline.module#TimelineModule'
-            // }
+            // , { 
+            //     path: '', 
+            //     loadChildren: './timeline/timeline.module#TimelineModule' 
+            // } 
         ]
     },
     {

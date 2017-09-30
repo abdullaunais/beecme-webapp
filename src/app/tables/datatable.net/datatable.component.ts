@@ -1,3 +1,5 @@
+// IMPORTANT: this is a plugin which requires jQuery for initialisation and data manipulation
+
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 declare interface DataTable {
@@ -90,7 +92,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
         } );
 
         // Delete a record
-        table.on( 'click', '.remove', function (e) {
+        table.on( 'click', '.remove', function (e: any) {
             const $tr = $(this).closest('tr');
             table.row($tr).remove().draw();
             e.preventDefault();

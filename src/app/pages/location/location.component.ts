@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DeliveryService } from "../../services/delivery.service";
 import { ObjectStorage } from '../../utilities/object-storage';
 
-declare var $: any;
-
 @Component({
     selector: 'app-location-cmp',
     templateUrl: './location.component.html',
@@ -36,17 +34,7 @@ export class LocationComponent implements OnInit {
 
     constructor(private deliveryService: DeliveryService, private storage: ObjectStorage) {}
 
-    checkFullPageBackgroundImage() {
-        const $page = $('.full-page');
-        const image_src = $page.data('image');
-
-        if (image_src !== undefined) {
-            const image_container = '<div class="full-page-background" style="background-image: url(' + image_src + ') "/>';
-            $page.append(image_container);
-        }
-    };
     ngOnInit() {
-        this.checkFullPageBackgroundImage();
         this.deliveryService.getLocation(this.type, this.value, this.start, this.offset).catch((err): any => {
             console.log("Error ", err);
         }).subscribe((data) => {
