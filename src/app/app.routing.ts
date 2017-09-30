@@ -33,7 +33,7 @@ export const AppRoutes: Routes = [
                 path: 'shop/:id',
                 loadChildren: './item-list/item-list.module#ItemListModule',
             }, {
-                path: 'shop/:shopid/item/:itemid',
+                path: 'item/:itemid',
                 loadChildren: './details/details.module#DetailsModule',
             },
             // , { 

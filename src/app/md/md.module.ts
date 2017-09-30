@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { MdTableComponent } from './md-table/md-table.component';
-import { MdChartComponent } from './md-chart/md-chart.component';
 
 export interface DropdownLink {
   title: string;
@@ -33,12 +32,10 @@ export interface NavItem {
     RouterModule
   ],
   declarations: [
-    MdTableComponent,
-    MdChartComponent
+    MdTableComponent
   ],
   exports: [
-    MdTableComponent,
-    MdChartComponent
+    MdTableComponent
   ]
 })
 export class MdModule { }
