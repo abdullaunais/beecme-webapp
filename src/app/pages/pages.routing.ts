@@ -4,6 +4,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { LocationComponent } from './location/location.component';
 import { LogoutComponent } from './logout/logout.component';
+import { LocationGuardService } from '../services/location-guard.service';
 
 export const PagesRoutes: Routes = [
 
@@ -21,7 +22,8 @@ export const PagesRoutes: Routes = [
                 component: LocationComponent
             }, {
                 path: 'register',
-                component: RegisterComponent
+                component: RegisterComponent,
+                canActivate: [LocationGuardService],
             }
             // , {
             //     path: 'pricing',
