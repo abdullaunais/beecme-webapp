@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DeliveryService } from "../../services/delivery.service";
 import { ObjectStorage } from '../../utilities/object-storage';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-location-cmp',
@@ -10,6 +11,7 @@ import { ObjectStorage } from '../../utilities/object-storage';
 
 export class LocationComponent implements OnInit {
     test: Date = new Date();
+    colorTheme: string = 'info';
 
     countryList: Array<any> = [];
     provinceList: Array<any> = [];
@@ -25,14 +27,18 @@ export class LocationComponent implements OnInit {
 
     countrySelected: boolean = false;
     provinceSelected: boolean = false;
-    // citySelected: boolean = false;
+    citySelected: boolean = false;
 
     type: number = 21;
     value: number = 1;
     start: number = 0;
     offset: number = 20;
 
-    constructor(private deliveryService: DeliveryService, private storage: ObjectStorage) {}
+    constructor(
+        private deliveryService: DeliveryService,
+        private storage: ObjectStorage,
+        private router: Router,
+    ) {}
 
     ngOnInit() {
         this.deliveryService.getLocation(this.type, this.value, this.start, this.offset).catch((err): any => {
@@ -75,14 +81,17 @@ export class LocationComponent implements OnInit {
     cityChanged() {
         let value: number = this.selectedCityId;
         this.selectedCity = this.cityList.find(city => city.id == value);
+        this.citySelected = true;
+    }
 
-        if(this.countrySelected && this.provinceSelected) {
+    getStarted() {
+        if(this.countrySelected && this.provinceSelected && this.citySelected) {
             this.storage.set('location.country', this.selectedCountry);
             this.storage.set('location.province', this.selectedProvince);
             this.storage.set('location.city', this.selectedCity);
             this.storage.set('location.set', true);
 
+            this.router.navigate(['/']);
         }
-
     }
 }

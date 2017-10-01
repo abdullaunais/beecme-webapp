@@ -2,17 +2,20 @@ import { Routes } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+import { LocationGuardService } from './services/location-guard.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 export const AppRoutes: Routes = [
     {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full',
+        canActivate: [LocationGuardService]
     },
     {
         path: '',
         component: AdminLayoutComponent,
-
+        canActivate: [LocationGuardService],
         children: [
             {
                 path: '',
@@ -26,6 +29,7 @@ export const AppRoutes: Routes = [
             }, {
                 path: 'orders',
                 loadChildren: './order-history/order-history.module#OrderHistoryModule',
+                canActivate: [AuthGuardService]
             }, {
                 path: 'category/:id',
                 loadChildren: './shop-list/shop-list.module#ShopListModule',
@@ -36,30 +40,10 @@ export const AppRoutes: Routes = [
                 path: 'item/:itemid',
                 loadChildren: './details/details.module#DetailsModule',
             },
-            // , { 
-            //     path: 'components', 
-            //     loadChildren: './components/components.module#ComponentsModule' 
-            // }, { 
-            //     path: 'forms', 
-            //     loadChildren: './forms/forms.module#Forms' 
-            // }, { 
-            //     path: 'tables', 
-            //     loadChildren: './tables/tables.module#TablesModule' 
-            // }, { 
-            //     path: 'widgets', 
-            //     loadChildren: './widgets/widgets.module#WidgetsModule' 
-            // }, { 
-            //     path: 'calendar', 
-            //     loadChildren: './calendar/calendar.module#CalendarModule' 
-            // }, 
             {
                 path: '',
                 loadChildren: './userpage/user.module#UserModule'
             }
-            // , { 
-            //     path: '', 
-            //     loadChildren: './timeline/timeline.module#TimelineModule' 
-            // } 
         ]
     },
     {

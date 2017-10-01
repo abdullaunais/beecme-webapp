@@ -10,13 +10,15 @@ import { PagesRoutes } from './pages.routing';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { LocationComponent } from './location/location.component';
+import { MdSelectModule } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(PagesRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MdSelectModule
   ],
   declarations: [
     LoginComponent,

@@ -17,6 +17,8 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
 import { ObjectStorage } from './utilities/object-storage';
 import { Config } from './services/config';
+import { LocationGuardService } from './services/location-guard.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
     imports:      [
@@ -35,6 +37,6 @@ import { Config } from './services/config';
         AuthLayoutComponent
     ],
     bootstrap:    [ AppComponent ],
-    providers: [Config, ObjectStorage]
+    providers: [Config, ObjectStorage, LocationGuardService, AuthGuardService]
 })
 export class AppModule { }

@@ -82,40 +82,35 @@
                                 </div>
                             </div>
                             <div class="col-md-5">
-                                <!-- <div class="social text-center">
-                                    <button class="btn btn-just-icon btn-round btn-twitter">
-                                        <i class="fa fa-twitter"></i>
-                                    </button>
-                                    <button class="btn btn-just-icon btn-round btn-dribbble">
-                                        <i class="fa fa-dribbble"></i>
-                                    </button>
-                                    <button class="btn btn-just-icon btn-round btn-facebook">
-                                        <i class="fa fa-facebook"> </i>
-                                    </button>
-                                    <h4> or be classical </h4>
-                                </div> -->
-                                <!-- <form class="form" method="" action=""> -->
                                 <div class="card-content">
 
-                                    <select [(ngModel)]="selectedCountryId" (change)="countryChanged()" title="Select Address" style="margin:5px;">
-                                                <option disabled selected [value]="-1">Select Country</option>
-                                                <option *ngFor="let country of countryList" [value]="country.id">{{ country.nameEn }}</option>
-                                            </select>
+                                    <md-select [color]="colorTheme" [(ngModel)]="selectedCountryId" (change)="countryChanged()" placeholder="Select Country"
+                                        name="country" ngClass="btn btn-default simple">
+                                        <md-option *ngFor="let country of countryList" [value]="country.id">
+                                            {{ country.nameEn }}
+                                        </md-option>
+                                    </md-select>
 
-                                    <select [(ngModel)]="selectedProvinceId" (change)="provinceChanged()" title="Select Address" style="margin:5px;">
-                                                <option disabled selected [value]="-1">Select Province</option>
-                                                <option *ngFor="let province of provinceList" [value]="province.id">{{ province.nameEn }}</option>
-                                            </select>
+                                    <md-select [color]="colorTheme" [(ngModel)]="selectedProvinceId" (change)="provinceChanged()" placeholder="Select Province"
+                                        name="province" ngClass="btn btn-default simple">
+                                        <md-option *ngFor="let province of provinceList" [value]="province.id">
+                                            {{ province.nameEn }}
+                                        </md-option>
+                                    </md-select>
 
-                                    <select [(ngModel)]="selectedCityId" (change)="cityChanged()" title="Select Address" style="margin:5px;">
-                                                <option disabled selected [value]="-1">Select City</option>
-                                                <option *ngFor="let city of cityList" [value]="city.id">{{ city.nameEn }}</option>
-                                            </select>
+                                    <md-select [color]="colorTheme" [(ngModel)]="selectedCityId" (change)="cityChanged()" placeholder="Select City"
+                                        name="city" ngClass="btn btn-default simple">
+                                        <md-option *ngFor="let city of cityList" [value]="city.id">
+                                            {{ city.nameEn }}
+                                        </md-option>
+                                    </md-select>
+
+                                    <button (click)="getStarted()" style="width: 100%;" class="btn btn-primary">Get Started</button>
 
                                 </div>
-                                <div class="footer text-center">
-                                    <button class="btn btn-primary btn-round">Get Started</button>
-                                </div>
+                                <!-- <div class="footer text-center">
+                                    
+                                </div> -->
                                 <!-- </form> -->
                             </div>
                         </div>
