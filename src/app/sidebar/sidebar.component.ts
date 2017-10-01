@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SidebarService } from './sidebar.service';
+import { Subscription } from 'rxjs';
 
 declare const $: any;
 
@@ -21,11 +23,11 @@ export interface ChildrenItems {
 
 //Menu Items
 export const ROUTES: RouteInfo[] = [{
-        path: '/home',
-        title: 'Home',
-        type: 'link',
-        icontype: 'dashboard'
-    }
+    path: '/home',
+    title: 'Home',
+    type: 'link',
+    icontype: 'dashboard'
+}
     // ,{
     //     path: '/components',
     //     title: 'Components',
@@ -41,53 +43,22 @@ export const ROUTES: RouteInfo[] = [{
     //         {path: 'typography', title: 'Typography', ab:'T'}
     //     ]
     // }
-    // ,{
-    //     path: '/forms',
-    //     title: 'Forms',
-    //     type: 'sub',
-    //     icontype: 'content_paste',
-    //     children: [
-    //         {path: 'regular', title: 'Regular Forms', ab:'RF'},
-    //         {path: 'extended', title: 'Extended Forms', ab:'EF'},
-    //         {path: 'validation', title: 'Validation Forms', ab:'VF'},
-    //         {path: 'wizard', title: 'Wizard', ab:'W'}
-    //     ]
-    // }
-    ,{
-        path: '/categories', 
-        title: 'Categories', 
-        type: 'link',
-        icontype: 'apps'
-    },{
-        path: '/cart', 
-        title: 'My Cart',
-        type: 'link',
-        icontype: 'shopping_cart'
-    },{
-        path: '/orders', 
-        title: 'My Orders',
-        type: 'link',
-        icontype: 'timeline'
-    }
-    // ,{
-    //     path: '/calendar',
-    //     title: 'Calendar',
-    //     type: 'link',
-    //     icontype: 'date_range'
-    // },{
-    //     path: '/pages',
-    //     title: 'Pages',
-    //     type: 'sub',
-    //     icontype: 'image',
-    //     children: [
-    //         {path: 'pricing', title: 'Pricing', ab:'P'},
-    //         {path: 'timeline', title: 'Timeline Page', ab:'TP'},
-    //         {path: 'login', title: 'Login Page', ab:'LP'},
-    //         {path: 'register', title: 'Register Page', ab:'RP'},
-    //         {path: 'lock', title: 'Lock Screen Page', ab:'LSP'},
-    //         {path: 'user', title: 'User Page', ab:'UP'}
-    //     ]
-    // }
+    , {
+    path: '/categories',
+    title: 'Categories',
+    type: 'link',
+    icontype: 'apps'
+}, {
+    path: '/cart',
+    title: 'My Cart',
+    type: 'link',
+    icontype: 'shopping_cart'
+}, {
+    path: '/orders',
+    title: 'My Orders',
+    type: 'link',
+    icontype: 'timeline'
+}
 ];
 @Component({
     selector: 'app-sidebar-cmp',
@@ -96,6 +67,16 @@ export const ROUTES: RouteInfo[] = [{
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
+
+    subscription: Subscription;
+    user: any = {};
+    isLogin: boolean = false;
+
+    constructor(
+        private sidebarService: SidebarService
+    ) {
+
+    }
 
     isNotMobileMenu() {
         if ($(window).width() > 991) {
@@ -107,7 +88,7 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
         let isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
         if (isWindows) {
-           // if we are on windows OS we activate the perfectScrollbar function
+            // if we are on windows OS we activate the perfectScrollbar function
             const $sidebar = $('.sidebar-wrapper');
             $sidebar.perfectScrollbar();
             // if we are on windows OS we activate the perfectScrollbar function
@@ -117,5 +98,18 @@ export class SidebarComponent implements OnInit {
             $('html').addClass('perfect-scrollbar-off');
         }
         this.menuItems = ROUTES.filter(menuItem => menuItem);
+
+        this.subscription = this.sidebarService.userItem
+            .subscribe((data: any) => {
+                if(data.isLogin) {
+                    this.isLogin = true;
+                }
+                this.user = data.user
+            });
+    }
+
+    ngOnDestroy() {
+        // prevent memory leak when component is destroyed
+        this.subscription.unsubscribe();
     }
 }

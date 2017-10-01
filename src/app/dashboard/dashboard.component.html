@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-6 col-sm-6" (click)="routeToPath('/categories')" style="cursor: pointer">
                 <div class="card card-stats">
                     <div class="card-header" data-background-color="blue">
                         <i class="material-icons">view_carousel</i>
@@ -33,14 +33,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-6 col-sm-6" (click)="routeToPath('/cart')" style="cursor: pointer">
                 <div class="card card-stats">
                     <div class="card-header" data-background-color="green">
                         <i class="material-icons">shopping_cart</i>
                     </div>
                     <div class="card-content">
                         <p class="category">My Cart</p>
-                        <h3 class="card-title">3 Items</h3>
+                        <h3 class="card-title">3</h3>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
@@ -49,13 +49,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-6 col-sm-6" (click)="routeToPath('/orders')" style="cursor: pointer">
                 <div class="card card-stats">
                     <div class="card-header" data-background-color="orange">
-                        <i class="material-icons">access_time</i>
+                        <i class="fa fa-truck"></i>
                     </div>
                     <div class="card-content">
-                        <p class="category">Pending Orders</p>
+                        <p class="category">My Orders</p>
                         <h3 class="card-title">2</h3>
                     </div>
                     <div class="card-footer">
@@ -69,7 +69,7 @@
 
         <div class="header text-center">
             <h4 class="title" style="text-align: left;">Categories</h4>
-            <div style="height: 1px; width: 100%; background-color: #ddd; margin-bottom: 20px;" ></div>
+            <div style="height: 1px; width: 100%; background-color: #ddd; margin-bottom: 20px;"></div>
             <!-- <p class="category">A beautiful plugin, that replace the classic alert, Handcrafted by our friend
                 <a target="_blank" href="https://twitter.com/t4t5">Tristan Edwards</a>. Please check out the
                 <a href="http://limonte.github.io/sweetalert2/" target="_blank">full documentation.</a>

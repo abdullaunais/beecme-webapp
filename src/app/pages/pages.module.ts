@@ -11,6 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { LocationComponent } from './location/location.component';
 import { MdSelectModule } from '@angular/material';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { MdSelectModule } from '@angular/material';
   declarations: [
     LoginComponent,
     RegisterComponent,
-    LocationComponent
+    LocationComponent,
+    LogoutComponent
   ]
 })
 

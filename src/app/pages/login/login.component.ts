@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ObjectStorage } from '../../utilities/object-storage';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
+import { SidebarService } from '../../sidebar/sidebar.service';
 
 declare var $: any;
 
@@ -30,7 +32,9 @@ export class LoginComponent implements OnInit {
         private element: ElementRef,
         public fb: FormBuilder,
         private storage: ObjectStorage,
-        private userService: UserService
+        private userService: UserService,
+        private router: Router,
+        private sidebarService: SidebarService
     ) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -128,6 +132,10 @@ export class LoginComponent implements OnInit {
             this.storage.set("user.login", true);
             this.storage.set("user.data", userData);
             this.storage.set("user.authToken", userData.authToken);
+
+            this.sidebarService.changeLogin({user: userData, isLogin: true});
+
+            this.router.navigate(['/home']);
             // this.variables.setLogin(true);
             // Variables.user.username = userData.username;
             // Variables.user.email = userData.email;
