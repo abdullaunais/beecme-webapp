@@ -4,7 +4,8 @@ declare const $: any;
 
 @Component({
     selector: 'app-order-history',
-    templateUrl: './order-history.component.html'
+    templateUrl: './order-history.component.html',
+    styleUrls: ['./order-history.component.scss'],
 })
 export class OrderHistoryComponent implements OnInit, AfterViewInit {
     // constructor(private navbarTitleService: NavbarTitleService, private notificationService: NotificationService) { }

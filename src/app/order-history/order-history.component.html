@@ -1,20 +1,58 @@
-<div class="main-content">
+<div class="main-content page-order-hostory">
     <div class="container-fluid">
         <div class="row">
 
             <div class="col col-lg-12 col-md-12 col-sm-12" *ngFor="let i of [1,2,3,4,5]">
                 <div class="card">
-                    <div class="card-header" data-background-color="red">
-                        <i class="material-icons">chat</i>
+                    <div class="card-header card-header-icon" data-background-color="purple">
+                        <i class="fa fa-truck"></i>
                     </div>
+                    <!-- <div class="card-header" data-background-color="purple">
+                        <i class="fa fa-truck"></i> &nbsp;&nbsp;Order From Burger King
+                    </div> -->
                     <div class="card-content">
-                        <img class="card-img-top" src="assets/img/food.jpg" style="height: 64px; width:64px;"/>
-                        <p class="category">Messages</p>
-                        <h3 class="card-title">12</h3>
+                        <h4 class="card-title">Order From Burger King</h4>
+                        <div class="row cart-item-row" *ngFor="let item of [1,2,3]">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 cart-item-image-wrapper">
+                                <img src="assets/img/food.jpg" class="img-responsive cart-item-image">
+                            </div>
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 cart-item-details-wrapper">
+                                <!-- <h5 class="cart-item-title"></h5> -->
+                                <!-- <button class="btn btn-default cart-item-btn-comment">Add Comment</button> -->
+                                <div class="cart-item-price-wrapper">
+                                    <p class="pull-left no-margin"><span class="cart-item-title">Item Name (2 UNIT X 10 LKR) = </span></p>
+                                    <p class="pull-right no-margin"><span style="font-weight: 400;">LKR 20.00</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-left: 5px;padding-right: 5px;">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            </div>
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                <div>
+                                    <p class="pull-left no-margin"><span style="font-weight: 300;">DELIVERY FEE </span></p>
+                                    <p class="pull-right no-margin"><span style="font-weight: 400;">LKR 20.00</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-left: 5px;padding-right: 5px;">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            </div>
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                <div>
+                                    <p class="pull-left no-margin"><span style="font-weight: 700;">FINAL TOTAL </span></p>
+                                    <p class="pull-right no-margin"><span style="font-weight: 700;">LKR 40.00</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="clear: both"></div>
                     </div>
                     <div class="card-footer">
                         <div class="stats">
-                            <i class="material-icons">chat_bubble_outline</i> See New Messages
+                            <i class="material-icons">check_circle</i> Delivered
+                        </div>
+                        <div class="stats pull-right">
+                            <i class="material-icons">star</i> Give Feedback
                         </div>
                     </div>
                 </div>
