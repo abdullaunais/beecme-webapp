@@ -3,107 +3,183 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header card-header-icon" data-background-color="rose">
+                    <div class="card-header card-header-icon" data-background-color="purple">
                         <i class="material-icons">perm_identity</i>
                     </div>
                     <div class="card-content">
-                        <h4 class="card-title">Edit Profile -
-                            <small class="category">Complete your profile</small>
+                        <h4 class="card-title">Edit Profile
+                            <!-- <small class="category">Complete your profile</small> -->
                         </h4>
                         <form>
                             <div class="row">
-                                <div class="col-md-5">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Company (disabled)</label>
-                                        <input type="text" class="form-control" disabled>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Username</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Email address</label>
-                                        <input type="email" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Fist Name</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Last Name</label>
-                                        <input type="text" class="form-control">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" style="padding: 15px 15px 0px;">
+                                                    <i class="material-icons">face</i>
+                                                </span>
+                                        <input type="text" (blur)="inputBlur()" #forminput class="form-control" placeholder="Name...">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Adress</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">City</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Country</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label">Postal Code</label>
-                                        <input type="text" class="form-control">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" style="padding: 15px 15px 0px;">
+                                                            <i class="material-icons">email</i>
+                                                        </span>
+                                        <input type="text" (blur)="inputBlur()" #forminput class="form-control" placeholder="Email...">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>About Me</label>
-                                        <div class="form-group label-floating">
-                                            <label class="control-label"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
-                                            <textarea class="form-control" rows="5"></textarea>
-                                        </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon" style="padding: 15px 15px 0px;">
+                                                            <i class="material-icons">call</i>
+                                                        </span>
+                                        <span class="input-group-addon" style="padding: 13px 5px 0px;">
+                                                                +94 - 
+                                                            </span>
+                                        <input type="text" (blur)="inputBlur()" #forminput class="form-control" placeholder="Phone...">
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-rose pull-right">Update Profile</button>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" style="padding: 15px 15px 0px;">
+                                                            <i class="material-icons">lock_outline</i>
+                                                        </span>
+                                        <input type="text" (blur)="inputBlur()" #forminput class="form-control" placeholder="Password...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" style="padding: 15px 15px 0px;">
+                                                            <i class="material-icons">lock_outline</i>
+                                                        </span>
+                                        <input type="text" (blur)="inputBlur()" #forminput class="form-control" placeholder="Verify Password...">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-rose pull-right">Save Profile</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card card-profile">
-                    <div class="card-avatar">
+                <div class="card card-profile" style="margin-top: 25px;">
+                    <div class="card-avatar" style="margin:-40px auto 0;">
                         <a href="#pablo">
-                            <img class="img" src="../../assets/img/faces/marc.jpg" />
+                            <img class="img" [src]="user.profilePicture ? user.profilePicture : '../../assets/img/profile_default_grey.webp'" />
                         </a>
                     </div>
+                    <div class="card-content" style="margin-top:0;">
+                        <h4 class="card-title" style="text-transform: uppercase; margin-bottom: 0;">{{user.username}}</h4>
+                        <h6 class="category text-gray" style="text-transform: none; margin-bottom: 10px; margin-top: 0px;">{{user.email}}</h6>
+                        <!-- <p class="description">
+                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye
+                            I love Rick Owens’ bed design but the back is...
+                        </p> -->
+                        <a href="#pablo" class="btn btn-rose btn-round"><i class="fa fa-file-image-o"></i> &nbsp;&nbsp;Image</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-icon" data-background-color="purple">
+                        <i class="material-icons">home</i>
+                    </div>
                     <div class="card-content">
-                        <h6 class="category text-gray">CEO / Co-Founder</h6>
-                        <h4 class="card-title">Alec Thompson</h4>
-                        <p class="description">
-                            Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                        </p>
-                        <a href="#pablo" class="btn btn-rose btn-round">Follow</a>
+                        <h4 class="card-title">
+                            My Address
+                            <!-- <small class="category">Complete your profile</small> -->
+                        </h4>
+
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3">
+                                <ul class="nav nav-pills nav-pills-icons nav-pills-rose nav-stacked" role="tablist">
+                                    <!--
+                            color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+                        -->
+                                    <li class="active">
+                                        <a href="#my-list" role="tab" data-toggle="tab">
+                                                <i class="material-icons">edit_location</i> Existing
+                                            </a>
+                                    </li>
+                                    <li>
+                                        <a href="#create-address" role="tab" data-toggle="tab">
+                                                <i class="material-icons">add_location</i> Add New
+                                            </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-9 col-sm-9">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="my-list">
+                                        <div *ngFor="let address of addressList" style="margin-bottom: 12px; border-bottom: 1px solid #eee;">
+                                            <h6 class="card-title" style="padding:0;margin:0; font-weight: 400; text-transform: none;">
+                                                {{ address.nickName }}
+                                                <i class="material-icons pull-right" style="line-height: 40px;">delete</i>
+                                            </h6>
+                                            <p class="category">
+                                                {{ address.street }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="create-address">
+                                        <div class="animated flipInX">
+                                            <div class="form-group label-floating" style="padding-bottom: 0;">
+                                                <label class="control-label">Nickname</label>
+                                                <input type="text" [(ngModel)]="nickname" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="animated flipInX">
+                                            <div class="form-group label-floating" style="padding-bottom: 0;">
+                                                <label class="control-label">Street</label>
+                                                <input type="text" [(ngModel)]="address" class="form-control">
+                                            </div>
+                                        </div>
+                                        <ul class="list-group animated flipInX" style="margin: 20px 0 0 0;">
+                                            <li class="list-group-item justify-content-between" style="border:none; padding:0px;">
+                                                Al Malaaz, Riyadh, Saudi Arabia.
+                                            </li>
+                                        </ul>
+                                        <button type="submit" class="btn btn-rose pull-right">Save Address</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div style="height: 1px; width: 100%; background-color: #eee;"></div>
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-md-5 col-sm-4 col-xs-12" id="new-address-heading">
+                                Create New Address
+                                <div class="togglebutton pull-right">
+                                    <label>
+                                                            <input type="checkbox" (change)="toggleNewAddress()" [(ngModel)]="isNewAddress">
+                                                        </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="isNewAddress">
+                            <div class="col-md-12">
+
+                            </div>
+                        </div>
+                        <div *ngIf="!isNewAddress" style="height: 1px; width: 100%; background-color: #eee; margin-top:6px;"></div>
+                        <div class="row" *ngIf="!isNewAddress">
+                            <div class="col-md-12">
+
+                            </div>
+                        </div> -->
+
+                        <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
