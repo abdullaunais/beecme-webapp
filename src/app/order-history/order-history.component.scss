@@ -2,9 +2,19 @@
     .no-margin {
         margin: 0;
     }
+    .order-status-header {
+        padding: 10px 15px;
+        margin: -20px 15px 0 5px;
+        float: right;
+    }
+    .order-title {
+        display: inline-block;
+        margin: 10px 20px;
+    }
     .cart-item-row {
         border-bottom: 1px solid #eee;
         padding: 5px;
+        margin: 0;
     }
     .cart-item-image-wrapper {
         height: 40px;
@@ -14,14 +24,15 @@
     .cart-item-image {
         height: 40px;
         width: 40px;
-        border-radius: 100%;
+        border-radius: 3px;
         margin: 0;
     }
     .cart-item-title {
-        font-weight: 500; font-size: 1em; font-weight: 500;
-    }
-    // .cart-item-details-wrapper {
-        // height: 40px; 
+        font-weight: 500;
+        font-size: 1em;
+        font-weight: 500;
+    } // .cart-item-details-wrapper {
+    // height: 40px; 
     // }
     .cart-item-price-wrapper {
         margin-top: 8px;

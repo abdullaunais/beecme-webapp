@@ -1,9 +1,9 @@
-<div class="main-content">
+<div class="main-content page-item-list">
     <div class="container-fluid">
         <div class="row">
 
             <div class="col-lg-4 col-md-6" *ngFor="let item of items">
-                <a href="item/{{item.itemCode}}">
+                <a [routerLink]="['/details']" [queryParams]="{item_id: item.itemCode, shop_id: shop.shopId}">
                     <div class="card card-product">
                         <div class="card-image card-item-image-wrapper" data-header-animation="true">
                             <img class="img card-item-image" [src]="item.img1" alt="Item Image">

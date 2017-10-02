@@ -5,7 +5,7 @@ import { DeliveryService } from "../services/delivery.service";
 @Component({
     selector: 'app-shop-list',
     templateUrl: './shop-list.component.html',
-    styleUrls: ['./shop-list.component.css'],
+    styleUrls: ['./shop-list.component.scss'],
     providers: [DeliveryService]
 })
 export class ShopListComponent {
@@ -31,7 +31,7 @@ export class ShopListComponent {
     }
 
     ngOnInit() {
-        this.route.params.subscribe(params => {
+        this.route.queryParams.subscribe(params => {
             if (params['id']) {
                 this.category['categoryId'] = params.id;
                 this.initialize();

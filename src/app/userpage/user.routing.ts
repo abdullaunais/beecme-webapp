@@ -8,7 +8,7 @@ export const UserRoutes: Routes = [
 
       path: '',
       children: [ {
-        path: 'pages/user',
+        path: 'pages/profile',
         component: UserComponent,
         canActivate: [AuthGuardService]
     }]

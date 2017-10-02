@@ -66,8 +66,8 @@ export class DeliveryService {
     .catch((err) => this.handleError(err));
   }
 
-  getItemById(itemId: number): Observable<any> {
-    let requestUrl: string = this.serviceRootUrl + this.ITEM_URL + "/" + itemId;
+  getItemById(itemId: number, shopId: number): Observable<any> {
+    let requestUrl: string = this.serviceRootUrl + this.ITEM_URL + "/" + itemId + "/" + shopId;
     return this.http.get(requestUrl, this.options)
     .map((res) => this.extractData(res))
     .catch((err) => this.handleError(err));

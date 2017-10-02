@@ -139,6 +139,12 @@ export class NavbarComponent implements OnInit {
                 }
             }
         }
+
+
+
+        if(titlee.indexOf("/details?") != -1) {
+            return "Details"
+        }
         return 'Dashboard';
     }
     getPath() {

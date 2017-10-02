@@ -32,13 +32,13 @@ export const AppRoutes: Routes = [
                 loadChildren: './order-history/order-history.module#OrderHistoryModule',
                 canActivate: [AuthGuardService]
             }, {
-                path: 'category/:id',
+                path: 'category',
                 loadChildren: './shop-list/shop-list.module#ShopListModule',
             }, {
-                path: 'shop/:id',
+                path: 'shop',
                 loadChildren: './item-list/item-list.module#ItemListModule',
             }, {
-                path: 'item/:itemid',
+                path: 'details',
                 loadChildren: './details/details.module#DetailsModule',
             },
             {

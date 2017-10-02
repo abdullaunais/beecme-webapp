@@ -1,0 +1,79 @@
+.page-item-details {
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+    .item-availability {
+        display: block;
+        margin: 5px 15px;
+        padding: 5px 15px;
+    }
+    .item-image-active-wrapper {
+        margin: 20px 15px 10px 15px;
+        padding: 0;
+    }
+    .item-image-active {
+        width: 100%;
+        border-radius: 3px;
+    }
+    .item-image-inactive {
+        width: 100%;
+        opacity: 0.4;
+        border-radius: 3px;
+    }
+    .image-selected {
+        opacity: 1;
+    }
+    .item-comment {
+        padding: 10px 15px;
+        display: block;
+        background-color: #eee;
+        border-radius: 4px;
+        margin-top: 20px;
+    }
+    .item-qty-btn-wrapper {
+        height: 44px;
+        width: 44px;
+    }
+    .item-qty-btn {
+        height: 44px;
+        width: 44px;
+        box-shadow: none;
+        margin: 0;
+    }
+    .item-qty-edit-wrapper {
+        width: 100%;
+    }
+    .item-qty-edit {
+        height: 44px;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        width: 100%;
+        padding: 0 10px;
+        line-height: 44px;
+        text-align: center;
+    }
+    .item-cart-btn {
+        height: 44px;
+        width: 100%;
+        box-shadow: none;
+        margin: 0;
+    }
+    .cart-shop-image {
+        height: 72px;
+        width: 72px;
+        object-fit: cover;
+        border-radius: 100%;
+    }
+    .btn-cart-shop-details {
+        height: 48px;
+        width: 48px;
+        margin: 12px;
+        background-color: transparent;
+        color: #898989;
+        box-shadow: none;
+        float: right;
+    }
+}
