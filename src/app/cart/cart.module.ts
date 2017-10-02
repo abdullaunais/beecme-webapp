@@ -5,12 +5,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CartRoutes } from './cart.routing';
 import { CartComponent } from './cart.component';
+import { MdSelectModule } from '@angular/material';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild(CartRoutes),
-        FormsModule
+        FormsModule,
+        MdSelectModule
     ],
     declarations: [CartComponent]
 })

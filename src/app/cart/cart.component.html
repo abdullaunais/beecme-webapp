@@ -1,4 +1,4 @@
-<div class="main-content">
+<div class="main-content page-shopping-cart">
     <div class="container-fluid">
         <div class="row">
 
@@ -124,12 +124,15 @@
                                 </ul>
                             </div>
                             <div class="row" *ngIf="!isNewAddress" style="padding:0 15px;">
-                                <select class="selectpicker" [(ngModel)]="selectedAddress" data-style="btn btn-primary" title="Select Address" data-size="5"
-                                    style="margin:5px;">
-                                        <option disabled selected>Select Address</option>
-                                        <option *ngFor="let address of addressList" [value]="address">{{ address.nickName }}</option>
-                                    </select>
-                            </div>
+
+
+                                <md-select [color]="colorTheme" [(ngModel)]="selectedAddressId" (change)="addressChanged()" placeholder="Select Address"
+                                name="address" ngClass="btn btn-default simple">
+                                <md-option *ngFor="let address of addressList" [value]="address.id">
+                                    {{ address.nickName }}
+                                </md-option>
+                            </md-select>
+                                
 
                             <div style="clear: both"></div>
                         </div>

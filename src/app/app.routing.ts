@@ -26,6 +26,7 @@ export const AppRoutes: Routes = [
             }, {
                 path: 'cart',
                 loadChildren: './cart/cart.module#CartModule',
+                canActivate: [AuthGuardService]
             }, {
                 path: 'orders',
                 loadChildren: './order-history/order-history.module#OrderHistoryModule',
