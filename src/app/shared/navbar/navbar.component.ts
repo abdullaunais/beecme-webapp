@@ -2,6 +2,9 @@ import { Component, OnInit, Renderer, ViewChild, ElementRef, Directive } from '@
 import { ROUTES } from '../.././sidebar/sidebar.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { CartService } from '../../cart/cart.service';
+
 const misc: any = {
     navbar_menu_visible: 0,
     active_collapse: true,
@@ -11,7 +14,8 @@ const misc: any = {
 declare var $: any;
 @Component({
     selector: 'app-navbar-cmp',
-    templateUrl: 'navbar.component.html'
+    templateUrl: 'navbar.component.html',
+    providers: [CartService]
 })
 
 export class NavbarComponent implements OnInit {
@@ -21,9 +25,17 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
 
+    cartCount: number;
+    subscription: Subscription;
+
     @ViewChild('app-navbar-cmp') button: any;
 
-    constructor(location: Location, private renderer: Renderer, private element: ElementRef) {
+    constructor(
+        location: Location,
+        private renderer: Renderer,
+        private element: ElementRef,
+        private cartService: CartService
+    ) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -92,7 +104,13 @@ export class NavbarComponent implements OnInit {
                 clearInterval(simulateWindowResize);
             }, 1000);
         });
+
+        this.subscription = this.cartService.cartCount
+        .subscribe((data: number) => {
+            this.cartCount = data;
+        });
     }
+
     isMobileMenu() {
         if ($(window).width() < 991) {
             return false;

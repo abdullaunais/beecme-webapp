@@ -10,11 +10,14 @@ import { UserService } from '../services/user.service';
 
 export class UserComponent {
     user: any = {};
-    addressList: any = {};
+    addressList: Array<any> = [];
 
     country: any;
     province: any;
     city: any;
+
+    nickname: string;
+    street: string;
 
     isLoading: boolean = false;
     isError: boolean = false;
@@ -43,5 +46,9 @@ export class UserComponent {
             // this.locationLabel = this.city.nameEn + ", \n" + this.province.nameEn + ",\n" + this.country.nameEn + ".";
             this.isLoading = false;
         });
+    }
+
+    inputBlur() {
+        return;
     }
 }

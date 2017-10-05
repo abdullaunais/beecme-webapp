@@ -10,7 +10,6 @@ import { UserService } from '../services/user.service';
 })
 export class CartComponent {
     colorTheme: string = 'info';
-    cartList: Array<any> = [1, 2, 3];
 
     user: any = {};
     addressList: Array<any> = [];
@@ -21,8 +20,14 @@ export class CartComponent {
     province: any;
     city: any;
 
+    cartItems: Array<any> = [];
+    cartShop: any = {};
+
+    cartIsEmpty: boolean = false;
     isLoading: boolean = false;
     isError: boolean = false;
+    shopIsVisible: boolean;
+    totalAmount: number = 0;
     isNewAddress: boolean = false;
 
     constructor(
@@ -37,10 +42,6 @@ export class CartComponent {
     }
 
     ngOnInit() {
-        this.initialize();
-    }
-
-    initialize() {
         this.isLoading = true;
         this.isError = false;
         this.userService.getAddressList(this.user.userId, this.user.authToken).catch((err): any => {
@@ -51,6 +52,33 @@ export class CartComponent {
             // this.locationLabel = this.city.nameEn + ", \n" + this.province.nameEn + ",\n" + this.country.nameEn + ".";
             this.isLoading = false;
         });
+
+        let cart = this.storage.get('delivery.cart');
+        console.log(cart);
+        if (cart) {
+            if (cart.length > 0) {
+                let cartShop = this.storage.get('delivery.cartShop');
+                this.cartShop = cartShop;
+                this.shopIsVisible = true;
+                this.cartIsEmpty = false;
+                this.cartItems = [];
+                let timeout = 0;
+                cart.forEach((item: any) => {
+                    this.totalAmount = this.totalAmount + (item.price * item.quantity);
+                    setTimeout(() => {
+                        this.cartItems.push(item);
+                    }, timeout += 100);
+                });
+            } else {
+                this.cartItems = [];
+                this.cartIsEmpty = true;
+            }
+        } else {
+            this.cartItems = [];
+            this.cartIsEmpty = true;
+        }
+        this.isLoading = false;
+        this.city = this.storage.get('location.city');
     }
 
     addressChanged() {

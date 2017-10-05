@@ -70,10 +70,10 @@
                                 </div>
                                 <div class="col-xs-12 col-lg-1 col-md-1 col-sm-12" style="padding: 0;"></div>
                                 <div class="col-xs-12 col-lg-5 col-md-5 col-sm-12" style="padding: 0;">
-                                        <button class="btn btn-primary item-cart-btn">
+                                        <button class="btn btn-primary item-cart-btn" (click)="validateCart()">
                                             <i class="fa fa-shopping-cart"></i> 
                                             <span class="hidden-md hidden-lg">&nbsp;Add to Cart</span>
-                                            <span>&nbsp;(LKR 250.00/KG)</span>
+                                            <span>&nbsp;(LKR {{item.price}}/{{item.unit}})</span>
                                         </button>
                                 </div>
                             </div>

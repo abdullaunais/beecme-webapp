@@ -76,7 +76,7 @@
         </form>
         <ul class="nav nav-mobile-menu">
             <li class="">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#pablo" aria-expanded="false">
+                <a [routerLink]="['/cart']" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             <i class="material-icons">shopping_cart</i> 
                             <span class="notification">3</span> 
                             <p class="hidden-lg hidden-md">Cart Items</p> 
@@ -109,12 +109,12 @@
                     </li>
                 </ul>
             </li>
-            <li class="" *ngIf="isLogin">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#pablo" aria-expanded="false">
+            <!-- <li class="" *ngIf="isLogin">
+                <a [routerLink]="['/pages/profile']" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             <i class="material-icons">person</i>
                             <p class="hidden-lg hidden-md">Profile</p>
                         <div class="ripple-container"></div></a>
-            </li>
+            </li> -->
             <li class="separator hidden-lg hidden-md"></li>
         </ul>
     </div>

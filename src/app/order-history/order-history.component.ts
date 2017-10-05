@@ -45,5 +45,7 @@ export class OrderHistoryComponent implements OnInit, AfterViewInit {
         $('[rel="tooltip"]').tooltip();
     }
 
-
+    upperCaseString(str: string) {
+        return str.toUpperCase();
+    }
 }

@@ -24,6 +24,7 @@ export class DeliveryService {
   SHOPS_URL = "/shops";
   CATEGORIES_URL = "/categories";
   ITEM_URL = "/items";
+  ITEM_SHOP_URL = "/itemshop";
   SCHEDULES_URL = "/schedules";
   ORDER_URL = "/carts";
   REVIEW_URL = "/reviews"
@@ -51,6 +52,13 @@ export class DeliveryService {
     .catch((err) => this.handleError(err));
   }
 
+  getShopById(shopId: number): Observable<any> {
+    let requestUrl: string = this.serviceRootUrl + this.SHOPS_URL + "/" + shopId;
+    return this.http.get(requestUrl, this.options)
+    .map((res) => this.extractData(res))
+    .catch((err) => this.handleError(err));
+  }
+
   getCategories(cityId: number): Observable<any> {
     let requestUrl: string = this.serviceRootUrl + this.CATEGORIES_URL + "/" + cityId;
     return this.http.get(requestUrl, this.options)
@@ -66,8 +74,8 @@ export class DeliveryService {
     .catch((err) => this.handleError(err));
   }
 
-  getItemById(itemId: number, shopId: number): Observable<any> {
-    let requestUrl: string = this.serviceRootUrl + this.ITEM_URL + "/" + itemId + "/" + shopId;
+  getItemById(shopId: number, itemId: number): Observable<any> {
+    let requestUrl: string = this.serviceRootUrl + this.ITEM_SHOP_URL + "/" + shopId + "/" + itemId;
     return this.http.get(requestUrl, this.options)
     .map((res) => this.extractData(res))
     .catch((err) => this.handleError(err));

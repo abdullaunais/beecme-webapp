@@ -1,8 +1,7 @@
 <div class="main-content page-order-hostory">
     <div class="container-fluid">
         <div class="row">
-
-            <div class="col col-lg-12 col-md-12 col-sm-12" *ngFor="let order of orders">
+            <div class="col col-lg-6 col-md-12 col-sm-12" *ngFor="let order of orders">
                 <div class="card">
                     <div class="card-header card-header-icon order-status-header" data-background-color="purple">
                         <i class="fa fa-truck"></i> <span class="hidden-xs">Processing</span>
@@ -14,8 +13,8 @@
                         <i class="fa fa-truck"></i> &nbsp;&nbsp;Order From Burger King
                     </div> -->
                     <div class="card-content" style="margin-top: 20px;">
-                        <h4 class="order-title">Order From Burger King</h4>
-                        <div class="row cart-item-row" *ngFor="let item of [1,2,3]">
+                        <h4 class="order-title">{{order.shop.shopName}}</h4>
+                        <div class="row cart-item-row" *ngFor="let item of order.orderDetails">
                             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 cart-item-image-wrapper">
                                 <img src="assets/img/food.jpg" class="img-responsive cart-item-image">
                             </div>
@@ -23,8 +22,8 @@
                                 <!-- <h5 class="cart-item-title"></h5> -->
                                 <!-- <button class="btn btn-default cart-item-btn-comment">Add Comment</button> -->
                                 <div class="cart-item-price-wrapper">
-                                    <p class="pull-left no-margin"><span class="cart-item-title">Item Name (2 UNIT X 10 LKR) = </span></p>
-                                    <p class="pull-right no-margin"><span style="font-weight: 400;">LKR 20.00</span></p>
+                                    <p class="pull-left no-margin"><span class="cart-item-title">{{item.nameEn}} ({{item.quantity}} {{upperCaseString(item.unit)}} X {{order.orderHeader.currency}} {{item.price}}) = </span></p>
+                                    <p class="pull-right no-margin"><span style="font-weight: 400;">{{order.orderHeader.currency}} {{item.quantity * item.price}}</span></p>
                                 </div>
                             </div>
                         </div>
@@ -33,8 +32,9 @@
                             </div>
                             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                                 <div>
-                                    <p class="pull-left no-margin"><span style="font-weight: 300;">DELIVERY FEE </span></p>
-                                    <p class="pull-right no-margin"><span style="font-weight: 400;">LKR 20.00</span></p>
+                                    <p class="pull-left no-margin"><span style="font-weight: 300;">DELIVERY CHARGE </span></p>
+                                    <p class="pull-right no-margin"><span style="font-weight: 400;" *ngIf="order.orderHeader.deliveryFee > 0">{{order.orderHeader.currency}} {{order.orderHeader.deliveryFee}}</span></p>                                    
+                                    <p class="pull-right no-margin"><span style="font-weight: 400;" *ngIf="order.orderHeader.deliveryFee == 0">FREE</span></p>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                                 <div>
                                     <p class="pull-left no-margin"><span style="font-weight: 700;">FINAL TOTAL </span></p>
-                                    <p class="pull-right no-margin"><span style="font-weight: 700;">LKR 40.00</span></p>
+                                    <p class="pull-right no-margin"><span style="font-weight: 700;">{{order.orderHeader.currency}} {{order.orderHeader.totalAmount}}</span></p>
                                 </div>
                             </div>
                         </div>
