@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DeliveryService } from "../services/delivery.service";
+import { ObjectStorage } from '../utilities/object-storage';
+// import { BreadcrumbService } from '../breadcrumb/breadcrumb.service';
 
 @Component({
     selector: 'app-shop-list',
@@ -9,6 +11,7 @@ import { DeliveryService } from "../services/delivery.service";
     providers: [DeliveryService]
 })
 export class ShopListComponent {
+    breadcrumbArray: { title: string; icon: string; path: string; }[];
     category: any = {};
     city: any = {};
     shops: Array<any> = [];
@@ -23,17 +26,25 @@ export class ShopListComponent {
 
     constructor(
         private route: ActivatedRoute,
-        private deliveryService: DeliveryService
+        private deliveryService: DeliveryService,
+        private storage: ObjectStorage
+        // private breadcrumbService: BreadcrumbService
     ) {
         this.isLoading = true;
         this.noMoreShops = false;
         this.isError = false;
+        this.breadcrumbArray = [
+            { title: 'Home', icon: 'home', path: 'home'},
+            {title: 'Categories', icon: 'apps', path: 'category'}
+        ];
+        this.city = this.storage.get('location.city');
+        // this.breadcrumbService.changeRoute(breadcrumbArray);
     }
 
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
-            if (params['id']) {
-                this.category['categoryId'] = params.id;
+            if (params['category']) {
+                this.category['categoryId'] = params['category'];
                 this.initialize();
             }
         });
@@ -41,13 +52,13 @@ export class ShopListComponent {
 
     initialize() {
         let catId = this.category['categoryId'];
-        this.deliveryService.getShops(catId, this.start, this.offset).catch((err):any => {
+        this.deliveryService.getShops(this.city.id, catId, this.start, this.offset).catch((err):any => {
             this.isAvailable = false;
             this.isError = true;
             this.isLoading = false;
         }).subscribe((data) => {
-          let json = JSON.stringify(data);
-          let shopsArray = JSON.parse(json);
+          let shopsArray = data;
+          console.log(shopsArray);
           this.shops = [];
           if (shopsArray) {
             if (shopsArray.length > 0) {

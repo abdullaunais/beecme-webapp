@@ -27,7 +27,7 @@
             <div class="collapse" id="collapseExample">
                 <ul class="nav">
                     <li *ngIf="isLogin">
-                        <a href="javascript:void(0)">
+                        <a [routerLink]="['/pages/profile']">
                                     <span class="sidebar-mini">
                                             <i class="material-icons">face</i>
                                     </span>
@@ -35,7 +35,7 @@
                                 </a>
                     </li>
                     <li *ngIf="!isLogin">
-                        <a href="/pages/login">
+                        <a [routerLink]="['/pages/login']">
                                         <span class="sidebar-mini">
                                                 <i class="material-icons">vpn_key</i>
                                         </span>
@@ -43,7 +43,7 @@
                                     </a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)">
+                        <a [routerLink]="['/pages/settings']">
                                     <span class="sidebar-mini">
                                             <i class="material-icons">settings</i>
                                     </span>

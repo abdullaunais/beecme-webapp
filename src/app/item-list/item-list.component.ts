@@ -9,6 +9,7 @@ import { ActivatedRoute } from "@angular/router";
   providers: [DeliveryService]
 })
 export class ItemListComponent {
+  breadcrumbArray: { title: string; icon: string; path: string; }[];
 
   start: number = 0;
   offset: number = 20;
@@ -28,12 +29,18 @@ export class ItemListComponent {
     this.isLoading = true;
     this.isAvailable = true;
     this.noMoreItems = false;
+
+    this.breadcrumbArray = [
+      { title: 'Home', icon: 'home', path: 'home'},
+      {title: 'Categories', icon: 'apps', path: 'category'},
+      {title: 'Shops', icon: 'store', path: 'category'}
+  ]
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params['id']) {
-        this.shop['shopId'] = params.id;
+      if (params['shop']) {
+        this.shop['shopId'] = params.shop;
         this.initialize();
       }
     });
@@ -45,6 +52,7 @@ export class ItemListComponent {
       this.isLoading = false;
       this.isAvailable = false;
     }).subscribe((data) => {
+      console.log(data['itemlist']);
       if (data['itemlist']) {
         if (data['itemlist'].length > 0) {
           this.isAvailable = true;

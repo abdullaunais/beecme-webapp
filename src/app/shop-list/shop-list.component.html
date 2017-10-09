@@ -1,23 +1,27 @@
 <div class="main-content page-shop-list">
     <div class="container-fluid">
         <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <app-breadcrumb [breadcrumbArray]="breadcrumbArray"></app-breadcrumb>
+            </div>
+
             <div class="col-md-4 col-sm-6" *ngFor="let shop of shops">
-                <a [routerLink]="['/shop']" [queryParams]="{id: shop.shopId}">
+                <a [routerLink]="['/shop']" [queryParams]="{shop: shop.shopId}" queryParamsHandling="merge">
                     <div class="card card-profile">
                         <div class="card-avatar">
-                            <img class="img shop-profile-picture" [src]="shop.profilePicture" />
+                            <img class="img shop-profile-picture" [src]="shop.profileUrl" />
                         </div>
                         <div class="card-content">
                             <h4 class="card-title">{{shop.shopName}}</h4>
-                            <h6 class="category text-gray shop-address">{{shop.address}}</h6>
+                            <h6 class="category text-gray shop-address">{{shop.street}}</h6>
                             <p>
                                 <button class="btn btn-info btn-round shop-keyword" *ngFor="let keyword of shop.keywordsArray">{{keyword}}</button>
                             </p>
                             <p class="description">
-                                Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye
-                                I love Rick Owens’ bed design but the back is...
+                                {{shop?.descriptionEn}}
                             </p>
-                            <a href="#pablo" class="btn btn-primary btn-round">View</a>
+                            <!-- <a href="#pablo" class="btn btn-primary btn-round">View</a> -->
                         </div>
                     </div>
                 </a>

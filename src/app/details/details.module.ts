@@ -5,12 +5,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DetailsRoutes } from './details.routing';
 import { DetailsComponent } from './details.component';
+import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild(DetailsRoutes),
-        FormsModule
+        FormsModule,
+        BreadcrumbModule
     ],
     declarations: [DetailsComponent]
 })

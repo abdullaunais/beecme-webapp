@@ -25,8 +25,8 @@ export class DetailsComponent {
 
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
-            if (params['shop_id']) {
-                this.shop['shopId'] = params.shop_id;
+            if (params['shop']) {
+                this.shop['shopId'] = params.shop;
                 // let shopStr = localStorage.getItem('shop');
                 // if (shopStr) {
                 //     let shopObj = JSON.parse(shopStr);
@@ -40,8 +40,8 @@ export class DetailsComponent {
                 });
             }
 
-            if (params['item_id']) {
-                this.item['itemCode'] = params.item_id;
+            if (params['item']) {
+                this.item['itemCode'] = params.item;
             }
             this.initialize();
         });

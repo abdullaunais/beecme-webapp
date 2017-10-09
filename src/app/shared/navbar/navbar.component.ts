@@ -163,7 +163,7 @@ export class NavbarComponent implements OnInit {
         if(titlee.indexOf("/details?") != -1) {
             return "Details"
         }
-        return 'Dashboard';
+        return 'BeecMe';
     }
     getPath() {
         return this.location.prepareExternalUrl(this.location.path());

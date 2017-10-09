@@ -1,0 +1,17 @@
+.component-shop-info {
+    .cart-shop-image {
+        height: 72px;
+        width: 72px;
+        object-fit: cover;
+        border-radius: 100%;
+    }
+    .btn-cart-shop-details {
+        height: 48px;
+        width: 48px;
+        margin: 12px;
+        background-color: transparent;
+        color: #898989;
+        box-shadow: none;
+        float: right;
+    }
+}

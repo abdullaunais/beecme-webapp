@@ -5,6 +5,9 @@ import { SidebarService } from '../../sidebar/sidebar.service';
 import { ObjectStorage } from '../../utilities/object-storage';
 import { Router } from '@angular/router';
 
+declare var swal: any;
+declare var $: any;
+
 @Component({
     selector: 'app-register-cmp',
     templateUrl: './register.component.html',
@@ -105,8 +108,30 @@ export class RegisterComponent implements OnInit {
             this.validationArray.push({ message: message, valid: isValid, index: formIndex });
         }
 
+        // if (this.registerForm.controls.formTermsAndConditions.errors) {
+        //     isValid = false;
+        //     formIndex = 4;
+        //     if (this.registerForm.controls.formPassword.errors.required) {
+        //         message = "You must agree the terms and conditions";
+        //     }
+        //     this.validationArray.push({ message: message, valid: isValid, index: formIndex });
+        // }
+
         if (!isValid) {
             //validations
+            this.validationArray.forEach(error => {
+                $('#forminput' + error.index).notify(
+                    error.message, 
+                    { 
+                        position:"bottom right",
+                        elementPosition: 'bottom right',
+                        globalPosition: 'bottom right',
+                        autoHideDelay: 500000,
+                     }
+                  );
+            });
+            
+
             return;
         } else {
             this.name = this.registerForm.value.formName.replace(/[^A-Za-z0-9_'-]/gi, '');
@@ -151,7 +176,17 @@ export class RegisterComponent implements OnInit {
 
                     this.sidebarService.changeLogin({ user: userData, isLogin: true });
 
-                    this.router.navigate(['/home']);
+                    swal({
+                        type: 'success',
+                        title: 'Success!',
+                        text: 'Registration Successful!',
+                        buttonsStyling: false,
+                        confirmButtonClass: 'btn btn-success'
+                    }).then(() => {
+                        this.router.navigate(['/home']);
+                    });
+
+
                 });
             } else if (response.code < 0) {
                 if (response.message === "Request failed. Code already exists") {

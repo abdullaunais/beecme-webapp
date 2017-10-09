@@ -19,6 +19,7 @@ import { ObjectStorage } from './utilities/object-storage';
 import { Config } from './services/config';
 import { LocationGuardService } from './services/location-guard.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { ShopInfoComponent } from './shop-info/shop-info.component';
 
 @NgModule({
     imports:      [
@@ -29,7 +30,7 @@ import { AuthGuardService } from './services/auth-guard.service';
         HttpModule,
         SidebarModule,
         NavbarModule,
-        FooterModule    
+        FooterModule
     ],
     declarations: [
         AppComponent,

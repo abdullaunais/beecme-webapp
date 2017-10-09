@@ -24,7 +24,7 @@ export class DeliveryService {
   SHOPS_URL = "/shops";
   CATEGORIES_URL = "/categories";
   ITEM_URL = "/items";
-  ITEM_SHOP_URL = "/itemshop";
+  ITEM_SHOP_URL = "/shopitems";
   SCHEDULES_URL = "/schedules";
   ORDER_URL = "/carts";
   REVIEW_URL = "/reviews"
@@ -44,7 +44,7 @@ export class DeliveryService {
     .catch((err) => this.handleError(err));
   }
 
-  getShops(categoryId: number, start: number, offset: number): Observable<any> {
+  getShops(cityId: number, categoryId: number, start: number, offset: number): Observable<any> {
     let queryParams = "?type=71&value=" + categoryId + "&start=" + start + "&offset=" + offset;
     let requestUrl: string = this.serviceRootUrl + this.SHOPS_URL + queryParams;
     return this.http.get(requestUrl, this.options)
@@ -67,8 +67,8 @@ export class DeliveryService {
   }
 
   getItemByShop(shopId: number, start: number, offset: number): Observable<any> {
-    let queryParams = "?type=17&value=" + shopId + "&start=" + start + "&offset=" + offset;
-    let requestUrl: string = this.serviceRootUrl + this.ITEM_URL + queryParams;
+    let queryParams = "?start=" + start + "&offset=" + offset;
+    let requestUrl: string = this.serviceRootUrl + this.ITEM_SHOP_URL + "/" + shopId + queryParams;
     return this.http.get(requestUrl, this.options)
     .map((res) => this.extractData(res))
     .catch((err) => this.handleError(err));

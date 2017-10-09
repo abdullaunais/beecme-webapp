@@ -10,8 +10,8 @@ import { PagesRoutes } from './pages.routing';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { LocationComponent } from './location/location.component';
-import { MdSelectModule } from '@angular/material';
 import { LogoutComponent } from './logout/logout.component';
+import { MdSelectModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -19,7 +19,7 @@ import { LogoutComponent } from './logout/logout.component';
     RouterModule.forChild(PagesRoutes),
     FormsModule,
     ReactiveFormsModule,
-    MdSelectModule
+    MdSelectModule,
   ],
   declarations: [
     LoginComponent,

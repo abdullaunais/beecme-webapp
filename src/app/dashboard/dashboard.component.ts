@@ -1,18 +1,27 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+// import { BreadcrumbService } from '../breadcrumb/breadcrumb.service';
 
 declare const $: any;
 
 @Component({
     selector: 'app-dashboard',
-    templateUrl: './dashboard.component.html'
+    templateUrl: './dashboard.component.html',
+    // providers: [BreadcrumbService]
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
+    breadcrumbArray: { title: string; icon: string; path: string; }[];
     // constructor(private navbarTitleService: NavbarTitleService, private notificationService: NotificationService) { }
 
     // constructor(private navbarTitleService: NavbarTitleService) { }
 
-    constructor(private router: Router) {}
+    constructor(
+        private router: Router,
+        // private breadcrumbService: BreadcrumbService
+    ) {
+        this.breadcrumbArray = [{title: 'Home', icon: 'home', path: 'home'}]
+        // this.breadcrumbService.changeRoute([]);
+    }
 
     public ngOnInit() {
     }

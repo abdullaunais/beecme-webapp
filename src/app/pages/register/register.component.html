@@ -43,7 +43,7 @@
     </nav>
     <div class="full-page register-page" filter-color="black">
         <div class="content">
-            <div class="row">
+            <div class="row" style="margin:0;">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="card card-signup">
                         <h2 class="card-title text-center">Register</h2>
@@ -104,31 +104,31 @@
                                             <span class="input-group-addon">
                                                 <i class="material-icons">face</i>
                                             </span>
-                                            <input type="text" formControlName="formName" (blur)="inputBlur()" #forminput class="form-control" placeholder="Name...">
+                                            <input type="text" formControlName="formName" (blur)="inputBlur()" id="forminput0" class="form-control" placeholder="Name...">
                                         </div>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="material-icons">email</i>
                                             </span>
-                                            <input type="text" formControlName="formEmail" (blur)="inputBlur()" #forminput type="email" class="form-control" placeholder="Email...">
+                                            <input type="text" formControlName="formEmail" (blur)="inputBlur()" id="forminput1" type="email" class="form-control" placeholder="Email...">
                                         </div>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                     <i class="material-icons">call</i>
                                             </span>
-                                            <input type="text" formControlName="formPhone" (blur)="inputBlur()" #forminput class="form-control" placeholder="Phone...">
+                                            <input type="number" formControlName="formPhone" (blur)="inputBlur()" id="forminput2" class="form-control" placeholder="Phone...">
                                         </div>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="material-icons">lock_outline</i>
                                             </span>
-                                            <input type="password" formControlName="formPassword" (blur)="inputBlur()" #forminput placeholder="Password..." class="form-control" />
+                                            <input type="password" formControlName="formPassword" (blur)="inputBlur()" id="forminput3" placeholder="Password..." class="form-control" />
                                         </div>
                                         <!-- If you want to add a checkbox to this form, uncomment this code -->
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" formControlName="formTermsAndConditions" (blur)="inputBlur()" #forminput name="optionsCheckboxes" checked> I agree to the
-                                                <a href="#something">terms and conditions</a>.
+                                                <input type="checkbox" formControlName="formTermsAndConditions" (blur)="inputBlur()" name="optionsCheckboxes" checked> I agree to the
+                                                <a  id="forminput4" href="#something">terms and conditions</a>.
                                             </label>
                                         </div>
                                     </div>
