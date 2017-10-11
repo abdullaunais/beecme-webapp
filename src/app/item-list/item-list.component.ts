@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { DeliveryService } from "../services/delivery.service";
-import { ActivatedRoute } from "@angular/router";
+import { DeliveryService } from '../services/delivery.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-item-list',
@@ -20,6 +20,7 @@ export class ItemListComponent {
   noMoreItems: boolean;
 
   shop: any = {};
+  selectedQty: number = 1;
 
   items: Array<any> = [];
   constructor(
@@ -31,10 +32,10 @@ export class ItemListComponent {
     this.noMoreItems = false;
 
     this.breadcrumbArray = [
-      { title: 'Home', icon: 'home', path: 'home'},
-      {title: 'Categories', icon: 'apps', path: 'category'},
-      {title: 'Shops', icon: 'store', path: 'category'}
-  ]
+      { title: 'Home', icon: 'home', path: 'home' },
+      { title: 'Categories', icon: 'apps', path: 'category' },
+      { title: 'Shops', icon: 'store', path: 'category' }
+    ]
   }
 
   ngOnInit() {
@@ -47,7 +48,7 @@ export class ItemListComponent {
   }
 
   initialize() {
-    let shopId = this.shop['shopId'];
+    const shopId = this.shop['shopId'];
     this.deliveryService.getItemByShop(shopId, this.start, this.offset).catch((err): any => {
       this.isLoading = false;
       this.isAvailable = false;
@@ -72,5 +73,19 @@ export class ItemListComponent {
       }
       this.isLoading = false;
     });
+
+    this.deliveryService.getShopById(shopId).catch((err): any => {
+      // this.isLoading = false;
+      // this.isAvailable = false;
+    }).subscribe((shopData) => {
+      this.shop = shopData;
+    });
   }
+
+  updateQty(item: any, val: number) {
+    if (val < item.qty) {
+      this.selectedQty += val;
+    }
+  }
+
 }

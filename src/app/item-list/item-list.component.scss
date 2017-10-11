@@ -1,4 +1,10 @@
 .page-item-list {
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
     .card-item-image-wrapper {
         height: 180px;
     }
@@ -32,5 +38,33 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         margin: 0 0 0 -1px !important;
+    }
+    .item-qty-btn-wrapper {
+        height: 44px;
+        width: 44px;
+    }
+    .item-qty-btn {
+        height: 44px;
+        width: 44px;
+        box-shadow: none;
+        margin: 0;
+    }
+    .item-qty-edit-wrapper {
+        width: 100%;
+    }
+    .item-qty-edit {
+        height: 44px;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        width: 100%;
+        padding: 0 10px;
+        line-height: 44px;
+        text-align: center;
+    }
+    .item-cart-btn {
+        height: 44px;
+        width: 100%;
+        box-shadow: none;
+        margin: 0;
     }
 }

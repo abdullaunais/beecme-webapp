@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DeliveryService } from "../services/delivery.service";
+import { DeliveryService } from '../services/delivery.service';
 import { ObjectStorage } from '../utilities/object-storage';
 // import { BreadcrumbService } from '../breadcrumb/breadcrumb.service';
 
@@ -51,13 +51,13 @@ export class ShopListComponent {
     }
 
     initialize() {
-        let catId = this.category['categoryId'];
-        this.deliveryService.getShops(this.city.id, catId, this.start, this.offset).catch((err):any => {
+        const catId = this.category['categoryId'];
+        this.deliveryService.getShops(this.city.id, catId, this.start, this.offset).catch((err): any => {
             this.isAvailable = false;
             this.isError = true;
             this.isLoading = false;
         }).subscribe((data) => {
-          let shopsArray = data;
+          const shopsArray = data;
           console.log(shopsArray);
           this.shops = [];
           if (shopsArray) {
@@ -66,8 +66,8 @@ export class ShopListComponent {
               this.isError = false;
               let timeout = 0;
               shopsArray.forEach((shop: any, index: number) => {
-                let keywordString = shop.keywords;
-                let keywords = keywordString.split(" ");
+                const keywordString = shop.keywords;
+                const keywords = keywordString.split(' ');
                 shopsArray[index]['keywordsArray'] = keywords;
                 setTimeout(() => {
                   this.shops.push(shop);

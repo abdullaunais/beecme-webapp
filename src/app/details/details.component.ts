@@ -119,8 +119,9 @@ export class DetailsComponent {
     }
 
     updateQty(val: number) {
-        if (val < this.item.qty)
+        if (val < this.item.qty) {
             this.selectedQty += val;
+        }
     }
 
     initialize() {
