@@ -88,4 +88,8 @@ export class ItemListComponent {
     }
   }
 
+  validateCart(item) {
+    console.log(JSON.stringify(item));
+  }
+
 }

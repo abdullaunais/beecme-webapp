@@ -1,13 +1,14 @@
 import {Injectable}      from '@angular/core'
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { ObjectStorage } from '../utilities/object-storage';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class CartService {
   // Observable users object source
   private _cartCountSource: BehaviorSubject<any>;
   // Observable user object stream
-  cartCount: any;
+  cartCount: Observable<string>;
 
   constructor(private storage: ObjectStorage) {
       if (this.storage.get('delivery.cart')) {

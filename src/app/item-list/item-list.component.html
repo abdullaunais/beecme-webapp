@@ -10,7 +10,7 @@
                 <app-shop-info></app-shop-info>
             </div>
 
-            <div class="col-lg-4 col-md-6" *ngFor="let item of items">
+            <div class="col-lg-3 col-md-4" *ngFor="let item of items">
                     <div class="card card-product">
                             <a [routerLink]="['/details']" [queryParams]="{item: item.itemCode, shop: shop.shopId}" queryParamsHandling="merge">
                         <div class="card-image card-item-image-wrapper" data-header-animation="true">
@@ -59,7 +59,7 @@
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
-                                                <button class="btn btn-primary item-cart-btn" (click)="validateCart()">
+                                                <button class="btn btn-primary item-cart-btn" (click)="validateCart(item)">
                                                     <i class="fa fa-shopping-cart"></i> 
                                                     <span>Add to Cart</span>
                                                 </button>
