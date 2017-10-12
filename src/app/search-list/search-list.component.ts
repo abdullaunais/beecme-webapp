@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { DeliveryService } from '../services/delivery.service';
 import { ActivatedRoute } from '@angular/router';
+import { DeliveryService } from '../services/delivery.service';
 import { ObjectStorage } from '../utilities/object-storage';
 
 @Component({
-  selector: 'app-item-list',
-  templateUrl: './item-list.component.html',
-  styleUrls: ['./item-list.component.scss'],
-  providers: [DeliveryService]
+  selector: 'app-search-list',
+  templateUrl: './search-list.component.html',
+  styleUrls: ['../item-list/item-list.component.scss']
 })
-export class ItemListComponent {
+export class SearchListComponent {
   breadcrumbArray: { title: string; icon: string; path: string; }[];
 
   start: number = 0;
@@ -20,8 +19,9 @@ export class ItemListComponent {
   isAvailable: boolean;
   noMoreItems: boolean;
 
-  shop: any = {};
+  // shop: any = {};
   city: any = {};
+  keyword: string = 'tomato';
 
   items: Array<any> = [];
   constructor(
@@ -37,21 +37,22 @@ export class ItemListComponent {
       { title: 'Home', icon: 'home', path: 'home' },
       { title: 'Categories', icon: 'apps', path: 'category' },
       { title: 'Shops', icon: 'store', path: 'category' }
-    ]
+    ];
+    this.initialize();
   }
 
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      if (params['shop']) {
-        this.shop['shopId'] = params.shop;
-        this.initialize();
-      }
-    });
-  }
+  // ngOnInit() {
+  //   this.route.queryParams.subscribe(params => {
+  //     if (params['shop']) {
+  //       this.shop['shopId'] = params.shop;
+  //       this.initialize();
+  //     }
+  //   });
+  // }
 
   initialize() {
-    const shopId = this.shop['shopId'];
-    this.deliveryService.getItemByShop(shopId, this.start, this.offset).catch((err): any => {
+    // const shopId = this.shop['shopId'];
+    this.deliveryService.searchItems(this.city.id, this.keyword, this.start, this.offset).catch((err): any => {
       this.isLoading = false;
       this.isAvailable = false;
     }).subscribe((data) => {
@@ -77,12 +78,12 @@ export class ItemListComponent {
       this.isLoading = false;
     });
 
-    this.deliveryService.getShopById(this.city.id, shopId).catch((err): any => {
-      // this.isLoading = false;
-      // this.isAvailable = false;
-    }).subscribe((shopData) => {
-      this.shop = shopData;
-    });
+    // this.deliveryService.getShopById(this.city.id, shopId).catch((err): any => {
+    //   // this.isLoading = false;
+    //   // this.isAvailable = false;
+    // }).subscribe((shopData) => {
+    //   this.shop = shopData;
+    // });
   }
 
   updateQty(item: any, val: number) {
@@ -91,7 +92,7 @@ export class ItemListComponent {
     }
   }
 
-  validateCart(item) {
+  validateCart(item: any) {
     console.log(JSON.stringify(item));
   }
 

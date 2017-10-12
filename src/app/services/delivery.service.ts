@@ -26,7 +26,8 @@ export class DeliveryService {
   private readonly SCHEDULE_URL = '/schedules';
   private readonly ORDER_URL = '/carts';
   private readonly REVIEW_URL = '/reviews';
-
+  private readonly SEARCH_URL = '/dashboard/search';
+  
   constructor(private http: Http, public config: Config) {
     this.headers = new Headers({ 'Content-Type': 'application/json' });
     this.options = new RequestOptions({ headers: this.headers });
@@ -91,8 +92,20 @@ export class DeliveryService {
       .catch((err) => this.handleError(err));
   }
 
-  findItem(itemCode: number): Observable<any> {
-    const requestUrl: string = this.serviceRootUrl + this.ITEM_URL + `/${itemCode}`;
+  // findItem(itemCode: number): Observable<any> {
+  //   const requestUrl: string = this.serviceRootUrl + this.ITEM_URL + `/${itemCode}`;
+  //   return this.http.get(requestUrl, this.options)
+  //     .map((res) => this.extractData(res))
+  //     .catch((err) => this.handleError(err));
+  // }
+
+  searchItems(cityId: number, keyword: string, start: number, offset: number): Observable<any> {
+    const queryParams = {
+      key: keyword,
+      start: start,
+      offset: offset
+    };
+    const requestUrl: string = this.serviceRootUrl + this.SEARCH_URL + `/${cityId}` + this.encodeQueryData(queryParams);
     return this.http.get(requestUrl, this.options)
       .map((res) => this.extractData(res))
       .catch((err) => this.handleError(err));

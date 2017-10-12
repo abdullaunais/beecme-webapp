@@ -165,6 +165,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
         return this.location.prepareExternalUrl(this.location.path());
     }
 
+    searchItems() {
+        
+    }
+
     ngOnDestroy() {
         // unsubscribe to ensure no memory leaks
         this.subscription.unsubscribe();

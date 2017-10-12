@@ -40,6 +40,9 @@ export const AppRoutes: Routes = [
             }, {
                 path: 'details',
                 loadChildren: './details/details.module#DetailsModule',
+            }, {
+                path: 'search',
+                loadChildren: './search-list/search-list.module#SearchListModule',
             },
             {
                 path: '',

@@ -40,9 +40,10 @@ export class CartComponent {
         this.country = this.storage.get('location.country');
         this.province = this.storage.get('location.province');
         this.city = this.storage.get('location.city');
+        this.initialize();
     }
 
-    ngOnInit() {
+    initialize() {
         this.isLoading = true;
         this.isError = false;
         this.userService.getAddressList(this.user.userId, this.user.authToken).catch((err): any => {
@@ -63,12 +64,12 @@ export class CartComponent {
                 this.shopIsVisible = true;
                 this.cartIsEmpty = false;
                 this.cartItems = [];
-                let timeout = 0;
+                // let timeout = 0;
                 cart.forEach((item: any) => {
                     this.totalAmount = this.totalAmount + (item.price * item.quantity);
-                    setTimeout(() => {
+                    // setTimeout(() => {
                         this.cartItems.push(item);
-                    }, timeout += 100);
+                    // }, timeout += 100);
                 });
             } else {
                 this.cartItems = [];
@@ -83,7 +84,7 @@ export class CartComponent {
     }
 
     removeItem(item: any, index: number) {
-        setTimeout(() => {
+        // setTimeout(() => {
           this.cartItems.splice(this.cartItems.findIndex((elem) => elem.itemCode === item.itemCode), 1);
           this.totalAmount = 0;
           this.cartItems.forEach((item) => {
@@ -96,7 +97,7 @@ export class CartComponent {
             this.cartIsEmpty = true;
           }
           this.cartService.setCartCount(this.cartItems.length);
-        }, 350);
+        // }, 350);
       }
 
     addressChanged() {
