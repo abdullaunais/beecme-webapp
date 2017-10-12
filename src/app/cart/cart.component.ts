@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { ObjectStorage } from '../utilities/object-storage';
 import { UserService } from '../services/user.service';
+import { CartService } from './cart.service';
 
 @Component({
     selector: 'app-shop-list',
     templateUrl: './cart.component.html',
     styleUrls: ['./cart.component.scss'],
-    providers: [UserService]
+    providers: [UserService, CartService]
 })
 export class CartComponent {
     colorTheme: string = 'info';
@@ -32,10 +33,10 @@ export class CartComponent {
 
     constructor(
         private storage: ObjectStorage,
-        private userService: UserService
+        private userService: UserService,
+        private cartService: CartService
     ) {
         this.user = this.storage.get('user.data');
-
         this.country = this.storage.get('location.country');
         this.province = this.storage.get('location.province');
         this.city = this.storage.get('location.city');
@@ -53,11 +54,11 @@ export class CartComponent {
             this.isLoading = false;
         });
 
-        let cart = this.storage.get('delivery.cart');
+        const cart = this.storage.get('delivery.cart');
         console.log(cart);
         if (cart) {
             if (cart.length > 0) {
-                let cartShop = this.storage.get('delivery.cartShop');
+                const cartShop = this.storage.get('delivery.cartShop');
                 this.cartShop = cartShop;
                 this.shopIsVisible = true;
                 this.cartIsEmpty = false;
@@ -80,6 +81,23 @@ export class CartComponent {
         this.isLoading = false;
         this.city = this.storage.get('location.city');
     }
+
+    removeItem(item: any, index: number) {
+        setTimeout(() => {
+          this.cartItems.splice(this.cartItems.findIndex((elem) => elem.itemCode === item.itemCode), 1);
+          this.totalAmount = 0;
+          this.cartItems.forEach((item) => {
+            this.totalAmount = this.totalAmount + (item.price * item.quantity);
+          });
+          this.storage.set('delivery.cart', this.cartItems);
+          if (this.cartItems.length === 0) {
+            this.storage.set('delivery.cartShop', {});
+            this.shopIsVisible = false;
+            this.cartIsEmpty = true;
+          }
+          this.cartService.setCartCount(this.cartItems.length);
+        }, 350);
+      }
 
     addressChanged() {
         this.selectedAddress = this.addressList.find(address => address.id === this.selectedAddressId)

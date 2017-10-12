@@ -1,8 +1,8 @@
-import { Component, OnInit, Renderer, ViewChild, ElementRef, Directive } from '@angular/core';
+import { Component, OnInit, Renderer, ViewChild, ElementRef, Directive, OnDestroy } from '@angular/core';
 import { ROUTES } from '../.././sidebar/sidebar.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import { CartService } from '../../cart/cart.service';
 
 const misc: any = {
@@ -14,11 +14,10 @@ const misc: any = {
 declare var $: any;
 @Component({
     selector: 'app-navbar-cmp',
-    templateUrl: 'navbar.component.html',
-    providers: [CartService]
+    templateUrl: 'navbar.component.html'
 })
 
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
     private listTitles: any[];
     location: Location;
     private nativeElement: Node;
@@ -39,6 +38,10 @@ export class NavbarComponent implements OnInit {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
+        this.subscription = this.cartService.cartCount
+        .subscribe((data: any) => {
+            this.cartCount = data;
+        });
     }
 
     ngOnInit() {
@@ -52,13 +55,13 @@ export class NavbarComponent implements OnInit {
         if ($('body').hasClass('hide-sidebar')) {
             misc.hide_sidebar_active = true;
         }
-        $('#minimizeSidebar').click(function() {
+        $('#minimizeSidebar').click(function () {
             if (misc.sidebar_mini_active === true) {
                 $('body').removeClass('sidebar-mini');
                 misc.sidebar_mini_active = false;
 
             } else {
-                setTimeout(function() {
+                setTimeout(function () {
                     $('body').addClass('sidebar-mini');
 
                     misc.sidebar_mini_active = true;
@@ -66,18 +69,18 @@ export class NavbarComponent implements OnInit {
             }
 
             // we simulate the window Resize so the charts will get updated in realtime.
-            const simulateWindowResize = setInterval(function() {
+            const simulateWindowResize = setInterval(function () {
                 window.dispatchEvent(new Event('resize'));
             }, 180);
 
             // we stop the simulation of Window Resize after the animations are completed
-            setTimeout(function() {
+            setTimeout(function () {
                 clearInterval(simulateWindowResize);
             }, 1000);
         });
-        $('#hideSidebar').click(function() {
+        $('#hideSidebar').click(function () {
             if (misc.hide_sidebar_active === true) {
-                setTimeout(function() {
+                setTimeout(function () {
                     $('body').removeClass('hide-sidebar');
                     misc.hide_sidebar_active = false;
                 }, 300);
@@ -87,7 +90,7 @@ export class NavbarComponent implements OnInit {
                 $('.sidebar').addClass('animation');
 
             } else {
-                setTimeout(function() {
+                setTimeout(function () {
                     $('body').addClass('hide-sidebar');
                     // $('.sidebar').addClass('animation');
                     misc.hide_sidebar_active = true;
@@ -95,19 +98,14 @@ export class NavbarComponent implements OnInit {
             }
 
             // we simulate the window Resize so the charts will get updated in realtime.
-            const simulateWindowResize = setInterval(function() {
+            const simulateWindowResize = setInterval(function () {
                 window.dispatchEvent(new Event('resize'));
             }, 180);
 
             // we stop the simulation of Window Resize after the animations are completed
-            setTimeout(function() {
+            setTimeout(function () {
                 clearInterval(simulateWindowResize);
             }, 1000);
-        });
-
-        this.subscription = this.cartService.cartCount
-        .subscribe((data: number) => {
-            this.cartCount = data;
         });
     }
 
@@ -120,7 +118,7 @@ export class NavbarComponent implements OnInit {
     sidebarOpen() {
         const toggleButton = this.toggleButton;
         const body = document.getElementsByTagName('body')[0];
-        setTimeout(function(){
+        setTimeout(function () {
             toggleButton.classList.add('toggled');
         }, 500);
         body.classList.add('nav-open');
@@ -144,13 +142,13 @@ export class NavbarComponent implements OnInit {
     };
 
     getTitle() {
-        let titlee: any = this.location.prepareExternalUrl(this.location.path());
+        const titlee: any = this.location.prepareExternalUrl(this.location.path());
         for (let i = 0; i < this.listTitles.length; i++) {
             if (this.listTitles[i].type === "link" && this.listTitles[i].path === titlee) {
                 return this.listTitles[i].title;
             } else if (this.listTitles[i].type === "sub") {
                 for (let j = 0; j < this.listTitles[i].children.length; j++) {
-                    let subtitle = this.listTitles[i].path + '/' + this.listTitles[i].children[j].path;
+                    const subtitle = this.listTitles[i].path + '/' + this.listTitles[i].children[j].path;
                     if (subtitle === titlee) {
                         return this.listTitles[i].children[j].title;
                     }
@@ -158,14 +156,17 @@ export class NavbarComponent implements OnInit {
             }
         }
 
-
-
-        if(titlee.indexOf("/details?") != -1) {
+        if (titlee.indexOf("/details?") != -1) {
             return "Details"
         }
         return 'BeecMe';
     }
     getPath() {
         return this.location.prepareExternalUrl(this.location.path());
+    }
+
+    ngOnDestroy() {
+        // unsubscribe to ensure no memory leaks
+        this.subscription.unsubscribe();
     }
 }

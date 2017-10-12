@@ -20,7 +20,6 @@ export class ItemListComponent {
   noMoreItems: boolean;
 
   shop: any = {};
-  selectedQty: number = 1;
 
   items: Array<any> = [];
   constructor(
@@ -59,6 +58,7 @@ export class ItemListComponent {
           this.isAvailable = true;
           let timeout = 0;
           data['itemlist'].forEach((item: any) => {
+            item.selectedQty = 1;
             setTimeout(() => {
               this.items.push(item);
             }, timeout += 100);
@@ -74,17 +74,17 @@ export class ItemListComponent {
       this.isLoading = false;
     });
 
-    this.deliveryService.getShopById(shopId).catch((err): any => {
-      // this.isLoading = false;
-      // this.isAvailable = false;
-    }).subscribe((shopData) => {
-      this.shop = shopData;
-    });
+    // this.deliveryService.getShopById(shopId).catch((err): any => {
+    //   // this.isLoading = false;
+    //   // this.isAvailable = false;
+    // }).subscribe((shopData) => {
+    //   this.shop = shopData;
+    // });
   }
 
   updateQty(item: any, val: number) {
-    if (val < item.qty) {
-      this.selectedQty += val;
+    if (item.selectedQty < item.qty) {
+      item.selectedQty += val;
     }
   }
 

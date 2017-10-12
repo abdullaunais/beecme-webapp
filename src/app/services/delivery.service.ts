@@ -13,102 +13,125 @@ import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class DeliveryService {
-
-  http: Http;
   headers: Headers;
   options: RequestOptions;
 
   serviceRootUrl: string;
 
-  LOCATION_URL = '/locations';
-  SHOPS_URL = '/shops';
-  CATEGORIES_URL = '/categories';
-  ITEM_URL = '/items';
-  ITEM_SHOP_URL = '/shopitems';
-  SCHEDULES_URL = '/schedules';
-  ORDER_URL = '/carts';
-  REVIEW_URL = '/reviews';
+  private readonly LOCATION_URL = '/locations';
+  private readonly SHOP_URL = '/shops';
+  private readonly CATEGORY_URL = '/categories';
+  private readonly ITEM_URL = '/items';
+  private readonly ITEM_SHOP_URL = '/shopitems';
+  private readonly SCHEDULE_URL = '/schedules';
+  private readonly ORDER_URL = '/carts';
+  private readonly REVIEW_URL = '/reviews';
 
-  constructor(public httpService: Http, public config: Config) {
-    this.http = httpService;
+  constructor(private http: Http, public config: Config) {
     this.headers = new Headers({ 'Content-Type': 'application/json' });
     this.options = new RequestOptions({ headers: this.headers });
-    this.serviceRootUrl = config.serverUrl + '/delivery';
+    this.serviceRootUrl = config.serverUrl;
   }
 
   getLocation(type: number, value: number, start: number, offset: number): Observable<any> {
-    const queryParams = '?type=' + type + '&value=' + value + '&start=' + start + '&offset=' + offset;
-    const requestUrl: string = this.serviceRootUrl + this.LOCATION_URL + queryParams;
+    const queryParams = {
+      type: type,
+      value: value,
+      start: start,
+      offset: offset
+    };
+    const requestUrl: string = this.serviceRootUrl + this.LOCATION_URL + this.encodeQueryData(queryParams);
     return this.http.get(requestUrl, this.options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   getShops(cityId: number, categoryId: number, start: number, offset: number): Observable<any> {
-    const queryParams = '?type=71&value=' + categoryId + '&start=' + start + '&offset=' + offset;
-    const requestUrl: string = this.serviceRootUrl + this.SHOPS_URL + queryParams;
+    const queryParams = {
+      type: 71,
+      value: categoryId,
+      start: start,
+      offset: offset
+    };
+    const requestUrl: string = this.serviceRootUrl + this.SHOP_URL + this.encodeQueryData(queryParams);
     return this.http.get(requestUrl, this.options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
-  getShopById(shopId: number): Observable<any> {
-    const requestUrl: string = this.serviceRootUrl + this.ITEM_SHOP_URL + '/' + shopId;
+  getShopById(cityId: number, shopId: number): Observable<any> {
+    const requestUrl: string = this.serviceRootUrl + this.SHOP_URL + `/${cityId}/${shopId}`;
     return this.http.get(requestUrl, this.options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   getCategories(cityId: number): Observable<any> {
-    const requestUrl: string = this.serviceRootUrl + this.CATEGORIES_URL + '/' + cityId;
+    const requestUrl: string = this.serviceRootUrl + this.CATEGORY_URL + `/${cityId}`;
     return this.http.get(requestUrl, this.options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   getItemByShop(shopId: number, start: number, offset: number): Observable<any> {
-    const queryParams = '?start=' + start + '&offset=' + offset;
-    const requestUrl: string = this.serviceRootUrl + this.ITEM_SHOP_URL + '/' + shopId + queryParams;
+    const queryParams = {
+      start: start,
+      offset: offset
+    };
+    const requestUrl: string = this.serviceRootUrl + this.ITEM_SHOP_URL + `/${shopId}` + this.encodeQueryData(queryParams);
     return this.http.get(requestUrl, this.options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   getItemById(shopId: number, itemId: number): Observable<any> {
-    const requestUrl: string = this.serviceRootUrl + this.ITEM_SHOP_URL + '/' + shopId + '/' + itemId;
+    const requestUrl: string = this.serviceRootUrl + this.ITEM_SHOP_URL + `/${shopId}/${itemId}`;
     return this.http.get(requestUrl, this.options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   findItem(itemCode: number): Observable<any> {
-    const requestUrl: string = this.serviceRootUrl + this.ITEM_URL + '/' + itemCode;
+    const requestUrl: string = this.serviceRootUrl + this.ITEM_URL + `/${itemCode}`;
     return this.http.get(requestUrl, this.options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   getItemByCategory(category: number, start: number, offset: number): Observable<any> {
-    const queryParams = '?type=11&value=' + category + '&start=' + start + '&offset=' + offset;
-    const requestUrl: string = this.serviceRootUrl + this.ITEM_URL + queryParams;
+    const queryParams = {
+      type: 11,
+      value: category,
+      start: start,
+      offset: offset
+    };
+    const requestUrl: string = this.serviceRootUrl + this.ITEM_URL + this.encodeQueryData(queryParams);
     return this.http.get(requestUrl, this.options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   getSchedules(cityId: number): Observable<any> {
-    const requestUrl: string = this.serviceRootUrl + this.SCHEDULES_URL + '?city=' + cityId;
+    const queryParams = {
+      city: cityId
+    };
+    const requestUrl: string = this.serviceRootUrl + this.SCHEDULE_URL + this.encodeQueryData(queryParams);
     return this.http.get(requestUrl, this.options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   getOrders(userId: number, start: number, offset: number): Observable<any> {
-    const queryParams = '?type=32&value=' + userId + '&start=' + start + '&offset=' + offset;
-    const requestUrl: string = this.serviceRootUrl + this.ORDER_URL + queryParams;
+    const queryParams = {
+      type: 32,
+      value: userId,
+      start: start,
+      offset: offset
+    };
+    const requestUrl: string = this.serviceRootUrl + this.ORDER_URL + this.encodeQueryData(queryParams);
     return this.http.get(requestUrl, this.options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   addOrder(order: any, authToken: any): Observable<any> {
@@ -120,8 +143,8 @@ export class DeliveryService {
 
     const requestUrl: string = this.serviceRootUrl + this.ORDER_URL;
     return this.http.post(requestUrl, body, options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   sendReview(review: any, authToken: any): Observable<any> {
@@ -133,8 +156,14 @@ export class DeliveryService {
 
     const requestUrl: string = this.serviceRootUrl + this.REVIEW_URL;
     return this.http.post(requestUrl, body, options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
+  }
+
+  private encodeQueryData(data: any): string {
+    return '?' + Object.keys(data).map((key) => {
+      return [key, data[key]].map(encodeURIComponent).join('=');
+    }).join('&');
   }
 
   private extractData(res: Response) {

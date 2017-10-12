@@ -15,7 +15,7 @@ export class ShopListComponent {
     category: any = {};
     city: any = {};
     shops: Array<any> = [];
-  
+
     start: number = 0;
     offset: number = 20;
 

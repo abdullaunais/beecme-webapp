@@ -13,124 +13,116 @@ import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class UserService {
-
-  http: Http;
-  headers: Headers;
-  options: RequestOptions;
-
   serviceRootUrl: string;
 
-  REGISTER_URL = "/register";  // post
-  GET_USER_URL = "/users"; // +username, get
-  UPDATE_USER_URL = "/users"; // +email/reset
-  AUTHENTICATE_LOGIN = "/auth"; // post
-  FORGOT_PASSWORD = "/mails"; // post
-  ADDRESS_URL = "/users/address"; //+userId
-  UPLOAD_PICTURE = "/users/upload"; //+userId 
+  private readonly REGISTER_URL = '/register';  // post
+  private readonly USER_URL = '/users'; // +username, get
+  private readonly UPDATE_USER_URL = '/users'; // +email/reset
+  private readonly AUTH_URL = '/auth'; // post
+  private readonly FORGOT_PASSWORD = '/mails'; // post
+  private readonly ADDRESS_URL = '/users/address'; // +userId
+  private readonly UPLOAD_PICTURE_URL = '/users/upload'; // +userId 
 
-  constructor(public httpService: Http, public config: Config) {
-    this.http = httpService;
-    this.headers = new Headers({ 'Content-Type': 'application/json' });
-    this.options = new RequestOptions({ headers: this.headers });
-    this.serviceRootUrl = config.serverUrl + "/delivery";
+  constructor(private http: Http, public config: Config) {
+    this.serviceRootUrl = config.serverUrl;
   }
 
   registerUser(user: any): Observable<any> {
-    let body = JSON.stringify(user);
-    let headers = new Headers();
+    const body = JSON.stringify(user);
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
 
-    let requestUrl: string = this.serviceRootUrl + this.REGISTER_URL;
+    const requestUrl: string = this.serviceRootUrl + this.REGISTER_URL;
     return this.http.post(requestUrl, body, options)
     .map((res) => this.extractData(res))
     .catch((err) => this.handleError(err));
   }
 
   uploadPicture(userId: number, authToken: any, image: any): Observable<any> {
-    let headers = new Headers();
+    const headers = new Headers();
     // headers.append('Content-Type', 'multipart/form-data');
     headers.append('Authorization', authToken);
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
 
-    let requestUrl: string = this.serviceRootUrl + this.UPLOAD_PICTURE + "/" + userId
+    const requestUrl: string = this.serviceRootUrl + this.UPLOAD_PICTURE_URL + `/${userId}`;
     return this.http.post(requestUrl, image, options)
     .map((res) => this.extractData(res))
     .catch((err) => this.handleError(err));
   }
 
   getUserDetails(userId: number, authToken: any): Observable<any> {
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', authToken);
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
 
-    let requestUrl: string = this.serviceRootUrl + this.GET_USER_URL + "/" + userId;
+    const requestUrl: string = this.serviceRootUrl + this.USER_URL + `/${userId}`;
     return this.http.get(requestUrl, options)
     .map((res) => this.extractData(res))
     .catch((err) => this.handleError(err));
   }
 
   updateUser(user: any, authToken: any): Observable<any> {
-    let body = JSON.stringify(user);
-    let headers = new Headers();
+    const body = JSON.stringify(user);
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', authToken);
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
 
-    let requestUrl: string = this.serviceRootUrl + this.UPDATE_USER_URL + "/" + user.email + "/reset";
+    const requestUrl: string = this.serviceRootUrl + this.UPDATE_USER_URL + `/${user.email}/reset`;
     return this.http.put(requestUrl, body, options)
     .map((res) => this.extractData(res))
     .catch((err) => this.handleError(err));
   }
 
   authenticate(email: string, password: any): Observable<any> {
-    let credentials = {
+    const credentials = {
       username: email,
       password: password
     };
-    let body = JSON.stringify(credentials);
-    let headers = new Headers();
+    const body = JSON.stringify(credentials);
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
 
-    let requestUrl: string = this.serviceRootUrl + this.AUTHENTICATE_LOGIN;
+    const requestUrl: string = this.serviceRootUrl + this.AUTH_URL;
     return this.http.post(requestUrl, body, options)
     .map((res) => this.extractData(res))
     .catch((err) => this.handleError(err));
   }
 
   forgotPassword(email: string): Observable<any> {
-    let request = {
+    const reqData = {
       PASSWORD_RESET: 1,
       email: email,
       subject: 1
     };
-    let body = JSON.stringify(request);
-    let headers = new Headers();
+    const body = JSON.stringify(reqData);
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
 
-    let requestUrl: string = this.serviceRootUrl + this.FORGOT_PASSWORD;
+    const requestUrl: string = this.serviceRootUrl + this.FORGOT_PASSWORD;
     return this.http.post(requestUrl, body, options)
     .map((res) => this.extractData(res))
     .catch((err) => this.handleError(err));
   }
 
   getAddressList(userId: number, authToken: any): Observable<any> {
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', authToken);
-    let options = new RequestOptions({ headers: headers });
+    const options = new RequestOptions({ headers: headers });
 
-    let requestUrl: string = this.serviceRootUrl + this.ADDRESS_URL + "/" + userId;
+    const requestUrl: string = this.serviceRootUrl + this.ADDRESS_URL + `/${userId}`;
     return this.http.get(requestUrl, options)
     .map((res) => this.extractData(res))
     .catch((err) => this.handleError(err));
   }
 
   private extractData(res: Response) {
-    let body = res.json();
+    const body = res.json();
     return body || {};
   }
 

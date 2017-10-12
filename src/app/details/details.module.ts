@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailsRoutes } from './details.routing';
 import { DetailsComponent } from './details.component';
 import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
+import { CartService } from '../cart/cart.service';
+import { DeliveryService } from '../services/delivery.service';
 
 @NgModule({
     imports: [
@@ -14,7 +16,8 @@ import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
         FormsModule,
         BreadcrumbModule
     ],
-    declarations: [DetailsComponent]
+    declarations: [DetailsComponent],
+    providers: [DeliveryService, CartService]
 })
 
 export class DetailsModule {}
