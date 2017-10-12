@@ -49,7 +49,7 @@ export class DeliveryService {
   getShops(cityId: number, categoryId: number, start: number, offset: number): Observable<any> {
     const queryParams = {
       type: 71,
-      value: categoryId,
+      value: [cityId, categoryId],
       start: start,
       offset: offset
     };
