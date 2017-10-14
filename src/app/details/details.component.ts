@@ -132,7 +132,8 @@ export class DetailsComponent {
 
     initialize() {
         console.log(`item details initialize fired with shopId ${this.shop['shopId']} and itemCode ${this.item['itemCode']}`);
-        this.deliveryService.getItemById(this.shop['shopId'], this.item['itemCode']).catch((err): any => {
+       // this.deliveryService.getItemById(this.shop['shopId'], this.item['itemCode']).catch((err): any => {
+        this.deliveryService.getItemById(this.sharedService.getShop().shopId, this.item['itemCode']).catch((err): any => {
             // ignore
         }).subscribe(item => {
             this.item = item;

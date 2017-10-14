@@ -169,10 +169,10 @@ export class RegisterComponent implements OnInit {
                 this.userService.authenticate(this.email, this.password).catch((err): any => {
 
                 }).subscribe(userData => {
-                    console.info(userData);
+                    console.log(`register status ${userData}`);
                     this.storage.set("user.login", true);
                     this.storage.set("user.data", userData);
-                    this.storage.set("user.authToken", userData.authToken);
+                    this.storage.set("user.authToken", userData);
 
                     this.sidebarService.changeLogin({ user: userData, isLogin: true });
 

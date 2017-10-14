@@ -121,7 +121,7 @@ loginUser() {
                   console.log(`login status from backend ${JSON.stringify(res)}`);
                   if(res.status === 200) {
                     let userData = res.json();
-                    console.info(userData);
+                    console.log(userData);
                     this.storage.set("user.login", true);
                     this.storage.set("user.data", userData);
                     this.storage.set("user.authToken", userData.authToken);
