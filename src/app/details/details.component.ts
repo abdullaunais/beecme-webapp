@@ -17,6 +17,7 @@ export class DetailsComponent {
     shop: any = {};
 
     selectedQty: number = 1;
+    city: any;
 
     constructor(
         private route: ActivatedRoute,
@@ -27,9 +28,16 @@ export class DetailsComponent {
     ) { }
 
     ngOnInit() {
+        this.city = this.storage.get('location.city');
         this.route.queryParams.subscribe(params => {
-            if (params['shop']) {
-                this.shop['shopId'] = params.shop;
+            if (this.sharedService.getShop()) {
+                //this.shop['shopId'] = params.shop;
+                this.deliveryService.getShopById(this.city.id, this.sharedService.getShop().shopId).catch((err): any => {
+                    // this.isLoading = false;
+                    // this.isAvailable = false;
+                  }).subscribe((shopData) => {
+                    this.shop = shopData;
+                  });                
                 // this.deliveryService.getShopById(this.shop['shopId']).catch((err): any => {
 
                 // }).subscribe((shop: any) => {
