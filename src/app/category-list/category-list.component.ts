@@ -22,12 +22,13 @@ export class CategoryListComponent implements OnInit {
     this.isLoading = true;
     this.isAvailable = true;
     this.isError = false;
-
+    console.log('this.storage.get(location.set)  '+ this.storage.get('location.set'));
     if(this.storage.get('location.set')) {
       this.city = this.storage.get('location.city');
     } else {
       return;
     }
+
   }
 
 
@@ -37,21 +38,22 @@ export class CategoryListComponent implements OnInit {
       this.isError = true;
       console.log(err);
     }).subscribe((data: any) => {
-      let json = JSON.stringify(data);
-      let catArray = JSON.parse(json);
-      if (catArray) {
-        if (catArray.length > 1) {
-          this.categories = catArray;
+      //let json = JSON.stringify(data);
+      // let catArray = data; // JSON.parse(json);
+      //console.log('catgories '+ catArray);
+     // if (catArray) {
+     //   if (catArray.length > 1) {
+          this.categories = data;
           this.isAvailable = true;
           this.isError = false;
-        } else {
-          this.isAvailable = false;
-          this.isError = false;
-        }
-      } else {
-        this.isAvailable = false;
-        this.isError = false;
-      }
+      //  } else {
+      //    this.isAvailable = false;
+      //    this.isError = false;
+      //  }
+      //} else {
+      //   this.isAvailable = false;
+      //   this.isError = false;
+      // }
       this.isLoading = false;
     });
   }
