@@ -23,7 +23,7 @@ export class CartComponent {
     city: any;
 
     cartItems: Array<any> = [];
-    cartShop: any = {};
+   // cartShop: any = {};
 
     cartIsEmpty: boolean = false;
     isLoading: boolean = false;
@@ -63,7 +63,7 @@ export class CartComponent {
         console.log(`Final Total is ${this.sharedService.getCartTotal()}`);
         if (this.cartItems && this.cartItems.length > 0) {
             // if (cart.length > 0) {
-                this.cartShop = this.storage.get('delivery.cartShop');
+                //this.cartShop = this.storage.get('delivery.cartShop');
                 // this.cartShop = cartShop;
                 this.shopIsVisible = true;
                 this.cartIsEmpty = false;
