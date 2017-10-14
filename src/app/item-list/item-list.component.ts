@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ObjectStorage } from '../utilities/object-storage';
 import { SharedService } from "../services/shared.service";
 
+declare var swal: any;
+
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
@@ -94,10 +96,33 @@ export class ItemListComponent {
     }
   }
 
-  validateCart(item:any) {
+  addToCart(item:any) {
     console.log(JSON.stringify(item));
-    item.quantity = item.selectedQty;
-    this.sharedService.pushItem(item);
+     item.quantity = item.selectedQty;
+    // this.sharedService.pushItem(item);
+
+             // this.item.quantity = this.selectedQty;
+              if (!this.sharedService.pushItem(item)) {
+                  // Customer is trying to add items from different shops
+                  swal({
+                      type: 'warning',
+                      title: 'Existing Cart',
+                      text: 'Your cart already contains items from a different Shop. You can only  add items from one shop at a time. Do you wish to clear the existing cart and add this item?',
+                      showCancelButton: true,
+                      confirmButtonColor: '#00b55d',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Clear Cart'
+                  }).then(() => {
+                      //this.storage.remove('delivery.cart');
+                      //this.storage.remove('delivery.cartShop');
+                      //this.cartService.setCartCount(0);
+                      this.sharedService.resetCart();
+                      this.addToCart(item);
+                  }).catch(() => {
+                      return;
+                  });
+      
+              }
   }
 
 }
