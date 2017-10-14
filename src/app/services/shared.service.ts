@@ -19,7 +19,7 @@ export class SharedService {
         // finalTotal calculation
         // Notify the event to subscribers: 
     
-        let cache: Item[] = JSON.parse(sessionStorage.getItem('cart'))
+        let cache: Item[] = JSON.parse(sessionStorage.getItem('delivery.cart'))
         if (cache === null) {
           cache = []
         } else {
@@ -31,7 +31,7 @@ export class SharedService {
         this.remove(cache, 'itemCode', item.itemCode)
         cache.push(item)
     
-        sessionStorage.setItem('cart', JSON.stringify(cache))
+        sessionStorage.setItem('delivery.cart', JSON.stringify(cache))
         this.refreshFinalTotal(cache);
         return true;
       }
@@ -43,11 +43,11 @@ export class SharedService {
         // set the temp var as the 'cart' in sessionStorage	
         // Notify the event to subscribers: 
     
-        let cache: Item[] = JSON.parse(sessionStorage.getItem('cart'));
+        let cache: Item[] = JSON.parse(sessionStorage.getItem('delivery.cart'));
         this.remove(cache, 'itemCode', c.itemCode);
     
-        sessionStorage.removeItem('cart');
-        sessionStorage.setItem('cart', JSON.stringify(cache));
+        sessionStorage.removeItem('delivery.cart');
+        sessionStorage.setItem('delivery.cart', JSON.stringify(cache));
         this.refreshFinalTotal(cache);
       }
 
@@ -72,10 +72,9 @@ export class SharedService {
 //        }
 //  }
 
-//  getCart(): Item[] {
-//   return JSON.parse(sessionStorage.getItem('cart'));
- 
-// }
+ getCart(): Item[] {
+  return JSON.parse(sessionStorage.getItem('delivery.cart'));
+}
 
 private refreshFinalTotal(cart: Item[]) {
   
@@ -94,13 +93,22 @@ private refreshFinalTotal(cart: Item[]) {
   
       //let df = JSON.parse(sessionStorage.getItem('shop')).deliveryCharge
       //cartTotal = cartTotal + df
+      console.log(`refreshFinalTotal calculated FT is ${cartTotal}`);
       sessionStorage.setItem('carttotal', cartTotal + "");
       console.log(`cart.length is ${cart.length}`);
       this.subjectCartSummary.next(cart.length);
+      console.log(`refreshFinalTotal updated FT is ${this.getCartTotal()}`);
     }
 
 getSubjectCartSummary(): Observable<number> {
   console.log('Firing > getSubjectCartSummary()');
   return this.subjectCartSummary.asObservable();
 }
+
+getCartTotal() {
+  // this.cartChanged.emit(this.finalTotal);
+  let total: number = +(sessionStorage.getItem('carttotal'));
+  return total;
+}
+
 }

@@ -37,11 +37,11 @@
                                     <button class="btn btn-default cart-item-btn-comment">Add Comment</button>
                                     <div class="cart-item-price-wrapper">
                                         <p class="pull-left no-margin">
-                                            <span style="font-weight: 300;">{{cartItem.quantity}} {{cartItem.unit}} X {{cartItem.price}} {{cartShop.currency}}
+                                            <span style="font-weight: 300;">{{cartItem.quantity}} {{cartItem.unit}} X {{cartItem.price}} {{cartShop?.currency}}
                                                 = </span>
                                         </p>
                                         <p class="pull-right no-margin">
-                                            <span style="font-weight: 400;">{{cartShop.currency}} {{cartItem.quantity*cartItem.price}}</span>
+                                            <span style="font-weight: 400;">{{cartShop?.currency}} {{cartItem.quantity*cartItem.price}}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@
                                             <span style="font-weight: 300;">FINAL TOTAL </span>
                                         </p>
                                         <p class="pull-right no-margin">
-                                            <span style="font-weight: 700;">LKR 40.00</span>
+                                            <span style="font-weight: 700;">{{cartShop?.currency}}{{sharedService.getCartTotal()}}</span>
                                         </p>
                                     </div>
                                 </div>

@@ -90,11 +90,13 @@ export class ItemListComponent {
   updateQty(item: any, val: number) {
     if (item.selectedQty < item.qty) {
       item.selectedQty += val;
+      
     }
   }
 
   validateCart(item:any) {
     console.log(JSON.stringify(item));
+    item.quantity = item.selectedQty;
     this.sharedService.pushItem(item);
   }
 
