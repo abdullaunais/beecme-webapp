@@ -82,7 +82,10 @@ export class CartComponent {
             this.cartIsEmpty = true;
         }
         this.isLoading = false;
+        this.country = this.storage.get('location.country');
+        this.province = this.storage.get('location.province');
         this.city = this.storage.get('location.city');
+        console.log(`users city is ${JSON.stringify(this.city)} province ${JSON.stringify(this.province)}`)
     }
 
     removeItem(item: any, index: number) {
