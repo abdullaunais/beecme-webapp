@@ -106,66 +106,66 @@ export class MailBean {
   
   export class OrderHeader {
     constructor() {}
-    userId;
-    cartId ;
+    userId: number;
+    cartId: number;
    // userName ;
-    dateCreated ;
-    totalAmount ;
-    totalItems ;
-    deliveryStatus ;
-    deliveryFee ;
-    dlvSchId ;
-    latitude ;
-    longitude ;
-    shopId;
-    comment;
-    statusDescEn;
-    statusDescAr;
-    deliveryTime;    
-    currency;
-    dlvAddressName;
-    dlvAddressStrret;
-    dlvAddressCity;
-    dlvAddressProvince;
-    dlvAddressCountry;
+    dateCreated : any;
+    totalAmount: number;
+    totalItems: number;
+    deliveryStatus: number;
+    deliveryFee: number;
+    dlvSchId: number;
+    latitude: number;
+    longitude: number;
+    shopId: number;
+    comment:string;
+    statusDescEn:string;
+    statusDescAr:string;
+    deliveryTime: any;    
+    currency:string
+    dlvAddressName:string;
+    dlvAddressStrret:string;
+    dlvAddressCity: any;
+    dlvAddressProvince: any;
+    dlvAddressCountry: any;
   }
   
   export class OrderHeaderReq {
     constructor() {}
-    userId;
-    cartId ;
+    userId: any;
+    cartId : any;
    // userName ;
-    dateCreated ;
-    totalAmount ;
-    totalItems ;
-    deliveryStatus ;
-    deliveryFee ;
-    dlvSchId ;
-    latitude ;
-    longitude ;
-    shopId;
-    comment;
-    statusDescEn;
-    statusDescAr;
-    deliveryTime;    
-    currency;
-    dlvAddressName;
-    dlvAddressStrret;
-    dlvAddressCity;
-    dlvAddressProvince;
-    dlvAddressCountry;
+    dateCreated : any;
+    totalAmount: number;
+    totalItems: number;
+    deliveryStatus: number;
+    deliveryFee: number;
+    dlvSchId: number;
+    latitude: number;
+    longitude: number;
+    shopId: number;
+    comment:string;
+    statusDescEn:string;
+    statusDescAr:string;
+    deliveryTime: any;
+    currency:string;
+    dlvAddressName:string;
+    dlvAddressStrret:string;
+    dlvAddressCity: any;
+    dlvAddressProvince: any;
+    dlvAddressCountry: any;
   }
   
   export class OrderDetails {
      constructor() {}
-    cartId;
-    itemCode;
-    quantity;
-    unit;
-    price;
-    itemDescEn;
-    itemDescAr;
-    comment;
+    cartId: number;
+    itemCode: number;
+    quantity: number;
+    unit:string;
+    price: number;
+    itemDescEn:string;
+    itemDescAr:string;
+    comment:string;
   }
   
   export class Cart {
