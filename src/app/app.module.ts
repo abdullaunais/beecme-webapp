@@ -20,6 +20,7 @@ import { Config } from './services/config';
 import { LocationGuardService } from './services/location-guard.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ShopInfoComponent } from './shop-info/shop-info.component';
+import { SharedService } from "./services/shared.service";
 
 @NgModule({
     imports:      [
@@ -38,6 +39,6 @@ import { ShopInfoComponent } from './shop-info/shop-info.component';
         AuthLayoutComponent
     ],
     bootstrap:    [ AppComponent ],
-    providers: [Config, ObjectStorage, LocationGuardService, AuthGuardService]
+    providers: [Config, ObjectStorage, LocationGuardService, AuthGuardService, SharedService]
 })
 export class AppModule { }

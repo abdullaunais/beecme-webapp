@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DeliveryService } from '../services/delivery.service';
 import { ActivatedRoute } from '@angular/router';
 import { ObjectStorage } from '../utilities/object-storage';
+import { SharedService } from "../services/shared.service";
 
 @Component({
   selector: 'app-item-list',
@@ -27,7 +28,8 @@ export class ItemListComponent {
   constructor(
     private route: ActivatedRoute,
     private deliveryService: DeliveryService,
-    private storage: ObjectStorage
+    private storage: ObjectStorage,
+    private sharedService: SharedService
   ) {
     this.isLoading = true;
     this.isAvailable = true;
@@ -91,8 +93,9 @@ export class ItemListComponent {
     }
   }
 
-  validateCart(item) {
+  validateCart(item:any) {
     console.log(JSON.stringify(item));
+    this.sharedService.pushItem(item);
   }
 
 }
