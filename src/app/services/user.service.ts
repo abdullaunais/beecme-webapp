@@ -76,7 +76,7 @@ export class UserService {
     .catch((err) => this.handleError(err));
   }
 
-  authenticate(email: string, password: any): Observable<any> {
+  authenticate(email: string, password: any): Observable<Response> {
     const credentials = {
       username: email,
       password: password
@@ -87,9 +87,9 @@ export class UserService {
     const options = new RequestOptions({ headers: headers });
 
     const requestUrl: string = this.serviceRootUrl + this.AUTH_URL;
-    return this.http.post(requestUrl, body, options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+    return this.http.post(requestUrl, body, options);
+    //.map((res) => this.extractData(res))
+    //.catch((err) => this.handleError(err));
   }
 
   forgotPassword(email: string): Observable<any> {
