@@ -23,7 +23,7 @@ export class CartComponent {
     city: any;
 
     cartItems: Array<any> = [];
-   // cartShop: any = {};
+    cartShop: any = {};
 
     cartIsEmpty: boolean = false;
     isLoading: boolean = false;
@@ -78,7 +78,7 @@ export class CartComponent {
             //     this.cartIsEmpty = true;
             // }
         } else {
-            this.cartItems = [];
+           // this.cartItems = [];
             this.cartIsEmpty = true;
         }
         this.isLoading = false;
@@ -99,6 +99,7 @@ export class CartComponent {
         //   }
           //this.cartService.setCartCount(this.cartItems.length);
           this.sharedService.removeItem(item);
+          this.cartItems = this.sharedService.getCart();
 
       }
 
