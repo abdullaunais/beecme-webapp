@@ -90,10 +90,18 @@ export class ItemListComponent {
   }
 
   updateQty(item: any, val: number) {
-    if (item.selectedQty < item.qty) {
+    
+    console.log(`updateQty current value = ${item.qty} and selectedQty ${item.selectedQty} item.quantity is ${item.quantity}`);
+    if (item.selectedQty > 0 && val < 0 ) {
       item.selectedQty += val;
-      
     }
+    if (item.selectedQty >= 0  && val > 0 ) {
+      item.selectedQty += val;
+    }
+
+    //if (item.selectedQty < item.qty) {
+    //  item.selectedQty += val;
+    //}
   }
 
   addToCart(item:any) {
