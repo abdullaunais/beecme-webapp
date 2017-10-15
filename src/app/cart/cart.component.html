@@ -83,16 +83,16 @@
                     </div>
                 </div>
             </div>
-
+            <form class="form-inline" (ngSubmit)="doCheckout()" novalidate autocomplete="off" #form="ngForm">
             <div class="col-sm-12 col-md-12 col-lg-5">
                 <div class="row" style="margin-left: 0px; margin-right: 0px;">
                     <div class="card cart-card">
                         <div class="card-content">
                             <h4 id="new-address-heading" style="color:#999;">
-                                New Address
+                                Delivery Address
                                 <div class="togglebutton pull-right">
                                     <label>
-                                        <input type="checkbox" [(ngModel)]="isNewAddress">
+                                        <input type="checkbox" name="isNewAddress" (click)="addressToggle()">
                                     </label>
                                 </div>
                             </h4>
@@ -106,13 +106,13 @@
                                 <div class="animated flipInX">
                                     <div class="form-group label-floating" style="padding-bottom: 0;">
                                         <label class="control-label">Nickname</label>
-                                        <input type="text" [(ngModel)]="nickname" class="form-control">
+                                        <input type="text" name="addressNickName"  #addressNickName="ngModel" [(ngModel)]="checkoutForm.addressNickName" maxlength="15" class="form-control">
                                     </div>
                                 </div>
                                 <div class="animated flipInX">
                                     <div class="form-group label-floating" style="padding-bottom: 0;">
                                         <label class="control-label">Street</label>
-                                        <input type="text" [(ngModel)]="address" class="form-control">
+                                        <input type="text" [(ngModel)]="checkoutForm.street" name="street" #street="ngModel" maxlength="100" class="form-control">
                                     </div>
                                 </div>
                                 <ul class="list-group animated flipInX" style="margin: 20px 0 0 0;">
@@ -126,7 +126,7 @@
                                 <ul class="list-group" style="margin:0;">
                                     <li class="list-group-item justify-content-between" style="border:none; padding:5px;">
                                         <i class="fa fa-address-card" style="font-size: 18px;"></i> &nbsp;&nbsp;Choose a
-                                        shipping address from existing addresses
+                                        delivery address from existing addresses
                                     </li>
                                 </ul>
                             </div>
@@ -156,6 +156,8 @@
                                         </li>
                                     </ul>
                                 </div>
+                                <div style="clear: both">{{msg?.message}}</div>
+                                <button type="submit" class="btn btn-rose pull-right" >Confirm Order</button>
                                 <div style="clear: both"></div>
                             </div>
                         </div>
@@ -163,6 +165,7 @@
                 </div>
 
             </div>
+        </form>
         </div>
     </div>
 </div>

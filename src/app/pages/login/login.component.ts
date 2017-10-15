@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
     private nativeElement: Node;
-    private msg: Message;
+    msg: Message;
 
     public loginForm = this.fb.group({
         formEmail: ["", [Validators.required, Validators.minLength(6), Validators.email]],

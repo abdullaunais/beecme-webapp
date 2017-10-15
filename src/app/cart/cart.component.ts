@@ -3,7 +3,7 @@ import { ObjectStorage } from '../utilities/object-storage';
 import { UserService } from '../services/user.service';
 import { CartService } from './cart.service';
 import { SharedService } from "../services/shared.service";
-import { LocationDetails, Address } from "../beans";
+import { LocationDetails, Address, Message, CartReq } from "../beans";
 import { DeliveryService } from "../services/delivery.service";
 import { Observable } from 'rxjs/Rx';
 
@@ -20,14 +20,14 @@ export class CartComponent {
     user: any = {};
     addressList: Address[];
     selectedAddress: Address;
-    selectedAddressId: number = -1;
+    //selectedAddressId: number = -1;
     selectedShopLocation: LocationDetails;
     country: any;
     province: any;
     city: any;
 
     cartItems: Array<any> = [];
-    cartShop: any = {};
+    //cartShop: any = {};
 
     cartIsEmpty: boolean = false;
     isLoading: boolean = false;
@@ -36,6 +36,9 @@ export class CartComponent {
     totalAmount: number = 0;
     isNewAddress: boolean = false;
 
+    formCheckout: any = {};
+    msg: Message;
+    
     constructor(
         private storage: ObjectStorage,
         private userService: UserService,
@@ -57,8 +60,9 @@ export class CartComponent {
         this.deliveryService.getLocationDetails(this.city.id)
         .subscribe(data => { 
             this.selectedShopLocation = data;
+            console.log(`selectedShopLocation ${JSON.stringify(this.selectedShopLocation)}`);
         }) ;
-        console.log(`selectedShopLocation ${JSON.stringify(this.selectedShopLocation)}`);
+        
         // .catch((err): any => {
         //     this.isLoading = false;
         //     this.isError = true;
@@ -132,4 +136,89 @@ export class CartComponent {
         console.log(`user this.selectedAddress for this cart is ${JSON.stringify(this.selectedAddress)}`);
         //this.selectedAddress = address;
     }
+
+    doCheckout() {
+        
+            // redirect the user to login first
+            // if (!this.sharedService.getUser()) {
+            //   this.sharedService.showCart = true;
+            //   console.log('this.sharedService.showCart ' + this.sharedService.showCart);
+            //   this.router.navigate(['/app-login/1']);
+            //   return;
+            // }
+        
+            //validate the address
+            let myCartReq: CartReq = new CartReq();
+            myCartReq.orderHeaderReq.comment = "TO DO COMMENT"; //this.formCheckout['comment'];
+        
+            console.log('Selected address details this.newAddress ' + this.formCheckout);
+            console.log('Selected address details this.selectedAddress ' + this.selectedAddress);
+        
+            if (!this.isNewAddress && (!this.selectedAddress || this.selectedAddress.id < 1)) {
+              let err = new Message();
+              err.code = -1;
+              err.message = 'Delivery address not entered or selected'
+              this.msg = err;
+            } else if (this.isNewAddress) {
+              // new address should be entered
+              let newAddress1 = new Address();
+              newAddress1.nickName = this.formCheckout['addressNickName'];
+              console.log('Selected address details newAddress1.nickName ' + newAddress1.nickName);
+        
+              newAddress1.street = this.formCheckout['street'];
+              newAddress1.cityId = this.city.id;   // this.sharedService.getCity().id
+              newAddress1.provinceId = this.province.id;            // this.sharedService.getProvince().id
+              newAddress1.countryId =  this.country.id;                             // this.sharedService.getCountry().id
+              this.selectedAddress = newAddress1;
+              console.log('Selected address details newAddress1 ' + JSON.stringify(newAddress1));
+              console.log('Selected address details this.selectedAddress ' + JSON.stringify(this.selectedAddress));
+        
+            } else {
+              let err = new Message();
+              err.code = -1;
+              err.message = 'Please check your delivery address and try again'
+              this.msg = err;
+            }
+            console.log('selected address is ' + JSON.stringify(this.selectedAddress));
+            console.log('header comment ' + myCartReq.orderHeaderReq.comment);
+            myCartReq.dlvAddressReq = this.selectedAddress;
+            myCartReq.orderDetailsReq = this.sharedService.getCart();
+            //console.log('SAVE CART = ' + (this.sharedService.getUser()));
+        
+            // if (this.sharedService.getUser()) {
+            myCartReq.orderHeaderReq.userId = this.user.userId; //this.sharedService.getUser().userId;
+            myCartReq.orderHeaderReq.shopId = this.sharedService.getShop().shopId;
+            myCartReq.orderHeaderReq.currency = this.sharedService.getShop().currency;
+            myCartReq.orderHeaderReq.totalAmount = this.sharedService.getCartTotal();
+        
+            console.log("MY CART " + JSON.stringify(myCartReq));
+        
+            if (myCartReq.orderHeaderReq.totalAmount < this.sharedService.getShop().minOrderAmount) {
+        
+              let err = new Message();
+              err.code = -1;
+              err.message = 'Final total is less than the minimum order amount'
+              this.msg = err;
+              return;
+            }
+        /*
+            this.deliveryService.saveCart(myCartReq)
+              .subscribe(data => {
+                this.msg = new Message();
+                this.msg = data.json();
+                this.sharedService.resetCart();
+                console.log(`CART SAVED SUCCESSFULLY ${data}`);
+              },
+              err => {
+                this.msg = new Message();
+                this.msg = err.json();
+                console.log(`FAILED TO SAVE CART ${this.msg.message}`);
+              });
+        */
+          }    
+
+          addressToggle() {
+            this.isNewAddress = !this.isNewAddress;
+        
+          }          
 }
