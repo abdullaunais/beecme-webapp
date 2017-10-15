@@ -39,9 +39,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
         this.subscription = this.cartService.cartCount
-        .subscribe((data: any) => {
-            this.cartCount = data;
-        });
+            .subscribe((data: any) => {
+                this.cartCount = data;
+            });
     }
 
     ngOnInit() {
@@ -166,7 +166,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
 
     searchItems() {
-        
+
     }
 
     ngOnDestroy() {
