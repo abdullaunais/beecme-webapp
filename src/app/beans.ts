@@ -22,6 +22,21 @@ export class MailBean {
     code: number;
     message: string;
   }
+
+  export class LocationDetails {
+    cityId: number;
+    provinceId: number;
+    countryId: number;
+    
+    cityEn:string;
+    provinceEn:string;
+    countryEn:string;
+    
+    cityAr:string;
+    provinceAr:string;
+    countryAr:string;
+  }
+  
   export class Shop
   {
     shopId:number;

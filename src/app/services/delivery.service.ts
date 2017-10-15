@@ -3,6 +3,7 @@ import { Config } from './config';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 // import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Rx';
+import { LocationDetails } from "../beans";
 
 /*
   Generated class for the DeliveryService provider.
@@ -47,6 +48,20 @@ export class DeliveryService {
       .catch((err) => this.handleError(err));
   }
 
+  getLocationDetails(cityId:number): Observable<LocationDetails> {
+
+    const requestUrl: string = this.serviceRootUrl + this.LOCATION_URL + '/' + cityId;
+    // return this.http.get(requestUrl, this.options)
+    //   .map((res) => this.extractData(res))
+    //   .catch((err) => this.handleError(err));
+      return this.http.get(requestUrl)
+      .map((res: Response)  => {
+        console.log(`getLocationDetails ${JSON.stringify(res.json())}`)
+        return res.json(); 
+      }
+      );
+  }  
+  
   getShops(cityId: number, categoryId: number, start: number, offset: number): Observable<any> {
     const queryParams = {
       type: 71,

@@ -3,12 +3,15 @@ import { ObjectStorage } from '../utilities/object-storage';
 import { UserService } from '../services/user.service';
 import { CartService } from './cart.service';
 import { SharedService } from "../services/shared.service";
+import { LocationDetails } from "../beans";
+import { DeliveryService } from "../services/delivery.service";
+import { Observable } from 'rxjs/Rx';
 
 @Component({
     selector: 'app-shop-list',
     templateUrl: './cart.component.html',
     styleUrls: ['./cart.component.scss'],
-    providers: [UserService, CartService]
+    providers: [UserService, CartService, DeliveryService]
 })
 export class CartComponent {
     colorTheme: string = 'info';
@@ -17,7 +20,7 @@ export class CartComponent {
     addressList: Array<any> = [];
     selectedAddress: any = {};
     selectedAddressId: number = -1;
-
+    selectedShopLocation: LocationDetails;
     country: any;
     province: any;
     city: any;
@@ -36,7 +39,8 @@ export class CartComponent {
         private storage: ObjectStorage,
         private userService: UserService,
         private cartService: CartService,
-        private sharedService: SharedService
+        private sharedService: SharedService,
+        private deliveryService: DeliveryService,
     ) {
         this.user = this.storage.get('user.data');
         this.country = this.storage.get('location.country');
@@ -48,6 +52,21 @@ export class CartComponent {
     initialize() {
         this.isLoading = true;
         this.isError = false;
+        console.log(`selectedCity ${JSON.stringify(this.city)}`);
+        this.deliveryService.getLocationDetails(this.city.id)
+        .subscribe(data => { 
+            this.selectedShopLocation = data;
+        }) ;
+        console.log(`selectedShopLocation ${JSON.stringify(this.selectedShopLocation)}`);
+        // .catch((err): any => {
+        //     this.isLoading = false;
+        //     this.isError = true;
+        // }).subscribe(data => {
+        //     this.selectedShopLocation = data;
+        //     // this.locationLabel = this.city.nameEn + ", \n" + this.province.nameEn + ",\n" + this.country.nameEn + ".";
+        //     this.isLoading = false;
+        // });
+
         this.userService.getAddressList(this.user.userId, this.user.authToken).catch((err): any => {
             this.isLoading = false;
             this.isError = true;
