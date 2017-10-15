@@ -34,7 +34,7 @@ export class CartComponent {
     isError: boolean = false;
     shopIsVisible: boolean;
     totalAmount: number = 0;
-    isNewAddress: boolean = false;
+    isNewAddress: boolean = true;
 
     formCheckout: any = {};
     msg: Message;
@@ -201,7 +201,7 @@ export class CartComponent {
               this.msg = err;
               return;
             }
-        /*
+        
             this.deliveryService.saveCart(myCartReq)
               .subscribe(data => {
                 this.msg = new Message();
@@ -214,10 +214,11 @@ export class CartComponent {
                 this.msg = err.json();
                 console.log(`FAILED TO SAVE CART ${this.msg.message}`);
               });
-        */
+        
           }    
 
           addressToggle() {
+              console.log(`addressToggle ${this.isNewAddress}`);
             this.isNewAddress = !this.isNewAddress;
         
           }          
