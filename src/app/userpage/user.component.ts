@@ -3,6 +3,7 @@ import { ObjectStorage } from '../utilities/object-storage';
 import { UserService } from '../services/user.service';
 import { DeliveryService } from "../services/delivery.service";
 import { LocationDetails, Message, Address } from "../beans";
+import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-user-cmp',
@@ -18,11 +19,12 @@ export class UserComponent {
     country: any;
     province: any;
     city: any;
-
     //nickname: string;
     //street: string;
     dlvAddress: any = {};
     addresses: Address[];
+    register: any = {};
+    confirmPassword = new FormControl("", [verifyPassword.bind(undefined, this.register)]);
 
     isLoading: boolean = false;
     isError: boolean = false;
@@ -57,6 +59,27 @@ export class UserComponent {
             // this.locationLabel = this.city.nameEn + ", \n" + this.province.nameEn + ",\n" + this.country.nameEn + ".";
             this.isLoading = false;
         });
+
+        this.initEditProfile();
+    }
+
+    initEditProfile() {
+        console.log(`edit user properties ${JSON.stringify(this.user)}`);
+        if (this.user) { //user already logged in
+                  this.register['userId'] = this.user.userId;
+                  this.register['username'] = this.user.username;
+                  this.register['email'] = this.user.email;
+                  this.register['country'] = this.user.country;
+                  this.register['address'] = this.user.address;
+                  this.register['phone'] = this.user.phone;
+                  /*
+                  this.provinces = (this.regService.getProvinces(this.sharedService.getUser().country));
+                  this.cities = this.regService.getCities(this.sharedService.getUser().country, this.sharedService.getUser().province)
+                  this.register['province'] = this.sharedService.getUser().province;
+                  this.register['city'] = this.sharedService.getUser().city;
+                  this.register['categoryId'] = this.sharedService.getUser().categoryId;
+                  */
+                }
     }
 
     inputBlur() {
@@ -98,4 +121,57 @@ export class UserComponent {
           }
           );
       }
+
+      doRegister() {
+          console.log(`doregister fired ${JSON.stringify(this.register)}`)
+        /*
+        this.register['type'] = this.type;
+        this.register['notificationSend'] = (this.register['notificationSend'] ? '1' : '0');
+        if (this.sharedService.getUser()) { //user already logged in
+    
+          this.regService.update(this.register)
+            .subscribe(data => {
+              this.msg = new Message();
+              this.msg = data.json();
+              console.log('CUSTOMER UPDATE STATUS ' + data.json())
+            },
+            err => {
+              this.msg = new Message();
+              this.msg = err.json();
+              console.log('ERROR AT CUSTOMER UPDATE ' + err);
+            });
+    
+    
+    
+        } else { // new user registration
+          this.register['country'] = this.sharedService.getCountry().id;
+          this.register['province'] = this.sharedService.getProvince().id;
+          this.register['city'] = this.sharedService.getCity().id;
+    
+          this.regService.register(this.register)
+            .subscribe(data => {
+              this.msg = new Message();
+              this.msg = data.json();
+              console.log('REGSITRATION STATUS ' + data.json());
+              console.log('REGSITRATION STATUS ' + this.msg);
+              this.doLogin();
+            },
+            err => {
+              this.msg = new Message();
+              this.msg = err.json();
+              console.log('ERROR WHILE REGISTERING ' + err);
+            });
+        }
+        */
+      }
+
+    }
+
+    export function verifyPassword(reg: any, ctrl: any) {
+        
+        const valid = reg.password && reg.password === ctrl.value;
+        
+        return (valid ? null : 	{ confirmPassword: { 
+                                    valid: false}
+                                });
     }

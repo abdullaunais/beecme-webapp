@@ -10,7 +10,7 @@ import { UserRoutes } from './user.routing';
     imports: [
         CommonModule,
         RouterModule.forChild(UserRoutes),
-        FormsModule
+        FormsModule, ReactiveFormsModule
     ],
     declarations: [UserComponent]
 })
