@@ -133,24 +133,30 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="create-address">
+                                            <form #newadd="ngForm" novalidate autocomplete="off" (ngSubmit)="addAddress()"> 
                                         <div class="animated flipInX">
                                             <div class="form-group label-floating" style="padding-bottom: 0;">
                                                 <label class="control-label">Nickname</label>
-                                                <input type="text" [(ngModel)]="nickname" class="form-control">
+                                                <input type="text" [(ngModel)]="dlvAddress.nickName" #nickName="ngModel" name="nickName" class="form-control">
                                             </div>
                                         </div>
                                         <div class="animated flipInX">
                                             <div class="form-group label-floating" style="padding-bottom: 0;">
                                                 <label class="control-label">Street</label>
-                                                <input type="text" [(ngModel)]="street" class="form-control">
+                                                <input type="text" [(ngModel)]="dlvAddress.street" #street="ngModel" name="street" class="form-control">
                                             </div>
                                         </div>
                                         <ul class="list-group animated flipInX" style="margin: 20px 0 0 0;">
                                             <li class="list-group-item justify-content-between" style="border:none; padding:0px;">
-                                                Al Malaaz, Riyadh, Saudi Arabia.
+                                                {{city.nameEn}}, {{province.nameEn}}, {{country.nameEn}}
                                             </li>
                                         </ul>
                                         <button type="submit" class="btn btn-rose pull-right">Save Address</button>
+                                        <p class="category">
+                                                {{ msg?.message }}
+                                            </p>
+                                        
+                                    </form>
                                     </div>
                                 </div>
                             </div>
