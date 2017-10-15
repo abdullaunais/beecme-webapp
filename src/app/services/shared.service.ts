@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'Rxjs/Observable';
 import { Item, Shop } from '../beans';
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
@@ -13,15 +13,15 @@ export class SharedService {
 
   pushItem(item: Item) {
 
-    // Read the existing cart and retrieve into a temp var. 
+    // Read the existing cart and retrieve into a temp var.
     // Remove the item from temp var if it exists
     // Push the new item to the temp var.
     // Remove the 'cart' from sessionStorage
-    // set the temp var as the 'cart' in sessionStorage	
+    // set the temp var as the 'cart' in sessionStorage
     // finalTotal calculation
-    // Notify the event to subscribers: 
+    // Notify the event to subscribers:
 
-    let cache: Item[] = JSON.parse(sessionStorage.getItem('delivery.cart'))
+    let cache: Item[] = JSON.parse(sessionStorage.getItem('delivery.cart'));
     if (cache === null) {
       cache = []
     } else {
@@ -44,7 +44,7 @@ export class SharedService {
     // set the temp var as the 'cart' in sessionStorage	
     // Notify the event to subscribers: 
 
-    let cache: Item[] = JSON.parse(sessionStorage.getItem('delivery.cart'));
+    const cache: Item[] = JSON.parse(sessionStorage.getItem('delivery.cart'));
     this.remove(cache, 'itemCode', c.itemCode);
 
     sessionStorage.removeItem('delivery.cart');
@@ -53,7 +53,7 @@ export class SharedService {
   }
 
   public remove(arr: any, attr: any, value: any) {
-    var i = arr.length;
+    let i = arr.length;
     while (i--) {
       if (arr[i]
         && arr[i].hasOwnProperty(attr)
@@ -88,11 +88,11 @@ export class SharedService {
       return;
     }
 
-    for (let item of cart) {
+    for (const item of cart) {
       cartTotal = cartTotal + (item.quantity * item.price)
     }
 
-    let df = JSON.parse(sessionStorage.getItem('delivery.shop')).deliveryCharge;
+    const df = JSON.parse(sessionStorage.getItem('delivery.shop')).deliveryCharge;
     cartTotal = cartTotal + df;
     console.log(`refreshFinalTotal calculated FT is ${cartTotal}`);
     sessionStorage.setItem('carttotal', cartTotal + "");
@@ -108,7 +108,7 @@ export class SharedService {
 
   getCartTotal() {
     // this.cartChanged.emit(this.finalTotal);
-    let total: number = +(sessionStorage.getItem('carttotal'));
+    const total: number = +(sessionStorage.getItem('carttotal'));
     return total;
   }
 
@@ -117,14 +117,14 @@ export class SharedService {
   }
 
   getShop(): Shop {
-    let s = JSON.parse(sessionStorage.getItem('delivery.shop'));
+    const s = JSON.parse(sessionStorage.getItem('delivery.shop'));
     return s;
   }
 
   public validateCartShop() {
     console.log(`validateCartShop this.getCart().length() is ${this.getCart()}`);
     if (this.getCart() != null && this.getCart().length > 0 &&
-      this.getCart()[0].shopId != this.getShop().shopId) {
+      this.getCart()[0].shopId !== this.getShop().shopId) {
       return false;
     } else {
       return true;

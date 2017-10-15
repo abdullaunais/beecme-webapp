@@ -1,0 +1,119 @@
+<div class="main-content page-settings">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="padding-bottom: 40px;">
+          <!-- <div class="card-header">
+                        <h4 class="card-title">Settings
+                            <small class="category">Vertical Tabs</small>
+                        </h4>
+                    </div> -->
+          <div class="row">
+            <div class="card-header card-header-text col-md-4" data-background-color="grey" style="margin-left: 30px; margin-right: 30px;">
+              <h4 class="card-title">Settings</h4>
+              <!-- <p class="category">Active</p> -->
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="row">
+              <div class="col-md-4">
+                <ul class="nav nav-pills nav-pills-rose nav-stacked">
+                  <li class="active">
+                    <a href="#tab1" data-toggle="tab">
+                      Change Location
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-8">
+                <div class="tab-content">
+                  <div class="tab-pane active" id="tab1">
+                    <h4 class="card-title card-subtitle">Current Location</h4>
+                    <div class="row">
+                      <div class="col-sm-6 item-label">
+                        Country
+                      </div>
+                      <div class="col-sm-6 item-value">
+                        {{ currentCountry.nameEn }}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6 item-label">
+                        Province
+                      </div>
+                      <div class="col-sm-6 item-value">
+                        {{ currentProvince.nameEn }}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6 item-label">
+                        City
+                      </div>
+                      <div class="col-sm-6 item-value">
+                        {{ currentCity.nameEn }}
+                      </div>
+                    </div>
+
+                    <h4 class="card-title card-subtitle" style="margin-top: 20px; margin-bottom: 10px;">Change Location</h4>
+
+                    <div class="row">
+                      <div class="col-sm-6 item-label">
+                        Select Country
+                      </div>
+                      <div class="col-sm-6">
+                        <md-select [color]="colorTheme" [(ngModel)]="selectedCountryId" (change)="countryChanged()" placeholder="Country" name="country"
+                          ngClass="btn btn-info simple location-select">
+                          <md-option *ngFor="let country of countryList" [value]="country.id">
+                            {{ country.nameEn }}
+                          </md-option>
+                        </md-select>
+                      </div>
+                    </div>
+
+                    <div class="row" *ngIf="countrySelected">
+                      <div class="col-sm-6 item-label">
+                        Select Province
+                      </div>
+                      <div class="col-sm-6">
+                        <md-select [color]="colorTheme" [(ngModel)]="selectedProvinceId" (change)="provinceChanged()" placeholder="Province" name="province"
+                          ngClass="btn btn-info simple location-select">
+                          <md-option *ngFor="let province of provinceList" [value]="province.id">
+                            {{ province.nameEn }}
+                          </md-option>
+                        </md-select>
+                      </div>
+                    </div>
+
+                    <div class="row" *ngIf="countrySelected && provinceSelected">
+                      <div class="col-sm-6 item-label">
+                        Select City
+                      </div>
+                      <div class="col-sm-6">
+                        <md-select [color]="colorTheme" [(ngModel)]="selectedCityId" (change)="cityChanged()" placeholder="City" name="city" ngClass="btn btn-info simple location-select">
+                          <md-option *ngFor="let city of cityList" [value]="city.id">
+                            {{ city.nameEn }}
+                          </md-option>
+                        </md-select>
+                      </div>
+                    </div>
+
+                    <div class="row" *ngIf="isLoading">
+                      <div class="loader loader-position-fix">
+                        <svg class="circular" viewBox="25 25 50 50">
+                          <circle class="path" cx="50" cy="50" r="10" fill="none" stroke-width="2" stroke-miterlimit="0" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="row" *ngIf="!isLoading" style="padding:45px;">
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

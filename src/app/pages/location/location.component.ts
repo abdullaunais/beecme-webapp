@@ -29,6 +29,9 @@ export class LocationComponent implements OnInit {
     provinceSelected: boolean = false;
     citySelected: boolean = false;
 
+    isLoading: boolean = false;
+    isError: boolean = false;
+
     type: number = 21;
     value: number = 1;
     start: number = 0;
@@ -38,7 +41,7 @@ export class LocationComponent implements OnInit {
         private deliveryService: DeliveryService,
         private storage: ObjectStorage,
         private router: Router,
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.deliveryService.getLocation(this.type, this.value, this.start, this.offset).catch((err): any => {
@@ -52,13 +55,18 @@ export class LocationComponent implements OnInit {
 
     countryChanged() {
         this.type = 22;
-        let value: number = this.selectedCountryId;
+        const value: number = this.selectedCountryId;
+        this.isLoading = true;
         this.deliveryService.getLocation(this.type, value, this.start, this.offset).catch((err): any => {
-            console.log("Error ", err);
+            console.log('Error ', err);
+            this.isError = true;
+            this.isLoading = false;
         }).subscribe((data) => {
-            let json = JSON.stringify(data);
+            const json = JSON.stringify(data);
             this.provinceList = JSON.parse(json);
             console.log(this.provinceList);
+            this.isError = false;
+            this.isLoading = false;
         });
         this.selectedCountry = this.countryList.find(country => country.id == this.selectedCountryId);
         this.countrySelected = true;
@@ -66,13 +74,18 @@ export class LocationComponent implements OnInit {
 
     provinceChanged() {
         this.type = 24;
-        let value: number = this.selectedProvinceId;
+        const value: number = this.selectedProvinceId;
+        this.isLoading = true;
         this.deliveryService.getLocation(this.type, value, this.start, this.offset).catch((err): any => {
-            console.log("Error ", err);
+            console.log('Error ', err);
+            this.isError = true;
+            this.isLoading = false;
         }).subscribe((data) => {
-            let json = JSON.stringify(data);
+            const json = JSON.stringify(data);
             this.cityList = JSON.parse(json);
             console.log(this.cityList);
+            this.isError = false;
+            this.isLoading = false;
         });
         this.selectedProvince = this.provinceList.find(province => province.id == this.selectedProvinceId);
         this.provinceSelected = true;
@@ -85,7 +98,7 @@ export class LocationComponent implements OnInit {
     }
 
     getStarted() {
-        if(this.countrySelected && this.provinceSelected && this.citySelected) {
+        if (this.countrySelected && this.provinceSelected && this.citySelected) {
             this.storage.set('location.country', this.selectedCountry);
             this.storage.set('location.province', this.selectedProvince);
             this.storage.set('location.city', this.selectedCity);

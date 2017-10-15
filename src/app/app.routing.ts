@@ -43,6 +43,9 @@ export const AppRoutes: Routes = [
             }, {
                 path: 'search',
                 loadChildren: './search-list/search-list.module#SearchListModule',
+            }, {
+                path: 'settings',
+                loadChildren: './settings/settings.module#SettingsModule',
             },
             {
                 path: '',

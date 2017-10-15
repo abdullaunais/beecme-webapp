@@ -55,7 +55,8 @@
                                             <span style="font-weight: 300;">DELIVERY FEE </span>
                                         </p>
                                         <p class="pull-right no-margin">
-                                            <span style="font-weight: 400;">{{sharedService.getShop()?.currency}}{{sharedService.getShop()?.deliveryCharge}}</span>
+                                            <button class="btn btn-success" *ngIf="sharedService.getShop()?.deliveryCharge === 0" style="margin: 0; padding: 5px 20px; font-weight: 700; cursor: default;">FREE</button>
+                                            <span style="font-weight: 400;" *ngIf="sharedService.getShop()?.deliveryCharge !== 0">{{sharedService.getShop()?.currency}}{{sharedService.getShop()?.deliveryCharge}}</span>
                                         </p>
                                     </div>
                                 </div>
