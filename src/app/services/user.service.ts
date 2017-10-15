@@ -3,6 +3,8 @@ import { Config } from './config';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 // import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Rx';
+import { Address } from "../beans";
+import { ObjectStorage } from "../utilities/object-storage";
 
 /*
   Generated class for the DeliveryService provider.
@@ -23,7 +25,9 @@ export class UserService {
   private readonly ADDRESS_URL = '/users/address'; // +userId
   private readonly UPLOAD_PICTURE_URL = '/users/upload'; // +userId 
 
-  constructor(private http: Http, public config: Config) {
+  constructor(private http: Http, 
+              public config: Config,
+              private storage: ObjectStorage) {
     this.serviceRootUrl = config.serverUrl;
   }
 
@@ -76,7 +80,7 @@ export class UserService {
     .catch((err) => this.handleError(err));
   }
 
-  authenticate(email: string, password: any): Observable<any> {
+  authenticate(email: string, password: any): Observable<Response> {
     const credentials = {
       username: email,
       password: password
@@ -87,9 +91,9 @@ export class UserService {
     const options = new RequestOptions({ headers: headers });
 
     const requestUrl: string = this.serviceRootUrl + this.AUTH_URL;
-    return this.http.post(requestUrl, body, options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+    return this.http.post(requestUrl, body, options);
+    //.map((res) => this.extractData(res))
+    //.catch((err) => this.handleError(err));
   }
 
   forgotPassword(email: string): Observable<any> {
@@ -130,4 +134,25 @@ export class UserService {
     console.error('An error occurred', error);
     return Observable.throw(error.json() || 'Server Error');
   }
+
+  addAddress(address: Address) : Observable<Response> {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+    headers.append('Authorization', this.storage.get('user.data').authToken);
+    console.log(`Authorization token is ${JSON.stringify(this.storage.get('user.data'))}`);
+    const url = this.serviceRootUrl + '/users/address/' + address.userId;
+    console.log(`URL ADD NEW ADDRESS:  ${url} and new address is ${JSON.stringify(address)}`);
+    return this.http.post(url,JSON.stringify(address), options);
+  }
+
+  getAddresses(userId: number): Observable<Address[]> {
+    // create header for the http call
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    const url = this.serviceRootUrl + '/users/address/' + userId;
+    console.log(`url for addresses for user :  ${url}`);
+    return this.http.get(url, options)
+      .map(res => (res.json()))
+  }  
 }

@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DeliveryService } from '../services/delivery.service';
 import { ObjectStorage } from '../utilities/object-storage';
+import { SharedService } from '../services/shared.service';
+import { Shop } from '../beans';
+
 // import { BreadcrumbService } from '../breadcrumb/breadcrumb.service';
 
 @Component({
@@ -27,7 +30,8 @@ export class ShopListComponent {
     constructor(
         private route: ActivatedRoute,
         private deliveryService: DeliveryService,
-        private storage: ObjectStorage
+        private storage: ObjectStorage,
+        private sharedService: SharedService,
         // private breadcrumbService: BreadcrumbService
     ) {
         this.isLoading = true;
@@ -83,5 +87,10 @@ export class ShopListComponent {
           }
           this.isLoading = false;
         });
+      }
+
+      shopSelected(shop: Shop) {
+        console.log(`SELECTED SHOP  ${JSON.stringify(shop)}`);
+        this.sharedService.setShop(shop);
       }
 }

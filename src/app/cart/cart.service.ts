@@ -11,13 +11,13 @@ export class CartService {
   cartCount: Observable<string>;
 
   constructor(private storage: ObjectStorage) {
-      if (this.storage.get('delivery.cart')) {
-          const cartArray: Array<any> = this.storage.get('delivery.cart');
-          this._cartCountSource =  new BehaviorSubject<number>(cartArray.length);
-      } else {
-          this._cartCountSource =  new BehaviorSubject<number>(0);
-      }
-      this.cartCount = this._cartCountSource.asObservable();
+    //   if (this.storage.get('delivery.cart')) {
+    //       const cartArray: Array<any> = this.storage.get('delivery.cart');
+    //       this._cartCountSource =  new BehaviorSubject<number>(cartArray.length);
+    //   } else {
+    //       this._cartCountSource =  new BehaviorSubject<number>(0);
+    //   }
+    //   this.cartCount = this._cartCountSource.asObservable();
   }
   // service command
   setCartCount(data: any) {

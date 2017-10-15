@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { DeliveryService } from '../services/delivery.service';
 import { ActivatedRoute } from '@angular/router';
 import { ObjectStorage } from '../utilities/object-storage';
+import { SharedService } from "../services/shared.service";
+
+declare var swal: any;
 
 @Component({
   selector: 'app-item-list',
@@ -27,7 +30,8 @@ export class ItemListComponent {
   constructor(
     private route: ActivatedRoute,
     private deliveryService: DeliveryService,
-    private storage: ObjectStorage
+    private storage: ObjectStorage,
+    private sharedService: SharedService
   ) {
     this.isLoading = true;
     this.isAvailable = true;
@@ -86,13 +90,47 @@ export class ItemListComponent {
   }
 
   updateQty(item: any, val: number) {
-    if (item.selectedQty < item.qty) {
+    
+    console.log(`updateQty current value = ${item.qty} and selectedQty ${item.selectedQty} item.quantity is ${item.quantity}`);
+    if (item.selectedQty > 0 && val < 0 ) {
       item.selectedQty += val;
     }
+    if (item.selectedQty >= 0  && val > 0 ) {
+      item.selectedQty += val;
+    }
+
+    //if (item.selectedQty < item.qty) {
+    //  item.selectedQty += val;
+    //}
   }
 
-  validateCart(item) {
+  addToCart(item:any) {
     console.log(JSON.stringify(item));
+     item.quantity = item.selectedQty;
+    // this.sharedService.pushItem(item);
+
+             // this.item.quantity = this.selectedQty;
+              if (!this.sharedService.pushItem(item)) {
+                  // Customer is trying to add items from different shops
+                  swal({
+                      type: 'warning',
+                      title: 'Existing Cart',
+                      text: 'Your cart already contains items from a different Shop. You can only  add items from one shop at a time. Do you wish to clear the existing cart and add this item?',
+                      showCancelButton: true,
+                      confirmButtonColor: '#00b55d',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Clear Cart'
+                  }).then(() => {
+                      //this.storage.remove('delivery.cart');
+                      //this.storage.remove('delivery.cartShop');
+                      //this.cartService.setCartCount(0);
+                      this.sharedService.resetCart();
+                      this.addToCart(item);
+                  }).catch(() => {
+                      return;
+                  });
+      
+              }
   }
 
 }

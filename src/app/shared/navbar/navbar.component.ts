@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 import { CartService } from '../../cart/cart.service';
+import { SharedService } from "../../services/shared.service";
 
 const misc: any = {
     navbar_menu_visible: 0,
@@ -24,8 +25,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    cartCount: number;
-    subscription: Subscription;
+    cartCount: number = 0;
+    //subscription: Subscription;
+    subCartSummary: Subscription;
 
     @ViewChild('app-navbar-cmp') button: any;
 
@@ -33,15 +35,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
         location: Location,
         private renderer: Renderer,
         private element: ElementRef,
-        private cartService: CartService
+        private cartService: CartService,
+        private sharedService: SharedService
     ) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
-        this.subscription = this.cartService.cartCount
-            .subscribe((data: any) => {
-                this.cartCount = data;
-            });
+        // this.subscription = this.cartService.cartCount
+        // .subscribe((data: any) => {
+        //     this.cartCount = data;
+        // });
+        console.log('initializing navbar');
+        this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });
     }
 
     ngOnInit() {
@@ -109,6 +114,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
         });
     }
 
+    ngOnChanges() {
+        console.log(`ngOnChanges - data is ${this.cartCount}`);
+    }
+
     isMobileMenu() {
         if ($(window).width() < 991) {
             return false;
@@ -171,6 +180,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         // unsubscribe to ensure no memory leaks
-        this.subscription.unsubscribe();
+        //this.subscription.unsubscribe();
+        this.subCartSummary.unsubscribe();
     }
+
+
+    cartChanged() {
+        console.log('event cart changed fired');
+      }
+
 }

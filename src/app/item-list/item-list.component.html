@@ -12,7 +12,7 @@
 
             <div class="col-lg-3 col-md-4" *ngFor="let item of items">
                     <div class="card card-product">
-                            <a [routerLink]="['/details']" [queryParams]="{item: item.itemCode, shop: shop.shopId}" queryParamsHandling="merge">
+                            <a [routerLink]="['/details']" [queryParams]="{item: item.itemCode, shop: shop?.shopId}" queryParamsHandling="merge">
                         <div class="card-image card-item-image-wrapper" data-header-animation="true">
                             <img class="img card-item-image" [src]="item.img1" alt="Item Image">
                         </div>
@@ -59,7 +59,7 @@
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
-                                                <button class="btn btn-primary item-cart-btn" (click)="validateCart(item)">
+                                                <button class="btn btn-primary item-cart-btn" (click)="addToCart(item)">
                                                     <i class="fa fa-shopping-cart"></i> 
                                                     <span>Add to Cart</span>
                                                 </button>

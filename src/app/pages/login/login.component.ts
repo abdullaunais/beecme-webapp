@@ -4,7 +4,7 @@ import { ObjectStorage } from '../../utilities/object-storage';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { SidebarService } from '../../sidebar/sidebar.service';
-
+import { Message } from '../../beans';
 declare var $: any;
 
 @Component({
@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
     private nativeElement: Node;
+    msg: Message;
 
     public loginForm = this.fb.group({
         formEmail: ["", [Validators.required, Validators.minLength(6), Validators.email]],
@@ -114,7 +115,30 @@ export class LoginComponent implements OnInit {
             this.loginUser();
         }
     }
+loginUser() {
+    this.userService.authenticate(this.email, this.password)
+    .subscribe(res => {
+                  console.log(`login status from backend ${JSON.stringify(res)}`);
+                  if(res.status === 200) {
+                    let userData = res.json();
+                    console.log(userData);
+                    this.storage.set("user.login", true);
+                    this.storage.set("user.data", userData);
+                    this.storage.set("user.authToken", userData.authToken);
+                    this.sidebarService.changeLogin({user: userData, isLogin: true});
+                    this.router.navigate(['/home']);
+                    console.log(`LOGIN SUCCESS FOR  ${userData}`);
+                  }
+            }, 
+             err => {
+                console.log(`LOGIN ISSUE  ${JSON.stringify(err)}`);
+               this.msg = new Message();
+               this.msg = err.json();
+              }
+            );
 
+}
+/*    
     loginUser() {
         if (!this.email && !this.password) {
             return;
@@ -123,6 +147,9 @@ export class LoginComponent implements OnInit {
         this.userService.authenticate(this.email, this.password).catch((err):any => {
             if (err.status === 401) {
                 console.log(err);
+                this.msg = new Message();
+                this.msg = err.json();
+                 
             } else {
 
             }
@@ -153,4 +180,5 @@ export class LoginComponent implements OnInit {
 
         });
     }
+    */
 }

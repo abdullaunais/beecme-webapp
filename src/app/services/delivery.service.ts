@@ -3,6 +3,8 @@ import { Config } from './config';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 // import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Rx';
+import { LocationDetails, CartReq } from "../beans";
+import { ObjectStorage } from "../utilities/object-storage";
 
 /*
   Generated class for the DeliveryService provider.
@@ -28,7 +30,9 @@ export class DeliveryService {
   private readonly REVIEW_URL = '/reviews';
   private readonly SEARCH_URL = '/dashboard/search';
   
-  constructor(private http: Http, public config: Config) {
+  constructor(private http: Http, 
+              public config: Config,
+              private storage: ObjectStorage ) {
     this.headers = new Headers({ 'Content-Type': 'application/json' });
     this.options = new RequestOptions({ headers: this.headers });
     this.serviceRootUrl = config.serverUrl;
@@ -47,6 +51,20 @@ export class DeliveryService {
       .catch((err) => this.handleError(err));
   }
 
+  getLocationDetails(cityId:number): Observable<LocationDetails> {
+
+    const requestUrl: string = this.serviceRootUrl + this.LOCATION_URL + '/' + cityId;
+    // return this.http.get(requestUrl, this.options)
+    //   .map((res) => this.extractData(res))
+    //   .catch((err) => this.handleError(err));
+      return this.http.get(requestUrl)
+      .map((res: Response)  => {
+        console.log(`getLocationDetails ${JSON.stringify(res.json())}`)
+        return res.json(); 
+      }
+      );
+  }  
+  
   getShops(cityId: number, categoryId: number, start: number, offset: number): Observable<any> {
     const queryParams = {
       type: 71,
@@ -188,4 +206,21 @@ export class DeliveryService {
     console.error('An error occurred', error);
     return Observable.throw(error.json() || 'Server Error');
   }
+
+  saveCart(cartReq: CartReq): Observable<Response> {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    // headers.append('Authorization','eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNTZ0ZXN0aW5nIiwiYXVkaWVuY2UiOiJtb2JpbGUiLCJjcmVhdGVkIjoxNDg3OTI1MTk5Mzk2LCJleHAiOjE0ODg1Mjk5OTl9.y9Taa5yaufPdYKkise69wR14N51omlmxwz-2gGXVOqM');
+    console.log('Authorization token = ' + this.storage.get('user.data').authToken);
+    //console.log('Authorization token = '+this.sharedService.user.authToken)
+    headers.append('Authorization', this.storage.get('user.data').authToken);
+    /*, 'Origin' : 'http://localhost:8080/',
+                              methods: ['GET', 'PUT', 'POST'],
+                            allowedHeaders: ['Content-Type', 'Authorization']  });*/
+
+    let options = new RequestOptions({ headers: headers });
+
+    const url = this.serviceRootUrl + '/carts';
+    console.log(`Saving the order ---> ${JSON.stringify(cartReq)}`);
+    return this.http.post(url, JSON.stringify(cartReq), options)
+  }  
 }
