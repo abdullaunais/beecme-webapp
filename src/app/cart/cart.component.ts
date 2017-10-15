@@ -3,9 +3,10 @@ import { ObjectStorage } from '../utilities/object-storage';
 import { UserService } from '../services/user.service';
 import { CartService } from './cart.service';
 import { SharedService } from "../services/shared.service";
-import { LocationDetails } from "../beans";
+import { LocationDetails, Address } from "../beans";
 import { DeliveryService } from "../services/delivery.service";
 import { Observable } from 'rxjs/Rx';
+
 
 @Component({
     selector: 'app-shop-list',
@@ -17,8 +18,8 @@ export class CartComponent {
     colorTheme: string = 'info';
 
     user: any = {};
-    addressList: Array<any> = [];
-    selectedAddress: any = {};
+    addressList: Address[];
+    selectedAddress: Address;
     selectedAddressId: number = -1;
     selectedShopLocation: LocationDetails;
     country: any;
@@ -126,6 +127,9 @@ export class CartComponent {
       }
 
     addressChanged() {
-        this.selectedAddress = this.addressList.find(address => address.id === this.selectedAddressId)
+        //this.selectedAddress = this.addressList.find(address => address.id === this.selectedAddressId);
+        //console.log(`user selected address for this cart is ${JSON.stringify(address)}`);
+        console.log(`user this.selectedAddress for this cart is ${JSON.stringify(this.selectedAddress)}`);
+        //this.selectedAddress = address;
     }
 }

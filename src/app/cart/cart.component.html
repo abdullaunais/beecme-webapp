@@ -99,7 +99,8 @@
                             <div class="row cart-item-row" *ngIf="isNewAddress" style="padding:15px;">
                                 <ul class="list-group" style="margin:0;">
                                     <li class="list-group-item justify-content-between" style="border:none; padding:0px;">
-                                        <i class="fa fa-address-card" style="font-size: 18px;"></i> &nbsp;&nbsp;Enter adress details
+                                        <i class="fa fa-address-card" style="font-size: 18px;"></i> &nbsp;&nbsp;Enter adress
+                                        details
                                     </li>
                                 </ul>
                                 <div class="animated flipInX">
@@ -124,21 +125,37 @@
 
                                 <ul class="list-group" style="margin:0;">
                                     <li class="list-group-item justify-content-between" style="border:none; padding:5px;">
-                                        <i class="fa fa-address-card" style="font-size: 18px;"></i> &nbsp;&nbsp;Choose a shipping address from existing addresses
+                                        <i class="fa fa-address-card" style="font-size: 18px;"></i> &nbsp;&nbsp;Choose a
+                                        shipping address from existing addresses
                                     </li>
                                 </ul>
                             </div>
                             <div class="row" *ngIf="!isNewAddress" style="padding:0 15px;">
 
 
-                                <md-select [color]="colorTheme" [(ngModel)]="selectedAddressId" (change)="addressChanged()" placeholder="Select Address"
+                                <md-select [color]="colorTheme" [(ngModel)]="selectedAddress" (change)="addressChanged()" placeholder="Select Address"
                                     name="address" ngClass="btn btn-default simple">
-                                    <md-option *ngFor="let address of addressList" [value]="address.id">
+                                    <md-option *ngFor="let address of addressList" [value]="address">
                                         {{ address.nickName }}
                                     </md-option>
                                 </md-select>
-
-
+                                <div *ngIf="selectedAddress?.id>0">
+                                    <div class="animated flipInX">
+                                        <div class="form-group label-floating" style="padding-bottom: 0;">
+                                            <label class="control-label">Nickname</label> {{selectedAddress.nickName}}
+                                        </div>
+                                    </div>
+                                    <div class="animated flipInX">
+                                        <div class="form-group label-floating" style="padding-bottom: 0;">
+                                            <label class="control-label">Street</label> {{selectedAddress.street}}
+                                        </div>
+                                    </div>
+                                    <ul class="list-group animated flipInX" style="margin: 20px 0 0 0;">
+                                        <li class="list-group-item justify-content-between" style="border:none; padding:0px;">
+                                            {{selectedAddress.cityEn}}, {{selectedAddress.provinceEn}}
+                                        </li>
+                                    </ul>
+                                </div>
                                 <div style="clear: both"></div>
                             </div>
                         </div>
