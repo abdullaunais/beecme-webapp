@@ -144,5 +144,15 @@ export class UserService {
     console.log(`URL ADD NEW ADDRESS:  ${url} and new address is ${JSON.stringify(address)}`);
     return this.http.post(url,JSON.stringify(address), options);
   }
-    
+
+  getAddresses(userId: number): Observable<Address[]> {
+    // create header for the http call
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    const url = this.serviceRootUrl + '/users/address/' + userId;
+    console.log(`url for addresses for user :  ${url}`);
+    return this.http.get(url, options)
+      .map(res => (res.json()))
+  }  
 }

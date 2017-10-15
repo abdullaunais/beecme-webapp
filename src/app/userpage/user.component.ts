@@ -13,7 +13,7 @@ import { LocationDetails, Message, Address } from "../beans";
 export class UserComponent {
     msg: Message;
     user: any = {};
-    addressList: Array<any> = [];
+    //addressList: Array<any> = [];
     selectedShopLocation: LocationDetails;
     country: any;
     province: any;
@@ -22,6 +22,7 @@ export class UserComponent {
     //nickname: string;
     //street: string;
     dlvAddress: any = {};
+    addresses: Address[];
 
     isLoading: boolean = false;
     isError: boolean = false;
@@ -51,7 +52,8 @@ export class UserComponent {
             this.isLoading = false;
             this.isError = true;
         }).subscribe(data => {
-            this.addressList = data
+            this.addresses = data
+            console.log(`users current address list ${JSON.stringify(this.addresses)}`)
             // this.locationLabel = this.city.nameEn + ", \n" + this.province.nameEn + ",\n" + this.country.nameEn + ".";
             this.isLoading = false;
         });
@@ -84,7 +86,16 @@ export class UserComponent {
                     console.log('ERROR ADDING NEW ADDRESS ' + err);
                   });
         // this.router.navigate(['/dlvaddress']);
-    
-        
+      }
+
+      loadAddressses() {
+        console.log(`LOADING DELIVERY ADDRESSES FOR USER ${JSON.stringify(this.user)}`);
+        this.userService.getAddresses(this.user.userId)
+          .subscribe(
+          (data) => {
+            console.log(`Retrieved addresses ${JSON.stringify(data)}`);
+            this.addresses = data;
+          }
+          );
       }
     }
