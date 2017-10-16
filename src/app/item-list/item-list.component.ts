@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { DeliveryService } from '../services/delivery.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ObjectStorage } from '../utilities/object-storage';
 import { SharedService } from '../services/shared.service';
+import { NotificationsService } from 'angular2-notifications';
 
 declare var swal: any;
 
@@ -26,12 +27,20 @@ export class ItemListComponent {
   shop: any = {};
   city: any = {};
 
+  public options = {
+    position: ["bottom", "right"],
+    timeOut: 0,
+    lastOnBottom: true,
+  };
+
   items: Array<any> = [];
   constructor(
     private route: ActivatedRoute,
     private deliveryService: DeliveryService,
     private storage: ObjectStorage,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private notify: NotificationsService,
+    private router: Router
   ) {
     this.isLoading = true;
     this.isAvailable = true;
@@ -125,7 +134,16 @@ export class ItemListComponent {
       }).catch(() => {
         return;
       });
-
+    } else {
+      const toast = this.notify.success('Item Added!', 'Click to Checkout', {
+        timeOut: 3000,
+        showProgressBar: true,
+        pauseOnHover: true,
+        clickToClose: true
+      });
+      toast.click.subscribe((event: any) => {
+        this.router.navigate(['/cart']);
+      });
     }
   }
 

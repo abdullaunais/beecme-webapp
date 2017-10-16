@@ -7,6 +7,7 @@ import { ItemListRoutes } from './item-list.routing';
 import { ItemListComponent } from './item-list.component';
 import { ShopInfoModule } from '../shop-info/shop-info.module';
 import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
         RouterModule.forChild(ItemListRoutes),
         FormsModule,
         ShopInfoModule,
-        BreadcrumbModule
+        BreadcrumbModule,
+        SimpleNotificationsModule.forRoot()
     ],
     declarations: [ItemListComponent]
 })

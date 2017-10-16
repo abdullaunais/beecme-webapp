@@ -32,7 +32,7 @@ export class SharedService {
         return false;
       }
     }
-    this.remove(cache, 'itemCode', item.itemCode)
+    this.remove(cache, 'itemCode', item.itemCode);
     cache.push(item);
 
     this.storage.set('delivery.cart', cache);
@@ -76,7 +76,7 @@ export class SharedService {
     let cartTotal = 0;
 
     if (cart.length === 0) {
-      this.storage.set('carttotal', 0);
+      this.storage.set('delivery.cartTotal', 0);
       console.log('refresh cart total to 0');
       this.subjectCartSummary.next(0);
       return;
@@ -86,10 +86,10 @@ export class SharedService {
       cartTotal = cartTotal + (item.quantity * item.price)
     }
 
-    const df = this.storage.get('delivery.shop').deliveryCharge;
+    const df = this.storage.get('delivery.cartShop').deliveryCharge;
     cartTotal = cartTotal + df;
     console.log(`refreshFinalTotal calculated FT is ${cartTotal}`);
-    this.storage.set('carttotal', cartTotal);
+    this.storage.set('delivery.cartTotal', cartTotal);
     console.log(`cart.length is ${cart.length}`);
     this.subjectCartSummary.next(cart.length);
     console.log(`refreshFinalTotal updated FT is ${this.getCartTotal()}`);
@@ -102,16 +102,16 @@ export class SharedService {
 
   getCartTotal() {
     // this.cartChanged.emit(this.finalTotal);
-    const total: number = +(this.storage.get('carttotal'));
+    const total: number = +(this.storage.get('delivery.cartTotal'));
     return total;
   }
 
   setShop(shop: Shop) {
-    this.storage.set('delivery.shop', shop);
+    this.storage.set('delivery.cartShop', shop);
   }
 
   getShop(): Shop {
-    const s = this.storage.get('delivery.shop');
+    const s = this.storage.get('delivery.cartShop');
     return s;
   }
 
@@ -127,6 +127,8 @@ export class SharedService {
 
   resetCart() {
     this.storage.remove('delivery.cart');
+    this.storage.remove('delivery.cartShop');
+    this.storage.remove('delivery.cartTotal');
     this.subjectCartSummary.next(0);
   }
 }

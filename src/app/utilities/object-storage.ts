@@ -1,6 +1,4 @@
 export class ObjectStorage {
-    // public storage: sessionStorage
-
     constructor() {}
 
     public set(key: string, obj: any) {
