@@ -57,8 +57,7 @@ export class CartComponent {
         this.isLoading = true;
         this.isError = false;
         console.log(`selectedCity ${JSON.stringify(this.city)}`);
-        this.deliveryService.getLocationDetails(this.city.id)
-        .subscribe(data => { 
+        this.deliveryService.getLocationDetails(this.city.id).subscribe(data => { 
             this.selectedShopLocation = data;
             console.log(`selectedShopLocation ${JSON.stringify(this.selectedShopLocation)}`);
         }) ;

@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule } 
 @Component({
     selector: 'app-user-cmp',
     templateUrl: 'user.component.html',
+    styleUrls: ['./user.component.scss'],
     providers: [UserService, DeliveryService]
 })
 
@@ -46,15 +47,14 @@ export class UserComponent {
     initialize() {
         this.isLoading = true;
         this.isError = false;
-        this.deliveryService.getLocationDetails(this.city.id)
-        .subscribe(data => { 
+        this.deliveryService.getLocationDetails(this.city.id).subscribe(data => { 
             this.selectedShopLocation = data;
-        }) ;        
+        });        
         this.userService.getAddressList(this.user.userId, this.user.authToken).catch((err):any => {
             this.isLoading = false;
             this.isError = true;
         }).subscribe(data => {
-            this.addresses = data
+            this.addresses = data;
             console.log(`users current address list ${JSON.stringify(this.addresses)}`)
             // this.locationLabel = this.city.nameEn + ", \n" + this.province.nameEn + ",\n" + this.country.nameEn + ".";
             this.isLoading = false;

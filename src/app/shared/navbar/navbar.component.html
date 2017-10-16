@@ -21,7 +21,7 @@
                     <li>
                         <a [routerLink]="['/cart']" title="My Cart" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="material-icons" style="font-size: 26px;">shopping_cart</i> 
-                            <span class="notification" style="font-size: 11px; height: 21px; line-height: 20px; padding:0 6px;">{{cartCount}}</span> 
+                            <span class="notification" style="font-size: 11px; height: 21px; line-height: 20px; padding:0 6px;" *ngIf="cartCount > 0">{{cartCount}}</span> 
                             <p class="hidden-lg hidden-md"> 
                                 Cart List 
                                 <b class="caret"></b> 
