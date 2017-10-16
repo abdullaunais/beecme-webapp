@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { OrderHistoryComponent } from "./order-history.component";
 import { OrderHistoryRoutes } from "./order-history.routing";
+import { DeliveryService } from '../services/delivery.service';
 
 @NgModule({
     imports: [
@@ -12,7 +13,8 @@ import { OrderHistoryRoutes } from "./order-history.routing";
         RouterModule.forChild(OrderHistoryRoutes),
         FormsModule
     ],
-    declarations: [OrderHistoryComponent]
+    declarations: [OrderHistoryComponent],
+    providers: [DeliveryService]
 })
 
 export class OrderHistoryModule {}

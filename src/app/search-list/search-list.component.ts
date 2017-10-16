@@ -9,7 +9,7 @@ import { ObjectStorage } from '../utilities/object-storage';
   styleUrls: ['../item-list/item-list.component.scss']
 })
 export class SearchListComponent {
-  breadcrumbArray: { title: string; icon: string; path: string; }[];
+  breadcrumbArray: Array<any>;
 
   start: number = 0;
   offset: number = 20;
@@ -33,14 +33,13 @@ export class SearchListComponent {
     this.isAvailable = true;
     this.noMoreItems = false;
     this.city = this.storage.get('location.city');
-    this.breadcrumbArray = [
-      { title: 'Home', icon: 'home', path: 'home' },
-      { title: 'Categories', icon: 'apps', path: 'category' },
-      { title: 'Shops', icon: 'store', path: 'category' }
-    ];
     this.route.queryParams.subscribe(params => {
       if (params['query']) {
         this.keyword = params['query'];
+        this.breadcrumbArray = [
+          { title: 'Home', icon: 'home', path: 'home' },
+          { title: 'Search', icon: 'search', path: 'search', queryParams: { query: params['query'] } }
+        ];
         this.initialize();
       }
     });

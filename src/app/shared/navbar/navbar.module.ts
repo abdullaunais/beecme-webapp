@@ -6,10 +6,10 @@ import { CartService } from '../../cart/cart.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    imports: [ RouterModule, CommonModule, ReactiveFormsModule ],
-    declarations: [ NavbarComponent ],
-    exports: [ NavbarComponent ],
+    imports: [RouterModule, CommonModule, ReactiveFormsModule],
+    declarations: [NavbarComponent],
+    exports: [NavbarComponent],
     providers: [CartService]
 })
 
-export class NavbarModule {}
+export class NavbarModule { }
