@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DeliveryService } from '../services/delivery.service';
 import { ObjectStorage } from '../utilities/object-storage';
 import { NotificationsService } from 'angular2-notifications';
+import { DashboardCounts } from "../beans";
 // import { BreadcrumbService } from '../breadcrumb/breadcrumb.service';
 
 declare const $: any;
@@ -12,7 +13,7 @@ declare const $: any;
     templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
-    counts: any = {};
+    counts: DashboardCounts;
     country: any = {};
     province: any = {};
     city: any = {};
