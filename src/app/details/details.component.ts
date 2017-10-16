@@ -13,6 +13,7 @@ declare var swal: any;
     styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent {
+    breadcrumbArray: Array<any>;
     item: any = {};
     shop: any = {};
 
@@ -25,25 +26,38 @@ export class DetailsComponent {
         private deliveryService: DeliveryService,
         private cartService: CartService,
         private sharedService: SharedService
-    ) { }
+    ) {
+        this.initialize();
+    }
 
-    ngOnInit() {
+    initialize() {
         this.city = this.storage.get('location.city');
         this.route.queryParams.subscribe(params => {
-            if (this.sharedService.getShop()) {
-                // this.shop['shopId'] = params.shop;
-                this.deliveryService.getShopById(this.city.id, params['shop']).catch((err): any => {
-                    // this.isLoading = false;
-                    // this.isAvailable = false;
-                }).subscribe((shopData) => {
-                    this.shop = shopData;
+            this.shop['shopId'] = params['shop'];
+            this.item['itemCode'] = params['item'];
+            this.deliveryService.getShopById(this.city.id, params['shop']).catch((err): any => {
+                // this.isLoading = false;
+                // this.isAvailable = false;
+            }).subscribe((shopData) => {
+                this.shop = shopData;
+                console.log(`item details initialize fired with shopId ${this.shop['shopId']} and itemCode ${this.item['itemCode']}`);
+                this.deliveryService.getItemById(params['shop'], this.item['itemCode']).catch((err): any => {
+                    // ignore
+                }).subscribe(item => {
+                    this.item = item;
+                    // this.deliveryService
                 });
-            }
 
-            if (params['item']) {
-                this.item['itemCode'] = params.item;
+            });
+
+            if (params['item'] && params['shop'] && params['item']) {
+                this.breadcrumbArray = [
+                    { title: 'Home', icon: 'home', path: 'home' },
+                    { title: 'Categories', icon: 'apps', path: 'category', queryParams: { category: params['category'] } },
+                    { title: 'Shops', icon: 'store', path: 'shop', queryParams: { category: params['category'], shop: params['shop'] } },
+                    { title: 'Details', icon: 'info', path: 'details', queryParams: { category: params['category'], shop: params['shop'], item: params['item'] } }
+                ];
             }
-            this.initialize();
         });
     }
 
@@ -135,17 +149,5 @@ export class DetailsComponent {
         if (this.selectedQty >= 0 && val > 0) {
             this.selectedQty += val;
         }
-
-    }
-
-    initialize() {
-        console.log(`item details initialize fired with shopId ${this.shop['shopId']} and itemCode ${this.item['itemCode']}`);
-        // this.deliveryService.getItemById(this.shop['shopId'], this.item['itemCode']).catch((err): any => {
-        this.deliveryService.getItemById(this.sharedService.getShop().shopId, this.item['itemCode']).catch((err): any => {
-            // ignore
-        }).subscribe(item => {
-            this.item = item;
-            // this.deliveryService
-        });
     }
 }

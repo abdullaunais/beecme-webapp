@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DeliveryService } from '../services/delivery.service';
 import { ActivatedRoute } from '@angular/router';
 import { ObjectStorage } from '../utilities/object-storage';
-import { SharedService } from "../services/shared.service";
+import { SharedService } from '../services/shared.service';
 
 declare var swal: any;
 
@@ -46,15 +46,11 @@ export class ItemListComponent {
       if (params['shop'] && params['category']) {
         this.breadcrumbArray = [
           { title: 'Home', icon: 'home', path: 'home' },
-          { title: 'Categories', icon: 'apps', path: 'category', queryParams: { category: params['category']} },
-          { title: 'Shops', icon: 'store', path: 'shop', queryParams: { category: params['category'], shop: params['shop']}}
+          { title: 'Categories', icon: 'apps', path: 'category', queryParams: { category: params['category'] } },
+          { title: 'Shops', icon: 'store', path: 'shop', queryParams: { category: params['category'], shop: params['shop'] } }
         ];
       }
     });
-    
-  }
-
-  ngOnInit() {
 
   }
 
@@ -95,47 +91,42 @@ export class ItemListComponent {
   }
 
   updateQty(item: any, val: number) {
-    
     console.log(`updateQty current value = ${item.qty} and selectedQty ${item.selectedQty} item.quantity is ${item.quantity}`);
-    if (item.selectedQty > 0 && val < 0 ) {
+    if (item.selectedQty > 0 && val < 0) {
       item.selectedQty += val;
     }
-    if (item.selectedQty >= 0  && val > 0 ) {
+    if (item.selectedQty >= 0 && val > 0) {
       item.selectedQty += val;
     }
-
-    //if (item.selectedQty < item.qty) {
-    //  item.selectedQty += val;
-    //}
   }
 
-  addToCart(item:any) {
+  addToCart(item: any) {
     console.log(JSON.stringify(item));
-     item.quantity = item.selectedQty;
+    item.quantity = item.selectedQty;
     // this.sharedService.pushItem(item);
 
-             // this.item.quantity = this.selectedQty;
-              if (!this.sharedService.pushItem(item)) {
-                  // Customer is trying to add items from different shops
-                  swal({
-                      type: 'warning',
-                      title: 'Existing Cart',
-                      text: 'Your cart already contains items from a different Shop. You can only  add items from one shop at a time. Do you wish to clear the existing cart and add this item?',
-                      showCancelButton: true,
-                      confirmButtonColor: '#00b55d',
-                      cancelButtonColor: '#d33',
-                      confirmButtonText: 'Clear Cart'
-                  }).then(() => {
-                      //this.storage.remove('delivery.cart');
-                      //this.storage.remove('delivery.cartShop');
-                      //this.cartService.setCartCount(0);
-                      this.sharedService.resetCart();
-                      this.addToCart(item);
-                  }).catch(() => {
-                      return;
-                  });
-      
-              }
+    // this.item.quantity = this.selectedQty;
+    if (!this.sharedService.pushItem(item)) {
+      // Customer is trying to add items from different shops
+      swal({
+        type: 'warning',
+        title: 'Existing Cart',
+        text: 'Your cart already contains items from a different Shop. You can only  add items from one shop at a time. Do you wish to clear the existing cart and add this item?',
+        showCancelButton: true,
+        confirmButtonColor: '#00b55d',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Clear Cart'
+      }).then(() => {
+        //this.storage.remove('delivery.cart');
+        //this.storage.remove('delivery.cartShop');
+        //this.cartService.setCartCount(0);
+        this.sharedService.resetCart();
+        this.addToCart(item);
+      }).catch(() => {
+        return;
+      });
+
+    }
   }
 
 }
