@@ -21,7 +21,7 @@ export class SearchListComponent {
 
   // shop: any = {};
   city: any = {};
-  keyword: string = 'tomato';
+  keyword: string = 'search';
 
   items: Array<any> = [];
   constructor(
@@ -38,7 +38,12 @@ export class SearchListComponent {
       { title: 'Categories', icon: 'apps', path: 'category' },
       { title: 'Shops', icon: 'store', path: 'category' }
     ];
-    this.initialize();
+    this.route.queryParams.subscribe(params => {
+      if (params['query']) {
+        this.keyword = params['query'];
+        this.initialize();
+      }
+    });
   }
 
   // ngOnInit() {
@@ -51,7 +56,6 @@ export class SearchListComponent {
   // }
 
   initialize() {
-    // const shopId = this.shop['shopId'];
     this.deliveryService.searchItems(this.city.id, this.keyword, this.start, this.offset).catch((err): any => {
       this.isLoading = false;
       this.isAvailable = false;
