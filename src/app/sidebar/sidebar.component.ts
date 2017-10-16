@@ -71,6 +71,7 @@ export class SidebarComponent implements OnInit {
     subscription: Subscription;
     user: any = {};
     isLogin: boolean = false;
+    isProfilePictureError: boolean = false;
 
     constructor(
         private sidebarService: SidebarService
@@ -106,6 +107,11 @@ export class SidebarComponent implements OnInit {
                 }
                 this.user = data.user
             });
+    }
+
+    profilePicError() {
+        // console.log('Profile Picture Error');
+        this.isProfilePictureError = true;
     }
 
     ngOnDestroy() {
