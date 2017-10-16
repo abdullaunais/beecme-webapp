@@ -1,4 +1,4 @@
-<div class="main-content">
+<div class="main-content page-user-profile">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
@@ -14,57 +14,67 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group">
-                                        <span class="input-group-addon" style="padding: 15px 15px 0px;">
-                                                    <i class="material-icons">face</i>
-                                                </span>
-                                        <input type="text" (blur)="inputBlur()" #forminput class="form-control" placeholder="Name..." name="username" [(ngModel)]="register.username" #username="ngModel" maxlength="40" minlength="5">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">face</i>
+                                        </span>
+                                        <input type="text" (blur)="inputBlur()" #forminput class="form-control" placeholder="Name..." name="username" [(ngModel)]="register.username"
+                                            #username="ngModel" maxlength="40" minlength="5">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group">
-                                        <span class="input-group-addon" style="padding: 15px 15px 0px;">
-                                                            <i class="material-icons">email</i>
-                                                        </span>
-                                        <input type="text" (blur)="inputBlur()"  class="form-control" placeholder="Email..." [(ngModel)]="register.email" name="email" #email="ngModel" maxlength="40" minlength="6" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">email</i>
+                                        </span>
+                                        <input type="text" (blur)="inputBlur()" class="form-control" placeholder="Email..." [(ngModel)]="register.email" name="email"
+                                            #email="ngModel" maxlength="40" minlength="6" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group">
-                                        <span class="input-group-addon" style="padding: 15px 15px 0px;">
-                                                            <i class="material-icons">call</i>
-                                                        </span>
-                                        <span class="input-group-addon" style="padding: 13px 5px 0px;">
-                                                                +94 - 
-                                                            </span>
-                                        <input type="text" (blur)="inputBlur()" class="form-control" placeholder="Phone..." [(ngModel)]="register.phone" name="phone" #phone="ngModel" maxlength="15" minlength="5">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">call</i>
+                                        </span>
+                                        <span class="input-group-addon" style="padding: 2px 5px 0px;">
+                                            +94 -
+                                        </span>
+                                        <input type="text" (blur)="inputBlur()" class="form-control" placeholder="Phone..." [(ngModel)]="register.phone" name="phone"
+                                            #phone="ngModel" maxlength="15" minlength="5">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group">
-                                        <span class="input-group-addon" style="padding: 15px 15px 0px;">
-                                                            <i class="material-icons">lock_outline</i>
-                                                        </span>
-                                        <input type="text" (blur)="inputBlur()"  class="form-control" placeholder="Password..." [(ngModel)]="register.password" name="password"  #password="ngModel" maxlength="12" minlength="3">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">lock_outline</i>
+                                        </span>
+                                        <input type="text" (blur)="inputBlur()" class="form-control" placeholder="Password..." [(ngModel)]="register.password" name="password"
+                                            #password="ngModel" maxlength="12" minlength="3">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group">
-                                        <span class="input-group-addon" style="padding: 15px 15px 0px;">
-                                                            <i class="material-icons">lock_outline</i>
-                                                        </span>
-                                        <input type="text" (blur)="inputBlur()"  class="form-control" placeholder="Verify Password..." name="confirmPassword" [formControl]="confirmPassword">
+                                        <span class="input-group-addon">
+                                            <i class="material-icons">lock_outline</i>
+                                        </span>
+                                        <input type="text" (blur)="inputBlur()" class="form-control" placeholder="Verify Password..." name="confirmPassword" [formControl]="confirmPassword">
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-rose pull-right">Save Profile</button>
+                            <div class="row">
+                                <div class="hiddent-xs col-md-6 col-lg-8">
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-4">
+                                    <button type="submit" class="btn btn-success pull-right btn-save-profile">Save Profile</button>
+                                </div>
+                            </div>
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -84,7 +94,8 @@
                             Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye
                             I love Rick Owens’ bed design but the back is...
                         </p> -->
-                        <a href="#pablo" class="btn btn-rose btn-round"><i class="fa fa-file-image-o"></i> &nbsp;&nbsp;Image</a>
+                        <a href="#pablo" class="btn btn-rose btn-round">
+                            <i class="fa fa-file-image-o"></i> &nbsp;&nbsp;Image</a>
                     </div>
                 </div>
             </div>
@@ -109,13 +120,13 @@
                         -->
                                     <li class="active">
                                         <a href="#my-list" role="tab" data-toggle="tab">
-                                                <i class="material-icons">edit_location</i> Existing
-                                            </a>
+                                            <i class="material-icons">edit_location</i> Existing
+                                        </a>
                                     </li>
                                     <li>
                                         <a href="#create-address" role="tab" data-toggle="tab">
-                                                <i class="material-icons">add_location</i> Add New
-                                            </a>
+                                            <i class="material-icons">add_location</i> Add New
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -133,30 +144,30 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="create-address">
-                                            <form #newadd="ngForm" novalidate autocomplete="off" (ngSubmit)="addAddress()"> 
-                                        <div class="animated flipInX">
-                                            <div class="form-group label-floating" style="padding-bottom: 0;">
-                                                <label class="control-label">Nickname</label>
-                                                <input type="text" [(ngModel)]="dlvAddress.nickName" #nickName="ngModel" name="nickName" class="form-control">
+                                        <form #newadd="ngForm" novalidate autocomplete="off" (ngSubmit)="addAddress()">
+                                            <div class="animated flipInX">
+                                                <div class="form-group label-floating" style="padding-bottom: 0;">
+                                                    <label class="control-label">Nickname</label>
+                                                    <input type="text" [(ngModel)]="dlvAddress.nickName" #nickName="ngModel" name="nickName" class="form-control">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="animated flipInX">
-                                            <div class="form-group label-floating" style="padding-bottom: 0;">
-                                                <label class="control-label">Street</label>
-                                                <input type="text" [(ngModel)]="dlvAddress.street" #street="ngModel" name="street" class="form-control">
+                                            <div class="animated flipInX">
+                                                <div class="form-group label-floating" style="padding-bottom: 0;">
+                                                    <label class="control-label">Street</label>
+                                                    <input type="text" [(ngModel)]="dlvAddress.street" #street="ngModel" name="street" class="form-control">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <ul class="list-group animated flipInX" style="margin: 20px 0 0 0;">
-                                            <li class="list-group-item justify-content-between" style="border:none; padding:0px;">
-                                                {{city.nameEn}}, {{province.nameEn}}, {{country.nameEn}}
-                                            </li>
-                                        </ul>
-                                        <button type="submit" class="btn btn-rose pull-right">Save Address</button>
-                                        <p class="category">
+                                            <ul class="list-group animated flipInX" style="margin: 20px 0 0 0;">
+                                                <li class="list-group-item justify-content-between" style="border:none; padding:0px;">
+                                                    {{city.nameEn}}, {{province.nameEn}}, {{country.nameEn}}
+                                                </li>
+                                            </ul>
+                                            <button type="submit" class="btn btn-rose pull-right">Save Address</button>
+                                            <p class="category">
                                                 {{ msg?.message }}
                                             </p>
-                                        
-                                    </form>
+
+                                        </form>
                                     </div>
                                 </div>
                             </div>

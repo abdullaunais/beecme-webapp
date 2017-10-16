@@ -12,6 +12,8 @@ declare const $: any;
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
     counts: any = {};
+    country: any = {};
+    province: any = {};
     city: any = {};
     breadcrumbArray: { title: string; icon: string; path: string; }[];
     // constructor(private navbarTitleService: NavbarTitleService, private notificationService: NotificationService) { }
@@ -24,6 +26,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         private storage: ObjectStorage
     ) {
         this.breadcrumbArray = [{title: 'Home', icon: 'home', path: 'home'}];
+        this.country = this.storage.get('location.country');
+        this.province = this.storage.get('location.province');
         this.city = this.storage.get('location.city');
         this.initialize();
     }

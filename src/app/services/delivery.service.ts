@@ -30,10 +30,10 @@ export class DeliveryService {
   private readonly REVIEW_URL = '/reviews';
   private readonly DASHBOARD_COUNTS_URL = '/dashboard/counts';
   private readonly SEARCH_URL = '/dashboard/search';
-  
-  constructor(private http: Http, 
-              public config: Config,
-              private storage: ObjectStorage ) {
+
+  constructor(private http: Http,
+    public config: Config,
+    private storage: ObjectStorage) {
     this.headers = new Headers({ 'Content-Type': 'application/json' });
     this.options = new RequestOptions({ headers: this.headers });
     this.serviceRootUrl = config.serverUrl;
@@ -54,24 +54,18 @@ export class DeliveryService {
 
   getLocationDetails(cityId: number): Observable<LocationDetails> {
     const requestUrl: string = this.serviceRootUrl + this.LOCATION_URL + '/' + cityId;
-    // return this.http.get(requestUrl, this.options)
-    //   .map((res) => this.extractData(res))
-    //   .catch((err) => this.handleError(err));
-      return this.http.get(requestUrl)
-      .map((res: Response)  => {
-        console.log(`getLocationDetails ${JSON.stringify(res.json())}`)
-        return res.json(); 
-      }
-      );
+    return this.http.get(requestUrl, this.options)
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
-  
+
   getDashboardCounts(cityId: number) {
     const requestUrl: string = this.serviceRootUrl + this.DASHBOARD_COUNTS_URL + `/${cityId}`;
     return this.http.get(requestUrl, this.options)
       .map((res) => this.extractData(res))
       .catch((err) => this.handleError(err));
   }
-  
+
   getShops(cityId: number, categoryId: number, start: number, offset: number): Observable<any> {
     const queryParams = {
       type: 71,
@@ -229,5 +223,5 @@ export class DeliveryService {
     const url = this.serviceRootUrl + '/carts';
     console.log(`Saving the order ---> ${JSON.stringify(cartReq)}`);
     return this.http.post(url, JSON.stringify(cartReq), options)
-  }  
+  }
 }
