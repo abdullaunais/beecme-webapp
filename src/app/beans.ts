@@ -308,4 +308,8 @@ export class MailBean {
         comment:string;
     }
     
-  
+    export class DashboardCounts {
+      countCategory: number;
+      countShops: number;
+      countItems: number;
+    }
