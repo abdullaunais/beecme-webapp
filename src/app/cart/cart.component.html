@@ -37,11 +37,11 @@
                                     <button class="btn btn-default cart-item-btn-comment">Add Comment</button>
                                     <div class="cart-item-price-wrapper">
                                         <p class="pull-left no-margin">
-                                            <span style="font-weight: 300;">{{cartItem.quantity}} {{cartItem.unit}} X {{cartItem.price}} {{cartShop?.currency}}
+                                            <span style="font-weight: 300;">{{cartItem.quantity}} {{cartItem.unit}} X {{cartItem.price}}
                                                 = </span>
                                         </p>
                                         <p class="pull-right no-margin">
-                                            <span style="font-weight: 400;">{{cartShop?.currency}} {{cartItem.quantity*cartItem.price}}</span>
+                                            <span style="font-weight: 400;">{{sharedService.getShop()?.currency}} {{cartItem.quantity*cartItem.price}}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@
                                         </p>
                                         <p class="pull-right no-margin">
                                             <button class="btn btn-success" *ngIf="sharedService.getShop()?.deliveryCharge === 0" style="margin: 0; padding: 5px 20px; font-weight: 700; cursor: default;">FREE</button>
-                                            <span style="font-weight: 400;" *ngIf="sharedService.getShop()?.deliveryCharge !== 0">{{sharedService.getShop()?.currency}}{{sharedService.getShop()?.deliveryCharge}}</span>
+                                            <span style="font-weight: 400;" *ngIf="sharedService.getShop()?.deliveryCharge !== 0">{{sharedService.getShop()?.currency}} {{sharedService.getShop()?.deliveryCharge}}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -70,7 +70,7 @@
                                             <span style="font-weight: 300;">FINAL TOTAL </span>
                                         </p>
                                         <p class="pull-right no-margin">
-                                            <span style="font-weight: 700;">{{sharedService.getShop()?.currency}}{{sharedService.getCartTotal()}}</span>
+                                            <span style="font-weight: 700;">{{sharedService.getShop()?.currency}} {{sharedService.getCartTotal()}}</span>
                                         </p>
                                     </div>
                                 </div>

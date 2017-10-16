@@ -13,7 +13,7 @@ declare var swal: any;
   providers: [DeliveryService]
 })
 export class ItemListComponent {
-  breadcrumbArray: { title: string; icon: string; path: string; }[];
+  breadcrumbArray: Array<any>;
 
   start: number = 0;
   offset: number = 20;
@@ -37,20 +37,25 @@ export class ItemListComponent {
     this.isAvailable = true;
     this.noMoreItems = false;
     this.city = this.storage.get('location.city');
-    this.breadcrumbArray = [
-      { title: 'Home', icon: 'home', path: 'home' },
-      { title: 'Categories', icon: 'apps', path: 'category' },
-      { title: 'Shops', icon: 'store', path: 'category' }
-    ]
-  }
-
-  ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (params['shop']) {
         this.shop['shopId'] = params.shop;
         this.initialize();
       }
+
+      if (params['shop'] && params['category']) {
+        this.breadcrumbArray = [
+          { title: 'Home', icon: 'home', path: 'home' },
+          { title: 'Categories', icon: 'apps', path: 'category', queryParams: { category: params['category']} },
+          { title: 'Shops', icon: 'store', path: 'shop', queryParams: { category: params['category'], shop: params['shop']}}
+        ];
+      }
     });
+    
+  }
+
+  ngOnInit() {
+
   }
 
   initialize() {

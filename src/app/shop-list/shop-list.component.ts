@@ -14,7 +14,7 @@ import { Shop } from '../beans';
     providers: [DeliveryService]
 })
 export class ShopListComponent {
-    breadcrumbArray: { title: string; icon: string; path: string; }[];
+    breadcrumbArray: Array<any>;
     category: any = {};
     city: any = {};
     shops: Array<any> = [];
@@ -37,21 +37,23 @@ export class ShopListComponent {
         this.isLoading = true;
         this.noMoreShops = false;
         this.isError = false;
-        this.breadcrumbArray = [
-            { title: 'Home', icon: 'home', path: 'home'},
-            {title: 'Categories', icon: 'apps', path: 'category'}
-        ];
         this.city = this.storage.get('location.city');
-        // this.breadcrumbService.changeRoute(breadcrumbArray);
-    }
-
-    ngOnInit() {
         this.route.queryParams.subscribe(params => {
             if (params['category']) {
                 this.category['categoryId'] = params['category'];
                 this.initialize();
+            } else {
+                return;
             }
         });
+        this.breadcrumbArray = [
+            { title: 'Home', icon: 'home', path: 'home'},
+            {title: 'Categories', icon: 'apps', path: 'category', queryParams: { category: this.category['categoryId']}}
+        ];
+    }
+
+    ngOnInit() {
+
     }
 
     initialize() {

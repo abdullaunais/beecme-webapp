@@ -10,20 +10,12 @@ import { Subscription } from 'rxjs';
 
 export class BreadcrumbComponent implements OnInit {
   @Input('breadcrumbArray') breadcrumbArray: any;
-  // breadcrumbArray: Array<any>;
-  // subscription: Subscription;
   constructor(
-    // private breadcrumbService: BreadcrumbService
   ) {
-    // bread
-    // this.subscription = this.breadcrumbService.breadcrumbItem
-    // .subscribe((data: any) => {
-    //   this.breadcrumbArray = data;
-    // });
+    
   }
 
   ngOnInit() {
-
+    
   }
-
 }

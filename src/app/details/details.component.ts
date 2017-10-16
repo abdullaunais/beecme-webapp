@@ -31,18 +31,13 @@ export class DetailsComponent {
         this.city = this.storage.get('location.city');
         this.route.queryParams.subscribe(params => {
             if (this.sharedService.getShop()) {
-                //this.shop['shopId'] = params.shop;
-                this.deliveryService.getShopById(this.city.id, this.sharedService.getShop().shopId).catch((err): any => {
+                // this.shop['shopId'] = params.shop;
+                this.deliveryService.getShopById(this.city.id, params['shop']).catch((err): any => {
                     // this.isLoading = false;
                     // this.isAvailable = false;
-                  }).subscribe((shopData) => {
+                }).subscribe((shopData) => {
                     this.shop = shopData;
-                  });                
-                // this.deliveryService.getShopById(this.shop['shopId']).catch((err): any => {
-
-                // }).subscribe((shop: any) => {
-                //     this.shop = shop;
-                // });
+                });
             }
 
             if (params['item']) {
@@ -134,10 +129,10 @@ export class DetailsComponent {
 
     updateQty(val: number) {
         console.log(`updateQty current value = ${this.item.qty} and selectedQty ${this.selectedQty} item.quantity is ${this.item.quantity}`);
-        if (this.selectedQty > 0 && val < 0 ) {
+        if (this.selectedQty > 0 && val < 0) {
             this.selectedQty += val;
         }
-        if (this.selectedQty >= 0  && val > 0 ) {
+        if (this.selectedQty >= 0 && val > 0) {
             this.selectedQty += val;
         }
 
@@ -145,7 +140,7 @@ export class DetailsComponent {
 
     initialize() {
         console.log(`item details initialize fired with shopId ${this.shop['shopId']} and itemCode ${this.item['itemCode']}`);
-       // this.deliveryService.getItemById(this.shop['shopId'], this.item['itemCode']).catch((err): any => {
+        // this.deliveryService.getItemById(this.shop['shopId'], this.item['itemCode']).catch((err): any => {
         this.deliveryService.getItemById(this.sharedService.getShop().shopId, this.item['itemCode']).catch((err): any => {
             // ignore
         }).subscribe(item => {

@@ -10,6 +10,7 @@ declare var swal: any;
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
+  breadcrumbArray: { title: string; icon: string; path: string; }[];
   colorTheme: string = 'info';
 
   currentCountry: any;
@@ -44,6 +45,12 @@ export class SettingsComponent implements OnInit {
     this.currentCountry = this.storage.get('location.country');
     this.currentProvince = this.storage.get('location.province');
     this.currentCity = this.storage.get('location.city');
+
+    this.breadcrumbArray = [
+      { title: 'Home', icon: 'home', path: 'home' },
+      { title: 'Settings', icon: 'settings', path: 'settings' }
+    ];
+
     this.initialize();
   }
 

@@ -1,6 +1,11 @@
 <div class="main-content page-settings">
   <div class="container-fluid">
     <div class="row">
+
+      <div class="col-lg-12 col-md-12">
+        <app-breadcrumb [breadcrumbArray]="breadcrumbArray"></app-breadcrumb>
+      </div>
+
       <div class="col-md-12">
         <div class="card" style="padding-bottom: 40px;">
           <!-- <div class="card-header">
@@ -9,7 +14,7 @@
                         </h4>
                     </div> -->
           <div class="row">
-            <div class="card-header card-header-text col-md-4" data-background-color="grey" style="margin-left: 30px; margin-right: 30px;">
+            <div class="card-header card-header-text col-md-4 animated flipInX" data-background-color="grey" style="margin-left: 30px; margin-right: 30px;">
               <h4 class="card-title">Settings</h4>
               <!-- <p class="category">Active</p> -->
             </div>
