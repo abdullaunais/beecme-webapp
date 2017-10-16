@@ -124,8 +124,23 @@ export class UserComponent {
             );
     }
 
+    deleteAddress(addressId: number) {
+        console.log(`delete address fired with address id ${addressId}`);
+        this.userService.deleteAddress(addressId)
+            .subscribe(data => {
+                this.msg = new Message();
+                this.msg = data.json();
+                console.log('DELETE ADDRESS STATUS ' + data.json())
+            },
+            err => {
+                this.msg = new Message();
+                this.msg = err;
+                console.log('ERROR DELETING NEW ADDRESS ' + err);
+            });
+    }
+
     doRegister() {
-        console.log(`doregister fired ${JSON.stringify(this.register)}`)
+        console.log(`doregister fired ${JSON.stringify(this.register)}`);
         /*
         this.register['type'] = this.type;
         this.register['notificationSend'] = (this.register['notificationSend'] ? '1' : '0');

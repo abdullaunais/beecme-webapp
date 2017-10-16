@@ -145,6 +145,18 @@ export class UserService {
     return this.http.post(url,JSON.stringify(address), options);
   }
 
+  deleteAddress(addressId: number) : Observable<Response> {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const authToken = this.storage.get('user.authToken');
+    console.log(`authToken:  ${authToken}`);
+    const options = new RequestOptions({ headers: headers });
+    headers.append('Authorization', authToken );
+    console.log(`Authorization token is ${JSON.stringify(this.storage.get('user.data'))}`);
+    const url = this.serviceRootUrl + '/users/address/' + addressId;
+    console.log(`URL DELETE ADDRESS:  ${url} of ID ${addressId}`);
+    return this.http.delete(url, options);
+  }
+  
   getAddresses(userId: number): Observable<Address[]> {
     // create header for the http call
     let headers = new Headers({ 'Content-Type': 'application/json' });

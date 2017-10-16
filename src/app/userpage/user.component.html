@@ -136,7 +136,7 @@
                                         <div *ngFor="let address of addresses" style="margin-bottom: 12px; border-bottom: 1px solid #eee;">
                                             <h6 class="card-title" style="padding:0;margin:0; font-weight: 400; text-transform: none;">
                                                 {{ address.nickName }}
-                                                <i class="material-icons pull-right" style="line-height: 40px;">delete</i>
+                                                <i class="material-icons pull-right" style="line-height: 40px;" (click)="deleteAddress(address.id)">delete</i>
                                             </h6>
                                             <p class="category">
                                                 {{ address.street }}, {{ address.cityEn }}, {{ address.provinceEn }}
