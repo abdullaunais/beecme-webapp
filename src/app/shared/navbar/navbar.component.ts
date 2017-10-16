@@ -1,10 +1,11 @@
 import { Component, OnInit, Renderer, ViewChild, ElementRef, Directive, OnDestroy } from '@angular/core';
 import { ROUTES } from '../.././sidebar/sidebar.component';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 import { CartService } from '../../cart/cart.service';
-import { SharedService } from "../../services/shared.service";
+import { SharedService } from '../../services/shared.service';
+import { Validators, FormBuilder } from '@angular/forms';
 
 const misc: any = {
     navbar_menu_visible: 0,
@@ -24,9 +25,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private nativeElement: Node;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    searchInput: string;
+
+    public searchForm = this.fb.group({
+        formSearch: ['', [Validators.required]]
+    });
 
     cartCount: number = 0;
-    //subscription: Subscription;
     subCartSummary: Subscription;
 
     @ViewChild('app-navbar-cmp') button: any;
@@ -36,15 +41,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
         private renderer: Renderer,
         private element: ElementRef,
         private cartService: CartService,
-        private sharedService: SharedService
+        private sharedService: SharedService,
+        private router: Router,
+        public fb: FormBuilder,
     ) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
-        // this.subscription = this.cartService.cartCount
-        // .subscribe((data: any) => {
-        //     this.cartCount = data;
-        // });
         console.log('initializing navbar');
         this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });
     }
@@ -175,7 +178,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
 
     searchItems() {
-
+        const searchQuery = this.searchForm.value.formSearch;
+        console.log(this.searchInput);
+        this.router.navigateByUrl(`search?query=${searchQuery}`);
     }
 
     ngOnDestroy() {

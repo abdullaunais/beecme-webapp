@@ -63,12 +63,12 @@
                     </li> -->
                     <li class="separator hidden-lg hidden-md"></li>
                 </ul>
-                <form class="navbar-form navbar-right" role="search">
+                <form [formGroup]="searchForm" (ngSubmit)="searchItems()" class="navbar-form navbar-right" role="search">
                     <div class="form-group form-search is-empty">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" formControlName="formSearch" class="form-control" placeholder="Search">
                         <span class="material-input"></span>
                     </div>
-                    <button type="submit" (click)="searchItems()" class="btn btn-white btn-round btn-just-icon">
+                    <button type="submit" class="btn btn-white btn-round btn-just-icon">
                         <i class="material-icons">search</i>
                         <div class="ripple-container"></div>
                     </button>

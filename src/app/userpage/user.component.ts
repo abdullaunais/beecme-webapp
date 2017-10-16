@@ -13,6 +13,7 @@ import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule } 
 })
 
 export class UserComponent {
+    breadcrumbArray: Array<any>;
     msg: Message;
     user: any = {};
     //addressList: Array<any> = [];
@@ -60,6 +61,10 @@ export class UserComponent {
             // this.locationLabel = this.city.nameEn + ", \n" + this.province.nameEn + ",\n" + this.country.nameEn + ".";
             this.isLoading = false;
         });
+        this.breadcrumbArray = [
+            { title: 'Home', icon: 'home', path: 'home' },
+            { title: 'Profile', icon: 'person', path: 'pages/profile' }
+        ];
 
         this.initEditProfile();
     }
