@@ -5,11 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DashboardRoutes } from './dashboard.routing';
 import { DashboardComponent } from './dashboard.component';
-import { CategoryListModule } from "../category-list/category-list.module";
+import { CategoryListModule } from '../category-list/category-list.module';
 import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
 import { DeliveryService } from '../services/delivery.service';
-// import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
-// import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 @NgModule({
     imports: [
@@ -17,7 +16,8 @@ import { DeliveryService } from '../services/delivery.service';
         CommonModule,
         RouterModule.forChild(DashboardRoutes),
         FormsModule,
-        BreadcrumbModule
+        BreadcrumbModule,
+        SimpleNotificationsModule.forRoot()
     ],
     declarations: [DashboardComponent],
     providers: [DeliveryService]

@@ -1,9 +1,51 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
+
+            <simple-notifications [options]="options"></simple-notifications>
+
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <app-breadcrumb [breadcrumbArray]="breadcrumbArray"></app-breadcrumb>
             </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header card-header-tabs" data-background-color="purple" style="padding: 6px 15px; box-shadow: 3px 2px 4px #ddd;">
+                            <div class="nav-tabs-navigation">
+                                <div class="nav-tabs-wrapper">
+                                    <i class="material-icons pull-left" style="padding:5px 3px;">my_location</i>
+                                    <span class="nav-tabs-title" style="padding: 5px; font-weight: 700; margin-right: 10px;">My Location </span>
+                                    <ul class="nav nav-tabs" data-tabs="tabs">
+                                        <li class="active">
+                                            <a href="#location" [routerLink]="['/settings']" data-toggle="tab" style="padding: 5px 20px;">
+                                                <i class="material-icons">mode_edit</i> Change
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-content" style="padding:0 0 30px 0;">
+                            <div class="tab-content" style="margin-top:10px;">
+                                <div class="tab-pane active" id="location">
+                                    <div class="col-sm-4" style="text-align: center;">
+                                        <span style="font-weight: 500;">Country : </span>
+                                        <span>{{country.nameEn}}</span>
+                                    </div>
+                                    <div class="col-sm-4" style="text-align: center;">
+                                        <span style="font-weight: 500;">Province : </span>
+                                        <span>{{province.nameEn}}</span>
+                                    </div>
+                                    <div class="col-sm-4" style="text-align: center;">
+                                        <span style="font-weight: 500;">City : </span>
+                                        <span>{{city.nameEn}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             <div class="col-lg-3 col-md-6 col-sm-6" (click)="routeToPath('/categories')" style="cursor: pointer">
                 <div class="card card-stats">
@@ -71,43 +113,8 @@
             </div>
         </div>
 
-        <div class="col-lg-12" style="padding-left: 0; padding-right: 0;">
-            <div class="card">
-                <div class="card-header card-header-tabs" data-background-color="default" style="padding: 6px 15px; box-shadow: 3px 2px 4px #ddd;">
-                    <div class="nav-tabs-navigation">
-                        <div class="nav-tabs-wrapper">
-                            <i class="material-icons pull-left" style="padding:5px 3px;">my_location</i>
-                            <span class="nav-tabs-title" style="padding: 5px; font-weight: 700; margin-right: 10px;">My Location </span>
-                            <ul class="nav nav-tabs" data-tabs="tabs">
-                                <li class="active">
-                                    <a href="#location" [routerLink]="['/settings']" data-toggle="tab" style="padding: 5px 20px;">
-                                        <i class="material-icons">mode_edit</i> Change
-                                        <div class="ripple-container"></div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-content" style="padding:0 0 30px 0;">
-                    <div class="tab-content" style="margin-top:10px;">
-                        <div class="tab-pane active" id="location">
-                            <div class="col-sm-4" style="text-align: center;">
-                                <span style="font-weight: 500;">Country : </span>
-                                <span>{{country.nameEn}}</span>
-                            </div>
-                            <div class="col-sm-4" style="text-align: center;">
-                                <span style="font-weight: 500;">Province : </span>
-                                <span>{{province.nameEn}}</span>
-                            </div>
-                            <div class="col-sm-4" style="text-align: center;">
-                                <span style="font-weight: 500;">City : </span>
-                                <span>{{city.nameEn}}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="row">
+            
         </div>
 
         <div class="header text-center">

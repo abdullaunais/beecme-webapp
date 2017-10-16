@@ -1,4 +1,7 @@
 <div class="wrapper wrapper-full-page">
+
+    <simple-notifications [options]="options"></simple-notifications>
+
     <nav class="navbar navbar-primary navbar-transparent navbar-absolute">
         <div class="container">
             <div class="navbar-header">
@@ -114,7 +117,7 @@
                                         </div>
                                         <div class="input-group">
                                             <span class="input-group-addon">
-                                                    <i class="material-icons">call</i>
+                                                <i class="material-icons">call</i>
                                             </span>
                                             <input type="number" formControlName="formPhone" (blur)="inputBlur()" id="forminput2" class="form-control" placeholder="Phone...">
                                         </div>
@@ -122,13 +125,14 @@
                                             <span class="input-group-addon">
                                                 <i class="material-icons">lock_outline</i>
                                             </span>
-                                            <input type="password" formControlName="formPassword" (blur)="inputBlur()" id="forminput3" placeholder="Password..." class="form-control" />
+                                            <input type="password" formControlName="formPassword" (blur)="inputBlur()" id="forminput3" placeholder="Password..." class="form-control"
+                                            />
                                         </div>
                                         <!-- If you want to add a checkbox to this form, uncomment this code -->
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" formControlName="formTermsAndConditions" (blur)="inputBlur()" name="optionsCheckboxes" checked> I agree to the
-                                                <a  id="forminput4" href="#something">terms and conditions</a>.
+                                                <a id="forminput4" href="#something">terms and conditions</a>.
                                             </label>
                                         </div>
                                     </div>
@@ -174,6 +178,6 @@
                 </p>
             </div>
         </footer>
-        <div class="full-page-background" style="background-image: url(../../../assets/img/register.jpeg) "></div> 
+        <div class="full-page-background" style="background-image: url(../../../assets/img/register.jpeg) "></div>
     </div>
 </div>

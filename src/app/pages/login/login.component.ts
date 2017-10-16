@@ -5,6 +5,7 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { SidebarService } from '../../sidebar/sidebar.service';
 import { Message } from '../../beans';
+import { NotificationsService } from 'angular2-notifications';
 declare var $: any;
 
 @Component({
@@ -19,6 +20,12 @@ export class LoginComponent implements OnInit {
     private sidebarVisible: boolean;
     private nativeElement: Node;
     msg: Message;
+
+    public options = {
+        position: ['bottom', 'right'],
+        timeOut: 0,
+        lastOnBottom: true,
+    };
 
     public loginForm = this.fb.group({
         formEmail: ["", [Validators.required, Validators.minLength(6), Validators.email]],
@@ -35,6 +42,7 @@ export class LoginComponent implements OnInit {
         private storage: ObjectStorage,
         private userService: UserService,
         private router: Router,
+        private notify: NotificationsService,
         private sidebarService: SidebarService
     ) {
         this.nativeElement = element.nativeElement;
@@ -115,70 +123,81 @@ export class LoginComponent implements OnInit {
             this.loginUser();
         }
     }
-loginUser() {
-    this.userService.authenticate(this.email, this.password)
-    .subscribe(res => {
-                  console.log(`login status from backend ${JSON.stringify(res)}`);
-                  if(res.status === 200) {
+
+    loginUser() {
+        this.userService.authenticate(this.email, this.password)
+            .subscribe(res => {
+                console.log(`login status from backend ${JSON.stringify(res)}`);
+                if (res.status === 200) {
                     let userData = res.json();
                     console.log(userData);
                     this.storage.set("user.login", true);
                     this.storage.set("user.data", userData);
                     this.storage.set("user.authToken", userData.authToken);
-                    this.sidebarService.changeLogin({user: userData, isLogin: true});
-                    this.router.navigate(['/home']);
+                    this.sidebarService.changeLogin({ user: userData, isLogin: true });
+                    this.router.navigateByUrl('/home?login=success');
                     console.log(`LOGIN SUCCESS FOR  ${userData}`);
-                  }
-            }, 
-             err => {
+                }
+            },
+            err => {
                 console.log(`LOGIN ISSUE  ${JSON.stringify(err)}`);
-               this.msg = new Message();
-               this.msg = err.json();
-              }
-            );
-
-}
-/*    
-    loginUser() {
-        if (!this.email && !this.password) {
-            return;
-        }
-
-        this.userService.authenticate(this.email, this.password).catch((err):any => {
-            if (err.status === 401) {
-                console.log(err);
                 this.msg = new Message();
                 this.msg = err.json();
-                 
-            } else {
-
+                this.msg.message = this.toTitleCase(this.msg.message);
+                const toast = this.notify.error('Error!', this.msg.message, {
+                    timeOut: 3000,
+                    showProgressBar: true,
+                    pauseOnHover: true,
+                    clickToClose: true
+                });
             }
-        }).subscribe((response) => {
-            let userData = response;
-            console.info(userData);
-            this.storage.set("user.login", true);
-            this.storage.set("user.data", userData);
-            this.storage.set("user.authToken", userData.authToken);
+            );
 
-            this.sidebarService.changeLogin({user: userData, isLogin: true});
-
-            this.router.navigate(['/home']);
-            // this.variables.setLogin(true);
-            // Variables.user.username = userData.username;
-            // Variables.user.email = userData.email;
-
-            // this.events.publish("user:change");
-            // if (this.redirectString === "redirect-deliveryschedule") {
-            //     this.navCtrl.setRoot('CheckoutOptionsPage', null, { animate: true, direction: "forward" });
-            // } else if (this.redirectString === "redirect-accountpage") {
-            //     this.navCtrl.setRoot('UserProfilePage', null, { animate: true, direction: "forward" });
-            // } else if (this.redirectString === "redirect-orderhistory") {
-            //     this.navCtrl.setRoot('OrderHistoryPage', null, { animate: true, direction: "forward" });
-            // } else {
-            //     this.navCtrl.setRoot('Categories', null, { animate: true, direction: "forward" });
-            // }
-
-        });
     }
-    */
+    /*    
+        loginUser() {
+            if (!this.email && !this.password) {
+                return;
+            }
+    
+            this.userService.authenticate(this.email, this.password).catch((err):any => {
+                if (err.status === 401) {
+                    console.log(err);
+                    this.msg = new Message();
+                    this.msg = err.json();
+                     
+                } else {
+    
+                }
+            }).subscribe((response) => {
+                let userData = response;
+                console.info(userData);
+                this.storage.set("user.login", true);
+                this.storage.set("user.data", userData);
+                this.storage.set("user.authToken", userData.authToken);
+    
+                this.sidebarService.changeLogin({user: userData, isLogin: true});
+    
+                this.router.navigate(['/home']);
+                // this.variables.setLogin(true);
+                // Variables.user.username = userData.username;
+                // Variables.user.email = userData.email;
+    
+                // this.events.publish("user:change");
+                // if (this.redirectString === "redirect-deliveryschedule") {
+                //     this.navCtrl.setRoot('CheckoutOptionsPage', null, { animate: true, direction: "forward" });
+                // } else if (this.redirectString === "redirect-accountpage") {
+                //     this.navCtrl.setRoot('UserProfilePage', null, { animate: true, direction: "forward" });
+                // } else if (this.redirectString === "redirect-orderhistory") {
+                //     this.navCtrl.setRoot('OrderHistoryPage', null, { animate: true, direction: "forward" });
+                // } else {
+                //     this.navCtrl.setRoot('Categories', null, { animate: true, direction: "forward" });
+                // }
+    
+            });
+        }
+        */
+    toTitleCase(str: string) {
+        return str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+    }
 }

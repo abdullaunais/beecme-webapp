@@ -29,6 +29,7 @@ export class UserComponent {
 
     isLoading: boolean = false;
     isError: boolean = false;
+    isProfilePictureError: boolean = false;
 
     constructor(
         private storage: ObjectStorage,
@@ -47,10 +48,10 @@ export class UserComponent {
     initialize() {
         this.isLoading = true;
         this.isError = false;
-        this.deliveryService.getLocationDetails(this.city.id).subscribe(data => { 
+        this.deliveryService.getLocationDetails(this.city.id).subscribe(data => {
             this.selectedShopLocation = data;
-        });        
-        this.userService.getAddressList(this.user.userId, this.user.authToken).catch((err):any => {
+        });
+        this.userService.getAddressList(this.user.userId, this.user.authToken).catch((err): any => {
             this.isLoading = false;
             this.isError = true;
         }).subscribe(data => {
@@ -66,20 +67,20 @@ export class UserComponent {
     initEditProfile() {
         console.log(`edit user properties ${JSON.stringify(this.user)}`);
         if (this.user) { //user already logged in
-                  this.register['userId'] = this.user.userId;
-                  this.register['username'] = this.user.username;
-                  this.register['email'] = this.user.email;
-                  this.register['country'] = this.user.country;
-                  this.register['address'] = this.user.address;
-                  this.register['phone'] = this.user.phone;
-                  /*
-                  this.provinces = (this.regService.getProvinces(this.sharedService.getUser().country));
-                  this.cities = this.regService.getCities(this.sharedService.getUser().country, this.sharedService.getUser().province)
-                  this.register['province'] = this.sharedService.getUser().province;
-                  this.register['city'] = this.sharedService.getUser().city;
-                  this.register['categoryId'] = this.sharedService.getUser().categoryId;
-                  */
-                }
+            this.register['userId'] = this.user.userId;
+            this.register['username'] = this.user.username;
+            this.register['email'] = this.user.email;
+            this.register['country'] = this.user.country;
+            this.register['address'] = this.user.address;
+            this.register['phone'] = this.user.phone;
+            /*
+            this.provinces = (this.regService.getProvinces(this.sharedService.getUser().country));
+            this.cities = this.regService.getCities(this.sharedService.getUser().country, this.sharedService.getUser().province)
+            this.register['province'] = this.sharedService.getUser().province;
+            this.register['city'] = this.sharedService.getUser().city;
+            this.register['categoryId'] = this.sharedService.getUser().categoryId;
+            */
+        }
     }
 
     inputBlur() {
@@ -87,43 +88,44 @@ export class UserComponent {
     }
 
     addAddress() {
-        let address: Address  = new Address();
+        let address: Address = new Address();
         console.log(`adding new address ${this.dlvAddress}`);
         address.nickName = this.dlvAddress['nickName'];
         address.street = this.dlvAddress['street'];
-    
-        address.cityId = this.selectedShopLocation.cityId; 
+
+        address.cityId = this.selectedShopLocation.cityId;
         address.provinceId = this.selectedShopLocation.provinceId;
         address.countryId = this.selectedShopLocation.countryId;
         address.userId = this.user.userId;
-    
+
         console.log(JSON.stringify(address))
         this.userService.addAddress(address)
-        .subscribe(data => {
-          this.msg = new Message();
-                   this.msg = data.json();
-                    console.log('ADD NEW ADDRESS STATUS '+ data.json())},
-                     err => {
-                   this.msg = new Message();
-                   this.msg = err;
-                    console.log('ERROR ADDING NEW ADDRESS ' + err);
-                  });
+            .subscribe(data => {
+                this.msg = new Message();
+                this.msg = data.json();
+                console.log('ADD NEW ADDRESS STATUS ' + data.json())
+            },
+            err => {
+                this.msg = new Message();
+                this.msg = err;
+                console.log('ERROR ADDING NEW ADDRESS ' + err);
+            });
         // this.router.navigate(['/dlvaddress']);
-      }
+    }
 
-      loadAddressses() {
+    loadAddressses() {
         console.log(`LOADING DELIVERY ADDRESSES FOR USER ${JSON.stringify(this.user)}`);
         this.userService.getAddresses(this.user.userId)
-          .subscribe(
-          (data) => {
-            console.log(`Retrieved addresses ${JSON.stringify(data)}`);
-            this.addresses = data;
-          }
-          );
-      }
+            .subscribe(
+            (data) => {
+                console.log(`Retrieved addresses ${JSON.stringify(data)}`);
+                this.addresses = data;
+            }
+            );
+    }
 
-      doRegister() {
-          console.log(`doregister fired ${JSON.stringify(this.register)}`)
+    doRegister() {
+        console.log(`doregister fired ${JSON.stringify(this.register)}`)
         /*
         this.register['type'] = this.type;
         this.register['notificationSend'] = (this.register['notificationSend'] ? '1' : '0');
@@ -163,15 +165,21 @@ export class UserComponent {
             });
         }
         */
-      }
-
     }
 
-    export function verifyPassword(reg: any, ctrl: any) {
-        
-        const valid = reg.password && reg.password === ctrl.value;
-        
-        return (valid ? null : 	{ confirmPassword: { 
-                                    valid: false}
-                                });
+    profilePictureError() {
+        this.isProfilePictureError = true;
     }
+
+}
+
+export function verifyPassword(reg: any, ctrl: any) {
+
+    const valid = reg.password && reg.password === ctrl.value;
+
+    return (valid ? null : {
+        confirmPassword: {
+            valid: false
+        }
+    });
+}

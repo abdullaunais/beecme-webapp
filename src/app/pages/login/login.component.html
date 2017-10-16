@@ -1,4 +1,6 @@
 <div class="wrapper wrapper-full-page">
+    <simple-notifications [options]="options"></simple-notifications>
+
     <nav class="navbar navbar-primary navbar-transparent navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -41,6 +43,7 @@
         <div class="content">
             <div class="container">
                 <div class="row">
+
                     <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
                         <form method="#" action="#">
                             <div class="card card-login card-hidden">
@@ -82,8 +85,8 @@
 
                                         <div class="input-group">
                                             <span class="input-group-addon">
-                                            <i class="material-icons">email</i>
-                                        </span>
+                                                <i class="material-icons">email</i>
+                                            </span>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Email</label>
                                                 <input formControlName="formEmail" (blur)="inputBlur()" #forminput type="email" class="form-control">
@@ -91,8 +94,8 @@
                                         </div>
                                         <div class="input-group">
                                             <span class="input-group-addon">
-                                            <i class="material-icons">lock_outline</i>
-                                        </span>
+                                                <i class="material-icons">lock_outline</i>
+                                            </span>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Password</label>
                                                 <input formControlName="formPassword" (blur)="inputBlur()" #forminput minlength="6" type="password" class="form-control">
@@ -100,16 +103,16 @@
                                         </div>
                                     </div>
 
+                                    <!-- <div style="margin-top:12px;">
+                                        <p class="text-center btn-rose" style="margin-bottom: 0; color: #c30000; font-weight: 500;">
+                                            {{msg?.message}}
+                                        </p>
+                                    </div> -->
+
                                     <div class="footer text-center">
                                         <button type="submit" class="btn btn-rose btn-simple btn-wd btn-lg">Let's go</button>
                                     </div>
-                                    <div>
-                                            <p class="text-center btn-rose" >
-                                                    {{msg?.message}}
-                                                </p>
-                                        
-                                    </div>
-                                    
+
                                 </form>
                             </div>
                         </form>

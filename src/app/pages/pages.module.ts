@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { LocationComponent } from './location/location.component';
 import { LogoutComponent } from './logout/logout.component';
 import { MdSelectModule } from '@angular/material';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { MdSelectModule } from '@angular/material';
     FormsModule,
     ReactiveFormsModule,
     MdSelectModule,
+    SimpleNotificationsModule.forRoot()
   ],
   declarations: [
     LoginComponent,

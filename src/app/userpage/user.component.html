@@ -84,7 +84,7 @@
                 <div class="card card-profile" style="margin-top: 25px;">
                     <div class="card-avatar" style="margin:-40px auto 0;">
                         <a href="#pablo">
-                            <img class="img" [src]="user.profilePicture ? user.profilePicture : '../../assets/img/profile_default_grey.webp'" />
+                            <img class="img" [src]="user.profilePicture ? isProfilePictureError ? '../assets/img/profile_default_grey.webp' : user.profilePicture : '../../assets/img/profile_default_grey.webp'" (error)="profilePictureError()"/>
                         </a>
                     </div>
                     <div class="card-content" style="margin-top:0;">

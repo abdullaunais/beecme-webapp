@@ -23,6 +23,6 @@ export class LogoutComponent {
 
         this.sidebarService.changeLogin({user: userObject, isLogin: false});
 
-        this.router.navigate(['/home']);
+        this.router.navigateByUrl('/home?logout=success');
     }
 }

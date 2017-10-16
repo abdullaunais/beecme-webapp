@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { SidebarService } from '../../sidebar/sidebar.service';
 import { ObjectStorage } from '../../utilities/object-storage';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 declare var swal: any;
 declare var $: any;
@@ -26,6 +27,12 @@ export class RegisterComponent implements OnInit {
     province: any;
     country: any;
 
+    public options = {
+        position: ['bottom', 'right'],
+        timeOut: 0,
+        lastOnBottom: true,
+    };
+
     validationArray: Array<any> = [];
     // @ViewChildren('forminput') formInputs;
 
@@ -42,7 +49,8 @@ export class RegisterComponent implements OnInit {
         private storage: ObjectStorage,
         private userService: UserService,
         private sidebarService: SidebarService,
-        private router: Router
+        private router: Router,
+        private notify: NotificationsService,
     ) {
         this.country = this.storage.get('location.country');
         this.province = this.storage.get('location.province');
@@ -183,17 +191,18 @@ export class RegisterComponent implements OnInit {
                         buttonsStyling: false,
                         confirmButtonClass: 'btn btn-success'
                     }).then(() => {
-                        this.router.navigate(['/home']);
+                        this.router.navigateByUrl('/home?register=success');
                     });
 
 
                 });
             } else if (response.code < 0) {
-                if (response.message === "Request failed. Code already exists") {
-
-                } else {
-
-                }
+                const toast = this.notify.error('Error!', response.message, {
+                    timeOut: 3000,
+                    showProgressBar: true,
+                    pauseOnHover: true,
+                    clickToClose: true
+                });
             } else {
             }
         });
