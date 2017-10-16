@@ -28,6 +28,7 @@ export class DeliveryService {
   private readonly SCHEDULE_URL = '/schedules';
   private readonly ORDER_URL = '/carts';
   private readonly REVIEW_URL = '/reviews';
+  private readonly DASHBOARD_COUNTS_URL = '/dashboard/counts';
   private readonly SEARCH_URL = '/dashboard/search';
   
   constructor(private http: Http, 
@@ -51,8 +52,7 @@ export class DeliveryService {
       .catch((err) => this.handleError(err));
   }
 
-  getLocationDetails(cityId:number): Observable<LocationDetails> {
-
+  getLocationDetails(cityId: number): Observable<LocationDetails> {
     const requestUrl: string = this.serviceRootUrl + this.LOCATION_URL + '/' + cityId;
     // return this.http.get(requestUrl, this.options)
     //   .map((res) => this.extractData(res))
@@ -63,7 +63,14 @@ export class DeliveryService {
         return res.json(); 
       }
       );
-  }  
+  }
+  
+  getDashboardCounts(cityId: number) {
+    const requestUrl: string = this.serviceRootUrl + this.DASHBOARD_COUNTS_URL + `/${cityId}`;
+    return this.http.get(requestUrl, this.options)
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
+  }
   
   getShops(cityId: number, categoryId: number, start: number, offset: number): Observable<any> {
     const queryParams = {

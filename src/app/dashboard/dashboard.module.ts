@@ -7,6 +7,7 @@ import { DashboardRoutes } from './dashboard.routing';
 import { DashboardComponent } from './dashboard.component';
 import { CategoryListModule } from "../category-list/category-list.module";
 import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
+import { DeliveryService } from '../services/delivery.service';
 // import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
 // import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 
@@ -18,7 +19,8 @@ import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
         FormsModule,
         BreadcrumbModule
     ],
-    declarations: [DashboardComponent]
+    declarations: [DashboardComponent],
+    providers: [DeliveryService]
 })
 
 export class DashboardModule {}

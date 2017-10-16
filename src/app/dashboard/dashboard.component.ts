@@ -1,15 +1,18 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DeliveryService } from '../services/delivery.service';
+import { ObjectStorage } from '../utilities/object-storage';
 // import { BreadcrumbService } from '../breadcrumb/breadcrumb.service';
 
 declare const $: any;
 
 @Component({
     selector: 'app-dashboard',
-    templateUrl: './dashboard.component.html',
-    // providers: [BreadcrumbService]
+    templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
+    counts: any = {};
+    city: any = {};
     breadcrumbArray: { title: string; icon: string; path: string; }[];
     // constructor(private navbarTitleService: NavbarTitleService, private notificationService: NotificationService) { }
 
@@ -17,10 +20,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     constructor(
         private router: Router,
-        // private breadcrumbService: BreadcrumbService
+        private deliveryService: DeliveryService,
+        private storage: ObjectStorage
     ) {
-        this.breadcrumbArray = [{title: 'Home', icon: 'home', path: 'home'}]
-        // this.breadcrumbService.changeRoute([]);
+        this.breadcrumbArray = [{title: 'Home', icon: 'home', path: 'home'}];
+        this.city = this.storage.get('location.city');
+        this.initialize();
+    }
+
+    initialize() {
+        this.deliveryService.getDashboardCounts(this.city.id).catch((err): any => {
+            console.log('Dashboard Service Error ', err);
+        }).subscribe((data) => {
+            this.counts = data;
+        });
     }
 
     public ngOnInit() {
