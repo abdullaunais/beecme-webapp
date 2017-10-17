@@ -5,6 +5,9 @@
     .no-margin {
         margin: 0;
     }
+    .text-sub {
+        font-size: 14px;
+    }
     .cart-card {
         margin-bottom: 15px;
         margin-top: 0px;
@@ -38,5 +41,9 @@
     }
     .cart-item-price-wrapper {
         margin-top: 8px;
+    }
+    .btn-confirm-order {
+        width: 100%;
+        font-weight: 700;
     }
 }

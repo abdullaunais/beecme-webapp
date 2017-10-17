@@ -7,6 +7,7 @@ import { CartRoutes } from './cart.routing';
 import { CartComponent } from './cart.component';
 import { MdSelectModule } from '@angular/material';
 import { ShopInfoModule } from '../shop-info/shop-info.module';
+import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import { ShopInfoModule } from '../shop-info/shop-info.module';
         RouterModule.forChild(CartRoutes),
         FormsModule,
         ShopInfoModule,
-        MdSelectModule
+        MdSelectModule,
+        BreadcrumbModule
     ],
     declarations: [CartComponent]
 })

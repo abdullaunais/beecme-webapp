@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { ObjectStorage } from '../utilities/object-storage';
 import { UserService } from '../services/user.service';
 import { CartService } from './cart.service';
-import { SharedService } from "../services/shared.service";
-import { LocationDetails, Address, Message, CartReq } from "../beans";
-import { DeliveryService } from "../services/delivery.service";
+import { SharedService } from '../services/shared.service';
+import { LocationDetails, Address, Message, CartReq } from '../beans';
+import { DeliveryService } from '../services/delivery.service';
 import { Observable } from 'rxjs/Rx';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 declare var swal: any;
 
@@ -17,7 +17,8 @@ declare var swal: any;
     providers: [UserService, CartService, DeliveryService]
 })
 export class CartComponent {
-    colorTheme: string = 'info';
+    breadcrumbArray: Array<any>;
+    colorTheme: string = 'brand-primary';
 
     user: any = {};
     addressList: Address[];
@@ -53,6 +54,10 @@ export class CartComponent {
         this.country = this.storage.get('location.country');
         this.province = this.storage.get('location.province');
         this.city = this.storage.get('location.city');
+        this.breadcrumbArray = [
+            {title: 'Home', icon: 'home', path: 'home'},
+            {title: 'My Cart', icon: 'shopping_cart', path: 'cart'}
+        ];
         this.initialize();
     }
 

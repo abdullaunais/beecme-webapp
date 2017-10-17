@@ -1,6 +1,12 @@
 <div class="main-content page-shopping-cart">
     <div class="container-fluid">
 
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <app-breadcrumb [breadcrumbArray]="breadcrumbArray"></app-breadcrumb>
+            </div>
+        </div>
+
         <div class="row" *ngIf="cartIsEmpty">
             <div class="col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3" style="padding: 0;">
                 <div class="cart-card">
@@ -37,8 +43,7 @@
                                     <button class="btn btn-default cart-item-btn-comment">Add Comment</button>
                                     <div class="cart-item-price-wrapper">
                                         <p class="pull-left no-margin">
-                                            <span style="font-weight: 300;">{{cartItem.quantity}} {{cartItem.unit}} X {{cartItem.price}}
-                                                = </span>
+                                            <span style="font-weight: 300;">{{cartItem.quantity}} {{cartItem.unit}} X {{cartItem.price}} = </span>
                                         </p>
                                         <p class="pull-right no-margin">
                                             <span style="font-weight: 400;">{{sharedService.getShop()?.currency}} {{cartItem.quantity*cartItem.price}}</span>
@@ -85,91 +90,107 @@
                 </div>
             </div>
             <form class="form-inline" (ngSubmit)="doCheckout()" novalidate autocomplete="off" #checkout="ngForm">
-            <div class="col-sm-12 col-md-12 col-lg-5">
-                <div class="row" style="margin-left: 0px; margin-right: 0px;">
-                    <div class="card cart-card">
-                        <div class="card-content">
-                            <h4 id="new-address-heading" style="color:#999;">
-                                New Delivery Address or Existing Delivery Address
-                                <div class="togglebutton pull-right">
-                                        <input type="checkbox" value="isNewAddress" (change)="addressToggle()">
-                                </div>
-                            </h4>
-                            <div class="row cart-item-row" *ngIf="isNewAddress" style="padding:15px;">
-                                <ul class="list-group" style="margin:0;">
-                                    <li class="list-group-item justify-content-between" style="border:none; padding:0px;">
-                                        <i class="fa fa-address-card" style="font-size: 18px;"></i> &nbsp;&nbsp;Enter adress
-                                        details
-                                    </li>
-                                </ul>
-                                <div class="animated flipInX">
-                                    <div class="form-group label-floating" style="padding-bottom: 0;">
-                                        <label class="control-label">Nickname</label>
-                                        <input type="text" name="addressNickName"  #addressNickName="ngModel" [(ngModel)]="formCheckout.addressNickName" maxlength="15" class="form-control">
+                <div class="col-sm-12 col-md-12 col-lg-5">
+                    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+                        <div class="card cart-card">
+                            <div class="card-content">
+                                <h4 id="new-address-heading" style="color:#999;">
+
+                                    <div class="togglebutton pull-left" style="margin-top: 10px; margin-right: 6px;">
+                                        <label>
+                                            <input type="checkbox" checked value="isNewAddress" (change)="addressToggle()">
+                                        </label>
                                     </div>
-                                </div>
-                                <div class="animated flipInX">
-                                    <div class="form-group label-floating" style="padding-bottom: 0;">
-                                        <label class="control-label">Street</label>
-                                        <input type="text" [(ngModel)]="formCheckout.street" name="street" #street="ngModel" maxlength="100" class="form-control">
-                                    </div>
-                                </div>
-                                <ul class="list-group animated flipInX" style="margin: 20px 0 0 0;">
-                                    <li class="list-group-item justify-content-between" style="border:none; padding:0px;">
-                                        {{city.nameEn}}, {{province.nameEn}}, {{country.nameEn}}
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="row cart-item-row" *ngIf="!isNewAddress">
-
-                                <ul class="list-group" style="margin:0;">
-                                    <li class="list-group-item justify-content-between" style="border:none; padding:5px;">
-                                        <i class="fa fa-address-card" style="font-size: 18px;"></i> &nbsp;&nbsp;Choose a
-                                        delivery address from existing addresses
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="row" *ngIf="!isNewAddress" style="padding:0 15px;">
-
-
-                                <md-select [color]="colorTheme" [(ngModel)]="selectedAddress" (change)="addressChanged()" placeholder="Select Address"
-                                    name="address" ngClass="btn btn-default simple">
-                                    <md-option *ngFor="let address of addressList" [value]="address">
-                                        {{ address.nickName }}
-                                    </md-option>
-                                </md-select>
-                                <div *ngIf="selectedAddress?.id>0">
+                                    <span [class]="!isNewAddress ? 'text-sub' : ''">New Delivery Address</span>
+                                    <br>
+                                    <span [class]="isNewAddress ? 'text-sub' : ''">or Existing Delivery Address</span>
+                                </h4>
+                                <div class="row cart-item-row" *ngIf="isNewAddress" style="padding:15px;">
+                                    <ul class="list-group" style="margin:0;">
+                                        <li class="list-group-item justify-content-between" style="border:none; padding:0px;">
+                                            <i class="fa fa-address-card" style="font-size: 18px;"></i> &nbsp;&nbsp;Enter adress details
+                                        </li>
+                                    </ul>
                                     <div class="animated flipInX">
                                         <div class="form-group label-floating" style="padding-bottom: 0;">
-                                            <label class="control-label">Nickname</label> {{selectedAddress.nickName}}
+                                            <label class="control-label">Nickname</label>
+                                            <input type="text" name="addressNickName" #addressNickName="ngModel" [(ngModel)]="formCheckout.addressNickName" maxlength="15"
+                                                class="form-control">
                                         </div>
                                     </div>
                                     <div class="animated flipInX">
                                         <div class="form-group label-floating" style="padding-bottom: 0;">
-                                            <label class="control-label">Street</label> {{selectedAddress.street}}
+                                            <label class="control-label">Street</label>
+                                            <input type="text" [(ngModel)]="formCheckout.street" name="street" #street="ngModel" maxlength="100" class="form-control">
                                         </div>
                                     </div>
                                     <ul class="list-group animated flipInX" style="margin: 20px 0 0 0;">
                                         <li class="list-group-item justify-content-between" style="border:none; padding:0px;">
-                                            {{selectedAddress.cityEn}}, {{selectedAddress.provinceEn}}
+                                            {{city.nameEn}}, {{province.nameEn}}, {{country.nameEn}}
                                         </li>
                                     </ul>
                                 </div>
-                              
-                                <div style="clear: both"></div>
+                                <div class="row cart-item-row" *ngIf="!isNewAddress">
+
+                                    <ul class="list-group" style="margin:0;">
+                                        <li class="list-group-item justify-content-between" style="border:none; padding:5px;">
+                                            <i class="fa fa-address-card" style="font-size: 18px;"></i> &nbsp;&nbsp;Choose a delivery address from existing addresses
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="row" *ngIf="!isNewAddress" style="padding:0 15px;">
+
+
+                                    <md-select [color]="colorTheme" [(ngModel)]="selectedAddress" (change)="addressChanged()" placeholder="Select Address" name="address"
+                                        ngClass="btn btn-default simple" style="padding: 10px 30px;">
+                                        <md-option *ngFor="let address of addressList" [value]="address">
+                                            {{ address.nickName }}
+                                        </md-option>
+                                    </md-select>
+                                    <div *ngIf="selectedAddress?.id>0">
+                                        <div class="animated flipInX">
+                                            <div class="form-group label-floating" style="padding-bottom: 0;">
+                                                <label class="control-label">Nickname</label> {{selectedAddress.nickName}}
+                                            </div>
+                                        </div>
+                                        <div class="animated flipInX">
+                                            <div class="form-group label-floating" style="padding-bottom: 0;">
+                                                <label class="control-label">Street</label> {{selectedAddress.street}}
+                                            </div>
+                                        </div>
+                                        <div class="animated flipInX">
+                                            <div class="form-group label-floating" style="padding-bottom: 0;">
+                                                <label class="control-label">Location</label> {{selectedAddress.cityEn}}, {{selectedAddress.provinceEn}}
+                                            </div>
+                                        </div>
+                                        <!-- <ul class="list-group animated flipInX" style="margin: 20px 0 0 0;">
+                                            <li class="list-group-item justify-content-between" style="border:none; padding:0px;">
+                                                    {{selectedAddress.cityEn}}, {{selectedAddress.provinceEn}}
+                                            </li>
+                                        </ul> -->
+                                    </div>
+
+                                    <div style="clear: both"></div>
+                                </div>
+                                <!-- <div class="row cart-item-row" style="padding:13px 15px 0 15px; margin-top: 30px;">
+                                    <div style="clear: both">{{msg?.message}}</div>
+                                    <button type="submit" class="btn btn-rose pull-right btn-confirm-order">Confirm Order</button>
+                                </div> -->
+
+                                <div class="row cart-item-row" style="padding:13px 15px 0 15px; margin-top: 30px;" *ngIf="sharedService.getCartTotal() >= sharedService.getShop()?.minOrderAmount">
+                                    <button type="submit" class="btn btn-rose btn-confirm-order">Confirm Order | Rs. {{sharedService.getCartTotal()}}</button>
+                                </div>
+                                <div class="row cart-item-row" style="padding:13px 15px 0 15px; margin-top: 30px;" *ngIf="sharedService.getCartTotal() < sharedService.getShop()?.minOrderAmount">
+                                    <button type="submit" [disabled]="true" class="btn btn-rose btn-confirm-order">
+                                        Add Rs. {{sharedService.getShop().minOrderAmount-sharedService.getCartTotal()}} more to confirm your order
+                                    </button>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-
-            </div>
-            <div *ngIf="sharedService.getCartTotal() >= sharedService.getShop()?.minOrderAmount"><button type="submit" class="btn btn-rose pull-right" >Confirm Order | Rs. {{sharedService.getCartTotal()}}</button> </div>
-            <div *ngIf="sharedService.getCartTotal() < sharedService.getShop()?.minOrderAmount" >
-                <button type="submit" [disabled]="true" class="btn btn-rose pull-right" >
-                    Add Rs. {{sharedService.getShop().minOrderAmount-sharedService.getCartTotal()}} more to confirm your order
-                </button> 
-            </div>
-        </form>
+            </form>
         </div>
     </div>
 </div>
