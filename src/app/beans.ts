@@ -21,6 +21,7 @@ export class MailBean {
   export class Message{
     code: number;
     message: string;
+    public static  SUCCESS: number = 1;
   }
 
   export class LocationDetails {

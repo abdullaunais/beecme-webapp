@@ -6,7 +6,9 @@ import { SharedService } from "../services/shared.service";
 import { LocationDetails, Address, Message, CartReq } from "../beans";
 import { DeliveryService } from "../services/delivery.service";
 import { Observable } from 'rxjs/Rx';
+import { Router } from "@angular/router";
 
+declare var swal: any;
 
 @Component({
     selector: 'app-shop-list',
@@ -45,6 +47,7 @@ export class CartComponent {
         private cartService: CartService,
         private sharedService: SharedService,
         private deliveryService: DeliveryService,
+        private router: Router,
     ) {
         this.user = this.storage.get('user.data');
         this.country = this.storage.get('location.country');
@@ -196,22 +199,28 @@ export class CartComponent {
         
               let err = new Message();
               err.code = -1;
-              err.message = 'Final total is less than the minimum order amount'
+              err.message = `Final total is less than the minimum order amount of ${this.sharedService.getShop().minOrderAmount}`;
               this.msg = err;
               return;
             }
         
             this.deliveryService.saveCart(myCartReq)
               .subscribe(data => {
+                  this.handleOrderStatus(data.json());
+                  /*
                 this.msg = new Message();
                 this.msg = data.json();
                 this.sharedService.resetCart();
                 console.log(`CART SAVED SUCCESSFULLY ${data}`);
+                */
               },
               err => {
+                this.handleOrderStatus(err.json());
+                  /*
                 this.msg = new Message();
                 this.msg = err.json();
                 console.log(`FAILED TO SAVE CART ${this.msg.message}`);
+                */
               });
         
           }    
@@ -220,5 +229,32 @@ export class CartComponent {
               console.log(`addressToggle ${this.isNewAddress}`);
             this.isNewAddress = !this.isNewAddress;
         
-          }          
+          } 
+
+          handleOrderStatus(json: any) {
+            console.log(`handle order status ${json}`);
+
+            if(json && json.code === Message.SUCCESS) { // SUCCESS
+                swal({
+                    type: 'success',
+                    title: 'Order Placement Successful!!',
+                    text: json.message,
+                    buttonsStyling: false,
+                    confirmButtonClass: 'btn btn-success'
+                }).then(() => {
+                    this.router.navigateByUrl('/home');
+                });
+            } else {
+                swal({
+                    type: 'failed',
+                    title: 'Order Placement Failed!!',
+                    text: json.message,
+                    buttonsStyling: false,
+                    confirmButtonClass: 'btn btn-failed'
+                }).then(() => {
+                    this.router.navigateByUrl('/home');
+                });
+            }
+      
+        }           
 }
