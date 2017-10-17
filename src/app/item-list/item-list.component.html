@@ -12,7 +12,7 @@
                 <app-shop-info [shop]="shop"></app-shop-info>
             </div>
 
-            <div class="col-lg-3 col-md-4" *ngFor="let item of items">
+            <div class="col-lg-4 col-md-4 col-sm-6" *ngFor="let item of items">
                 <div class="card card-product">
                     <a [routerLink]="['/details']" [queryParams]="{item: item.itemCode, shop: shop?.shopId}" queryParamsHandling="merge">
                         <div class="card-image card-item-image-wrapper" data-header-animation="true">

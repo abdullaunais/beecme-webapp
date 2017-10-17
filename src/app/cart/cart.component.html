@@ -11,7 +11,7 @@
             <div class="col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3" style="padding: 0;">
                 <div class="cart-card">
                     <div class="card-content" style="padding:0;text-align: center;">
-                        <h6>Cart is Empty</h6>
+                        <h6>Cart is Empty <br>Add some items to cart </h6>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                     <div class="card cart-card">
                         <div class="card-content">
                             <h4>Cart Items</h4>
-                            <div class="row cart-item-row" *ngFor="let cartItem of cartItems; let i = index;">
+                            <div class="row cart-item-row animated flipInX" *ngFor="let cartItem of cartItems; let i = index;">
                                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 cart-item-image-wrapper">
                                     <img [src]="cartItem.img1" class="img-responsive cart-item-image">
                                 </div>
@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row cart-item-row">
+                            <div class="row cart-item-row animated flipInX">
                                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 </div>
                                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row cart-item-row">
+                            <div class="row cart-item-row animated flipInX">
                                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                 </div>
                                 <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">

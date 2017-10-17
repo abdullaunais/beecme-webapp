@@ -13,7 +13,11 @@ declare const $: any;
     templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
-    counts: DashboardCounts;
+    counts: DashboardCounts = {
+        countCategory: 0,
+        countShops: 0,
+        countItems: 0
+    };
     country: any = {};
     province: any = {};
     city: any = {};

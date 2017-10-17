@@ -10,11 +10,11 @@
                 <a [routerLink]="['/shop']" [queryParams]="{shop: shop.shopId}" queryParamsHandling="merge" (click)="shopSelected(shop)">
                     <div class="card card-profile">
                         <div class="card-avatar">
-                            <img class="img shop-profile-picture" [src]="shop.profileUrl" />
+                            <img class="img shop-profile-picture" [src]="shop?.profileUrl" />
                         </div>
                         <div class="card-content">
-                            <h4 class="card-title">{{shop.shopName}}</h4>
-                            <h6 class="category text-gray shop-address">{{shop.street}}</h6>
+                            <h4 class="card-title">{{shop?.shopName}}</h4>
+                            <h6 class="category text-gray shop-address">{{shop?.street}}</h6>
                             <p>
                                 <button class="btn btn-info btn-round shop-keyword" *ngFor="let keyword of shop.keywordsArray">{{keyword}}</button>
                             </p>
