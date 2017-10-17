@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
     <base href='/'>
 
@@ -14,21 +15,45 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
     <!--  Material Dashboard CSS    -->
     <link href="../assets/css/material-dashboard.css" rel="stylesheet" />
-     <!-- CSS for Demo Purpose, don't include it in your project     -->
+    <!-- CSS for Demo Purpose, don't include it in your project     -->
     <!-- <link href="../assets/css/demo.css" rel="stylesheet" /> -->
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
+    />
 
 </head>
 
 <body class="bootstrap-collapse">
     <app-my-app>
-        <div class="loader">
+        <style>
+            .loader-title {
+                margin: 0 auto;
+                width: 50%;
+                position: absolute;
+                display: block;
+                left: 0;
+                right: 0;
+                z-index: 1;
+                -webkit-transform: translate3d(0, -50%, 0);
+                -moz-transform: translate3d(0, -50%, 0);
+                -o-transform: translate3d(0, -50%, 0);
+                -ms-transform: translate3d(0, -50%, 0);
+                transform: translate3d(0, -50%, 0);
+                text-align: center;
+                top: 50%;
+                padding-top: 60px;
+            }
+        </style>
+        <div class="loader" style="top: 42%;">
             <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
             </svg>
+        </div>
+        <div class="loader-title">
+            <h3>Welcome to BeecMe</h3>
+            <h5>Please Wait...</h5>
         </div>
     </app-my-app>
 </body>
