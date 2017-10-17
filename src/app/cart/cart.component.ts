@@ -235,6 +235,7 @@ export class CartComponent {
             console.log(`handle order status ${json}`);
 
             if(json && json.code === Message.SUCCESS) { // SUCCESS
+                this.sharedService.resetCart();
                 swal({
                     type: 'success',
                     title: 'Order Placement Successful!!',

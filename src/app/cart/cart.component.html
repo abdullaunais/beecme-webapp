@@ -92,9 +92,7 @@
                             <h4 id="new-address-heading" style="color:#999;">
                                 New Delivery Address or Existing Delivery Address
                                 <div class="togglebutton pull-right">
-                                    <label>
                                         <input type="checkbox" value="isNewAddress" (change)="addressToggle()">
-                                    </label>
                                 </div>
                             </h4>
                             <div class="row cart-item-row" *ngIf="isNewAddress" style="padding:15px;">
@@ -165,8 +163,12 @@
                 </div>
 
             </div>
-            <div style="clear: both">{{msg?.message}}</div>
-            <button type="submit" class="btn btn-rose pull-right" >Confirm Order</button>            
+            <div *ngIf="sharedService.getCartTotal() >= sharedService.getShop()?.minOrderAmount"><button type="submit" class="btn btn-rose pull-right" >Confirm Order | Rs. {{sharedService.getCartTotal()}}</button> </div>
+            <div *ngIf="sharedService.getCartTotal() < sharedService.getShop()?.minOrderAmount" >
+                <button type="submit" [disabled]="true" class="btn btn-rose pull-right" >
+                    Add Rs. {{sharedService.getShop().minOrderAmount-sharedService.getCartTotal()}} more to confirm your order
+                </button> 
+            </div>
         </form>
         </div>
     </div>
