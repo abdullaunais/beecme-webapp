@@ -3,13 +3,13 @@
     <a [routerLink]="['/category']" [queryParams]="{category: category.categoryId}" queryParamsHandling="merge">
       <div class="card card-product category-card">
         <div class="card-image category-image-wrapper" data-header-animation="true">
-          <img class="img" [src]="category.imageEn" alt="">
+          <img class="img img-category" [src]="category.imageEn" alt="">
         </div>
         <div class="card-content">
           <div class="card-actions">
             <button type="button" class="btn btn-default btn-simple">
-                        2 Shops Available
-                    </button>
+              Available
+            </button>
           </div>
           <h4 class="card-title">
             {{category.nameEn}}
