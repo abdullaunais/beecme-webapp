@@ -145,7 +145,7 @@ export class LoginComponent implements OnInit {
                 this.msg = err.json();
                 this.msg.message = this.toTitleCase(this.msg.message);
                 const toast = this.notify.error('Error!', this.msg.message, {
-                    timeOut: 3000,
+                    timeOut: 6000,
                     showProgressBar: true,
                     pauseOnHover: true,
                     clickToClose: true

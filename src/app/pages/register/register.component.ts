@@ -198,7 +198,7 @@ export class RegisterComponent implements OnInit {
                 });
             } else if (response.code < 0) {
                 const toast = this.notify.error('Error!', response.message, {
-                    timeOut: 3000,
+                    timeOut: 6000,
                     showProgressBar: true,
                     pauseOnHover: true,
                     clickToClose: true

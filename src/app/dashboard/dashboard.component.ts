@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             if (params['login']) {
                 if (params['login'] === 'success') {
                     const toast = this.notify.success('Login Success!', 'Enjoy BeecMe', {
-                        timeOut: 3000,
+                        timeOut: 6000,
                         showProgressBar: true,
                         pauseOnHover: true,
                         clickToClose: true
@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             } else if (params['register']) {
                 if (params['register'] === 'success') {
                     const toast = this.notify.success('Registration Success!', 'Enjoy BeecMe', {
-                        timeOut: 3000,
+                        timeOut: 6000,
                         showProgressBar: true,
                         pauseOnHover: true,
                         clickToClose: true
@@ -72,8 +72,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                 }
             } else if (params['logout']) {
                 if (params['logout'] === 'success') {
-                    const toast = this.notify.warn('User Logged Out!', 'We are sad to see you go.', {
-                        timeOut: 3000,
+                    const toast = this.notify.warn('Logged Out!', 'We expect to see you soon.', {
+                        timeOut: 6000,
                         showProgressBar: true,
                         pauseOnHover: true,
                         clickToClose: true

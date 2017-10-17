@@ -127,7 +127,7 @@ export class DetailsComponent {
             });
         } else {
             const toast = this.notify.success('Item Added!', 'Click to Checkout', {
-                timeOut: 3000,
+                timeOut: 6000,
                 showProgressBar: true,
                 pauseOnHover: true,
                 clickToClose: true
