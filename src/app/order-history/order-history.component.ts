@@ -7,10 +7,9 @@ declare const $: any;
 @Component({
     selector: 'app-order-history',
     templateUrl: './order-history.component.html',
-    styleUrls: ['./order-history.component.scss'],
-    providers: [DeliveryService]
+    styleUrls: ['./order-history.component.scss']
 })
-export class OrderHistoryComponent implements OnInit, AfterViewInit {
+export class OrderHistoryComponent implements AfterViewInit {
     start: number = 0;
     offset: number = 5;
 
@@ -20,10 +19,12 @@ export class OrderHistoryComponent implements OnInit, AfterViewInit {
     constructor(
         private storage: ObjectStorage,
         private deliveryService: DeliveryService
-    ) { }
-    ngOnInit() {
+    ) {
+        this.initialize();
+    }
+    initialize() {
         this.isLoading = true;
-        this.user = this.storage.get("user.data");
+        this.user = this.storage.get('user.data');
         this.deliveryService.getOrders(this.user.userId, this.start, this.offset).catch((err): any => {
             this.isLoading = false;
         }).subscribe(orderRes => {

@@ -1,5 +1,5 @@
 <ol class="component-breadcrumb breadcrumb breadcrumb-col-teal">
-    <li *ngFor="let breadcrumb of breadcrumbArray"><a [routerLink]="['/' + breadcrumb.path]" [queryParams]="breadcrumb?.queryParams"><i class="material-icons breadcrumb-icon">{{breadcrumb.icon}}</i> {{breadcrumb.title}}</a></li>
+    <li *ngFor="let breadcrumb of breadcrumbArray; let last = last;" [class]="last ? 'active' : ''"><a [routerLink]="['/' + breadcrumb.path]" [queryParams]="breadcrumb?.queryParams"><i class="material-icons breadcrumb-icon">{{breadcrumb.icon}}</i> {{breadcrumb.title}}</a></li>
     <!-- <li><a><i class="material-icons breadcrumb-icon">archive</i> Data</a></li>
     <li><a><i class="material-icons breadcrumb-icon">library_books</i> Library</a></li>
     <li class="active"><a><i class="material-icons breadcrumb-icon">attachment</i> File</a></li> -->
