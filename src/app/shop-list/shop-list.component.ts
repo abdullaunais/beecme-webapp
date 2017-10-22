@@ -15,7 +15,7 @@ import { Shop } from '../beans';
 })
 export class ShopListComponent {
     breadcrumbArray: Array<any>;
-    category: any = {};
+    categoryId: number;
     city: any = {};
     shops: Array<any> = [];
 
@@ -40,37 +40,34 @@ export class ShopListComponent {
         this.city = this.storage.get('location.city');
         this.route.queryParams.subscribe(params => {
             if (params['category']) {
-                this.category['categoryId'] = params['category'];
+                this.categoryId = params['category'];
                 this.initialize();
             } else {
+                console.log(`something wrong with params[category]. It is not set`);
                 return;
             }
         });
-        this.breadcrumbArray = [
-            { title: 'Home', icon: 'home', path: 'home'},
-            {title: 'Categories', icon: 'apps', path: 'category', queryParams: { category: this.category['categoryId']}}
-        ];
-    }
-
-    ngOnInit() {
 
     }
 
     initialize() {
-        const catId = this.category['categoryId'];
-        this.deliveryService.getShops(this.city.id, catId, this.start, this.offset).catch((err): any => {
+        console.log(`working with breadcrumb for categoryId ${this.categoryId}`);
+        this.breadcrumbArray = [
+            { title: 'Home', icon: 'home', path: 'home'},
+            {title: 'Categories', icon: 'apps', path: 'category', queryParams: { category: this.categoryId}}
+        ];        
+        //const catId = this.category['categoryId'];
+        this.deliveryService.getShops(this.city.id, this.categoryId, this.start, this.offset).catch((err): any => {
             this.isAvailable = false;
             this.isError = true;
             this.isLoading = false;
         }).subscribe((data) => {
           const shopsArray = data;
-          console.log(shopsArray);
+          console.log(`Shop List ${JSON.stringify(shopsArray)}`);
           this.shops = [];
           if (shopsArray) {
             if (shopsArray.length > 0) {
-              this.isAvailable = true;
-              this.isError = false;
-              let timeout = 0;
+               let timeout = 0;
               shopsArray.forEach((shop: any, index: number) => {
                 const keywordString = shop.keywords;
                 const keywords = keywordString.split(' ');
@@ -79,6 +76,8 @@ export class ShopListComponent {
                   this.shops.push(shop);
                 }, timeout += 100);
               });
+              this.isAvailable = true;
+              this.isError = false;              
             } else {
               this.isAvailable = false;
               this.shops = [];

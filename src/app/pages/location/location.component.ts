@@ -73,7 +73,7 @@ export class LocationComponent implements OnInit {
     }
 
     provinceChanged() {
-        this.type = 24;
+        this.type = 23;
         const value: number = this.selectedProvinceId;
         this.isLoading = true;
         this.deliveryService.getLocation(this.type, value, this.start, this.offset).catch((err): any => {
