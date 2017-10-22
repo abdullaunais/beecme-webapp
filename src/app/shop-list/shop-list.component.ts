@@ -15,7 +15,7 @@ import { Shop } from '../beans';
 })
 export class ShopListComponent {
     breadcrumbArray: Array<any>;
-    categoryId: number;
+    //categoryId: number;
     city: any = {};
     shops: Array<any> = [];
 
@@ -38,26 +38,28 @@ export class ShopListComponent {
         this.noMoreShops = false;
         this.isError = false;
         this.city = this.storage.get('location.city');
-        this.route.queryParams.subscribe(params => {
-            if (params['category']) {
-                this.categoryId = params['category'];
-                this.initialize();
-            } else {
-                console.log(`something wrong with params[category]. It is not set`);
-                return;
-            }
-        });
+        // this.route.queryParams.subscribe(params => {
+        //     if (params['category']) {
+        //         this.categoryId = params['category'];
+        //         this.initialize();
+        //     } else {
+        //         console.log(`something wrong with params[category]. It is not set`);
+        //         return;
+        //     }
+        // });
 
+        this.initialize();
     }
 
     initialize() {
-        console.log(`working with breadcrumb for categoryId ${this.categoryId}`);
+        const categoryId = this.route.snapshot.params['category'];
+        console.log(`working with breadcrumb for categoryId ${categoryId}`);
         this.breadcrumbArray = [
             { title: 'Home', icon: 'home', path: 'home'},
-            {title: 'Categories', icon: 'apps', path: 'category', queryParams: { category: this.categoryId}}
+            {title: 'Categories', icon: 'apps', path: 'category', queryParams: { category: categoryId}}
         ];        
         //const catId = this.category['categoryId'];
-        this.deliveryService.getShops(this.city.id, this.categoryId, this.start, this.offset).catch((err): any => {
+        this.deliveryService.getShops(this.city.id, categoryId, this.start, this.offset).catch((err): any => {
             this.isAvailable = false;
             this.isError = true;
             this.isLoading = false;
@@ -90,8 +92,8 @@ export class ShopListComponent {
         });
       }
 
-      shopSelected(shop: Shop) {
-        console.log(`SELECTED SHOP  ${JSON.stringify(shop)}`);
-        this.sharedService.setShop(shop);
-      }
+    //   shopSelected(shop: Shop) {
+    //     console.log(`SELECTED SHOP  ${JSON.stringify(shop)}`);
+    //     this.sharedService.setShop(shop);
+    //   }
 }
