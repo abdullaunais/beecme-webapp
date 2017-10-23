@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 
 tslint\.json
+src/app/services/shared.service.spec.ts

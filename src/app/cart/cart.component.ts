@@ -12,7 +12,7 @@ declare var $: any;
 declare var swal: any;
 
 @Component({
-    selector: 'app-shop-list',
+    selector: 'app-cart',
     templateUrl: './cart.component.html',
     styleUrls: ['./cart.component.scss'],
     providers: [UserService, DeliveryService]

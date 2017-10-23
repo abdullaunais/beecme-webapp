@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DeliveryService } from '../services/delivery.service';
 import { ObjectStorage } from '../utilities/object-storage';
@@ -9,11 +9,12 @@ import { Shop } from '../beans';
 
 @Component({
     selector: 'app-shop-list',
+  //  template: `hi there`,
     templateUrl: './shop-list.component.html',
     styleUrls: ['./shop-list.component.scss'],
     providers: [DeliveryService]
 })
-export class ShopListComponent {
+export class ShopListComponent implements OnInit{
     breadcrumbArray: Array<any>;
     category: any = {};
     city: any = {};
@@ -41,8 +42,9 @@ export class ShopListComponent {
         this.route.queryParams.subscribe(params => {
             if (params['category']) {
                 this.category['categoryId'] = params['category'];
-                this.initialize();
+                //this.initialize();
             } else {
+                console.log(`params category is null returning`);
                 return;
             }
         });
@@ -50,13 +52,16 @@ export class ShopListComponent {
             { title: 'Home', icon: 'home', path: 'home'},
             {title: 'Categories', icon: 'apps', path: 'category', queryParams: { category: this.category['categoryId']}}
         ];
+
     }
 
     ngOnInit() {
-
+        this.initialize();
+        console.log('exiting from shop-list.component');
     }
 
     initialize() {
+        
         const catId = this.category['categoryId'];
         this.deliveryService.getShops(this.city.id, catId, this.start, this.offset).catch((err): any => {
             this.isAvailable = false;
@@ -89,6 +94,7 @@ export class ShopListComponent {
           }
           this.isLoading = false;
         });
+        
       }
 
       shopSelected(shop: Shop) {
