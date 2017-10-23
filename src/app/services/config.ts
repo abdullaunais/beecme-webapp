@@ -14,7 +14,8 @@ export class Config {
   private readonly serverPath = 'delivery';
   private serverUrl: string;
   constructor() {
-    this.serverUrl = `http://${this.serverHost}:${this.serverPort}/${this.serverPath}`;
+   // this.serverUrl = `http://${this.serverHost}:${this.serverPort}/${this.serverPath}`;
+   this.serverUrl = `http://localhost:8080/delivery`;
   }
 
   getServerUrl() {

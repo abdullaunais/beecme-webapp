@@ -1,6 +1,6 @@
 <div class="row component-category-list">
   <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let category of categories">
-    <a routerLink="/shops/{{category.categoryId}}" >
+    <a [routerLink]="['/category']" [queryParams]="{category: category.categoryId}" queryParamsHandling="merge">
       <div class="card card-product category-card">
         <div class="card-image category-image-wrapper animated flipInX" data-header-animation="true">
           <img class="img img-category" [src]="category.imageEn" alt="">
