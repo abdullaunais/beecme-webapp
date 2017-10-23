@@ -61,6 +61,7 @@ export class OrderHistoryComponent implements AfterViewInit {
                 this.orders = [];
             }
             this.isLoading = false;
+            console.log(` order history ${JSON.stringify(this.orders)}`)
         });
     }
 
