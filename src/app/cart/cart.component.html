@@ -41,7 +41,12 @@
                                             <i class="material-icons btn-cart-remove">delete</i>
                                         </button>
                                     </h5>
-                                    <button (click)="openCommentModal(cartItem)" class="btn btn-default cart-item-btn-comment">Add Comment</button>
+                                    <div *ngIf="cartItem.commentDtl" class="cart-item-comment">
+                                        <i class="material-icons" style="transform: scaleX(-1); font-size: 18px;">format_quote</i>
+                                        {{cartItem.commentDtl}}
+                                        <i class="material-icons" style="font-size: 18px;">format_quote</i>                                        
+                                    </div>
+                                    <button *ngIf="!cartItem.commentDtl" (click)="openCommentModal(cartItem, i)" class="btn btn-default cart-item-btn-comment">Add Comment</button>
                                     <div class="cart-item-price-wrapper">
                                         <p class="pull-left no-margin">
                                             <span style="font-weight: 300;">{{cartItem.quantity}} {{cartItem.unit}} X {{cartItem.price}} = </span>

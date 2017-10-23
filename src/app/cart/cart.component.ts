@@ -18,6 +18,7 @@ declare var swal: any;
     providers: [UserService, DeliveryService]
 })
 export class CartComponent {
+    activeCartItemIndex: number;
     activeCartItem: any;
     breadcrumbArray: Array<any>;
     colorTheme: string = 'brand-primary';
@@ -138,7 +139,10 @@ export class CartComponent {
         // this.cartService.setCartCount(this.cartItems.length);
         this.sharedService.removeItem(item);
         this.cartItems = this.sharedService.getCart();
-
+        if (this.cartItems.length === 0) {
+            this.shopIsVisible = false;
+            this.cartIsEmpty = true;
+        }
     }
 
     addressChanged() {
@@ -234,9 +238,10 @@ export class CartComponent {
 
     }
 
-    openCommentModal(cartItem: any) {
+    openCommentModal(cartItem: any, index: number) {
         console.log('ACTIVE ITEM : ', cartItem);
         this.activeCartItem = cartItem;
+        this.activeCartItemIndex = index;
         $('#commentModal').modal('show');
     }
 
@@ -244,9 +249,13 @@ export class CartComponent {
         const comment = this.commentForm.value.formComment;
         console.log('COMMENT -> ', comment);
 
+        if (this.activeCartItemIndex !== null) {
+            this.cartItems[this.activeCartItemIndex].commentDtl = comment;
+        }
 
+        this.storage.set('delivery.cart', this.cartItems);
 
-
+        this.activeCartItemIndex = null;
         this.activeCartItem = null;
         $('#commentModal').modal('hide');
     }
