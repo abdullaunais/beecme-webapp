@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { SidebarService } from '../../sidebar/sidebar.service';
 import { Message } from '../../beans';
 import { NotificationsService } from 'angular2-notifications';
+import { Constant } from '../../services/constant';
 declare var $: any;
 
 @Component({
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
     msg: Message;
 
     public options = {
-        position: ['bottom', 'right'],
+        position: Constant.NOTIFICATION_DEFAULT_POSITION,
         timeOut: 0,
         lastOnBottom: true,
     };
@@ -145,7 +146,7 @@ export class LoginComponent implements OnInit {
                 this.msg = err.json();
                 this.msg.message = this.toTitleCase(this.msg.message);
                 const toast = this.notify.error('Error!', this.msg.message, {
-                    timeOut: 6000,
+                    timeOut: Constant.NOTIFICATION_DEFAULT_TIMEOUT,
                     showProgressBar: true,
                     pauseOnHover: true,
                     clickToClose: true

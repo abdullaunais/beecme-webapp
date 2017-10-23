@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { DeliveryService } from "../services/delivery.service";
+import { ActivatedRoute, Router } from '@angular/router';
+import { DeliveryService } from '../services/delivery.service';
 import { ObjectStorage } from '../utilities/object-storage';
-import { CartService } from '../cart/cart.service';
-import { SharedService } from "../services/shared.service";
+import { SharedService } from '../services/shared.service';
 import { NotificationsService } from 'angular2-notifications';
+import { Constant } from '../services/constant';
 
 declare var swal: any;
 
@@ -22,7 +22,7 @@ export class DetailsComponent {
     city: any;
 
     public options = {
-        position: ['bottom', 'right'],
+        position: Constant.NOTIFICATION_DEFAULT_POSITION,
         timeOut: 0,
         lastOnBottom: true,
     };
@@ -31,7 +31,6 @@ export class DetailsComponent {
         private route: ActivatedRoute,
         private storage: ObjectStorage,
         private deliveryService: DeliveryService,
-        private cartService: CartService,
         private sharedService: SharedService,
         private notify: NotificationsService,
         private router: Router
@@ -127,7 +126,7 @@ export class DetailsComponent {
             });
         } else {
             const toast = this.notify.success('Item Added!', 'Click to Checkout', {
-                timeOut: 6000,
+                timeOut: Constant.NOTIFICATION_DEFAULT_TIMEOUT,
                 showProgressBar: true,
                 pauseOnHover: true,
                 clickToClose: true

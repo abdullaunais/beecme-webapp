@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ObjectStorage } from '../utilities/object-storage';
 import { SharedService } from '../services/shared.service';
 import { NotificationsService } from 'angular2-notifications';
+import { Constant } from '../services/constant';
 
 declare var swal: any;
 
@@ -136,7 +137,7 @@ export class ItemListComponent {
       });
     } else {
       const toast = this.notify.success('Item Added!', 'Click to Checkout', {
-        timeOut: 6000,
+        timeOut: Constant.NOTIFICATION_DEFAULT_TIMEOUT,
         showProgressBar: true,
         pauseOnHover: true,
         clickToClose: true

@@ -28,7 +28,7 @@ export class UserService {
   constructor(private http: Http, 
               public config: Config,
               private storage: ObjectStorage) {
-    this.serviceRootUrl = config.serverUrl;
+    this.serviceRootUrl = config.getServerUrl();
   }
 
   registerUser(user: any): Observable<any> {

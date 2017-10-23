@@ -3,7 +3,6 @@ import { ROUTES } from '../.././sidebar/sidebar.component';
 import { Router } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
-import { CartService } from '../../cart/cart.service';
 import { SharedService } from '../../services/shared.service';
 import { Validators, FormBuilder } from '@angular/forms';
 
@@ -40,7 +39,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
         location: Location,
         private renderer: Renderer,
         private element: ElementRef,
-        private cartService: CartService,
         private sharedService: SharedService,
         private router: Router,
         public fb: FormBuilder,

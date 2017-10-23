@@ -36,7 +36,7 @@ export class DeliveryService {
     private storage: ObjectStorage) {
     this.headers = new Headers({ 'Content-Type': 'application/json' });
     this.options = new RequestOptions({ headers: this.headers });
-    this.serviceRootUrl = config.serverUrl;
+    this.serviceRootUrl = config.getServerUrl();
   }
 
   getLocation(type: number, value: number, start: number, offset: number): Observable<any> {

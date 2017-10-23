@@ -4,6 +4,7 @@ import { DeliveryService } from '../services/delivery.service';
 import { ObjectStorage } from '../utilities/object-storage';
 import { NotificationsService } from 'angular2-notifications';
 import { DashboardCounts } from "../beans";
+import { Constant } from '../services/constant';
 // import { BreadcrumbService } from '../breadcrumb/breadcrumb.service';
 
 declare const $: any;
@@ -24,7 +25,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     breadcrumbArray: { title: string; icon: string; path: string; }[];
 
     public options = {
-        position: ['bottom', 'right'],
+        position: Constant.NOTIFICATION_DEFAULT_POSITION,
         timeOut: 0,
         lastOnBottom: true,
     };
@@ -59,7 +60,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             if (params['login']) {
                 if (params['login'] === 'success') {
                     const toast = this.notify.success('Login Success!', 'Enjoy BeecMe', {
-                        timeOut: 6000,
+                        timeOut: Constant.NOTIFICATION_DEFAULT_TIMEOUT,
                         showProgressBar: true,
                         pauseOnHover: true,
                         clickToClose: true
@@ -68,7 +69,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             } else if (params['register']) {
                 if (params['register'] === 'success') {
                     const toast = this.notify.success('Registration Success!', 'Enjoy BeecMe', {
-                        timeOut: 6000,
+                        timeOut: Constant.NOTIFICATION_DEFAULT_TIMEOUT,
                         showProgressBar: true,
                         pauseOnHover: true,
                         clickToClose: true
@@ -77,7 +78,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             } else if (params['logout']) {
                 if (params['logout'] === 'success') {
                     const toast = this.notify.warn('Logged Out!', 'We expect to see you soon.', {
-                        timeOut: 6000,
+                        timeOut: Constant.NOTIFICATION_DEFAULT_TIMEOUT,
                         showProgressBar: true,
                         pauseOnHover: true,
                         clickToClose: true

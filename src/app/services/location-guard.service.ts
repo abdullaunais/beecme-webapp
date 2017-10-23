@@ -11,7 +11,7 @@ export class LocationGuardService implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    let isLocationSet: boolean = this.storage.get('location.set');
+    const isLocationSet: boolean = this.storage.get('location.set');
     if (isLocationSet) {
       return true;
     } else {

@@ -5,6 +5,7 @@ import { SidebarService } from '../../sidebar/sidebar.service';
 import { ObjectStorage } from '../../utilities/object-storage';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
+import { Constant } from '../../services/constant';
 
 declare var swal: any;
 declare var $: any;
@@ -28,7 +29,7 @@ export class RegisterComponent implements OnInit {
     country: any;
 
     public options = {
-        position: ['bottom', 'right'],
+        position: Constant.NOTIFICATION_DEFAULT_POSITION,
         timeOut: 0,
         lastOnBottom: true,
     };
@@ -37,11 +38,11 @@ export class RegisterComponent implements OnInit {
     // @ViewChildren('forminput') formInputs;
 
     public registerForm = this.formBuilder.group({
-        formName: ["", [Validators.required, Validators.minLength(4), Validators.pattern(/^[a-zA-Z ]{2,30}$/)]],
-        formEmail: ["", [Validators.required, Validators.minLength(6), Validators.email]],
-        formPhone: ["", [Validators.required, Validators.minLength(9), Validators.maxLength(10)]],
-        formPassword: ["", [Validators.required, Validators.minLength(6)]],
-        formTermsAndConditions: ["", [Validators.required]],
+        formName: ['', [Validators.required, Validators.minLength(4), Validators.pattern(/^[a-zA-Z ]{2,30}$/)]],
+        formEmail: ['', [Validators.required, Validators.minLength(6), Validators.email]],
+        formPhone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(10)]],
+        formPassword: ['', [Validators.required, Validators.minLength(6)]],
+        formTermsAndConditions: ['', [Validators.required]],
     });
 
     constructor(
@@ -60,20 +61,20 @@ export class RegisterComponent implements OnInit {
 
 
     validate() {
-        let isValid: boolean = true;
-        let message: string = "";
-        let formIndex: number = 0;
+        let isValid = true;
+        let message = '';
+        let formIndex = 0;
         this.validationArray = [];
 
         if (this.registerForm.controls.formName.errors) {
             isValid = false;
             formIndex = 0;
             if (this.registerForm.controls.formName.errors.required) {
-                message = "Name is required";
+                message = 'Name is required';
             } else if (this.registerForm.controls.formName.errors.minlength) {
-                message = "Name should be at least 4 charaters long";
+                message = 'Name should be at least 4 charaters long';
             } else if (this.registerForm.controls.formName.errors.pattern) {
-                message = "Name is not in a valid format";
+                message = 'Name is not in a valid format';
             }
             this.validationArray.push({ message: message, valid: isValid, index: formIndex });
         }
@@ -82,11 +83,11 @@ export class RegisterComponent implements OnInit {
             isValid = false;
             formIndex = 1;
             if (this.registerForm.controls.formEmail.errors.required) {
-                message = "Email is required";
+                message = 'Email is required';
             } else if (this.registerForm.controls.formEmail.errors.minlength) {
-                message = "Email is not a valid format";
+                message = 'Email is not a valid format';
             } else if (this.registerForm.controls.formEmail.errors.email) {
-                message = "Email is not a valid format";
+                message = 'Email is not a valid format';
             }
             this.validationArray.push({ message: message, valid: isValid, index: formIndex });
         }
@@ -95,11 +96,11 @@ export class RegisterComponent implements OnInit {
             isValid = false;
             formIndex = 2;
             if (this.registerForm.controls.formPhone.errors.required) {
-                message = "Phone is required";
+                message = 'Phone is required';
             } else if (this.registerForm.controls.formPhone.errors.minlength) {
-                message = "Phone should have at least 9 numbers";
+                message = 'Phone should have at least 9 numbers';
             } else if (this.registerForm.controls.formPhone.errors.maxlength) {
-                message = "Phone cannot be more than 10 numbers";
+                message = 'Phone cannot be more than 10 numbers';
             }
             this.validationArray.push({ message: message, valid: isValid, index: formIndex });
         }
@@ -109,9 +110,9 @@ export class RegisterComponent implements OnInit {
             isValid = false;
             formIndex = 3;
             if (this.registerForm.controls.formPassword.errors.required) {
-                message = "Password is required";
+                message = 'Password is required';
             } else if (this.registerForm.controls.formPassword.errors.minlength) {
-                message = "Password should be at least 6 charaters long";
+                message = 'Password should be at least 6 charaters long';
             }
             this.validationArray.push({ message: message, valid: isValid, index: formIndex });
         }
@@ -126,19 +127,19 @@ export class RegisterComponent implements OnInit {
         // }
 
         if (!isValid) {
-            //validations
+            // validations
             this.validationArray.forEach(error => {
                 $('#forminput' + error.index).notify(
-                    error.message, 
-                    { 
-                        position:"bottom right",
+                    error.message,
+                    {
+                        position: 'bottom right',
                         elementPosition: 'bottom right',
                         globalPosition: 'bottom right',
                         autoHideDelay: 500000,
-                     }
-                  );
+                    }
+                );
             });
-            
+
 
             return;
         } else {
@@ -157,16 +158,16 @@ export class RegisterComponent implements OnInit {
 
     registerUser() {
 
-        let user = {
-            "username": this.name,
-            "email": this.email,
-            "password": this.password,
-            "phone": this.phone,
-            "country": this.country.id,
-            "province": this.province.id,
-            "city": this.city.id,
-            "type": "1",
-            "notificationSend": "0"
+        const user = {
+            'username': this.name,
+            'email': this.email,
+            'password': this.password,
+            'phone': this.phone,
+            'country': this.country.id,
+            'province': this.province.id,
+            'city': this.city.id,
+            'type': '1',
+            'notificationSend': '0'
         };
         this.userService.registerUser(user).catch((err): any => {
 
@@ -178,9 +179,9 @@ export class RegisterComponent implements OnInit {
 
                 }).subscribe(userData => {
                     console.log(`register status ${userData}`);
-                    this.storage.set("user.login", true);
-                    this.storage.set("user.data", userData);
-                    this.storage.set("user.authToken", userData);
+                    this.storage.set('user.login', true);
+                    this.storage.set('user.data', userData);
+                    this.storage.set('user.authToken', userData);
 
                     this.sidebarService.changeLogin({ user: userData, isLogin: true });
 
@@ -198,7 +199,7 @@ export class RegisterComponent implements OnInit {
                 });
             } else if (response.code < 0) {
                 const toast = this.notify.error('Error!', response.message, {
-                    timeOut: 6000,
+                    timeOut: Constant.NOTIFICATION_DEFAULT_TIMEOUT,
                     showProgressBar: true,
                     pauseOnHover: true,
                     clickToClose: true
