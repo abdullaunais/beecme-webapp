@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DeliveryService } from "../../services/delivery.service";
+import { DeliveryService } from '../../services/delivery.service';
 import { ObjectStorage } from '../../utilities/object-storage';
 import { Router } from '@angular/router';
 
@@ -45,7 +45,7 @@ export class LocationComponent implements OnInit {
 
     ngOnInit() {
         this.deliveryService.getLocation(this.type, this.value, this.start, this.offset).catch((err): any => {
-            console.log("Error ", err);
+            console.log('Error ', err);
         }).subscribe((data) => {
             let json = JSON.stringify(data);
             this.countryList = JSON.parse(json);
@@ -68,7 +68,7 @@ export class LocationComponent implements OnInit {
             this.isError = false;
             this.isLoading = false;
         });
-        this.selectedCountry = this.countryList.find(country => country.id == this.selectedCountryId);
+        this.selectedCountry = this.countryList.find(country => country.id === this.selectedCountryId);
         this.countrySelected = true;
     }
 
@@ -87,13 +87,13 @@ export class LocationComponent implements OnInit {
             this.isError = false;
             this.isLoading = false;
         });
-        this.selectedProvince = this.provinceList.find(province => province.id == this.selectedProvinceId);
+        this.selectedProvince = this.provinceList.find(province => province.id === this.selectedProvinceId);
         this.provinceSelected = true;
     }
 
     cityChanged() {
         let value: number = this.selectedCityId;
-        this.selectedCity = this.cityList.find(city => city.id == value);
+        this.selectedCity = this.cityList.find(city => city.id === value);
         this.citySelected = true;
     }
 

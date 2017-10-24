@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DeliveryService } from '../services/delivery.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ObjectStorage } from '../utilities/object-storage';
@@ -12,7 +12,8 @@ declare var swal: any;
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.scss'],
-  providers: [DeliveryService]
+  providers: [DeliveryService],
+  encapsulation: ViewEncapsulation.None
 })
 export class ItemListComponent {
   breadcrumbArray: Array<any>;

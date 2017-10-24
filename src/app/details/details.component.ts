@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeliveryService } from '../services/delivery.service';
 import { ObjectStorage } from '../utilities/object-storage';
@@ -11,7 +11,8 @@ declare var swal: any;
 @Component({
     selector: 'app-details',
     templateUrl: './details.component.html',
-    styleUrls: ['./details.component.scss']
+    styleUrls: ['./details.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class DetailsComponent {
     breadcrumbArray: Array<any>;

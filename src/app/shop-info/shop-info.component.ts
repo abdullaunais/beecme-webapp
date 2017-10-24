@@ -1,15 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-shop-info',
   templateUrl: './shop-info.component.html',
-  styleUrls: ['./shop-info.component.scss']
+  styleUrls: ['./shop-info.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
-export class ShopInfoComponent implements OnInit {
+export class ShopInfoComponent {
   @Input('shop') shop: any;
   constructor() { }
-
-  ngOnInit() {
-  }
-
 }

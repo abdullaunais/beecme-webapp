@@ -1,20 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DeliveryService } from '../services/delivery.service';
 import { ObjectStorage } from '../utilities/object-storage';
 import { SharedService } from '../services/shared.service';
 import { Shop } from '../beans';
 
-// import { BreadcrumbService } from '../breadcrumb/breadcrumb.service';
-
 @Component({
     selector: 'app-shop-list',
-  //  template: `hi there`,
     templateUrl: './shop-list.component.html',
     styleUrls: ['./shop-list.component.scss'],
-    providers: [DeliveryService]
+    providers: [DeliveryService],
+    encapsulation: ViewEncapsulation.None
+    // Reference : https://blog.thoughtram.io/angular/2015/06/29/shadow-dom-strategies-in-angular2.html
 })
-export class ShopListComponent implements OnInit{
+export class ShopListComponent implements OnInit {
     breadcrumbArray: Array<any>;
     category: any = {};
     city: any = {};
