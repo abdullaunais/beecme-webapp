@@ -9,7 +9,7 @@
             <div class="col-md-4 col-sm-6" *ngFor="let shop of shops">
                 <a [routerLink]="['/shop']" [queryParams]="{shop: shop.shopId}" queryParamsHandling="merge" (click)="shopSelected(shop)">
                     <div class="card card-profile">
-                        <div class="card-avatar">
+                        <div class="card-avatar animated flipInX">
                             <img class="img shop-profile-picture" [src]="shop?.profileUrl" />
                         </div>
                         <div class="card-content">
