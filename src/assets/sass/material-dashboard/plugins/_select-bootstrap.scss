@@ -14,6 +14,7 @@
 .mat-select-placeholder {
     line-height: normal;
     padding: 0;
+    position: initial !important;
 }
 
 .mat-select-value-text {
@@ -48,6 +49,7 @@
 }
 .mat-select-content, .mat-select-panel-done-animating {
     background: white;
+    padding: 0px 0;
 }
 .mat-option {
     color: rgba(0, 0, 0, 0.87);
@@ -80,16 +82,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
-    line-height: 42px;
-    height: 42px;
+    line-height: 40px;
+    height: 40px;
     padding: 0 16px;
     text-align: left;
     text-decoration: none;
     position: relative;
     cursor: pointer;
     outline: none;
-    margin: 0 5px;
-    border-radius: 2px;
+    margin: 0 0px;
+    border-radius: 0px;
 
     span{
         float: right;
@@ -97,7 +99,7 @@
 }
 .mat-option {
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     .mat-option-ripple.mat-ripple{
         display: none;
     }
