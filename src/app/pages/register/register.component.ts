@@ -175,28 +175,39 @@ export class RegisterComponent implements OnInit {
 
             if (response.code === 1) {
                 // register success
-                this.userService.authenticate(this.email, this.password).catch((err): any => {
+               // this.userService.authenticate(this.email, this.password).catch((err): any => {
 
-                }).subscribe(userData => {
-                    console.log(`register status ${userData}`);
-                    this.storage.set('user.login', true);
-                    this.storage.set('user.data', userData);
-                    this.storage.set('user.authToken', userData);
+                // }).subscribe(userData => {
+                //     console.log(`register status ${userData}`);
 
-                    this.sidebarService.changeLogin({ user: userData, isLogin: true });
+                    // this.storage.set('user.login', true);
+                    // this.storage.set('user.data', userData);
+                    // this.storage.set('user.authToken', userData);
 
-                    swal({
-                        type: 'success',
-                        title: 'Success!',
-                        text: 'Registration Successful!',
-                        buttonsStyling: false,
-                        confirmButtonClass: 'btn btn-success'
-                    }).then(() => {
-                        this.router.navigateByUrl('/home?register=success');
+                    this.userService.authenticate(this.email, this.password)
+                    .subscribe(res => {
+                        console.log(`login status from backend ${JSON.stringify(res)}`);
+                        if (res.status === 200) {
+                            let userData = res.json();
+                            console.log(userData);
+                            this.storage.set("user.login", true);
+                            this.storage.set("user.data", userData);
+                            this.storage.set("user.authToken", userData.authToken);
+                            this.sidebarService.changeLogin({ user: userData, isLogin: true });
+                            this.router.navigateByUrl('/home?login=success'); 
+                                                                   
+                            swal({
+                                type: 'success',
+                                title: 'Success!',
+                                text: 'Registration Successful!',
+                                buttonsStyling: false,
+                                confirmButtonClass: 'btn btn-success'
+                            }).then(() => {
+                                this.router.navigateByUrl('/home?register=success');
+                            });
+
+                        }
                     });
-
-
-                });
             } else if (response.code < 0) {
                 const toast = this.notify.error('Error!', response.message, {
                     timeOut: Constant.NOTIFICATION_DEFAULT_TIMEOUT,

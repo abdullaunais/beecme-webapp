@@ -93,12 +93,14 @@ export class DeliveryService {
       .catch((err) => this.handleError(err));
   }
 
-  getItemByShop(shopId: number, start: number, offset: number): Observable<any> {
+  getItemByShop(categoryId:number, shopId: number, start: number, offset: number): Observable<any> {
     const queryParams = {
+      type : 150,
+      value : [categoryId, shopId],
       start: start,
       offset: offset
     };
-    const requestUrl: string = this.serviceRootUrl + this.ITEM_SHOP_URL + `/${shopId}` + this.encodeQueryData(queryParams);
+    const requestUrl: string = this.serviceRootUrl + this.ITEM_SHOP_URL + this.encodeQueryData(queryParams);
     return this.http.get(requestUrl, this.options)
       .map((res) => this.extractData(res))
       .catch((err) => this.handleError(err));
@@ -211,9 +213,9 @@ export class DeliveryService {
   saveCart(cartReq: CartReq): Observable<Response> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     // headers.append('Authorization','eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNTZ0ZXN0aW5nIiwiYXVkaWVuY2UiOiJtb2JpbGUiLCJjcmVhdGVkIjoxNDg3OTI1MTk5Mzk2LCJleHAiOjE0ODg1Mjk5OTl9.y9Taa5yaufPdYKkise69wR14N51omlmxwz-2gGXVOqM');
-    console.log('Authorization token = ' + this.storage.get('user.data').authToken);
+    console.log(`Authorization token = ${(this.storage.get('user.authToken'))}`); 
     //console.log('Authorization token = '+this.sharedService.user.authToken)
-    headers.append('Authorization', this.storage.get('user.data').authToken);
+    headers.append('Authorization', this.storage.get('user.authToken'));
     /*, 'Origin' : 'http://localhost:8080/',
                               methods: ['GET', 'PUT', 'POST'],
                             allowedHeaders: ['Content-Type', 'Authorization']  });*/

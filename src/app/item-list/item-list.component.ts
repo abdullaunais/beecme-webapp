@@ -28,6 +28,7 @@ export class ItemListComponent {
 
   shop: any = {};
   city: any = {};
+  selectedCatId: number;
 
   public options = {
     position: ["bottom", "right"],
@@ -49,8 +50,11 @@ export class ItemListComponent {
     this.noMoreItems = false;
     this.city = this.storage.get('location.city');
     this.route.queryParams.subscribe(params => {
+
+      console.log(`params ${JSON.stringify(params)}`);
       if (params['shop']) {
-        this.shop['shopId'] = params.shop;
+        this.shop['shopId'] = params['shop'];
+        this.selectedCatId = params['category'];
         this.initialize();
       }
 
@@ -67,7 +71,8 @@ export class ItemListComponent {
 
   initialize() {
     const shopId = this.shop['shopId'];
-    this.deliveryService.getItemByShop(shopId, this.start, this.offset).catch((err): any => {
+    console.log(`params ${shopId} ${this.selectedCatId}`);
+    this.deliveryService.getItemByShop(this.selectedCatId, shopId, this.start, this.offset).catch((err): any => {
       this.isLoading = false;
       this.isAvailable = false;
     }).subscribe((data) => {
