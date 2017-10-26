@@ -161,11 +161,16 @@ export class DetailsComponent {
 
     updateQty(val: number) {
         console.log(`updateQty current value = ${this.item.qty} and selectedQty ${this.selectedQty} item.quantity is ${this.item.quantity}`);
-        if (this.selectedQty > 0 && val < 0) {
+
+        if (this.item.qty > this.selectedQty) {
+            if (this.selectedQty >= 0 && val > 0) {
+                this.selectedQty += val;
+            }
+        }
+
+        if (this.selectedQty > 1 && val < 0) {
             this.selectedQty += val;
         }
-        if (this.selectedQty >= 0 && val > 0) {
-            this.selectedQty += val;
-        }
+    
     }
 }
