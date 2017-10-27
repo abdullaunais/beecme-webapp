@@ -18,11 +18,17 @@
                                 <h4 class="card-title">{{item.nameEn}}</h4>
                                 <!-- <p class="category">Active</p> -->
                             </div>
-                            <div class="card-header card-header-text" data-background-color="green" class="item-availability">
-                                <!-- <h4 class="card-title">{{item.nameEn}}</h4> -->
+                            <div *ngIf="item?.qty>0" class="card-header card-header-text" data-background-color="green" class="item-availability">
                                 <p class="category" style="color: #fff;">
-                                    <i class="fa fa-check-circle"></i> &nbsp;Available</p>
+                                    <i class="fa fa-check-circle"></i> &nbsp;Available Quantity: {{item.qty}}x{{item.unit}} 
+                                </p>
                             </div>
+                            <div *ngIf="item?.qty < 1" class="card-header card-header-text" data-background-color="red" class="item-availability">
+                                <p class="category" style="color: #fff;">
+                                    <i class="fa fa-minus-circle"></i> &nbsp;Out of Stock
+                                </p>
+                            </div>
+
                             <div class="card-header item-image-active-wrapper">
                                 <img [src]="activeImage" class="img-responsive item-image-active" />
                             </div>
@@ -82,7 +88,7 @@
                                 </div>
                                 <div class="col-xs-12 col-lg-1 col-md-1 col-sm-12" style="padding: 0;"></div>
                                 <div class="col-xs-12 col-lg-5 col-md-5 col-sm-12" style="padding: 0;">
-                                    <button class="btn btn-primary item-cart-btn" (click)="addToCart()">
+                                    <button [disabled]="item?.qty < 1" class="btn btn-primary item-cart-btn" (click)="addToCart()">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span class="hidden-md hidden-lg">&nbsp;Add to Cart</span>
                                         <span>&nbsp;(LKR {{item.price}}/{{item.unit}})</span>
