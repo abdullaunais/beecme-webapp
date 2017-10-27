@@ -2,7 +2,7 @@
   <div class="card cart-card" style="margin-top: 0px;">
     <div class="card-content" style="padding:15px;">
       <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2" style="padding:0px;">
-        <img src="{{shop.profileUrl}}" class="img-responsive cart-shop-image">
+        <img [src]="shop?.profileUrl" class="img-responsive cart-shop-image">
       </div>
       <div class="col-xs-9 col-sm-5 col-md-5 col-lg-5" style="padding:0px;">
         <h4 style="font-weight: 400; margin: 0;">{{shop.shopName}}</h4>

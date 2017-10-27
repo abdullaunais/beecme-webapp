@@ -24,7 +24,7 @@
                 <div class="card card-product">
                     <a [routerLink]="['/details']" [queryParams]="{item: item.itemCode, shop: shop?.shopId}" queryParamsHandling="merge">
                         <div class="card-image card-item-image-wrapper" data-header-animation="true">
-                            <img class="img card-item-image" [src]="item.img1" alt="Item Image">
+                            <img class="img card-item-image" *ngIf="item.img1" [src]="item?.img1" alt=" ">
                         </div>
                         <div class="card-content">
                             <div class="card-actions" style="top:-62px;">

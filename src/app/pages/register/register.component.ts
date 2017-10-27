@@ -194,7 +194,6 @@ export class RegisterComponent implements OnInit {
                             this.storage.set("user.data", userData);
                             this.storage.set("user.authToken", userData.authToken);
                             this.sidebarService.changeLogin({ user: userData, isLogin: true });
-                            this.router.navigateByUrl('/home?login=success'); 
                                                                    
                             swal({
                                 type: 'success',

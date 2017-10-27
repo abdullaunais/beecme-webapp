@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SidebarService } from './sidebar.service';
 import { Subscription } from 'rxjs';
+import { SharedService } from '../services/shared.service';
 
 declare const $: any;
 
@@ -65,18 +66,21 @@ export const ROUTES: RouteInfo[] = [{
     templateUrl: 'sidebar.component.html',
 })
 
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
     public menuItems: any[];
 
     subscription: Subscription;
     user: any = {};
     isLogin: boolean = false;
-    isProfilePictureError: boolean = false;
+
+    cartCount: number = 0;
+    subCartSummary: Subscription;
 
     constructor(
-        private sidebarService: SidebarService
+        private sidebarService: SidebarService,
+        private sharedService: SharedService        
     ) {
-
+        this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });        
     }
 
     isNotMobileMenu() {
@@ -102,20 +106,20 @@ export class SidebarComponent implements OnInit {
 
         this.subscription = this.sidebarService.userItem
             .subscribe((data: any) => {
-                if(data.isLogin) {
+                if (data.isLogin) {
                     this.isLogin = true;
                 }
-                this.user = data.user
+                this.user = data.user;
             });
     }
 
     profilePicError() {
-        // console.log('Profile Picture Error');
-        this.isProfilePictureError = true;
+        this.user.profilePicture = '../assets/img/profile_default_grey.webp';
     }
 
     ngOnDestroy() {
         // prevent memory leak when component is destroyed
         this.subscription.unsubscribe();
+        this.subCartSummary.unsubscribe();
     }
 }
