@@ -22,6 +22,9 @@ export class DetailsComponent {
     selectedQty: number = 1;
     city: any;
 
+    activeImage: string;
+    activeImageId: number = 1;
+
     public options = {
         position: Constant.NOTIFICATION_DEFAULT_POSITION,
         timeOut: 0,
@@ -44,19 +47,23 @@ export class DetailsComponent {
         this.route.queryParams.subscribe(params => {
             this.shop['shopId'] = params['shop'];
             this.item['itemCode'] = params['item'];
+
+            this.deliveryService.getItemById(params['shop'], this.item['itemCode']).catch((err): any => {
+                // ignore
+            }).subscribe(item => {
+                this.item = item;
+                if (item.img1) {
+                    this.activeImage =  item.img1;
+                }
+                // this.deliveryService
+            });
+
             this.deliveryService.getShopById(this.city.id, params['shop']).catch((err): any => {
                 // this.isLoading = false;
                 // this.isAvailable = false;
             }).subscribe((shopData) => {
                 this.shop = shopData;
                 console.log(`item details initialize fired with shopId ${this.shop['shopId']} and itemCode ${this.item['itemCode']}`);
-                this.deliveryService.getItemById(params['shop'], this.item['itemCode']).catch((err): any => {
-                    // ignore
-                }).subscribe(item => {
-                    this.item = item;
-                    // this.deliveryService
-                });
-
             });
 
             if (params['item'] && params['shop'] && params['item']) {
@@ -68,6 +75,11 @@ export class DetailsComponent {
                 ];
             }
         });
+    }
+
+    setImage(img: string, id: number) {
+        this.activeImage = img;
+        this.activeImageId = id;
     }
 
     // validateCart() {

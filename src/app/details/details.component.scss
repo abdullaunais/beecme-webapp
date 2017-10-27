@@ -17,6 +17,9 @@
     .item-image-active {
         width: 100%;
         border-radius: 3px;
+        min-height: 25rem;
+        max-height: 28rem;
+        object-fit: cover;
     }
     .item-image-inactive {
         width: 100%;
