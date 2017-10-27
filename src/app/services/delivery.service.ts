@@ -30,10 +30,13 @@ export class DeliveryService {
   private readonly REVIEW_URL = '/reviews';
   private readonly DASHBOARD_COUNTS_URL = '/dashboard/counts';
   private readonly SEARCH_URL = '/dashboard/search';
+  private readonly NOTIFICATIONS_URL = '/notifications';
 
-  constructor(private http: Http,
+  constructor(
+    private http: Http,
     public config: Config,
-    private storage: ObjectStorage) {
+    private storage: ObjectStorage
+  ) {
     this.headers = new Headers({ 'Content-Type': 'application/json' });
     this.options = new RequestOptions({ headers: this.headers });
     this.serviceRootUrl = config.getServerUrl();
@@ -66,6 +69,13 @@ export class DeliveryService {
       .catch((err) => this.handleError(err));
   }
 
+  getNotifications(userId: number) {
+    const requestUrl: string = this.serviceRootUrl + this.NOTIFICATIONS_URL + `/${userId}`;
+    return this.http.get(requestUrl, this.options)
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
+  }
+
   getShops(cityId: number, categoryId: number, start: number, offset: number): Observable<any> {
     const queryParams = {
       type: 71,
@@ -93,10 +103,10 @@ export class DeliveryService {
       .catch((err) => this.handleError(err));
   }
 
-  getItemByShop(categoryId:number, shopId: number, start: number, offset: number): Observable<any> {
+  getItemByShop(categoryId: number, shopId: number, start: number, offset: number): Observable<any> {
     const queryParams = {
-      type : 150,
-      value : [categoryId, shopId],
+      type: 150,
+      value: [categoryId, shopId],
       start: start,
       offset: offset
     };
@@ -213,7 +223,7 @@ export class DeliveryService {
   saveCart(cartReq: CartReq): Observable<Response> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     // headers.append('Authorization','eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNTZ0ZXN0aW5nIiwiYXVkaWVuY2UiOiJtb2JpbGUiLCJjcmVhdGVkIjoxNDg3OTI1MTk5Mzk2LCJleHAiOjE0ODg1Mjk5OTl9.y9Taa5yaufPdYKkise69wR14N51omlmxwz-2gGXVOqM');
-    console.log(`Authorization token = ${(this.storage.get('user.authToken'))}`); 
+    console.log(`Authorization token = ${(this.storage.get('user.authToken'))}`);
     //console.log('Authorization token = '+this.sharedService.user.authToken)
     headers.append('Authorization', this.storage.get('user.authToken'));
     /*, 'Origin' : 'http://localhost:8080/',
@@ -222,8 +232,8 @@ export class DeliveryService {
 
     let options = new RequestOptions({ headers: headers });
 
-    const url = this.serviceRootUrl + '/carts';
+    const url = this.serviceRootUrl + this.ORDER_URL;
     console.log(`Saving the order ---> ${JSON.stringify(cartReq)}`);
-    return this.http.post(url, JSON.stringify(cartReq), options)
+    return this.http.post(url, JSON.stringify(cartReq), options);
   }
 }

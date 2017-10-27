@@ -1,10 +1,12 @@
-import { Component, OnInit, Renderer, ViewChild, ElementRef, Directive, OnDestroy } from '@angular/core';
+import { Component, OnInit, Renderer, ViewChild, ElementRef, Directive, OnDestroy, OnChanges } from '@angular/core';
 import { ROUTES } from '../.././sidebar/sidebar.component';
 import { Router } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 import { SharedService } from '../../services/shared.service';
 import { Validators, FormBuilder } from '@angular/forms';
+import { ObjectStorage } from '../../utilities/object-storage';
+import { DeliveryService } from '../../services/delivery.service';
 
 const misc: any = {
     navbar_menu_visible: 0,
@@ -18,7 +20,7 @@ declare var $: any;
     templateUrl: 'navbar.component.html'
 })
 
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
     private listTitles: any[];
     location: Location;
     private nativeElement: Node;
@@ -33,6 +35,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     cartCount: number = 0;
     subCartSummary: Subscription;
 
+    isLoggedIn: boolean = false;
+    user: any = {};
+
+    notifications: Array<any> = [];
+
     @ViewChild('app-navbar-cmp') button: any;
 
     constructor(
@@ -40,14 +47,27 @@ export class NavbarComponent implements OnInit, OnDestroy {
         private renderer: Renderer,
         private element: ElementRef,
         private sharedService: SharedService,
+        private deliveryService: DeliveryService,
         private router: Router,
         public fb: FormBuilder,
+        private storage: ObjectStorage
     ) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
         console.log('initializing navbar');
         this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });
+        if (this.storage.get('user.login')) {
+            this.isLoggedIn = this.storage.get('user.login');
+            this.user = this.storage.get('user.data');
+            this.deliveryService.getNotifications(this.user.userId).catch((err): any => {
+                // ignore
+            }).subscribe((res) => {
+                console.log('NOTIFICATIONS -> ', res);
+                this.notifications = res;
+            });
+        }
+
     }
 
     ngOnInit() {
@@ -116,7 +136,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
 
     ngOnChanges() {
-        console.log(`ngOnChanges - data is ${this.cartCount}`);
+        console.log(`ngOnChanges - count is ${this.cartCount}`);
     }
 
     isMobileMenu() {
@@ -183,13 +203,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         // unsubscribe to ensure no memory leaks
-        //this.subscription.unsubscribe();
         this.subCartSummary.unsubscribe();
     }
 
 
     cartChanged() {
         console.log('event cart changed fired');
-      }
+    }
 
 }

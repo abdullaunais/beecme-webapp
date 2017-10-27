@@ -28,7 +28,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown" *ngIf="isLoggedIn">
                         <a href="#" class="dropdown-toggle" title="Notifications" data-toggle="dropdown">
                             <i class="material-icons" style="font-size: 26px;">notifications</i>
                             <span class="notification" style="font-size: 11px; height: 21px; line-height: 20px; padding:0 6px;">5</span>
@@ -38,20 +38,8 @@
                             </p>
                         </a>
                         <ul class="dropdown-menu">
-                            <li>
+                            <li *ngFor="let notification of notifications">
                                 <a href="#">Mike John responded to your email</a>
-                            </li>
-                            <li>
-                                <a href="#">You have 5 new tasks</a>
-                            </li>
-                            <li>
-                                <a href="#">You're now friend with Andrew</a>
-                            </li>
-                            <li>
-                                <a href="#">Another Notification</a>
-                            </li>
-                            <li>
-                                <a href="#">Another One</a>
                             </li>
                         </ul>
                     </li>
