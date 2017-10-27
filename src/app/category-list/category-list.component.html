@@ -1,4 +1,11 @@
 <div class="row component-category-list">
+  <div *ngIf="isLoading">
+    <div class="loader loader-position-fix">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="10" fill="none" stroke-width="2" stroke-miterlimit="0" />
+      </svg>
+    </div>
+  </div>
   <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let category of categories">
     <a [routerLink]="['/category']" [queryParams]="{category: category.categoryId}" queryParamsHandling="merge">
       <div class="card card-product category-card">

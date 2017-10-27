@@ -25,6 +25,7 @@ export class ItemListComponent {
   isLoading: boolean;
   isAvailable: boolean;
   noMoreItems: boolean;
+  shopLoading: boolean;
 
   shop: any = {};
   city: any = {};
@@ -46,6 +47,7 @@ export class ItemListComponent {
     private router: Router
   ) {
     this.isLoading = true;
+    this.shopLoading = true;
     this.isAvailable = true;
     this.noMoreItems = false;
     this.city = this.storage.get('location.city');
@@ -99,10 +101,11 @@ export class ItemListComponent {
     });
 
     this.deliveryService.getShopById(this.city.id, shopId).catch((err): any => {
-      // this.isLoading = false;
+      this.shopLoading = false;
       // this.isAvailable = false;
     }).subscribe((shopData) => {
       this.shop = shopData;
+      this.shopLoading = false;
     });
   }
 

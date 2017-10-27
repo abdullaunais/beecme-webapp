@@ -8,7 +8,15 @@
                 <app-breadcrumb [breadcrumbArray]="breadcrumbArray"></app-breadcrumb>
             </div>
 
-            <div class="col-lg-12 col-md-12 animated fadeIn">
+            <div *ngIf="isLoading || shopLoading">
+                <div class="loader loader-position-fix">
+                    <svg class="circular" viewBox="25 25 50 50">
+                        <circle class="path" cx="50" cy="50" r="10" fill="none" stroke-width="2" stroke-miterlimit="0" />
+                    </svg>
+                </div>
+            </div>
+
+            <div *ngIf="!shopLoading" class="col-lg-12 col-md-12 animated fadeIn">
                 <app-shop-info [shop]="shop"></app-shop-info>
             </div>
 
