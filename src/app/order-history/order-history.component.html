@@ -3,13 +3,33 @@
         <div class="row">
             <div class="col col-lg-6 col-md-12 col-sm-12" *ngFor="let order of orders">
                 <div class="card">
+
                     <div class="card-header card-header-icon order-status-header" data-background-color="purple">
+                        <i class="fa fa-check-square"></i>
+                        <span class="hidden-xs">{{order?.orderHeader?.dateCreated}}</span>
+                    </div>
+
+                    <div *ngIf="order?.orderHeader?.deliveryStatus === 50" class="card-header card-header-icon order-status-header" data-background-color="purple">
                         <i class="fa fa-truck"></i>
                         <span class="hidden-xs">Processing</span>
                     </div>
+                    <div *ngIf="order?.orderHeader?.deliveryStatus === 52" class="card-header card-header-icon order-status-header" data-background-color="green">
+                        <i class="fa fa-truck"></i>
+                        <span class="hidden-xs">Order Completed</span>
+                    </div>
+                    <div *ngIf="order?.orderHeader?.deliveryStatus === 51" class="card-header card-header-icon order-status-header" data-background-color="orange">
+                        <i class="fa fa-truck"></i>
+                        <span class="hidden-xs">Order Cancelled</span>
+                    </div>
+
                     <div (click)="openRatingModal(order)" class="card-header card-header-icon order-status-header cursor-pointer" data-background-color="orange">
                         <i class="fa fa-star"></i>
                         <span class="hidden-xs">Give Feedback</span>
+                    </div>
+                    <div class="card-header card-header-icon order-status-header" data-background-color="white">
+                        <span>
+                            # {{order?.orderHeader?.cartId}}
+                       </span>
                     </div>
                     <!-- <div class="card-header" data-background-color="purple">
                         <i class="fa fa-truck"></i> &nbsp;&nbsp;Order From Burger King
