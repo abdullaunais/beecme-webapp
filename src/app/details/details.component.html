@@ -34,13 +34,13 @@
                             </div>
                             <div class="card-header row" style="margin: 10px 5px 20px 15px; padding: 0;">
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding-left: 0; padding-right: 10px;">
-                                    <img [src]="item.img1" (click)="setImage(item?.img1, 1)" *ngIf="item.img1" class="img-responsive item-image-inactive" [ngClass]="{'image-selected': activeImageId === 1 }" />
+                                    <img [src]="item.img1" (mouseenter)="setImage(item?.img1, 1)" *ngIf="item.img1" class="img-responsive item-image-inactive" [ngClass]="{'image-selected': activeImageId === 1 }" />
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding-left: 0; padding-right: 10px;">
-                                    <img [src]="item.img2" (click)="setImage(item?.img2, 2)" *ngIf="item.img2" class="img-responsive item-image-inactive" [ngClass]="{'image-selected': activeImageId === 2 }" />
+                                    <img [src]="item.img2" (mouseenter)="setImage(item?.img2, 2)" *ngIf="item.img2" class="img-responsive item-image-inactive" [ngClass]="{'image-selected': activeImageId === 2 }" />
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding-left: 0; padding-right: 10px;">
-                                    <img [src]="item.img3" (click)="setImage(item?.img3, 3)" *ngIf="item.img3" class="img-responsive item-image-inactive" [ngClass]="{'image-selected': activeImageId === 3 }" />
+                                    <img [src]="item.img3" (mouseenter)="setImage(item?.img3, 3)" *ngIf="item.img3" class="img-responsive item-image-inactive" [ngClass]="{'image-selected': activeImageId === 3 }" />
                                 </div>
                             </div>
                         </div>
