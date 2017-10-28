@@ -34,13 +34,15 @@
         font-weight: 500;
         font-size: 1em;
         font-weight: 500;
-    } // .cart-item-details-wrapper {
-    // height: 40px; 
-    // }
+    }
     .cart-item-price-wrapper {
         margin-top: 8px;
     }
     .feedback-title {
         margin-bottom: 5px;
+    }
+    .loader {
+        position: inherit;
+        margin: 100px auto;
     }
 }

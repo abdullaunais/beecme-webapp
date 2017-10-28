@@ -24,6 +24,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     city: any = {};
     breadcrumbArray: { title: string; icon: string; path: string; }[];
 
+    countsLoading: boolean;
+
     public options = {
         position: Constant.NOTIFICATION_DEFAULT_POSITION,
         timeOut: 0,
@@ -48,10 +50,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
 
     initialize() {
+        this.countsLoading = true;
         this.deliveryService.getDashboardCounts(this.city.id).catch((err): any => {
             console.log('Dashboard Service Error ', err);
+            this.countsLoading = false;
         }).subscribe((data) => {
             this.counts = data;
+            this.countsLoading = false;
         });
     }
 
