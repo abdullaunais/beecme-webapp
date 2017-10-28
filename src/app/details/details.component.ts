@@ -53,7 +53,7 @@ export class DetailsComponent {
             }).subscribe(item => {
                 this.item = item;
                 if (item.img1) {
-                    this.activeImage =  item.img1;
+                    this.activeImage = item.img1;
                 }
                 // this.deliveryService
             });
@@ -69,8 +69,9 @@ export class DetailsComponent {
             if (params['item'] && params['shop'] && params['item']) {
                 this.breadcrumbArray = [
                     { title: 'Home', icon: 'home', path: 'home' },
-                    { title: 'Categories', icon: 'apps', path: 'category', queryParams: { category: params['category'] } },
-                    { title: 'Shops', icon: 'store', path: 'shop', queryParams: { category: params['category'], shop: params['shop'] } },
+                    { title: 'Categories', icon: 'apps', path: 'categories' },
+                    { title: 'Shops', icon: 'store', path: 'category', queryParams: { category: params['category'] } },
+                    { title: 'Items', icon: 'bookmark', path: 'shop', queryParams: { category: params['category'], shop: params['shop'] } },
                     { title: 'Details', icon: 'info', path: 'details', queryParams: { category: params['category'], shop: params['shop'], item: params['item'] } }
                 ];
             }
@@ -183,6 +184,6 @@ export class DetailsComponent {
         if (this.selectedQty > 1 && val < 0) {
             this.selectedQty += val;
         }
-    
+
     }
 }

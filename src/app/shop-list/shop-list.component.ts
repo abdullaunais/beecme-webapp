@@ -48,8 +48,9 @@ export class ShopListComponent implements OnInit {
             }
         });
         this.breadcrumbArray = [
-            { title: 'Home', icon: 'home', path: 'home'},
-            {title: 'Categories', icon: 'apps', path: 'category', queryParams: { category: this.category['categoryId']}}
+            { title: 'Home', icon: 'home', path: 'home' },
+            { title: 'Categories', icon: 'apps', path: 'categories' },
+            { title: 'Shops', icon: 'store', path: 'category', queryParams: { category: this.category['categoryId'] } }
         ];
 
     }
@@ -60,44 +61,44 @@ export class ShopListComponent implements OnInit {
     }
 
     initialize() {
-        
+
         const catId = this.category['categoryId'];
         this.deliveryService.getShops(this.city.id, catId, this.start, this.offset).catch((err): any => {
             this.isAvailable = false;
             this.isError = true;
             this.isLoading = false;
         }).subscribe((data) => {
-          const shopsArray = data;
-          console.log(shopsArray);
-          this.shops = [];
-          if (shopsArray) {
-            if (shopsArray.length > 0) {
-              this.isAvailable = true;
-              this.isError = false;
-              let timeout = 0;
-              shopsArray.forEach((shop: any, index: number) => {
-                const keywordString = shop.keywords;
-                const keywords = keywordString.split(' ');
-                shopsArray[index]['keywordsArray'] = keywords;
-                setTimeout(() => {
-                  this.shops.push(shop);
-                }, timeout += 100);
-              });
-            } else {
-              this.isAvailable = false;
-              this.shops = [];
-            }
-          } else {
-            this.isAvailable = false;
+            const shopsArray = data;
+            console.log(shopsArray);
             this.shops = [];
-          }
-          this.isLoading = false;
+            if (shopsArray) {
+                if (shopsArray.length > 0) {
+                    this.isAvailable = true;
+                    this.isError = false;
+                    let timeout = 0;
+                    shopsArray.forEach((shop: any, index: number) => {
+                        const keywordString = shop.keywords;
+                        const keywords = keywordString.split(' ');
+                        shopsArray[index]['keywordsArray'] = keywords;
+                        setTimeout(() => {
+                            this.shops.push(shop);
+                        }, timeout += 100);
+                    });
+                } else {
+                    this.isAvailable = false;
+                    this.shops = [];
+                }
+            } else {
+                this.isAvailable = false;
+                this.shops = [];
+            }
+            this.isLoading = false;
         });
-        
-      }
 
-      shopSelected(shop: Shop) {
+    }
+
+    shopSelected(shop: Shop) {
         console.log(`SELECTED SHOP  ${JSON.stringify(shop)}`);
         this.sharedService.setShop(shop);
-      }
+    }
 }

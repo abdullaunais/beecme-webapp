@@ -63,8 +63,9 @@ export class ItemListComponent {
       if (params['shop'] && params['category']) {
         this.breadcrumbArray = [
           { title: 'Home', icon: 'home', path: 'home' },
-          { title: 'Categories', icon: 'apps', path: 'category', queryParams: { category: params['category'] } },
-          { title: 'Shops', icon: 'store', path: 'shop', queryParams: { category: params['category'], shop: params['shop'] } }
+          { title: 'Categories', icon: 'apps', path: 'categories' },
+          { title: 'Shops', icon: 'store', path: 'category', queryParams: { category: params['category'] } },
+          { title: 'Items', icon: 'bookmark', path: 'shop', queryParams: { category: params['category'], shop: params['shop'] } }
         ];
       }
     });

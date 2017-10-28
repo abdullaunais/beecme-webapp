@@ -15,6 +15,7 @@ declare const swal: any;
     styleUrls: ['./order-history.component.scss']
 })
 export class OrderHistoryComponent implements AfterViewInit {
+    breadcrumbArray: Array<any>;
     @ViewChild('ratingModal') ratingModal: ElementRef;
 
     authToken: any;
@@ -43,6 +44,10 @@ export class OrderHistoryComponent implements AfterViewInit {
         private deliveryService: DeliveryService
     ) {
         this.authToken = this.storage.get('user.authToken');
+        this.breadcrumbArray = [
+            { title: 'Home', icon: 'home', path: 'home' },
+            { title: 'Orders', icon: 'assignment_turned_in', path: 'orders' }
+        ];
         this.initialize();
     }
     initialize() {

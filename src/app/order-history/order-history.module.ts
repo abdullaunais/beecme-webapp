@@ -7,12 +7,14 @@ import { OrderHistoryComponent } from './order-history.component';
 import { OrderHistoryRoutes } from './order-history.routing';
 import { DeliveryService } from '../services/delivery.service';
 import { StarRatingModule } from 'angular-star-rating';
+import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild(OrderHistoryRoutes),
         ReactiveFormsModule,
+        BreadcrumbModule,
         StarRatingModule.forRoot()
     ],
     declarations: [OrderHistoryComponent],
