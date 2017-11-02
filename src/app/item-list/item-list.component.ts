@@ -19,7 +19,9 @@ export class ItemListComponent {
   breadcrumbArray: Array<any>;
 
   start: number = 0;
+  pageStart: number = 0;
   offset: number = 20;
+  size: number = 1;
 
   // cartCount: number;
   isLoading: boolean;
@@ -98,6 +100,9 @@ export class ItemListComponent {
         this.items = [];
         this.isAvailable = false;
       }
+      if (data.totalPages) {
+        this.size = data.totalPages;
+      }
       this.isLoading = false;
     });
 
@@ -109,6 +114,42 @@ export class ItemListComponent {
       this.shopLoading = false;
     });
   }
+
+  paginationChange(val: number) {
+    this.pageStart += this.offset * val;
+    this.start += val;
+    
+    this.isLoading = true;
+    this.noMoreItems = false;
+    this.items = [];
+    const shopId = this.shop['shopId'];
+    this.deliveryService.getItemByShop(this.selectedCatId, shopId, this.pageStart, this.offset).catch((err): any => {
+      this.isLoading = false;
+      this.noMoreItems = true;
+    }).subscribe((data) => {
+      console.log(data['itemlist']);
+      if (data['itemlist']) {
+        if (data['itemlist'].length > 0) {
+          this.noMoreItems = false;
+          let timeout = 0;
+          data['itemlist'].forEach((item: any) => {
+            item.selectedQty = 1;
+            setTimeout(() => {
+              this.items.push(item);
+            }, timeout += 100);
+          });
+        } else {
+          this.items = [];
+          this.noMoreItems = true;
+        }
+      } else {
+        this.items = [];
+        this.noMoreItems = true;
+      }
+      this.isLoading = false;
+    });
+  }
+
 
   updateQty(item: any, val: number) {
     console.log(`updateQty current value = ${item.qty} and selectedQty ${item.selectedQty} item.quantity is ${item.quantity}`);

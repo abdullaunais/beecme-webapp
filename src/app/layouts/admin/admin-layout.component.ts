@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy, ViewChild, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { NavItem, NavItemType } from '../../md/md.module';
 import { Subscription } from 'rxjs/Subscription';
 import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
 import 'rxjs/add/operator/filter';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { NavItem, NavItemType } from '../../beans';
 
 declare const $: any;
 

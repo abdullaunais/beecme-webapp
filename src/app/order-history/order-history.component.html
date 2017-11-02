@@ -31,11 +31,6 @@
             <div class="col col-lg-6 col-md-12 col-sm-12" *ngFor="let order of orders">
                 <div class="card">
 
-                    <div class="card-header card-header-icon order-status-header" data-background-color="purple">
-                        <i class="fa fa-check-square"></i>
-                        <span class="hidden-xs">{{order?.orderHeader?.dateCreated}}</span>
-                    </div>
-
                     <div *ngIf="order?.orderHeader?.deliveryStatus === 50" class="card-header card-header-icon order-status-header" data-background-color="purple">
                         <i class="fa fa-truck"></i>
                         <span class="hidden-xs">Processing</span>
@@ -54,15 +49,15 @@
                         <span class="hidden-xs">Give Feedback</span>
                     </div>
                     <div class="card-header card-header-icon order-status-header" data-background-color="white">
-                        <span>
-                            # {{order?.orderHeader?.cartId}}
-                        </span>
+                        <i class="fa fa-hashtag"></i>
+                        <span>{{order?.orderHeader?.cartId}}</span>
                     </div>
                     <!-- <div class="card-header" data-background-color="purple">
                         <i class="fa fa-truck"></i> &nbsp;&nbsp;Order From Burger King
                     </div> -->
                     <div class="card-content" style="margin-top: 20px;">
                         <h4 class="order-title">Order from {{order.shop.shopName}}</h4>
+                        <p style="display: block; margin: 0px 20px 10px 20px; font-weight: 300; color: #999;">On {{order?.orderHeader?.dateCreated}}</p>
                         <div class="row cart-item-row" *ngFor="let item of order.orderDetails">
                             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 cart-item-image-wrapper">
                                 <img src="assets/img/food.jpg" class="img-responsive cart-item-image">

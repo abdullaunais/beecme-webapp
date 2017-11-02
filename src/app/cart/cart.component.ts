@@ -273,7 +273,7 @@ export class CartComponent {
             this.sharedService.resetCart();
             swal({
                 type: 'success',
-                title: 'Order Placement Successful!!',
+                title: 'Order Successful!',
                 text: json.message,
                 buttonsStyling: false,
                 confirmButtonClass: 'btn btn-success'
@@ -283,7 +283,7 @@ export class CartComponent {
         } else {
             swal({
                 type: 'failed',
-                title: 'Order Placement Failed!!',
+                title: 'Order Placement Failed!',
                 text: json.message,
                 buttonsStyling: false,
                 confirmButtonClass: 'btn btn-failed'
