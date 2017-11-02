@@ -13,6 +13,7 @@ import { LocationComponent } from './location/location.component';
 import { LogoutComponent } from './logout/logout.component';
 import { MdSelectModule } from '@angular/material';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { Error404Component } from './error-404/error-404.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     LoginComponent,
     RegisterComponent,
     LocationComponent,
-    LogoutComponent
+    LogoutComponent,
+    Error404Component
   ]
 })
 

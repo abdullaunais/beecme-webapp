@@ -60,5 +60,10 @@ export const AppRoutes: Routes = [
             path: 'pages',
             loadChildren: './pages/pages.module#PagesModule'
         }]
+    },
+    {
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: '/pages/404'
     }
 ];
