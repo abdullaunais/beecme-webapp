@@ -8,6 +8,74 @@
                 <app-breadcrumb [breadcrumbArray]="breadcrumbArray"></app-breadcrumb>
             </div>
 
+
+            <div class="col-lg-3 col-md-6 col-sm-6" (click)="routeToPath('/categories')" style="cursor: pointer">
+                <div class="card card-stats">
+                    <div class="card-header" data-background-color="blue">
+                        <i class="material-icons">view_carousel</i>
+                    </div>
+                    <div class="card-content">
+                        <p class="category">Categories</p>
+                        <h3 class="card-title">{{counts?.countCategory}}</h3>
+                    </div>
+             <!--       <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">shop</i> View Available Shops
+                        </div> 
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header" data-background-color="red">
+                        <i class="material-icons">shop</i>
+                    </div>
+                    <div class="card-content">
+                        <p class="category">Shops</p>
+                        <h3 class="card-title">{{counts?.countShops}}</h3>
+                    </div>
+<!--                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">chat_bubble_outline</i> Buy from Shops around you
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6" (click)="routeToPath('/cart')" style="cursor: pointer">
+                <div class="card card-stats">
+                    <div class="card-header" data-background-color="green">
+                        <i class="material-icons">shopping_cart</i>
+                    </div>
+                    <div class="card-content">
+                        <p class="category">Total Items</p>
+                        <h3 class="card-title">{{counts?.countItems}}</h3>
+                    </div>
+<!--                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">shopping_cart</i> Checkout Items
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6" (click)="routeToPath('/orders')" style="cursor: pointer">
+                <div class="card card-stats">
+                    <div class="card-header" data-background-color="orange">
+                        <i class="fa fa-truck"></i>
+                    </div>
+                    <div class="card-content">
+                        <p class="category">My Orders</p>
+                        <h3 class="card-title">2</h3>
+                    </div>
+                <!--    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i> Just Updated
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header card-header-tabs" data-background-color="purple" style="padding: 6px 15px; box-shadow: 3px 2px 4px #ddd;">
@@ -47,78 +115,10 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-6" (click)="routeToPath('/categories')" style="cursor: pointer">
-                <div class="card card-stats">
-                    <div class="card-header" data-background-color="blue">
-                        <i class="material-icons">view_carousel</i>
-                    </div>
-                    <div class="card-content">
-                        <p class="category">Categories</p>
-                        <h3 class="card-title">{{counts?.countCategory}}</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">shop</i> View Available Shops
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-header" data-background-color="red">
-                        <i class="material-icons">shop</i>
-                    </div>
-                    <div class="card-content">
-                        <p class="category">Shops</p>
-                        <h3 class="card-title">{{counts?.countShops}}</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">chat_bubble_outline</i> Buy from Shops around you
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6" (click)="routeToPath('/cart')" style="cursor: pointer">
-                <div class="card card-stats">
-                    <div class="card-header" data-background-color="green">
-                        <i class="material-icons">shopping_cart</i>
-                    </div>
-                    <div class="card-content">
-                        <p class="category">Total Items</p>
-                        <h3 class="card-title">{{counts?.countItems}}</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">shopping_cart</i> Checkout Items
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6" (click)="routeToPath('/orders')" style="cursor: pointer">
-                <div class="card card-stats">
-                    <div class="card-header" data-background-color="orange">
-                        <i class="fa fa-truck"></i>
-                    </div>
-                    <div class="card-content">
-                        <p class="category">My Orders</p>
-                        <h3 class="card-title">2</h3>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">update</i> Just Updated
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-
         </div>
 
         <div class="header text-center">
-            <h4 class="title" style="text-align: left;">Categories</h4>
+<!--            <h4 class="title" style="text-align: left;">Categories</h4> -->
             <div style="height: 1px; width: 100%; background-color: #ddd; margin-bottom: 20px;"></div>
             <!-- <p class="category">A beautiful plugin, that replace the classic alert, Handcrafted by our friend
                 <a target="_blank" href="https://twitter.com/t4t5">Tristan Edwards</a>. Please check out the
