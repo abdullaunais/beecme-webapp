@@ -428,6 +428,12 @@
     }
 }
 
+#containerIntro p,
+#containerIntro h3 {
+    display: inline;
+
+}
+
 .card-stats{
     .card-title{
         margin: 0;
