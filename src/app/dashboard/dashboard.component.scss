@@ -1,0 +1,15 @@
+.page-dashboard {
+    .card-header {
+        padding: 0px 4px;
+    }
+    #containerIntro {
+        display: inline;
+    }
+    .category {
+        display: inline-flex;
+        margin-right: 10px;
+    }
+    .card-stats .card-header i {
+        font-size: 30px;
+    }
+}
