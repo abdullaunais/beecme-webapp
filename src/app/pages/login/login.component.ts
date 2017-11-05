@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ObjectStorage } from '../../utilities/object-storage';
 import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SidebarService } from '../../sidebar/sidebar.service';
 import { Message } from '../../beans';
 import { NotificationsService } from 'angular2-notifications';
@@ -37,6 +37,8 @@ export class LoginComponent implements OnInit {
     email: string;
     password: any;
 
+    redirectPath: string = 'home';
+
     constructor(
         private element: ElementRef,
         public fb: FormBuilder,
@@ -44,10 +46,17 @@ export class LoginComponent implements OnInit {
         private userService: UserService,
         private router: Router,
         private notify: NotificationsService,
-        private sidebarService: SidebarService
+        private sidebarService: SidebarService,
+        private route: ActivatedRoute
     ) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
+
+        this.route.queryParams.subscribe(params => {
+            if (params.redirectPath) {
+                this.redirectPath = params.redirectPath;
+            }
+        });
     }
 
     ngOnInit() {
@@ -136,7 +145,7 @@ export class LoginComponent implements OnInit {
                     this.storage.set("user.data", userData);
                     this.storage.set("user.authToken", userData.authToken);
                     this.sidebarService.changeLogin({ user: userData, isLogin: true });
-                    this.router.navigateByUrl('/home?login=success');
+                    this.router.navigate([this.redirectPath], { queryParams: { login: 'success' }});
                     console.log(`LOGIN SUCCESS FOR  ${userData}`);
                 }
             },

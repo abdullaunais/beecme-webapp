@@ -7,12 +7,12 @@ import { ObjectStorage } from '../utilities/object-storage';
 
 @Injectable()
 export class SharedService {
-
+  subjectCartSummary = new Subject<number>();
   constructor(
     private storage: ObjectStorage
-  ) { }
+  ) {}
 
-  subjectCartSummary = new Subject<number>();
+
 
   pushItem(item: Item) {
 

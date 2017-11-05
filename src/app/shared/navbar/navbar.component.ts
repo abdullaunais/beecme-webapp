@@ -56,6 +56,7 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
         console.log('initializing navbar');
+        this.cartCount = this.sharedService.getCart().length;
         this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });
         if (this.storage.get('user.login')) {
             this.isLoggedIn = this.storage.get('user.login');
