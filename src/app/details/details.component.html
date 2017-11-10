@@ -20,7 +20,7 @@
                             </div>
                             <div *ngIf="item?.qty>0" class="card-header card-header-text" data-background-color="green" class="item-availability">
                                 <p class="category" style="color: #fff;">
-                                    <i class="fa fa-check-circle"></i> &nbsp;Available Quantity: {{item.qty}}x{{item.unit}} 
+                                    <i class="fa fa-check-circle"></i> &nbsp;Available Quantity: {{item.qty}} x {{item.unit}} 
                                 </p>
                             </div>
                             <div *ngIf="item?.qty < 1" class="card-header card-header-text" data-background-color="red" class="item-availability">
