@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
         formSearch: ['', [Validators.required]]
     });
 
-    cartCount: number = 0;
+    cartCount: string;
     subCartSummary: Subscription;
 
     isLoggedIn: boolean = false;
@@ -56,13 +56,15 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
         console.log('initializing navbar');
-        if(this.sharedService.getCart()) {
-            this.cartCount = this.sharedService.getCart().length;
-        } else {
-            this.cartCount = 0;
-        }
             
         this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });
+        if(this.sharedService.getCart()) {
+            // this.cartCount = this.sharedService.getCart().length + ' items';
+            this.sharedService.refreshFinalTotal(this.sharedService.getCart());
+         } else {
+             this.cartCount = '0 items';
+         }
+ 
         if (this.storage.get('user.login')) {
             this.isLoggedIn = this.storage.get('user.login');
             this.user = this.storage.get('user.data');

@@ -7,7 +7,7 @@ import { ObjectStorage } from '../utilities/object-storage';
 
 @Injectable()
 export class SharedService {
-  subjectCartSummary = new Subject<number>();
+  subjectCartSummary = new Subject<string>();
   constructor(
     private storage: ObjectStorage
   ) {}
@@ -71,14 +71,14 @@ export class SharedService {
     return this.storage.get('delivery.cart');
   }
 
-  private refreshFinalTotal(cart: Item[]) {
+  public refreshFinalTotal(cart: Item[]) {
 
     let cartTotal = 0;
 
     if (cart.length === 0) {
       this.storage.set('delivery.cartTotal', 0);
       console.log('refresh cart total to 0');
-      this.subjectCartSummary.next(0);
+      this.subjectCartSummary.next('0 items');
       return;
     }
 
@@ -91,11 +91,11 @@ export class SharedService {
     console.log(`refreshFinalTotal calculated FT is ${cartTotal}`);
     this.storage.set('delivery.cartTotal', cartTotal);
     console.log(`cart.length is ${cart.length}`);
-    this.subjectCartSummary.next(cart.length);
+    this.subjectCartSummary.next(cart.length + ' of ' + this.getShop().currency + cartTotal);
     console.log(`refreshFinalTotal updated FT is ${this.getCartTotal()}`);
   }
 
-  getSubjectCartSummary(): Observable<number> {
+  getSubjectCartSummary(): Observable<string> {
     console.log('Firing > getSubjectCartSummary()');
     return this.subjectCartSummary.asObservable();
   }
@@ -129,6 +129,6 @@ export class SharedService {
     this.storage.remove('delivery.cart');
     this.storage.remove('delivery.cartShop');
     this.storage.remove('delivery.cartTotal');
-    this.subjectCartSummary.next(0);
+    this.subjectCartSummary.next('0 items');
   }
 }
