@@ -32,13 +32,14 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
         formSearch: ['', [Validators.required]]
     });
 
-    cartCount: number = 0;
+    cartCount: string;
     subCartSummary: Subscription;
 
     isLoggedIn: boolean = false;
     user: any = {};
 
     notifications: Array<any> = [];
+    city: any = {};
 
     @ViewChild('app-navbar-cmp') button: any;
 
@@ -55,9 +56,17 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
+        this.city = this.storage.get('location.city');
         console.log('initializing navbar');
-        this.cartCount = this.sharedService.getCart().length;
+            
         this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });
+        if(this.sharedService.getCart()) {
+            // this.cartCount = this.sharedService.getCart().length + ' items';
+            this.sharedService.refreshFinalTotal(this.sharedService.getCart());
+         } else {
+             this.cartCount = '0 items';
+         }
+ 
         if (this.storage.get('user.login')) {
             this.isLoggedIn = this.storage.get('user.login');
             this.user = this.storage.get('user.data');
