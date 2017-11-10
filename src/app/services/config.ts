@@ -9,15 +9,11 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class Config {
-  private readonly serverHost = '54.254.246.56'; // local: 192.168.0.102 // aws: 54.254.246.56
-  private readonly serverPort = '8080';
-  private readonly serverPath = 'delivery';
-  private serverUrl: string;
+  private readonly serverUrl: string = `http://beecme.com/delivery`;
+  //  private readonly serverUrl: string = `http://localhost:8080/delivery`;
   constructor() {
-  this.serverUrl = `http://${this.serverHost}:${this.serverPort}/${this.serverPath}`;
-  // this.serverUrl = `http://localhost:8080/delivery`;
+  
   }
-
   getServerUrl() {
     return this.serverUrl;
   }

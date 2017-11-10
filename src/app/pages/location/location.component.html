@@ -88,7 +88,7 @@
                                         </md-option>
                                     </md-select>
 
-                                    <md-select [color]="colorTheme" [(ngModel)]="selectedProvinceId" (change)="provinceChanged()" placeholder="Select Province"
+                                    <md-select [color]="colorTheme" [(ngModel)]="selectedProvinceId" (change)="provinceChanged()" placeholder="Select District"
                                         name="province" ngClass="btn btn-default simple">
                                         <md-option *ngFor="let province of provinceList" [value]="province.id">
                                             {{ province.nameEn }}

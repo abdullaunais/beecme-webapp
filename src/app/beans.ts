@@ -6,7 +6,6 @@ export class MailBean {
 }
 
 export class Review {
-
   id: number;
   shopId: number;
   userId: number;
@@ -95,7 +94,6 @@ export class User {
 }
 
 export class OrderDetail {
-
   cartId: number;
   itemCode: number;
   quantity: number;
@@ -107,7 +105,6 @@ export class OrderDetail {
 }
 
 export class OrderDetailReq {
-
   cartId: number;
   itemCode: number;
   quantity: number;
@@ -119,7 +116,6 @@ export class OrderDetailReq {
 }
 
 export class OrderHeader {
-  constructor() { }
   userId: number;
   cartId: number;
   // userName ;
@@ -142,10 +138,10 @@ export class OrderHeader {
   dlvAddressCity: any;
   dlvAddressProvince: any;
   dlvAddressCountry: any;
+  constructor() { }
 }
 
 export class OrderHeaderReq {
-  constructor() { }
   userId: any;
   cartId: any;
   // userName ;
@@ -168,10 +164,10 @@ export class OrderHeaderReq {
   dlvAddressCity: any;
   dlvAddressProvince: any;
   dlvAddressCountry: any;
+  constructor() { }
 }
 
 export class OrderDetails {
-  constructor() { }
   cartId: number;
   itemCode: number;
   quantity: number;
@@ -180,16 +176,15 @@ export class OrderDetails {
   itemDescEn: string;
   itemDescAr: string;
   comment: string;
+  constructor() { }
 }
 
 export class Cart {
-
   orderHeader: OrderHeader = new OrderHeader();
   orderDetails: Item[] = [];
 }
 
 export class CartReq {
-
   orderHeaderReq: OrderHeaderReq = new OrderHeaderReq();
   dlvAddressReq: Address = new Address();
   orderDetailsReq: ItemReq[] = [];
@@ -256,7 +251,6 @@ export class AddCart {
 }
 */
 export class Item {
-
   itemCode: number;
   category: number;
   nameEn: string;
@@ -281,7 +275,6 @@ export class Item {
 }
 
 export class ItemReq {
-
   itemCode: number;
   category: number;
   nameEn: string;

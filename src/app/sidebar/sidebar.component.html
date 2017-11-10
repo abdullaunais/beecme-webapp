@@ -15,9 +15,9 @@
 
     <div class="user">
         <div class="photo">
-            <img *ngIf="user.profilePicture" [src]="isLogin ? user.profilePicture : '../assets/img/profile_default_grey.webp'" (error)="profilePicError()"
+            <img *ngIf="user.profilePicture" [src]="isLogin ? user.profilePicture : '/assets/img/profile_default_grey.webp'" (error)="profilePicError()"
             />
-            <img *ngIf="!user.profilePicture" [src]="'../assets/img/profile_default_grey.webp'" />
+            <img *ngIf="!user.profilePicture" [src]="'/assets/img/profile_default_grey.webp'" />
         </div>
         <div class="info">
             <a data-toggle="collapse" href="#collapseExample" class="collapsed">

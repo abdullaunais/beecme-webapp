@@ -155,16 +155,6 @@ export class DeliveryService {
       .catch((err) => this.handleError(err));
   }
 
-  getSchedules(cityId: number): Observable<any> {
-    const queryParams = {
-      city: cityId
-    };
-    const requestUrl: string = this.serviceRootUrl + this.SCHEDULE_URL + this.encodeQueryData(queryParams);
-    return this.http.get(requestUrl, this.options)
-      .map((res) => this.extractData(res))
-      .catch((err) => this.handleError(err));
-  }
-
   getOrders(userId: number, start: number, offset: number): Observable<any> {
     const queryParams = {
       type: 32,

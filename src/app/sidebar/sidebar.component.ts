@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SidebarService } from './sidebar.service';
-import { Subscription } from 'rxjs';
 import { SharedService } from '../services/shared.service';
+import { Subscription } from 'rxjs';
 
 declare const $: any;
 
@@ -114,7 +114,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
 
     profilePicError() {
-        this.user.profilePicture = '../assets/img/profile_default_grey.webp';
+        this.user.profilePicture = '/assets/img/profile_default_grey.webp';
     }
 
     ngOnDestroy() {

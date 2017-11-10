@@ -49,7 +49,7 @@
                     </div>
                     <div class="row">
                       <div class="col-sm-6 item-label">
-                        Province
+                        District
                       </div>
                       <div class="col-sm-6 item-value">
                         {{ currentProvince.nameEn }}
@@ -85,7 +85,7 @@
                         Select Province
                       </div>
                       <div class="col-sm-6">
-                        <md-select [color]="colorTheme" [(ngModel)]="selectedProvinceId" (change)="provinceChanged()" placeholder="Province" name="province"
+                        <md-select [color]="colorTheme" [(ngModel)]="selectedProvinceId" (change)="provinceChanged()" placeholder="District" name="province"
                           ngClass="btn btn-info simple location-select">
                           <md-option *ngFor="let province of provinceList" [value]="province.id">
                             {{ province.nameEn }}
