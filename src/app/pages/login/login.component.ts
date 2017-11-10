@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ObjectStorage } from '../../utilities/object-storage';
 import { UserService } from '../../services/user.service';
@@ -12,7 +12,8 @@ declare var $: any;
 @Component({
     selector: 'app-login-cmp',
     templateUrl: './login.component.html',
-    providers: [UserService]
+    providers: [UserService],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class LoginComponent implements OnInit {

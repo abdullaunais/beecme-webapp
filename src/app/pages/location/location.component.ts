@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DeliveryService } from '../../services/delivery.service';
 import { ObjectStorage } from '../../utilities/object-storage';
 import { Router } from '@angular/router';
@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'app-location-cmp',
     templateUrl: './location.component.html',
-    providers: [DeliveryService]
+    providers: [DeliveryService],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class LocationComponent implements OnInit {

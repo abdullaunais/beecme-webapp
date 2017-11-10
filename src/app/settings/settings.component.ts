@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ObjectStorage } from '../utilities/object-storage';
 import { DeliveryService } from '../services/delivery.service';
 
@@ -7,7 +7,8 @@ declare var swal: any;
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  styleUrls: ['./settings.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SettingsComponent implements OnInit {
   breadcrumbArray: { title: string; icon: string; path: string; }[];

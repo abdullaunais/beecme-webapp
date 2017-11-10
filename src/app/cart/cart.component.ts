@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ObjectStorage } from '../utilities/object-storage';
 import { UserService } from '../services/user.service';
 import { SharedService } from '../services/shared.service';
@@ -15,7 +15,8 @@ declare var swal: any;
     selector: 'app-cart',
     templateUrl: './cart.component.html',
     styleUrls: ['./cart.component.scss'],
-    providers: [UserService, DeliveryService]
+    providers: [UserService, DeliveryService],
+    encapsulation: ViewEncapsulation.None
 })
 export class CartComponent {
     activeCartItemIndex: number;

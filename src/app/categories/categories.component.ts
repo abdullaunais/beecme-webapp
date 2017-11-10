@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 // import { BreadcrumbService } from '../breadcrumb/breadcrumb.service';
 
 @Component({
     selector: 'app-categories',
-    templateUrl: './categories.component.html'
+    templateUrl: './categories.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class CategoriesComponent {
     breadcrumbArray: { title: string; icon: string; path: string; }[];
