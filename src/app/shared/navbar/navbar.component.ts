@@ -39,6 +39,7 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
     user: any = {};
 
     notifications: Array<any> = [];
+    city: any = {};
 
     @ViewChild('app-navbar-cmp') button: any;
 
@@ -55,6 +56,7 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
+        this.city = this.storage.get('location.city');
         console.log('initializing navbar');
             
         this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });
