@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { ObjectStorage } from '../utilities/object-storage';
 import { UserService } from '../services/user.service';
-import { DeliveryService } from "../services/delivery.service";
-import { LocationDetails, Message, Address } from "../beans";
+import { DeliveryService } from '../services/delivery.service';
+import { LocationDetails, Message, Address } from '../beans';
 import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Constant } from '../services/constant';
 
 @Component({
     selector: 'app-user-cmp',
@@ -16,17 +17,17 @@ export class UserComponent {
     breadcrumbArray: Array<any>;
     msg: Message;
     user: any = {};
-    //addressList: Array<any> = [];
+    // addressList: Array<any> = [];
     selectedShopLocation: LocationDetails;
     country: any;
     province: any;
     city: any;
-    //nickname: string;
-    //street: string;
+    // nickname: string;
+    // street: string;
     dlvAddress: any = {};
     addresses: Address[];
     register: any = {};
-    confirmPassword = new FormControl("", [verifyPassword.bind(undefined, this.register)]);
+    confirmPassword = new FormControl('', [verifyPassword.bind(undefined, this.register)]);
 
     isLoading: boolean = false;
     isError: boolean = false;
@@ -37,11 +38,11 @@ export class UserComponent {
         private userService: UserService,
         private deliveryService: DeliveryService,
     ) {
-        this.user = this.storage.get('user.data');
+        this.user = this.storage.get(Constant.USER_OBJECT);
 
-        this.country = this.storage.get('location.country');
-        this.province = this.storage.get('location.province');
-        this.city = this.storage.get('location.city');
+        this.country = this.storage.get(Constant.COUNTRY);
+        this.province = this.storage.get(Constant.PROVINCE);
+        this.city = this.storage.get(Constant.CITY);
 
         this.initialize();
     }
@@ -57,7 +58,7 @@ export class UserComponent {
             this.isError = true;
         }).subscribe(data => {
             this.addresses = data;
-            console.log(`users current address list ${JSON.stringify(this.addresses)}`)
+            console.log(`users current address list ${JSON.stringify(this.addresses)}`);
             // this.locationLabel = this.city.nameEn + ", \n" + this.province.nameEn + ",\n" + this.country.nameEn + ".";
             this.isLoading = false;
         });
@@ -71,7 +72,7 @@ export class UserComponent {
 
     initEditProfile() {
         console.log(`edit user properties ${JSON.stringify(this.user)}`);
-        if (this.user) { //user already logged in
+        if (this.user) { // user already logged in
             this.register['userId'] = this.user.userId;
             this.register['username'] = this.user.username;
             this.register['email'] = this.user.email;
@@ -103,12 +104,12 @@ export class UserComponent {
         address.countryId = this.selectedShopLocation.countryId;
         address.userId = this.user.userId;
 
-        console.log(JSON.stringify(address))
+        console.log(JSON.stringify(address));
         this.userService.addAddress(address)
             .subscribe(data => {
                 this.msg = new Message();
                 this.msg = data.json();
-                console.log('ADD NEW ADDRESS STATUS ' + data.json())
+                console.log('ADD NEW ADDRESS STATUS ' + data.json());
             },
             err => {
                 this.msg = new Message();
@@ -135,7 +136,7 @@ export class UserComponent {
             .subscribe(data => {
                 this.msg = new Message();
                 this.msg = data.json();
-                console.log('DELETE ADDRESS STATUS ' + data.json())
+                console.log('DELETE ADDRESS STATUS ' + data.json());
             },
             err => {
                 this.msg = new Message();

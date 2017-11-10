@@ -53,9 +53,9 @@ export class RegisterComponent implements OnInit {
         private router: Router,
         private notify: NotificationsService,
     ) {
-        this.country = this.storage.get('location.country');
-        this.province = this.storage.get('location.province');
-        this.city = this.storage.get('location.city');
+        this.country = this.storage.get(Constant.COUNTRY);
+        this.province = this.storage.get(Constant.PROVINCE);
+        this.city = this.storage.get(Constant.CITY);
     }
     ngOnInit() { }
 
@@ -180,19 +180,15 @@ export class RegisterComponent implements OnInit {
                 // }).subscribe(userData => {
                 //     console.log(`register status ${userData}`);
 
-                    // this.storage.set('user.login', true);
-                    // this.storage.set('user.data', userData);
-                    // this.storage.set('user.authToken', userData);
-
                     this.userService.authenticate(this.email, this.password)
                     .subscribe(res => {
                         console.log(`login status from backend ${JSON.stringify(res)}`);
                         if (res.status === 200) {
-                            let userData = res.json();
+                            const userData = res.json();
                             console.log(userData);
-                            this.storage.set("user.login", true);
-                            this.storage.set("user.data", userData);
-                            this.storage.set("user.authToken", userData.authToken);
+                            this.storage.set(Constant.USER_SET, true);
+                            this.storage.set(Constant.USER_OBJECT, userData);
+                            this.storage.set(Constant.AUTHENTICATION_TOKEN, userData.authToken);
                             this.sidebarService.changeLogin({ user: userData, isLogin: true });
                                                                    
                             swal({

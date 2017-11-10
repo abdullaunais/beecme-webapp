@@ -3,7 +3,7 @@ import { Subject } from 'rxjs/Subject';
 import { Item, Shop } from '../beans';
 import { Observable } from 'rxjs/Observable';
 import { ObjectStorage } from '../utilities/object-storage';
-
+import { Constant } from './constant';
 
 @Injectable()
 export class SharedService {
@@ -24,7 +24,7 @@ export class SharedService {
     // finalTotal calculation
     // Notify the event to subscribers:
 
-    let cache: Item[] = this.storage.get('delivery.cart');
+    let cache: Item[] = this.storage.get(Constant.CART_ITEMS);
     if (cache === null) {
       cache = [];
     } else {
@@ -35,7 +35,7 @@ export class SharedService {
     this.remove(cache, 'itemCode', item.itemCode);
     cache.push(item);
 
-    this.storage.set('delivery.cart', cache);
+    this.storage.set(Constant.CART_ITEMS, cache);
     this.refreshFinalTotal(cache);
     return true;
   }
@@ -47,11 +47,11 @@ export class SharedService {
     // set the temp var as the 'cart' in storage	
     // Notify the event to subscribers: 
 
-    const cache: Item[] = this.storage.get('delivery.cart');
+    const cache: Item[] = this.storage.get(Constant.CART_ITEMS);
     this.remove(cache, 'itemCode', c.itemCode);
 
-    this.storage.remove('delivery.cart');
-    this.storage.set('delivery.cart', cache);
+    this.storage.remove(Constant.CART_ITEMS);
+    this.storage.set(Constant.CART_ITEMS, cache);
     this.refreshFinalTotal(cache);
   }
 
@@ -68,7 +68,7 @@ export class SharedService {
   }
 
   getCart(): Item[] {
-    return this.storage.get('delivery.cart');
+    return this.storage.get(Constant.CART_ITEMS);
   }
 
   public refreshFinalTotal(cart: Item[]) {
@@ -76,20 +76,20 @@ export class SharedService {
     let cartTotal = 0;
 
     if (cart.length === 0) {
-      this.storage.set('delivery.cartTotal', 0);
+      this.storage.set(Constant.CART_TOTAL, 0);
       console.log('refresh cart total to 0');
       this.subjectCartSummary.next('0 items');
       return;
     }
 
     for (const item of cart) {
-      cartTotal = cartTotal + (item.quantity * item.price)
+      cartTotal = cartTotal + (item.quantity * item.price);
     }
 
-    const df = this.storage.get('delivery.cartShop').deliveryCharge;
+    const df = this.storage.get(Constant.CART_SHOP).deliveryCharge;
     cartTotal = cartTotal + df;
     console.log(`refreshFinalTotal calculated FT is ${cartTotal}`);
-    this.storage.set('delivery.cartTotal', cartTotal);
+    this.storage.set(Constant.CART_TOTAL, cartTotal);
     console.log(`cart.length is ${cart.length}`);
     this.subjectCartSummary.next(cart.length + ' of ' + this.getShop().currency + cartTotal);
     console.log(`refreshFinalTotal updated FT is ${this.getCartTotal()}`);
@@ -102,16 +102,16 @@ export class SharedService {
 
   getCartTotal() {
     // this.cartChanged.emit(this.finalTotal);
-    const total: number = +(this.storage.get('delivery.cartTotal'));
+    const total: number = +(this.storage.get(Constant.CART_TOTAL));
     return total;
   }
 
   setShop(shop: Shop) {
-    this.storage.set('delivery.cartShop', shop);
+    this.storage.set(Constant.CART_SHOP, shop);
   }
 
   getShop(): Shop {
-    const s = this.storage.get('delivery.cartShop');
+    const s = this.storage.get(Constant.CART_SHOP);
     return s;
   }
 
@@ -126,9 +126,9 @@ export class SharedService {
   }
 
   resetCart() {
-    this.storage.remove('delivery.cart');
-    this.storage.remove('delivery.cartShop');
-    this.storage.remove('delivery.cartTotal');
+    this.storage.remove(Constant.CART_ITEMS);
+    this.storage.remove(Constant.CART_SHOP);
+    this.storage.remove(Constant.CART_TOTAL);
     this.subjectCartSummary.next('0 items');
   }
 }

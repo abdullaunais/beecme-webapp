@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DeliveryService } from '../../services/delivery.service';
 import { ObjectStorage } from '../../utilities/object-storage';
 import { Router } from '@angular/router';
+import { Constant } from '../../services/constant';
 
 @Component({
     selector: 'app-location-cmp',
@@ -48,7 +49,7 @@ export class LocationComponent implements OnInit {
         this.deliveryService.getLocation(this.type, this.value, this.start, this.offset).catch((err): any => {
             console.log('Error ', err);
         }).subscribe((data) => {
-            let json = JSON.stringify(data);
+            const json = JSON.stringify(data);
             this.countryList = JSON.parse(json);
             console.log(this.countryList);
         });
@@ -93,17 +94,17 @@ export class LocationComponent implements OnInit {
     }
 
     cityChanged() {
-        let value: number = this.selectedCityId;
+        const value: number = this.selectedCityId;
         this.selectedCity = this.cityList.find(city => city.id === value);
         this.citySelected = true;
     }
 
     getStarted() {
         if (this.countrySelected && this.provinceSelected && this.citySelected) {
-            this.storage.set('location.country', this.selectedCountry);
-            this.storage.set('location.province', this.selectedProvince);
-            this.storage.set('location.city', this.selectedCity);
-            this.storage.set('location.set', true);
+            this.storage.set(Constant.COUNTRY, this.selectedCountry);
+            this.storage.set(Constant.PROVINCE, this.selectedProvince);
+            this.storage.set(Constant.CITY, this.selectedCity);
+            this.storage.set(Constant.LOCATION_SET, true);
 
             this.router.navigate(['/']);
         }

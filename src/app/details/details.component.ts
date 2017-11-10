@@ -43,7 +43,7 @@ export class DetailsComponent {
     }
 
     initialize() {
-        this.city = this.storage.get('location.city');
+        this.city = this.storage.get(Constant.CITY);
         this.route.queryParams.subscribe(params => {
             this.shop['shopId'] = params['shop'];
             this.item['itemCode'] = params['item'];
@@ -84,7 +84,7 @@ export class DetailsComponent {
     }
 
     // validateCart() {
-    //     const cartShop = this.storage.get('delivery.cartShop');
+    //     const cartShop = this.storage.get(Constant.CART_SHOP);
     //     if (cartShop) {
     //         if (cartShop.shopId) {
     //             if (parseInt(cartShop.shopId, 10) !== parseInt(this.shop.shopId, 10)) {
@@ -97,8 +97,8 @@ export class DetailsComponent {
     //                     cancelButtonColor: '#d33',
     //                     confirmButtonText: 'Clear Cart'
     //                 }).then(() => {
-    //                     this.storage.remove('delivery.cart');
-    //                     this.storage.remove('delivery.cartShop');
+    //                     this.storage.remove(Constant.CART_ITEMS);
+    //                     this.storage.remove(Constant.CART_SHOP);
     //                     this.cartService.setCartCount(0);
 
     //                     this.addToCart();
@@ -130,9 +130,9 @@ export class DetailsComponent {
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Clear Cart'
             }).then(() => {
-                //this.storage.remove('delivery.cart');
-                //this.storage.remove('delivery.cartShop');
-                //this.cartService.setCartCount(0);
+                // this.storage.remove(Constant.CART_ITEMS);
+                // this.storage.remove(Constant.CART_SHOP);
+                // this.cartService.setCartCount(0);
                 this.sharedService.resetCart();
                 this.addToCart();
             }).catch(() => {
@@ -153,7 +153,7 @@ export class DetailsComponent {
 
     // addToCart() {
     //     this.item.quantity = this.selectedQty;
-    //     let cart: Array<any> = this.storage.get('delivery.cart');
+    //     let cart: Array<any> = this.storage.get(Constant.CART_ITEMS);
     //     if (!cart) {
     //         cart = [];
     //     }
@@ -162,13 +162,13 @@ export class DetailsComponent {
     //     if (prevCart && prevCart.length > 0) {
     //         const index = cartItems.findIndex(x => x.itemCode === this.item.itemCode);
     //         cartItems[index] = this.item;
-    //         this.storage.set('delivery.cart', cartItems);
+    //         this.storage.set(Constant.CART_ITEMS, cartItems);
     //         this.cartService.setCartCount(cartItems.length);
-    //         this.storage.set('delivery.cartShop', this.shop);
+    //         this.storage.set(Constant.CART_SHOP, this.shop);
     //     } else {
     //         cartItems.push(this.item);
-    //         this.storage.set('delivery.cart', cartItems);
-    //         this.storage.set('delivery.cartShop', this.shop);
+    //         this.storage.set(Constant.CART_ITEMS, cartItems);
+    //         this.storage.set(Constant.CART_SHOP, this.shop);
     //     }
     // }
 

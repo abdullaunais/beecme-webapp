@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DeliveryService } from '../services/delivery.service';
 import { ObjectStorage } from '../utilities/object-storage';
+import { Constant } from '../services/constant';
 
 @Component({
   selector: 'app-search-list',
@@ -32,7 +33,7 @@ export class SearchListComponent {
     this.isLoading = true;
     this.isAvailable = true;
     this.noMoreItems = false;
-    this.city = this.storage.get('location.city');
+    this.city = this.storage.get(Constant.CITY);
     this.route.queryParams.subscribe(params => {
       if (params['query']) {
         this.keyword = params['query'];

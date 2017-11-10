@@ -5,6 +5,7 @@ import { OnClickEvent } from 'angular-star-rating';
 import { OnRatingChangeEven } from 'angular-star-rating';
 import { OnHoverRatingChangeEvent } from 'angular-star-rating';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Constant } from '../services/constant';
 
 declare const $: any;
 declare const swal: any;
@@ -43,7 +44,7 @@ export class OrderHistoryComponent implements AfterViewInit {
         public formBuilder: FormBuilder,
         private deliveryService: DeliveryService
     ) {
-        this.authToken = this.storage.get('user.authToken');
+        this.authToken = this.storage.get(Constant.AUTHENTICATION_TOKEN);
         this.breadcrumbArray = [
             { title: 'Home', icon: 'home', path: 'home' },
             { title: 'Orders', icon: 'assignment_turned_in', path: 'orders' }
@@ -52,7 +53,7 @@ export class OrderHistoryComponent implements AfterViewInit {
     }
     initialize() {
         this.isLoading = true;
-        this.user = this.storage.get('user.data');
+        this.user = this.storage.get(Constant.USER_OBJECT);
         this.deliveryService.getOrders(this.user.userId, this.start, this.offset).catch((err): any => {
             this.isLoading = false;
         }).subscribe(orderRes => {

@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DeliveryService } from '../services/delivery.service';
 import { ObjectStorage } from '../utilities/object-storage';
 import { NotificationsService } from 'angular2-notifications';
-import { DashboardCounts } from "../beans";
+import { DashboardCounts } from '../beans';
 import { Constant } from '../services/constant';
 // import { BreadcrumbService } from '../breadcrumb/breadcrumb.service';
 
@@ -45,9 +45,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         private notify: NotificationsService
     ) {
         this.breadcrumbArray = [{ title: 'Home', icon: 'home', path: 'home' }];
-        this.country = this.storage.get('location.country');
-        this.province = this.storage.get('location.province');
-        this.city = this.storage.get('location.city');
+        this.country = this.storage.get(Constant.COUNTRY);
+        this.province = this.storage.get(Constant.PROVINCE);
+        this.city = this.storage.get(Constant.CITY);
         this.initialize();
     }
 

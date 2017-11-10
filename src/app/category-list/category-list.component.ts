@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DeliveryService } from "../services/delivery.service";
+import { DeliveryService } from '../services/delivery.service';
 import { ObservableInput } from 'rxjs/Observable';
 import { ObjectStorage } from '../utilities/object-storage';
+import { Constant } from '../services/constant';
 
 @Component({
   selector: 'app-category-list',
@@ -22,9 +23,9 @@ export class CategoryListComponent implements OnInit {
     this.isLoading = true;
     this.isAvailable = true;
     this.isError = false;
-    console.log('this.storage.get(location.set)  ' + this.storage.get('location.set'));
-    if (this.storage.get('location.set')) {
-      this.city = this.storage.get('location.city');
+    console.log('this.storage.get(location.set)  ' + this.storage.get(Constant.LOCATION_SET));
+    if (this.storage.get(Constant.LOCATION_SET)) {
+      this.city = this.storage.get(Constant.CITY);
     } else {
       return;
     }
@@ -38,9 +39,9 @@ export class CategoryListComponent implements OnInit {
       this.isError = true;
       console.log(err);
     }).subscribe((data: any) => {
-      //let json = JSON.stringify(data);
-      let catArray = data; // JSON.parse(json);
-      //console.log('catgories '+ catArray);
+      // let json = JSON.stringify(data);
+      const catArray = data; // JSON.parse(json);
+      // console.log('catgories '+ catArray);
       if (catArray) {
         if (catArray.length > 1) {
           let timeout = 0;
@@ -67,5 +68,4 @@ export class CategoryListComponent implements OnInit {
   ngOnInit() {
     this.initialize();
   }
-
 }

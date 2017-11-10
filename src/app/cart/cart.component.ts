@@ -7,6 +7,7 @@ import { DeliveryService } from '../services/delivery.service';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { Validators, FormBuilder } from '@angular/forms';
+import { Constant } from '../services/constant';
 
 declare var $: any;
 declare var swal: any;
@@ -56,10 +57,10 @@ export class CartComponent {
         private router: Router,
         private formBuilder: FormBuilder
     ) {
-        this.user = this.storage.get('user.data');
-        this.country = this.storage.get('location.country');
-        this.province = this.storage.get('location.province');
-        this.city = this.storage.get('location.city');
+        this.user = this.storage.get(Constant.USER_OBJECT);
+        this.country = this.storage.get(Constant.COUNTRY);
+        this.province = this.storage.get(Constant.PROVINCE);
+        this.city = this.storage.get(Constant.CITY);
         this.breadcrumbArray = [
             { title: 'Home', icon: 'home', path: 'home' },
             { title: 'My Cart', icon: 'shopping_cart', path: 'cart' }
@@ -94,13 +95,13 @@ export class CartComponent {
             this.isLoading = false;
         });
 
-        // const cart = this.storage.get('delivery.cart');
+        // const cart = this.storage.get(Constant.CART_ITEMS);
         this.cartItems = this.sharedService.getCart();
         console.log(this.cartItems);
         console.log(`Final Total is ${this.sharedService.getCartTotal()}`);
         if (this.cartItems && this.cartItems.length > 0) {
             // if (cart.length > 0) {
-            // this.cartShop = this.storage.get('delivery.cartShop');
+            // this.cartShop = this.storage.get(Constant.CART_SHOP);
             // this.cartShop = cartShop;
             this.shopIsVisible = true;
             this.cartIsEmpty = false;
@@ -119,9 +120,9 @@ export class CartComponent {
             this.cartIsEmpty = true;
         }
         this.isLoading = false;
-        this.country = this.storage.get('location.country');
-        this.province = this.storage.get('location.province');
-        this.city = this.storage.get('location.city');
+        this.country = this.storage.get(Constant.COUNTRY);
+        this.province = this.storage.get(Constant.PROVINCE);
+        this.city = this.storage.get(Constant.CITY);
         console.log(`users city is ${JSON.stringify(this.city)} province ${JSON.stringify(this.province)}`)
     }
 
@@ -131,9 +132,9 @@ export class CartComponent {
         //   this.cartItems.forEach((item) => {
         //     this.totalAmount = this.totalAmount + (item.price * item.quantity);
         //   });
-        //   this.storage.set('delivery.cart', this.cartItems);
+        //   this.storage.set(Constant.CART_ITEMS, this.cartItems);
         //   if (this.cartItems.length === 0) {
-        //     this.storage.set('delivery.cartShop', {});
+        //     this.storage.set(Constant.CART_SHOP, {});
         //     this.shopIsVisible = false;
         //     this.cartIsEmpty = true;
         //   }
@@ -173,7 +174,7 @@ export class CartComponent {
         if (!this.isNewAddress && (!this.selectedAddress || this.selectedAddress.id < 1)) {
             let err = new Message();
             err.code = -1;
-            err.message = 'Delivery address not entered or selected'
+            err.message = 'Delivery address not entered or selected';
             this.msg = err;
         } else if (this.isNewAddress) {
             // new address should be entered
@@ -192,7 +193,7 @@ export class CartComponent {
         } else {
             let err = new Message();
             err.code = -1;
-            err.message = 'Please check your delivery address and try again'
+            err.message = 'Please check your delivery address and try again';
             this.msg = err;
         }
         console.log('selected address is ' + JSON.stringify(this.selectedAddress));
@@ -202,7 +203,7 @@ export class CartComponent {
         // console.log('SAVE CART = ' + (this.sharedService.getUser()));
 
         // if (this.sharedService.getUser()) {
-        myCartReq.orderHeaderReq.userId = this.user.userId; //this.sharedService.getUser().userId;
+        myCartReq.orderHeaderReq.userId = this.user.userId; // this.sharedService.getUser().userId;
         myCartReq.orderHeaderReq.shopId = this.sharedService.getShop().shopId;
         myCartReq.orderHeaderReq.currency = this.sharedService.getShop().currency;
         myCartReq.orderHeaderReq.totalAmount = this.sharedService.getCartTotal();
@@ -254,7 +255,7 @@ export class CartComponent {
             this.cartItems[this.activeCartItemIndex].commentDtl = comment;
         }
 
-        this.storage.set('delivery.cart', this.cartItems);
+        this.storage.set(Constant.CART_ITEMS, this.cartItems);
 
         this.activeCartItemIndex = null;
         this.activeCartItem = null;

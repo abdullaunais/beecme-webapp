@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Config } from './config';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-// import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Rx';
-import { Address } from "../beans";
-import { ObjectStorage } from "../utilities/object-storage";
+import { Address } from '../beans';
+import { ObjectStorage } from '../utilities/object-storage';
+import { Constant } from './constant';
 
 /*
   Generated class for the DeliveryService provider.
@@ -92,8 +92,8 @@ export class UserService {
 
     const requestUrl: string = this.serviceRootUrl + this.AUTH_URL;
     return this.http.post(requestUrl, body, options);
-    //.map((res) => this.extractData(res))
-    //.catch((err) => this.handleError(err));
+    // .map((res) => this.extractData(res))
+    // .catch((err) => this.handleError(err));
   }
 
   forgotPassword(email: string): Observable<any> {
@@ -135,23 +135,23 @@ export class UserService {
     return Observable.throw(error.json() || 'Server Error');
   }
 
-  addAddress(address: Address) : Observable<Response> {
+  addAddress(address: Address): Observable<Response> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
-    headers.append('Authorization', this.storage.get('user.data').authToken);
-    console.log(`Authorization token is ${JSON.stringify(this.storage.get('user.data'))}`);
+    headers.append('Authorization', this.storage.get(Constant.USER_OBJECT).authToken);
+    console.log(`Authorization token is ${JSON.stringify(this.storage.get(Constant.USER_OBJECT))}`);
     const url = this.serviceRootUrl + '/users/address/' + address.userId;
     console.log(`URL ADD NEW ADDRESS:  ${url} and new address is ${JSON.stringify(address)}`);
-    return this.http.post(url,JSON.stringify(address), options);
+    return this.http.post(url, JSON.stringify(address), options);
   }
 
-  deleteAddress(addressId: number) : Observable<Response> {
+  deleteAddress(addressId: number): Observable<Response> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
-    const authToken = this.storage.get('user.authToken');
+    const authToken = this.storage.get(Constant.AUTHENTICATION_TOKEN);
     console.log(`authToken:  ${authToken}`);
     const options = new RequestOptions({ headers: headers });
     headers.append('Authorization', authToken );
-    console.log(`Authorization token is ${JSON.stringify(this.storage.get('user.data'))}`);
+    console.log(`Authorization token is ${JSON.stringify(this.storage.get(Constant.USER_OBJECT))}`);
     const url = this.serviceRootUrl + '/users/address/' + addressId;
     console.log(`URL DELETE ADDRESS:  ${url} of ID ${addressId}`);
     return this.http.delete(url, options);
@@ -159,12 +159,12 @@ export class UserService {
   
   getAddresses(userId: number): Observable<Address[]> {
     // create header for the http call
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
 
     const url = this.serviceRootUrl + '/users/address/' + userId;
     console.log(`url for addresses for user :  ${url}`);
     return this.http.get(url, options)
-      .map(res => (res.json()))
+      .map(res => (res.json()));
   }  
 }

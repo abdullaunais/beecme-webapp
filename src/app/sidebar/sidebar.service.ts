@@ -1,6 +1,7 @@
-import {Injectable}      from '@angular/core'
+import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { ObjectStorage } from '../utilities/object-storage';
+import { Constant } from '../services/constant';
 
 @Injectable()
 export class SidebarService {
@@ -10,13 +11,13 @@ export class SidebarService {
   userItem: any;
 
   constructor(private storage: ObjectStorage) {
-      if(this.storage.get('user.login')) {
-          let userObject = this.storage.get('user.data');
+      if (this.storage.get(Constant.USER_SET)) {
+          const userObject = this.storage.get(Constant.USER_OBJECT);
           this._userObjectSource =  new BehaviorSubject<any>({ user: userObject, isLogin: true});
       } else {
-          let userObject = {
+          const userObject = {
               username: 'My Account'
-          }
+          };
           this._userObjectSource =  new BehaviorSubject<any>({ user: userObject, isLogin: false});
       }
       this.userItem = this._userObjectSource.asObservable();

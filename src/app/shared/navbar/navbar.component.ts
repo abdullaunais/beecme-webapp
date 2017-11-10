@@ -7,6 +7,7 @@ import { SharedService } from '../../services/shared.service';
 import { Validators, FormBuilder } from '@angular/forms';
 import { ObjectStorage } from '../../utilities/object-storage';
 import { DeliveryService } from '../../services/delivery.service';
+import { Constant } from '../../services/constant';
 
 const misc: any = {
     navbar_menu_visible: 0,
@@ -56,20 +57,20 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
-        this.city = this.storage.get('location.city');
+        this.city = this.storage.get(Constant.CITY);
         console.log('initializing navbar');
-            
+
         this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });
-        if(this.sharedService.getCart()) {
+        if (this.sharedService.getCart()) {
             // this.cartCount = this.sharedService.getCart().length + ' items';
             this.sharedService.refreshFinalTotal(this.sharedService.getCart());
-         } else {
-             this.cartCount = '0 items';
-         }
- 
-        if (this.storage.get('user.login')) {
-            this.isLoggedIn = this.storage.get('user.login');
-            this.user = this.storage.get('user.data');
+        } else {
+            this.cartCount = '0 items';
+        }
+
+        if (this.storage.get(Constant.USER_SET)) {
+            this.isLoggedIn = this.storage.get(Constant.USER_SET);
+            this.user = this.storage.get(Constant.USER_OBJECT);
             this.deliveryService.getNotifications(this.user.userId).catch((err): any => {
                 // ignore
             }).subscribe((res) => {
@@ -181,26 +182,27 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
         }
     };
 
-    getTitle() {
-        const titlee: any = this.location.prepareExternalUrl(this.location.path());
-        for (let i = 0; i < this.listTitles.length; i++) {
-            if (this.listTitles[i].type === "link" && this.listTitles[i].path === titlee) {
-                return this.listTitles[i].title;
-            } else if (this.listTitles[i].type === "sub") {
-                for (let j = 0; j < this.listTitles[i].children.length; j++) {
-                    const subtitle = this.listTitles[i].path + '/' + this.listTitles[i].children[j].path;
-                    if (subtitle === titlee) {
-                        return this.listTitles[i].children[j].title;
-                    }
-                }
-            }
-        }
+    // getTitle() {
+    //     const titlee: any = this.location.prepareExternalUrl(this.location.path());
+    //     for (let i = 0; i < this.listTitles.length; i++) {
+    //         if (this.listTitles[i].type === 'link' && this.listTitles[i].path === titlee) {
+    //             return this.listTitles[i].title;
+    //         } else if (this.listTitles[i].type === 'sub') {
+    //             for (let j = 0; j < this.listTitles[i].children.length; j++) {
+    //                 const subtitle = this.listTitles[i].path + '/' + this.listTitles[i].children[j].path;
+    //                 if (subtitle === titlee) {
+    //                     return this.listTitles[i].children[j].title;
+    //                 }
+    //             }
+    //         }
+    //     }
 
-        if (titlee.indexOf("/details?") != -1) {
-            return "Details"
-        }
-        return 'BeecMe';
-    }
+    //     if (titlee.indexOf('/details?') !== -1) {
+    //         return 'Details';
+    //     }
+    //     return 'BeecMe';
+    // }
+
     getPath() {
         return this.location.prepareExternalUrl(this.location.path());
     }
@@ -220,5 +222,4 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
     cartChanged() {
         console.log('event cart changed fired');
     }
-
 }

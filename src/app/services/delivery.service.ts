@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Config } from './config';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-// import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Rx';
-import { LocationDetails, CartReq } from "../beans";
-import { ObjectStorage } from "../utilities/object-storage";
+import { LocationDetails, CartReq } from '../beans';
+import { ObjectStorage } from '../utilities/object-storage';
+import { Constant } from './constant';
 
 /*
   Generated class for the DeliveryService provider.
@@ -213,14 +213,10 @@ export class DeliveryService {
   saveCart(cartReq: CartReq): Observable<Response> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     // headers.append('Authorization','eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNTZ0ZXN0aW5nIiwiYXVkaWVuY2UiOiJtb2JpbGUiLCJjcmVhdGVkIjoxNDg3OTI1MTk5Mzk2LCJleHAiOjE0ODg1Mjk5OTl9.y9Taa5yaufPdYKkise69wR14N51omlmxwz-2gGXVOqM');
-    console.log(`Authorization token = ${(this.storage.get('user.authToken'))}`);
-    //console.log('Authorization token = '+this.sharedService.user.authToken)
-    headers.append('Authorization', this.storage.get('user.authToken'));
-    /*, 'Origin' : 'http://localhost:8080/',
-                              methods: ['GET', 'PUT', 'POST'],
-                            allowedHeaders: ['Content-Type', 'Authorization']  });*/
-
-    let options = new RequestOptions({ headers: headers });
+    console.log(`Authorization token = ${(this.storage.get(Constant.AUTHENTICATION_TOKEN))}`);
+    // console.log('Authorization token = '+this.sharedService.user.authToken)
+    headers.append('Authorization', this.storage.get(Constant.AUTHENTICATION_TOKEN));
+    const options = new RequestOptions({ headers: headers });
 
     const url = this.serviceRootUrl + this.ORDER_URL;
     console.log(`Saving the order ---> ${JSON.stringify(cartReq)}`);

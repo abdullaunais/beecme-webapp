@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
     };
 
     public loginForm = this.fb.group({
-        formEmail: ["", [Validators.required, Validators.minLength(6), Validators.email]],
-        formPassword: ["", [Validators.required, Validators.minLength(6)]]
+        formEmail: ['', [Validators.required, Validators.minLength(6), Validators.email]],
+        formPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
 
     validationArray: Array<any> = [];
@@ -96,19 +96,20 @@ export class LoginComponent implements OnInit {
         // console.log(this.loginForm);
 
         let isValid: boolean = true;
-        let message: string = "";
+        let message: string = '';
         let formIndex: number = 0;
         this.validationArray = [];
 
         if (this.loginForm.controls.formEmail.errors) {
             isValid = false;
             formIndex = 0;
-            if (this.loginForm.controls.formEmail.errors.required)
-                message = "Email is required";
-            else if (this.loginForm.controls.formEmail.errors.minlength)
-                message = "Email is not a valid format";
-            else if (this.loginForm.controls.formEmail.errors.email)
-                message = "Email is not a valid format";
+            if (this.loginForm.controls.formEmail.errors.required) {
+                message = 'Email is required';
+            } else if (this.loginForm.controls.formEmail.errors.minlength) {
+                message = 'Email is not a valid format';
+            } else if (this.loginForm.controls.formEmail.errors.email) {
+                message = 'Email is not a valid format';
+            }
 
             this.validationArray.push({ message: message, valid: isValid, index: formIndex });
         }
@@ -116,10 +117,11 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.controls.formPassword.errors) {
             isValid = false;
             formIndex = 1;
-            if (this.loginForm.controls.formPassword.errors.required)
-                message = "Password is required";
-            else if (this.loginForm.controls.formPassword.errors.minlength)
-                message = "Password should be at least 6 charaters long";
+            if (this.loginForm.controls.formPassword.errors.required) {
+                message = 'Password is required';
+            } else if (this.loginForm.controls.formPassword.errors.minlength) {
+                message = 'Password should be at least 6 charaters long';
+            }
 
             this.validationArray.push({ message: message, valid: isValid, index: formIndex });
         }
@@ -140,13 +142,13 @@ export class LoginComponent implements OnInit {
             .subscribe(res => {
                 console.log(`login status from backend ${JSON.stringify(res)}`);
                 if (res.status === 200) {
-                    let userData = res.json();
+                    const userData = res.json();
                     console.log(userData);
-                    this.storage.set("user.login", true);
-                    this.storage.set("user.data", userData);
-                    this.storage.set("user.authToken", userData.authToken);
+                    this.storage.set(Constant.USER_SET, true);
+                    this.storage.set(Constant.USER_OBJECT, userData);
+                    this.storage.set(Constant.AUTHENTICATION_TOKEN, userData.authToken);
                     this.sidebarService.changeLogin({ user: userData, isLogin: true });
-                    this.router.navigate([this.redirectPath], { queryParams: { login: 'success' }});
+                    this.router.navigate([this.redirectPath], { queryParams: { login: 'success' } });
                     console.log(`LOGIN SUCCESS FOR  ${userData}`);
                 }
             },
@@ -183,9 +185,6 @@ export class LoginComponent implements OnInit {
             }).subscribe((response) => {
                 let userData = response;
                 console.info(userData);
-                this.storage.set("user.login", true);
-                this.storage.set("user.data", userData);
-                this.storage.set("user.authToken", userData.authToken);
     
                 this.sidebarService.changeLogin({user: userData, isLogin: true});
     

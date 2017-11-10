@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ObjectStorage } from '../utilities/object-storage';
 import { DeliveryService } from '../services/delivery.service';
+import { Constant } from '../services/constant';
 
 declare var swal: any;
 
@@ -43,9 +44,9 @@ export class SettingsComponent implements OnInit {
   offset: number = 20;
 
   constructor(private storage: ObjectStorage, private deliveryService: DeliveryService) {
-    this.currentCountry = this.storage.get('location.country');
-    this.currentProvince = this.storage.get('location.province');
-    this.currentCity = this.storage.get('location.city');
+    this.currentCountry = this.storage.get(Constant.COUNTRY);
+    this.currentProvince = this.storage.get(Constant.PROVINCE);
+    this.currentCity = this.storage.get(Constant.CITY);
 
     this.breadcrumbArray = [
       { title: 'Home', icon: 'home', path: 'home' },
@@ -85,7 +86,7 @@ export class SettingsComponent implements OnInit {
       this.isError = false;
       this.isLoading = false;
     });
-    this.selectedCountry = this.countryList.find(country => country.id == this.selectedCountryId);
+    this.selectedCountry = this.countryList.find(country => country.id === this.selectedCountryId);
     this.countrySelected = true;
   }
 
@@ -104,7 +105,7 @@ export class SettingsComponent implements OnInit {
       this.isError = false;
       this.isLoading = false;
     });
-    this.selectedProvince = this.provinceList.find(province => province.id == this.selectedProvinceId);
+    this.selectedProvince = this.provinceList.find(province => province.id === this.selectedProvinceId);
     this.provinceSelected = true;
   }
 
@@ -114,15 +115,15 @@ export class SettingsComponent implements OnInit {
     this.citySelected = true;
 
     if (this.countrySelected && this.provinceSelected && this.citySelected) {
-      // this.storage.remove('location.country');
-      // this.storage.remove('location.province');
-      // this.storage.remove('location.city');
-      // this.storage.remove('location.set');
+      // this.storage.remove(Constant.COUNTRY);
+      // this.storage.remove(Constant.PROVINCE);
+      // this.storage.remove(Constant.CITY);
+      // this.storage.remove(Constant.LOCATION_SET);
 
-      this.storage.set('location.country', this.selectedCountry);
-      this.storage.set('location.province', this.selectedProvince);
-      this.storage.set('location.city', this.selectedCity);
-      this.storage.set('location.set', true);
+      this.storage.set(Constant.COUNTRY, this.selectedCountry);
+      this.storage.set(Constant.PROVINCE, this.selectedProvince);
+      this.storage.set(Constant.CITY, this.selectedCity);
+      this.storage.set(Constant.LOCATION_SET, true);
 
       this.currentCountry = this.selectedCountry;
       this.currentProvince = this.selectedProvince;

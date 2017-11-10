@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { ObjectStorage } from '../utilities/object-storage';
+import { Constant } from './constant';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
@@ -11,7 +12,7 @@ export class AuthGuardService implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const isLoggedIn: boolean = this.storage.get('user.login');
+    const isLoggedIn: boolean = this.storage.get(Constant.USER_SET);
     if (isLoggedIn) {
       return true;
     } else {

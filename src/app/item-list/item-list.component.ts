@@ -52,7 +52,7 @@ export class ItemListComponent {
     this.shopLoading = true;
     this.isAvailable = true;
     this.noMoreItems = false;
-    this.city = this.storage.get('location.city');
+    this.city = this.storage.get(Constant.CITY);
     this.route.queryParams.subscribe(params => {
 
       console.log(`params ${JSON.stringify(params)}`);
@@ -182,9 +182,9 @@ export class ItemListComponent {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Clear Cart'
       }).then(() => {
-        //this.storage.remove('delivery.cart');
-        //this.storage.remove('delivery.cartShop');
-        //this.cartService.setCartCount(0);
+        // this.storage.remove(Constant.CART_ITEMS);
+        // this.storage.remove(Constant.CART_SHOP);
+        // this.cartService.setCartCount(0);
         this.sharedService.resetCart();
         this.addToCart(item);
       }).catch(() => {
@@ -202,5 +202,4 @@ export class ItemListComponent {
       });
     }
   }
-
 }

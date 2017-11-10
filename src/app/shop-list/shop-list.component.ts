@@ -4,6 +4,7 @@ import { DeliveryService } from '../services/delivery.service';
 import { ObjectStorage } from '../utilities/object-storage';
 import { SharedService } from '../services/shared.service';
 import { Shop } from '../beans';
+import { Constant } from '../services/constant';
 
 @Component({
     selector: 'app-shop-list',
@@ -37,11 +38,11 @@ export class ShopListComponent implements OnInit {
         this.isLoading = true;
         this.noMoreShops = false;
         this.isError = false;
-        this.city = this.storage.get('location.city');
+        this.city = this.storage.get(Constant.CITY);
         this.route.queryParams.subscribe(params => {
             if (params['category']) {
                 this.category['categoryId'] = params['category'];
-                //this.initialize();
+                // this.initialize();
             } else {
                 console.log(`params category is null returning`);
                 return;
