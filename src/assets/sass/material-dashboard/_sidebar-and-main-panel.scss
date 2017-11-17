@@ -5,7 +5,7 @@
 }
 
 .sidebar{
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
@@ -407,7 +407,6 @@
 .main-panel{
     position: relative;
     float: right;
-    overflow: auto;
     width: $sidebar-width;
     min-height: 100%;
     @include transition (0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
@@ -455,23 +454,6 @@
     -webkit-transition-timing-function: linear,linear,ease;
     transition-timing-function: linear,linear,ease;
     -webkit-overflow-scrolling: touch;
-}
-
-// windows os settings for perfect scrollbar off
-.sidebar .sidebar-wrapper,
-.main-panel{
-    .perfect-scrollbar-on &,
-    &{
-        overflow: hidden;
-    }
-}
-
-// regular settings for perfect scrollbar off
-.perfect-scrollbar-off{
-    .sidebar .sidebar-wrapper,
-    .main-panel{
-        overflow: auto;
-    }
 }
 
 .visible-on-sidebar-regular{

@@ -25,9 +25,9 @@ export class UserService {
   private readonly ADDRESS_URL = '/users/address'; // +userId
   private readonly UPLOAD_PICTURE_URL = '/users/upload'; // +userId 
 
-  constructor(private http: Http, 
-              public config: Config,
-              private storage: ObjectStorage) {
+  constructor(private http: Http,
+    public config: Config,
+    private storage: ObjectStorage) {
     this.serviceRootUrl = config.getServerUrl();
   }
 
@@ -39,8 +39,8 @@ export class UserService {
 
     const requestUrl: string = this.serviceRootUrl + this.REGISTER_URL;
     return this.http.post(requestUrl, body, options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   uploadPicture(userId: number, authToken: any, image: any): Observable<any> {
@@ -51,8 +51,8 @@ export class UserService {
 
     const requestUrl: string = this.serviceRootUrl + this.UPLOAD_PICTURE_URL + `/${userId}`;
     return this.http.post(requestUrl, image, options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   getUserDetails(userId: number, authToken: any): Observable<any> {
@@ -63,8 +63,8 @@ export class UserService {
 
     const requestUrl: string = this.serviceRootUrl + this.USER_URL + `/${userId}`;
     return this.http.get(requestUrl, options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   updateUser(user: any, authToken: any): Observable<any> {
@@ -76,8 +76,8 @@ export class UserService {
 
     const requestUrl: string = this.serviceRootUrl + this.UPDATE_USER_URL + `/${user.email}/reset`;
     return this.http.put(requestUrl, body, options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   authenticate(email: string, password: any): Observable<Response> {
@@ -109,8 +109,8 @@ export class UserService {
 
     const requestUrl: string = this.serviceRootUrl + this.FORGOT_PASSWORD;
     return this.http.post(requestUrl, body, options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   getAddressList(userId: number, authToken: any): Observable<any> {
@@ -121,8 +121,8 @@ export class UserService {
 
     const requestUrl: string = this.serviceRootUrl + this.ADDRESS_URL + `/${userId}`;
     return this.http.get(requestUrl, options)
-    .map((res) => this.extractData(res))
-    .catch((err) => this.handleError(err));
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
   }
 
   private extractData(res: Response) {
@@ -150,13 +150,13 @@ export class UserService {
     const authToken = this.storage.get(Constant.AUTHENTICATION_TOKEN);
     console.log(`authToken:  ${authToken}`);
     const options = new RequestOptions({ headers: headers });
-    headers.append('Authorization', authToken );
+    headers.append('Authorization', authToken);
     console.log(`Authorization token is ${JSON.stringify(this.storage.get(Constant.USER_OBJECT))}`);
     const url = this.serviceRootUrl + '/users/address/' + addressId;
     console.log(`URL DELETE ADDRESS:  ${url} of ID ${addressId}`);
     return this.http.delete(url, options);
   }
-  
+
   getAddresses(userId: number): Observable<Address[]> {
     // create header for the http call
     const headers = new Headers({ 'Content-Type': 'application/json' });
@@ -166,5 +166,5 @@ export class UserService {
     console.log(`url for addresses for user :  ${url}`);
     return this.http.get(url, options)
       .map(res => (res.json()));
-  }  
+  }
 }

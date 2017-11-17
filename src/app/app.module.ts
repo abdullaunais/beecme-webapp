@@ -22,6 +22,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { ShopInfoComponent } from './shop-info/shop-info.component';
 import { SharedService } from './services/shared.service';
 
+
 @NgModule({
     imports:      [
         CommonModule,

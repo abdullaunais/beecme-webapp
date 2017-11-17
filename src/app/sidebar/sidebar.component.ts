@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SidebarService } from './sidebar.service';
 import { SharedService } from '../services/shared.service';
 import { Subscription } from 'rxjs';
+import PerfectScrollbar from 'perfect-scrollbar'; 
 
 declare const $: any;
 
@@ -83,7 +84,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });        
     }
 
-    isNotMobileMenu() {
+    isMobileMenu() {
         if ($(window).width() > 991) {
             return false;
         }
@@ -122,4 +123,20 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.subscription.unsubscribe();
         this.subCartSummary.unsubscribe();
     }
+
+    updatePS(): void  { 
+        if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) { 
+            const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper'); 
+            let ps = new PerfectScrollbar(elemSidebar, { wheelSpeed: 2, suppressScrollX: true }); 
+        } 
+    } 
+
+
+    isMac(): boolean { 
+        let bool = false; 
+        if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) { 
+            bool = true; 
+        } 
+        return bool; 
+    } 
 }

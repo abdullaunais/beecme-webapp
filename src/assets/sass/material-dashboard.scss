@@ -1,7 +1,7 @@
 /*!
 
  =========================================================
- * Material Dashboard PRO Angular CLI - V1.4.2
+ * Material Dashboard PRO Angular CLI - V1.4.5
  =========================================================
 
  * Product Page: https://www.creative-tim.com/product/material-dashboard-pro-angular2
@@ -11,14 +11,14 @@
  =========================================================
 
  */
+
+@import "../../../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 //variables and mixins
 @import "material-dashboard/variables";
 @import "material-dashboard/mixins";
 @import "material-dashboard/shadows";
 @import '../../../node_modules/@angular/material/theming';
-// @import "../../../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "../../../node_modules/angular-star-rating/assets/scss/star-rating";
-
 //plugin css
 @import "material-dashboard/plugins/plugin-nouislider";
 @import "material-dashboard/plugins/animate";
@@ -30,9 +30,6 @@
 @import "material-dashboard/plugins/wizard-card";
 @import "material-dashboard/plugins/chartist";
 @import "material-dashboard/plugins/select-bootstrap";
-@import "material-dashboard/plugins/perfect-scrollbar";
-
-
 // Core CSS
 @import "material-dashboard/typography";
 @import "material-dashboard/sidebar-and-main-panel";
@@ -59,12 +56,10 @@
 @import "material-dashboard/navbars";
 @import "material-dashboard/popups";
 @import "material-dashboard/footers";
-
 // Fancy Stuff
 @import "material-dashboard/dropdown";
 @import "material-dashboard/cards";
 @import "material-dashboard/tabs";
 @import "material-dashboard/responsive";
-
 // Demo Purpose
 @import "material-dashboard/fixed-plugin";

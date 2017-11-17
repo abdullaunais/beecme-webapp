@@ -61,11 +61,9 @@
      font-size: map-get($theme, 'font-size');
      letter-spacing: map-get($theme, 'letter-spacing');
 
-     color: map-get($theme, 'color');
+     color: map-get($theme, 'color') !important;
      border-radius: map-get($theme, 'border-radius');
      border: map-get($theme, 'border');
-
-     transition: map-get($theme, 'transition');
 
      margin: map-get($theme, 'margin');
      padding: map-get($theme, 'padding');
@@ -80,7 +78,13 @@
      display: inline-block;
      cursor: pointer;
      position: relative;
-     background-color: $brand-primary;
+     background-color: $brand-primary !important;
+
+     -webkit-transition: all 150ms ease-in;
+     -moz-transition: all 150ms ease-in;
+     -o-transition: all 150ms ease-in;
+     -ms-transition: all 150ms ease-in;
+     transition: all 150ms ease-in;
 
      &:not(.readonly):not(.tag--editing):focus {
          background: map-get($theme, 'background-focused');
@@ -111,29 +115,22 @@
          cursor: text;
      }
 
-     &[_ngcontent-c1]:not(:focus):not(.tag--editing):not(:active):not(.readonly):hover {
-         background: $brand-info;
-         color: #ffffff;
-     }
+     &:hover{
+         padding-right: 18px;
+         .tag-wrapper{
+             delete-icon{
+                 opacity: 1;
+                 span{
+                     svg{
+                         padding-right: 6px;
 
-     &[_nghost-c3]:hover,
-     &:hover [_nghost-c3]{
-         @include transition($fast-transition-time, $transition-ease-in);
+                         display: block;
+                        //  right: 6px;
+                     }
+                 }
+             }
+         }
      }
-
-     &[_nghost-c3]:hover svg,
-     &:hover [_nghost-c3] svg,
-     &[_nghost-c3]:hover delete-icon,
-     &:hover [_nghost-c3] delete-icon{
-         display: block;
-         right: 10px;
-     }
-
-     &[_ngcontent-c1]:not(.readonly):not(.tag--editing):active,
-     &[_ngcontent-c1]:not(.readonly):not(.tag--editing):focus {
-    background: $brand-info;
-    color: #fff;
-}
  }
 
  @mixin tag-input-form-theme($theme) {
@@ -153,12 +150,18 @@
  }
 
  @mixin icon-theme($theme) {
-     width: map-get($theme, 'width');
+     width: auto;
      height: map-get($theme, 'height');
      // transition: map-get($theme, 'transition');
-     display: none;
+     opacity: 0;
      text-align: right;
+     font-size: 100px;
      transform: map-get($theme, 'transform');
+     -webkit-transition: all 150ms ease-in;
+     -moz-transition: all 150ms ease-in;
+     -o-transition: all 150ms ease-in;
+     -ms-transition: all 150ms ease-in;
+     transition: all 150ms ease-in;
 
      path {
          fill: map-get($theme, 'fill');
@@ -245,13 +248,3 @@ tag-input {
      max-width: 100%;
      line-height: 22px;
  }
-
- tag[_ngcontent-c4]:not(:focus):not(.tag--editing):not(:active):not(.readonly):hover{
-    background-color: $brand-primary !important;
-    color: #FFFFFF !important;
- }
-
-//tag ripple
-[_nghost-c6] {
-    display: none;
-}

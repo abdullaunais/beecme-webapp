@@ -1,6 +1,8 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-
+import { Component, OnInit, Inject } from '@angular/core';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/filter';
+import { DOCUMENT } from '@angular/platform-browser';
 declare var $: any;
 
 @Component({
@@ -9,17 +11,19 @@ declare var $: any;
 })
 
 export class AppComponent implements OnInit {
-    constructor(private elRef: ElementRef) {}
+    private _router: Subscription;
+
+    constructor(private router: Router, @Inject(DOCUMENT, ) private document: any) { }
+
     ngOnInit() {
         $.material.options.autofill = true;
         $.material.init();
-        const body = document.getElementsByTagName('body')[0];
-        const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
-        if (isWindows) {
-           // if we are on windows OS we activate the perfectScrollbar function
-            body.classList.add('perfect-scrollbar-on');
-        } else {
-            body.classList.add('perfect-scrollbar-off');
-        }
+        this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
+            if (window.outerWidth > 991) {
+                window.document.children[0].scrollTop = 0;
+            } else {
+                window.document.activeElement.scrollTop = 0;
+            }
+        });
     }
 }

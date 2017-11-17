@@ -56,7 +56,7 @@ export class DeliveryService {
   }
 
   getLocationDetails(cityId: number): Observable<LocationDetails> {
-    const requestUrl: string = this.serviceRootUrl + this.LOCATION_URL + '/' + cityId;
+    const requestUrl: string = this.serviceRootUrl + this.LOCATION_URL + `/${cityId}`;
     return this.http.get(requestUrl, this.options)
       .map((res) => this.extractData(res))
       .catch((err) => this.handleError(err));
