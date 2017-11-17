@@ -23,6 +23,11 @@
                         </a>
                     </li>
                     <li class="">
+                        <a href="/pages/register">
+                            <i class="material-icons">person_add</i> Register
+                        </a>
+                    </li>
+                    <li class="">
                         <a href="/pages/login">
                             <i class="material-icons">fingerprint</i> Login
                         </a>
@@ -33,12 +38,12 @@
     </nav>
     <div class="full-page register-page" filter-color="black">
         <div class="content">
-            <div class="row">
+            <div class="row" style="margin:0;">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="card card-signup">
-                        <h2 class="card-title text-center">Welcome to BeecMe.com</h2>
+                        <h3 class="card-title text-center">Welcome to BeecMe.com</h3>
                         <div class="row">
-                            <div class="col-md-5 col-md-offset-1">
+                            <div class="col-md-5 col-md-offset-1 hidden-sm hidden-xs">
                                 <div class="card-content">
                                     <div class="info info-horizontal">
                                         <div class="icon icon-info">
@@ -48,8 +53,90 @@
                                             <h4 class="info-title">The Sri Lanka’s online marketplace</h4>
                                             <p class="description">
                                                 Bringing the Shops and Customers in one single platform. Be it a Customer or a Shop the possibilities are endless with BeecMe.com.
-                                                With tommorrow's technology, we are giving the Customers to Shop whenever, whereever and however. 
-                                                We will deliver to your doorstep while striving to make your shopping experience a wonderful one.
+                                                With tommorrow's technology, we are giving the Customers to Shop whenever,
+                                                whereever and however. We will deliver to your doorstep while striving to
+                                                make your shopping experience a wonderful one.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="info info-horizontal">
+                                        <div class="icon icon-rose">
+                                            <i class="material-icons">timeline</i>
+                                        </div>
+                                        <div class="description">
+                                            <h4 class="info-title">Why is your location important?</h4>
+                                            <p class="description">
+                                                By providing the accurate location, you are helping us to deliver your orders on time.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="info info-horizontal">
+                                        <div class="icon icon-primary">
+                                            <i class="material-icons">code</i>
+                                        </div>
+                                        <div class="description">
+                                            <h4 class="info-title">Added Benifits of Registering</h4>
+                                            <p class="description">
+                                                Our prices are un-beatable. Our offers are genuine. By registering with us, you are opening a single door to endless Shops.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="card-content" style="padding: 15px 35px;">
+                                    <div class="info info-horizontal">
+                                        <div class="icon icon-danger">
+                                            <i class="material-icons">location_on</i>
+                                        </div>
+                                        <div class="description">
+                                            <h4 class="info-title">Select your location to begin</h4>
+                                        </div>
+                                    </div>
+
+                                    <md-select [color]="colorTheme" [(ngModel)]="selectedCountryId" (change)="countryChanged()" placeholder="Select Country"
+                                        name="country" ngClass="btn btn-default simple">
+                                        <md-option *ngFor="let country of countryList" [value]="country.id">
+                                            {{ country.nameEn }}
+                                        </md-option>
+                                    </md-select>
+
+                                    <md-select [color]="colorTheme" [(ngModel)]="selectedProvinceId" (change)="provinceChanged()" placeholder="Select District"
+                                        name="province" ngClass="btn btn-default simple">
+                                        <md-option *ngFor="let province of provinceList" [value]="province.id">
+                                            {{ province.nameEn }}
+                                        </md-option>
+                                    </md-select>
+
+                                    <md-select [color]="colorTheme" [(ngModel)]="selectedCityId" (change)="cityChanged()" placeholder="Select City" name="city"
+                                        ngClass="btn btn-default simple">
+                                        <md-option *ngFor="let city of cityList" [value]="city.id">
+                                            {{ city.nameEn }}
+                                        </md-option>
+                                    </md-select>
+
+                                    <button (click)="getStarted()" style="width: 100%;" class="btn btn-primary">Get Started</button>
+
+                                </div>
+                                <!-- <div class="footer text-center">
+                                    
+                                </div> -->
+                            </div>
+
+                            <div class="col-md-5 col-md-offset-1 hidden-md hidden-lg hidden-xl">
+                                <div class="card-content">
+                                    <div class="info info-horizontal">
+                                        <div class="icon icon-info">
+                                            <i class="material-icons">group</i>
+                                        </div>
+                                        <div class="description">
+                                            <h4 class="info-title">The Sri Lanka’s online marketplace</h4>
+                                            <p class="description">
+                                                Bringing the Shops and Customers in one single platform. Be it a Customer or a Shop the possibilities are endless with BeecMe.com.
+                                                With tommorrow's technology, we are giving the Customers to Shop whenever,
+                                                whereever and however. We will deliver to your doorstep while striving to
+                                                make your shopping experience a wonderful one.
                                             </p>
                                         </div>
                                     </div>
@@ -77,37 +164,6 @@
                                     </div>
 
                                 </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="card-content">
-
-                                    <md-select [color]="colorTheme" [(ngModel)]="selectedCountryId" (change)="countryChanged()" placeholder="Select Country"
-                                        name="country" ngClass="btn btn-default simple">
-                                        <md-option *ngFor="let country of countryList" [value]="country.id">
-                                            {{ country.nameEn }}
-                                        </md-option>
-                                    </md-select>
-
-                                    <md-select [color]="colorTheme" [(ngModel)]="selectedProvinceId" (change)="provinceChanged()" placeholder="Select District"
-                                        name="province" ngClass="btn btn-default simple">
-                                        <md-option *ngFor="let province of provinceList" [value]="province.id">
-                                            {{ province.nameEn }}
-                                        </md-option>
-                                    </md-select>
-
-                                    <md-select [color]="colorTheme" [(ngModel)]="selectedCityId" (change)="cityChanged()" placeholder="Select City"
-                                        name="city" ngClass="btn btn-default simple">
-                                        <md-option *ngFor="let city of cityList" [value]="city.id">
-                                            {{ city.nameEn }}
-                                        </md-option>
-                                    </md-select>
-
-                                    <button (click)="getStarted()" style="width: 100%;" class="btn btn-primary">Get Started</button>
-
-                                </div>
-                                <!-- <div class="footer text-center">
-                                    
-                                </div> -->
                             </div>
                         </div>
                     </div>

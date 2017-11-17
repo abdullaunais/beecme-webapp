@@ -49,9 +49,9 @@
             <div class="row" style="margin:0;">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="card card-signup">
-                        <h2 class="card-title text-center">Register</h2>
+                        <h3 class="card-title text-center">Register</h3>
                         <div class="row">
-                            <div class="col-md-5 col-md-offset-1">
+                            <div class="col-md-5 col-md-offset-1 hidden-sm hidden-xs">
                                 <div class="card-content">
                                     <div class="info info-horizontal">
                                         <div class="icon icon-rose">
@@ -103,8 +103,16 @@
                                     </button>
                                     <h4> or be classical </h4>
                                 </div> -->
-                                <form [formGroup]="registerForm" (ngSubmit)="validate()">
+                                <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
                                     <div class="card-content">
+                                        <div class="info info-horizontal">
+                                            <div class="icon icon-success">
+                                                <i class="material-icons">person</i>
+                                            </div>
+                                            <div class="description">
+                                                <h4 class="info-title">Registration Details</h4>
+                                            </div>
+                                        </div>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="material-icons">face</i>
@@ -143,6 +151,46 @@
                                     </div>
                                 </form>
                             </div>
+
+                            <div class="col-md-5 col-md-offset-1 hidden-md hidden-lg hidden-xl">
+                                    <div class="card-content">
+                                        <div class="info info-horizontal">
+                                            <div class="icon icon-rose">
+                                                <i class="material-icons">timeline</i>
+                                            </div>
+                                            <div class="description">
+                                                <h4 class="info-title">The Sri Lanka’s online marketplace</h4>
+                                                <p class="description">
+                                                    Bringing the Shops and Customers in one single platform. Be it a Customer or a Shop the possibilities are endless with BeecMe.com.
+                                                    With tommorrow's technology, we are giving the Customers to Shop whenever, whereever and however. 
+                                                    We will deliver to your doorstep while striving to make your shopping experience a wonderful one.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="info info-horizontal">
+                                            <div class="icon icon-primary">
+                                                <i class="material-icons">code</i>
+                                            </div>
+                                            <div class="description">
+                                                <h4 class="info-title">Why is your location important?</h4>
+                                                <p class="description">
+                                                    By providing the accurate location, you are helping us to deliver your orders on time.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="info info-horizontal">
+                                            <div class="icon icon-info">
+                                                <i class="material-icons">group</i>
+                                            </div>
+                                            <div class="description">
+                                                <h4 class="info-title">Added Benifits of Registering</h4>
+                                                <p class="description">
+                                                    Our prices are un-beatable. Our offers are genuine. By registering with us, you are opening a single door to endless Shops.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>

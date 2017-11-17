@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
     };
 
     validationArray: Array<any> = [];
+    isValid = true;
     // @ViewChildren('forminput') formInputs;
 
     public registerForm = this.formBuilder.group({
@@ -59,15 +60,13 @@ export class RegisterComponent implements OnInit {
     }
     ngOnInit() { }
 
-
     validate() {
-        let isValid = true;
         let message = '';
         let formIndex = 0;
         this.validationArray = [];
 
         if (this.registerForm.controls.formName.errors) {
-            isValid = false;
+            this.isValid = false;
             formIndex = 0;
             if (this.registerForm.controls.formName.errors.required) {
                 message = 'Name is required';
@@ -76,11 +75,11 @@ export class RegisterComponent implements OnInit {
             } else if (this.registerForm.controls.formName.errors.pattern) {
                 message = 'Name is not in a valid format';
             }
-            this.validationArray.push({ message: message, valid: isValid, index: formIndex });
+            this.validationArray.push({ message: message, valid: this.isValid, index: formIndex });
         }
 
         if (this.registerForm.controls.formEmail.errors) {
-            isValid = false;
+            this.isValid = false;
             formIndex = 1;
             if (this.registerForm.controls.formEmail.errors.required) {
                 message = 'Email is required';
@@ -89,11 +88,11 @@ export class RegisterComponent implements OnInit {
             } else if (this.registerForm.controls.formEmail.errors.email) {
                 message = 'Email is not a valid format';
             }
-            this.validationArray.push({ message: message, valid: isValid, index: formIndex });
+            this.validationArray.push({ message: message, valid: this.isValid, index: formIndex });
         }
 
         if (this.registerForm.controls.formPhone.errors) {
-            isValid = false;
+            this.isValid = false;
             formIndex = 2;
             if (this.registerForm.controls.formPhone.errors.required) {
                 message = 'Phone is required';
@@ -102,19 +101,19 @@ export class RegisterComponent implements OnInit {
             } else if (this.registerForm.controls.formPhone.errors.maxlength) {
                 message = 'Phone cannot be more than 10 numbers';
             }
-            this.validationArray.push({ message: message, valid: isValid, index: formIndex });
+            this.validationArray.push({ message: message, valid: this.isValid, index: formIndex });
         }
 
 
         if (this.registerForm.controls.formPassword.errors) {
-            isValid = false;
+            this.isValid = false;
             formIndex = 3;
             if (this.registerForm.controls.formPassword.errors.required) {
                 message = 'Password is required';
             } else if (this.registerForm.controls.formPassword.errors.minlength) {
                 message = 'Password should be at least 6 charaters long';
             }
-            this.validationArray.push({ message: message, valid: isValid, index: formIndex });
+            this.validationArray.push({ message: message, valid: this.isValid, index: formIndex });
         }
 
         // if (this.registerForm.controls.formTermsAndConditions.errors) {
@@ -126,7 +125,7 @@ export class RegisterComponent implements OnInit {
         //     this.validationArray.push({ message: message, valid: isValid, index: formIndex });
         // }
 
-        if (!isValid) {
+        if (!this.isValid) {
             // validations
             this.validationArray.forEach(error => {
                 $('#forminput' + error.index).notify(
@@ -139,21 +138,19 @@ export class RegisterComponent implements OnInit {
                     }
                 );
             });
+        }
+    }
 
-
-            return;
-        } else {
+    submitForm() {
+        this.validate();
+        if (this.isValid) {
             this.name = this.registerForm.value.formName.replace(/[^A-Za-z0-9_'-]/gi, '');
             this.email = this.registerForm.value.formEmail;
             this.phone = this.registerForm.value.formPhone;
             this.password = this.registerForm.value.formPassword;
-
             this.registerUser();
-
-            return;
         }
     }
-
 
 
     registerUser() {
@@ -175,12 +172,12 @@ export class RegisterComponent implements OnInit {
 
             if (response.code === 1) {
                 // register success
-               // this.userService.authenticate(this.email, this.password).catch((err): any => {
+                // this.userService.authenticate(this.email, this.password).catch((err): any => {
 
                 // }).subscribe(userData => {
                 //     console.log(`register status ${userData}`);
 
-                    this.userService.authenticate(this.email, this.password)
+                this.userService.authenticate(this.email, this.password)
                     .subscribe(res => {
                         console.log(`login status from backend ${JSON.stringify(res)}`);
                         if (res.status === 200) {
@@ -190,7 +187,7 @@ export class RegisterComponent implements OnInit {
                             this.storage.set(Constant.USER_OBJECT, userData);
                             this.storage.set(Constant.AUTHENTICATION_TOKEN, userData.authToken);
                             this.sidebarService.changeLogin({ user: userData, isLogin: true });
-                                                                   
+
                             swal({
                                 type: 'success',
                                 title: 'Success!',
@@ -216,6 +213,6 @@ export class RegisterComponent implements OnInit {
     }
 
     inputBlur() {
-        return;
+        // this.validate();
     }
 }
