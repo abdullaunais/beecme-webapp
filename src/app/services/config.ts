@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class Config {
-  private readonly serverUrl = `https://beecme.com/delivery`;
+  private readonly serverUrl = `https://www.beecme.com/delivery`;
   //  private readonly serverUrl: string = `http://localhost:8080/delivery`;
   constructor() {
   
