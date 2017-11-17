@@ -16,7 +16,7 @@
             </div> -->
 
 
-            <div class="col-lg-3 col-md-6 col-sm-6" (click)="routeToPath('/categories')" style="cursor: pointer">
+            <div class="col-lg-3 col-md-4 col-sm-4" (click)="routeToPath('/categories')" style="cursor: pointer">
                 <div class="card card-stats">
                     <div class="card-header" data-background-color="blue">
                         <i class="material-icons">view_carousel</i>
@@ -32,7 +32,7 @@
                     </div> -->
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-4 col-sm-4">
                 <div class="card card-stats">
                     <div class="card-header" data-background-color="red">
                         <i class="material-icons">shop</i>
@@ -48,13 +48,13 @@
                     </div> -->
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6" (click)="routeToPath('/cart')" style="cursor: pointer">
+            <div class="col-lg-3 col-md-4 col-sm-4" (click)="routeToPath('/cart')" style="cursor: pointer">
                 <div class="card card-stats">
                     <div class="card-header" data-background-color="green">
                         <i class="material-icons">shopping_cart</i>
                     </div>
                     <div class="card-content containerIntro" style="padding: 8px 20px;">
-                        <p class="category">Total Items</p>
+                        <p class="category">Items</p>
                         <h3 class="card-title" style="display: inline-flex;">{{counts?.countItems}}</h3>
                     </div>
                     <!--                    <div class="card-footer">
@@ -64,7 +64,7 @@
                     </div> -->
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6" (click)="routeToPath('/orders')" style="cursor: pointer">
+            <div class="col-lg-3 col-md-4 col-sm-4 hidden-md hidden-sm" (click)="routeToPath('/orders')" style="cursor: pointer">
                 <div class="card card-stats">
                     <div class="card-header" data-background-color="orange">
                         <i class="fa fa-truck"></i>

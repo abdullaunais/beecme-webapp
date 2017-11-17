@@ -44,6 +44,14 @@
                             <span class="sidebar-normal">Login</span>
                         </a>
                     </li>
+                    <li *ngIf="!isLogin">
+                        <a [routerLink]="['/pages/register']">
+                            <span class="sidebar-mini">
+                                <i class="material-icons">person_add</i>
+                            </span>
+                            <span class="sidebar-normal">Register</span>
+                        </a>
+                    </li>
                     <li>
                         <a [routerLink]="['/settings']">
                             <span class="sidebar-mini">
