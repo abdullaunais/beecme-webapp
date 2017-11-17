@@ -1,5 +1,5 @@
-<div class="main-content page-item-list">
-    <div class="container-fluid">
+<div class="main-content">
+    <div class="container-fluid page-item-list">
         <div class="row">
 
             <simple-notifications [options]="options"></simple-notifications>
@@ -62,17 +62,17 @@
                                     <table class="col-12" style="padding:0;">
                                         <tr>
                                             <td class="item-qty-btn-wrapper">
-                                                <button (click)="updateQty(item, -1)" style="margin-right: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
+                                                <button [disabled]="item?.qty < 1" (click)="updateQty(item, -1)" style="margin-right: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
                                                     <i class="fa fa-minus"></i>
                                                 </button>
                                             </td>
                                             <td class="item-qty-edit-wrapper">
                                                 <div style="width: 100%;">
-                                                    <input type="number" [max]="item.qty" [(ngModel)]="item.selectedQty" class="item-qty-edit" value="1" placeholder="Quanity">
+                                                    <input [disabled]="item?.qty < 1" type="number" [max]="item.qty" [(ngModel)]="item.selectedQty" class="item-qty-edit" value="1" placeholder="Quanity">
                                                 </div>
                                             </td>
                                             <td class="item-qty-btn-wrapper">
-                                                <button (click)="updateQty(item, 1)" style="margin-left: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
+                                                <button [disabled]="item?.qty < 1" (click)="updateQty(item, 1)" style="margin-left: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
                                                     <i class="fa fa-plus"></i>
                                                 </button>
                                             </td>

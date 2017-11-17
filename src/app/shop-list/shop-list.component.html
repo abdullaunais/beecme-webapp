@@ -1,5 +1,5 @@
-<div class="main-content page-shop-list">
-    <div class="container-fluid">
+<div class="main-content">
+    <div class="container-fluid page-shop-list">
         <div class="row">
 
             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -14,11 +14,22 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div  *ngIf="!isLoading && !isAvailable" class="col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3" style="padding: 0;">
+                    <div style="margin-bottom: 15px; margin-top: 0px;">
+                        <div class="card-content" style="padding:0;text-align: center;">
+                            <h6>No Shops available in this category.
+                                <br>Try a different category </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-md-4 col-sm-6" *ngFor="let shop of shops">
                 <a [routerLink]="['/shop']" [queryParams]="{shop: shop.shopId}" queryParamsHandling="merge" (click)="shopSelected(shop)">
                     <div class="card card-profile">
-                        <div class="card-avatar animated flipInX">
-                            <img class="img shop-profile-picture" [src]="shop?.profileUrl" />
+                        <div class="card-avatar animated flipInX fileinput-new thumbnail img-circle">
+                            <img class="img shop-profile-picture" [src]="shop?.profileUrl ? shop?.profileUrl : './assets/img/placeholder.jpg'" alt=" " />
                         </div>
                         <div class="card-content">
                             <h4 class="card-title">{{shop?.shopName}}</h4>

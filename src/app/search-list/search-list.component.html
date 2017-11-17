@@ -14,7 +14,7 @@
         <div class="card card-product">
           <a [routerLink]="['/details']" [queryParams]="{item: item.itemCode, shop: item.shopId}" queryParamsHandling="merge">
             <div class="card-image card-item-image-wrapper" data-header-animation="true">
-              <img class="img card-item-image" [src]="item.img1" alt="Item Image">
+              <img class="img card-item-image" [src]="item.img1" alt=" ">
             </div>
             <div class="card-content">
               <div class="card-actions" style="top:-62px;">
@@ -44,17 +44,17 @@
                   <table class="col-12" style="padding:0;">
                     <tr>
                       <td class="item-qty-btn-wrapper">
-                        <button (click)="updateQty(item, -1)" style="margin-right: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
+                        <button [disabled]="item?.qty < 1" (click)="updateQty(item, -1)" style="margin-right: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
                           <i class="fa fa-minus"></i>
                         </button>
                       </td>
                       <td class="item-qty-edit-wrapper">
                         <div style="width: 100%;">
-                          <input type="number" [max]="item.qty" [(ngModel)]="item.selectedQty" class="item-qty-edit" placeholder="Quanity">
+                          <input [disabled]="item?.qty < 1" type="number" [max]="item.qty" [(ngModel)]="item.selectedQty" class="item-qty-edit" placeholder="Quanity">
                         </div>
                       </td>
                       <td class="item-qty-btn-wrapper">
-                        <button (click)="updateQty(item, 1)" style="margin-left: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
+                        <button [disabled]="item?.qty < 1" (click)="updateQty(item, 1)" style="margin-left: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
                           <i class="fa fa-plus"></i>
                         </button>
                       </td>
@@ -63,7 +63,7 @@
                 </div>
               </div>
               <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
-                <button class="btn btn-primary item-cart-btn" (click)="validateCart(item)">
+                <button [disabled]="item?.qty < 1" class="btn btn-primary item-cart-btn" (click)="validateCart(item)">
                   <i class="fa fa-shopping-cart"></i>
                   <span>Add to Cart</span>
                 </button>

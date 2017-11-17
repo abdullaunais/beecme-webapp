@@ -20,9 +20,10 @@
     }
     .card-item-desc {
         overflow: hidden;
-        width: 98%;
-        max-height: 60px;
         white-space: pre-wrap;
+        text-overflow: ellipsis;
+        width: 98%;
+        max-height: 44px;
     }
     .card-item-pricetag {
         padding: 6px;
