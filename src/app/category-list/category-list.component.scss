@@ -1,6 +1,7 @@
 .component-category-list {
     .category-image-wrapper {
         height: 180px;
+        z-index: 1000;
     }
     .img-category {
         object-fit: cover;

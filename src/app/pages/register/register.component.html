@@ -90,7 +90,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-5 col-sm-offset-1 col-sm-10">
                                 <!-- <div class="social text-center">
                                     <button class="btn btn-just-icon btn-round btn-twitter">
                                         <i class="fa fa-twitter"></i>
@@ -141,20 +141,20 @@
                                         <!-- If you want to add a checkbox to this form, uncomment this code -->
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" formControlName="formTermsAndConditions" (blur)="inputBlur()" name="optionsCheckboxes" checked> I agree to the
+                                                <input type="checkbox" (change)="registerForm.controls.formTermsAndConditions = !registerForm.controls.formTermsAndConditions"  formControlName="formTermsAndConditions" (blur)="inputBlur()" name="optionsCheckboxes" checked> I agree to the
                                                 <a id="forminput4" href="#something">terms and conditions</a>.
                                             </label>
                                         </div>
                                     </div>
                                     <div class="footer text-center">
-                                        <button type="submit" class="btn btn-primary btn-round">Get Started</button>
+                                        <button [disabled]="registerForm.controls.formTermsAndConditions" type="submit" class="btn btn-primary btn-round">Get Started</button>
                                     </div>
                                 </form>
                             </div>
 
-                            <div class="col-md-5 col-md-offset-1 hidden-md hidden-lg hidden-xl">
+                            <div class="col-sm-10 col-xs-10 col-sm-offset-1 col-xs-offset-1 hidden-md hidden-lg hidden-xl">
                                     <div class="card-content">
-                                        <div class="info info-horizontal">
+                                        <div class="info info-horizontal" style="max-width: 100%;">
                                             <div class="icon icon-rose">
                                                 <i class="material-icons">timeline</i>
                                             </div>
@@ -167,7 +167,7 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="info info-horizontal">
+                                        <div class="info info-horizontal" style="max-width: 100%;">
                                             <div class="icon icon-primary">
                                                 <i class="material-icons">code</i>
                                             </div>
@@ -178,7 +178,7 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class="info info-horizontal">
+                                        <div class="info info-horizontal" style="max-width: 100%;">
                                             <div class="icon icon-info">
                                                 <i class="material-icons">group</i>
                                             </div>
