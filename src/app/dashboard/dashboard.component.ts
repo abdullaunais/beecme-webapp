@@ -5,7 +5,7 @@ import { ObjectStorage } from '../utilities/object-storage';
 import { NotificationsService } from 'angular2-notifications';
 import { DashboardCounts } from '../beans';
 import { Constant } from '../services/constant';
-// import { BreadcrumbService } from '../breadcrumb/breadcrumb.service';
+import { ICarouselConfig, AnimationConfig } from 'angular4-carousel';
 
 declare const $: any;
 
@@ -25,6 +25,22 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     province: any = {};
     city: any = {};
     breadcrumbArray: { title: string; icon: string; path: string; }[];
+
+    public imageSources: string[] = [
+        './assets/img/login.jpeg',
+        './assets/img/register.jpeg',
+        './assets/img/woods.jpeg',
+    ];
+
+    public config: ICarouselConfig = {
+        verifyBeforeLoad: true,
+        log: false,
+        animation: true,
+        animationType: AnimationConfig.SLIDE,
+        autoplay: true,
+        autoplayDelay: 5000,
+        stopAutoplayMinWidth: 768
+    };
 
     countsLoading: boolean;
 
