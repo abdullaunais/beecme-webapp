@@ -77,9 +77,13 @@ export class DeliveryService {
   }
 
   getShops(cityId: number, categoryId: number, start: number, offset: number): Observable<any> {
+    
+    const type = (categoryId < 0 ? 75 : 71);
+    const value = (categoryId < 0 ? [cityId] : [categoryId, cityId]);
     const queryParams = {
-      type: 71,
-      value: [categoryId, cityId],
+      type: type,
+    //  value: [categoryId, cityId],
+      value: value,
       start: start,
       offset: offset
     };

@@ -3,6 +3,9 @@ import { SidebarService } from './sidebar.service';
 import { SharedService } from '../services/shared.service';
 import { Subscription } from 'rxjs';
 import PerfectScrollbar from 'perfect-scrollbar';
+import { DeliveryService } from "../services/delivery.service";
+import { ObjectStorage } from "../utilities/object-storage";
+import { Constant } from "../services/constant";
 
 declare const $: any;
 
@@ -68,6 +71,12 @@ export const ROUTES: RouteInfo[] = [{
 })
 
 export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
+    isLoading: boolean;
+    isAvailable: boolean;
+    isError: boolean;
+    categories: Array<any> = [];
+    city: any;
+
     public menuItems: any[];
 
     subscription: Subscription;
@@ -79,8 +88,19 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
 
     constructor(
         private sidebarService: SidebarService,
-        private sharedService: SharedService
+        private sharedService: SharedService,
+        private deliveryService: DeliveryService,
+        private storage: ObjectStorage
     ) {
+        this.isLoading = true;
+        this.isAvailable = true;
+        this.isError = false;
+        console.log('this.storage.get(location.set)  ' + this.storage.get(Constant.LOCATION_SET));
+        if (this.storage.get(Constant.LOCATION_SET)) {
+          this.city = this.storage.get(Constant.CITY);
+        } else {
+          return;
+        }        
         this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });
     }
 
@@ -111,6 +131,7 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngOnInit() {
+        this.initialize();
         this.menuItems = ROUTES.filter(menuItem => menuItem);
 
         this.subscription = this.sidebarService.userItem
@@ -121,6 +142,38 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.user = data.user;
             });
     }
+
+    initialize() {
+        this.deliveryService.getCategories(this.city.id).catch((err): any => {
+          this.isLoading = false;
+          this.isError = true;
+          console.log(err);
+        }).subscribe((data: any) => {
+          // let json = JSON.stringify(data);
+          const catArray = data; // JSON.parse(json);
+          // console.log('catgories '+ catArray);
+          if (catArray) {
+            if (catArray.length > 1) {
+              let timeout = 0;
+              catArray.forEach((element: any) => {
+                setTimeout(() => {
+                  this.categories.push(element);
+                }, timeout += 100);
+              });
+              // this.categories = data;
+              this.isAvailable = true;
+              this.isError = false;
+            } else {
+              this.isAvailable = false;
+              this.isError = false;
+            }
+          } else {
+            this.isAvailable = false;
+            this.isError = false;
+          }
+          this.isLoading = false;
+        });
+      }
 
     profilePicError() {
         this.user.profilePicture = '/assets/img/profile_default_grey.webp';

@@ -10,10 +10,12 @@ import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
 import { DeliveryService } from '../services/delivery.service';
 import { CarouselModule } from 'angular4-carousel';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { ShopListModule } from "../shop-list/shop-list.module";
 
 @NgModule({
     imports: [
         CategoryListModule,
+        ShopListModule,
         CommonModule,
         RouterModule.forChild(DashboardRoutes),
         FormsModule,

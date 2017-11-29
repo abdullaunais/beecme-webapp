@@ -45,7 +45,8 @@ export class ShopListComponent implements OnInit {
                 // this.initialize();
             } else {
                 console.log(`params category is null returning`);
-                return;
+               // load all shops return;
+               this.category['categoryId'] = '-999';
             }
         });
         this.breadcrumbArray = [
