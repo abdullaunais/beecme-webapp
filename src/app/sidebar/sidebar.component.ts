@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { SidebarService } from './sidebar.service';
 import { SharedService } from '../services/shared.service';
 import { Subscription } from 'rxjs';
-import PerfectScrollbar from 'perfect-scrollbar'; 
+import PerfectScrollbar from 'perfect-scrollbar';
 
 declare const $: any;
 
@@ -67,7 +67,7 @@ export const ROUTES: RouteInfo[] = [{
     templateUrl: 'sidebar.component.html',
 })
 
-export class SidebarComponent implements OnInit, OnDestroy {
+export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
     public menuItems: any[];
 
     subscription: Subscription;
@@ -79,9 +79,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     constructor(
         private sidebarService: SidebarService,
-        private sharedService: SharedService        
+        private sharedService: SharedService
     ) {
-        this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });        
+        this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });
     }
 
     isMobileMenu() {
@@ -91,18 +91,26 @@ export class SidebarComponent implements OnInit, OnDestroy {
         return true;
     };
 
-    ngOnInit() {
+    ngAfterViewInit() {
         let isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
         if (isWindows) {
             // if we are on windows OS we activate the perfectScrollbar function
-            const $sidebar = $('.sidebar-wrapper');
-            $sidebar.perfectScrollbar();
+            //const sidebar = $('.sidebar-wrapper');
+            const sidebar = <HTMLElement>document.querySelector('.sidebar-wrapper');
+            const psSidebar = new PerfectScrollbar(sidebar);
+
+            const mainpanel = <HTMLElement>document.querySelector('.main-panel');
+            const psMain = new PerfectScrollbar(mainpanel);
+            //sidebar.perfectScrollbar();
             // if we are on windows OS we activate the perfectScrollbar function
-            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+            //$('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
             $('html').addClass('perfect-scrollbar-on');
         } else {
             $('html').addClass('perfect-scrollbar-off');
         }
+    }
+
+    ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
 
         this.subscription = this.sidebarService.userItem
@@ -124,19 +132,19 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.subCartSummary.unsubscribe();
     }
 
-    updatePS(): void  { 
-        if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) { 
-            const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper'); 
-            let ps = new PerfectScrollbar(elemSidebar, { wheelSpeed: 2, suppressScrollX: true }); 
-        } 
-    } 
+    updatePS(): void {
+        if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
+            const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
+            let ps = new PerfectScrollbar(elemSidebar, { wheelSpeed: 2, suppressScrollX: true });
+        }
+    }
 
 
-    isMac(): boolean { 
-        let bool = false; 
-        if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) { 
-            bool = true; 
-        } 
-        return bool; 
-    } 
+    isMac(): boolean {
+        let bool = false;
+        if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) {
+            bool = true;
+        }
+        return bool;
+    }
 }
