@@ -141,8 +141,11 @@
                                         <!-- If you want to add a checkbox to this form, uncomment this code -->
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" (change)="registerForm.controls.formTermsAndConditions = !registerForm.controls.formTermsAndConditions"  formControlName="formTermsAndConditions" (blur)="inputBlur()" name="optionsCheckboxes" checked> I agree to the
-                                                <a id="forminput4" href="#something">terms and conditions</a>.
+                                           <!--     <input type="checkbox" (change)="registerForm.controls.formTermsAndConditions = !registerForm.controls.formTermsAndConditions"  formControlName="formTermsAndConditions" (blur)="inputBlur()" name="optionsCheckboxes" checked> I agree to the
+                                                <a id="forminput4" href="#something">terms and conditions</a>. -->
+                                                <input type="checkbox"  formControlName="formTermsAndConditions" (blur)="inputBlur()" name="optionsCheckboxes" checked> I agree to the
+                                                
+
                                             </label>
                                         </div>
                                     </div>

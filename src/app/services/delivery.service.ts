@@ -110,7 +110,7 @@ export class DeliveryService {
   getItemByShop(categoryId: number, shopId: number, start: number, offset: number): Observable<any> {
     const queryParams = {
       type: 150,
-      value: [categoryId, shopId],
+      value: [shopId,categoryId ],
       start: start,
       offset: offset
     };
