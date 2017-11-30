@@ -59,6 +59,9 @@ export class ItemListComponent {
       if (params['shop']) {
         this.shop['shopId'] = params['shop'];
         this.selectedCatId = params['category'];
+        if(!this.selectedCatId || this.selectedCatId < 0 ) {
+          this.selectedCatId = -1;
+        }
         this.initialize();
       }
 

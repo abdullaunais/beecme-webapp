@@ -132,21 +132,23 @@
     </div>
     <div class="nav-container">
         <ul class="nav">
-            <li routerLinkActive="active" *ngFor="let menuitem of menuItems">
-                <!--If is a single link-->
+            <!-- <li routerLinkActive="active" *ngFor="let menuitem of menuItems"> -->
+                <!--If is a single link
                 <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
                     <i class="material-icons">{{menuitem.icontype}}</i>
                     <p>{{menuitem.title}}</p>
                 </a>
-                <!--If it have a submenu-->
+                -->
+                <!--If it have a submenu
                 <a data-toggle="collapse" href="#{{menuitem.collapse}}" *ngIf="menuitem.type === 'sub'" (click)="updatePS()">
                     <i class="material-icons">{{menuitem.icontype}}</i>
                     <p>{{menuitem.title}}
                         <b class="caret"></b>
                     </p>
                 </a>
+                -->
 
-                <!--Display the submenu items-->
+                <!--Display the submenu items
                 <div id="{{menuitem.collapse}}" class="collapse" *ngIf="menuitem.type === 'sub'">
                     <ul class="nav">
                         <li routerLinkActive="active" *ngFor="let childitem of menuitem.children">
@@ -157,7 +159,18 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+                -->
+                <!-- categories start -->
+                    <ul class="nav">
+                        <li routerLinkActive="active" *ngFor="let category of categories">
+                            <a [routerLink]="['/category']" [queryParams]="{category: category.categoryId}" queryParamsHandling="merge">
+                                      {{category.nameEn}}
+
+                              </a>
+                        </li>
+                    </ul>
+                <!-- categories end -->
+            <!-- </li> -->
             <!-- <li>
                         <a href="http://md-pro-angular.creative-tim.com/documentation/tutorial?ref=md-pro-archive">
                             <i class="material-icons">school</i>
@@ -166,6 +179,7 @@
                     </li> -->
         </ul>
     </div>
+
     <!-- <footer class="footer">
         <img src="assets/img/google-play-badge.png" style="width:100%; padding: 0 10px;" />
         <img src="assets/img/app-store-badge.svg" style="width:100%; padding: 0 26px;" />

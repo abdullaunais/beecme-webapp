@@ -16,7 +16,8 @@ import { ShopInfoModule } from "../shop-info/shop-info.module";
         ShopInfoModule,
         BreadcrumbModule
     ],
-    declarations: [ShopListComponent]
+    declarations: [ShopListComponent],
+    exports: [ShopListComponent]
 })
 
 export class ShopListModule {}

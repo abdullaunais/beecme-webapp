@@ -1,8 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { SidebarService } from './sidebar.service';
 import { SharedService } from '../services/shared.service';
 import { Subscription } from 'rxjs';
-import PerfectScrollbar from 'perfect-scrollbar'; 
+import PerfectScrollbar from 'perfect-scrollbar';
+import { DeliveryService } from "../services/delivery.service";
+import { ObjectStorage } from "../utilities/object-storage";
+import { Constant } from "../services/constant";
 
 declare const $: any;
 
@@ -67,7 +70,13 @@ export const ROUTES: RouteInfo[] = [{
     templateUrl: 'sidebar.component.html',
 })
 
-export class SidebarComponent implements OnInit, OnDestroy {
+export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
+    isLoading: boolean;
+    isAvailable: boolean;
+    isError: boolean;
+    categories: Array<any> = [];
+    city: any;
+
     public menuItems: any[];
 
     subscription: Subscription;
@@ -79,9 +88,20 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     constructor(
         private sidebarService: SidebarService,
-        private sharedService: SharedService        
+        private sharedService: SharedService,
+        private deliveryService: DeliveryService,
+        private storage: ObjectStorage
     ) {
-        this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });        
+        this.isLoading = true;
+        this.isAvailable = true;
+        this.isError = false;
+        console.log('this.storage.get(location.set)  ' + this.storage.get(Constant.LOCATION_SET));
+        if (this.storage.get(Constant.LOCATION_SET)) {
+          this.city = this.storage.get(Constant.CITY);
+        } else {
+          return;
+        }        
+        this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });
     }
 
     isMobileMenu() {
@@ -91,18 +111,27 @@ export class SidebarComponent implements OnInit, OnDestroy {
         return true;
     };
 
-    ngOnInit() {
+    ngAfterViewInit() {
         let isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
         if (isWindows) {
             // if we are on windows OS we activate the perfectScrollbar function
-            const $sidebar = $('.sidebar-wrapper');
-            $sidebar.perfectScrollbar();
+            //const sidebar = $('.sidebar-wrapper');
+            const sidebar = <HTMLElement>document.querySelector('.sidebar-wrapper');
+            const psSidebar = new PerfectScrollbar(sidebar);
+
+            const mainpanel = <HTMLElement>document.querySelector('.main-panel');
+            const psMain = new PerfectScrollbar(mainpanel);
+            //sidebar.perfectScrollbar();
             // if we are on windows OS we activate the perfectScrollbar function
-            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+            //$('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
             $('html').addClass('perfect-scrollbar-on');
         } else {
             $('html').addClass('perfect-scrollbar-off');
         }
+    }
+
+    ngOnInit() {
+        this.initialize();
         this.menuItems = ROUTES.filter(menuItem => menuItem);
 
         this.subscription = this.sidebarService.userItem
@@ -114,6 +143,38 @@ export class SidebarComponent implements OnInit, OnDestroy {
             });
     }
 
+    initialize() {
+        this.deliveryService.getCategories(this.city.id).catch((err): any => {
+          this.isLoading = false;
+          this.isError = true;
+          console.log(err);
+        }).subscribe((data: any) => {
+          // let json = JSON.stringify(data);
+          const catArray = data; // JSON.parse(json);
+          // console.log('catgories '+ catArray);
+          if (catArray) {
+            if (catArray.length > 1) {
+              let timeout = 0;
+              catArray.forEach((element: any) => {
+                setTimeout(() => {
+                  this.categories.push(element);
+                }, timeout += 100);
+              });
+              // this.categories = data;
+              this.isAvailable = true;
+              this.isError = false;
+            } else {
+              this.isAvailable = false;
+              this.isError = false;
+            }
+          } else {
+            this.isAvailable = false;
+            this.isError = false;
+          }
+          this.isLoading = false;
+        });
+      }
+
     profilePicError() {
         this.user.profilePicture = '/assets/img/profile_default_grey.webp';
     }
@@ -124,19 +185,19 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.subCartSummary.unsubscribe();
     }
 
-    updatePS(): void  { 
-        if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) { 
-            const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper'); 
-            let ps = new PerfectScrollbar(elemSidebar, { wheelSpeed: 2, suppressScrollX: true }); 
-        } 
-    } 
+    updatePS(): void {
+        if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
+            const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
+            let ps = new PerfectScrollbar(elemSidebar, { wheelSpeed: 2, suppressScrollX: true });
+        }
+    }
 
 
-    isMac(): boolean { 
-        let bool = false; 
-        if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) { 
-            bool = true; 
-        } 
-        return bool; 
-    } 
+    isMac(): boolean {
+        let bool = false;
+        if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) {
+            bool = true;
+        }
+        return bool;
+    }
 }
