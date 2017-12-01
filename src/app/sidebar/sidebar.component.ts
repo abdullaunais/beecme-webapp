@@ -16,6 +16,7 @@ export interface RouteInfo {
     type: string;
     icontype: string;
     // icon: string;
+    collapse?: string;
     children?: ChildrenItems[];
 }
 
@@ -23,47 +24,50 @@ export interface ChildrenItems {
     path: string;
     title: string;
     ab: string;
+    queryParams: any;
     type?: string;
 }
 
 //Menu Items
-export const ROUTES: RouteInfo[] = [{
-    path: '/home',
-    title: 'Home',
-    type: 'link',
-    icontype: 'dashboard'
-}
-    // ,{
-    //     path: '/components',
-    //     title: 'Components',
-    //     type: 'sub',
-    //     icontype: 'apps',
-    //     children: [
-    //         {path: 'buttons', title: 'Buttons', ab:'B'},
-    //         {path: 'grid', title: 'Grid System', ab:'GS'},
-    //         {path: 'panels', title: 'Panels', ab:'P'},
-    //         {path: 'sweet-alert', title: 'Sweet Alert', ab:'SA'},
-    //         {path: 'notifications', title: 'Notifications', ab:'N'},
-    //         {path: 'icons', title: 'Icons', ab:'I'},
-    //         {path: 'typography', title: 'Typography', ab:'T'}
-    //     ]
+export const ROUTES: RouteInfo[] = [
+    {
+        path: '/home',
+        title: 'Home',
+        type: 'link',
+        icontype: 'dashboard'
+    },
+    {
+        path: '/categories',
+        title: 'Categories',
+        type: 'sub',
+        icontype: 'apps',
+        collapse: 'categories',
+        children: [
+            // { path: 'buttons', title: 'Buttons', ab: 'B' }
+            // { path: 'grid', title: 'Grid System', ab: 'GS' },
+            // { path: 'panels', title: 'Panels', ab: 'P' },
+            // { path: 'sweet-alert', title: 'Sweet Alert', ab: 'SA' },
+            // { path: 'notifications', title: 'Notifications', ab: 'N' },
+            // { path: 'icons', title: 'Icons', ab: 'I' },
+            // { path: 'typography', title: 'Typography', ab: 'T' }
+        ]
+    }
+    //     , {
+    //     path: '/categories',
+    //     title: 'Categories',
+    //     type: 'link',
+    //     icontype: 'apps'
+    // }, {
+    //     path: '/cart',
+    //     title: 'My Cart',
+    //     type: 'link',
+    //     icontype: 'shopping_cart'
+    // }, {
+    //     path: '/orders',
+    //     title: 'My Orders',
+    //     type: 'link',
+    //     icontype: 'timeline'
     // }
-    , {
-    path: '/categories',
-    title: 'Categories',
-    type: 'link',
-    icontype: 'apps'
-}, {
-    path: '/cart',
-    title: 'My Cart',
-    type: 'link',
-    icontype: 'shopping_cart'
-}, {
-    path: '/orders',
-    title: 'My Orders',
-    type: 'link',
-    icontype: 'timeline'
-}
 ];
 @Component({
     selector: 'app-sidebar-cmp',
@@ -97,10 +101,10 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
         this.isError = false;
         console.log('this.storage.get(location.set)  ' + this.storage.get(Constant.LOCATION_SET));
         if (this.storage.get(Constant.LOCATION_SET)) {
-          this.city = this.storage.get(Constant.CITY);
+            this.city = this.storage.get(Constant.CITY);
         } else {
-          return;
-        }        
+            return;
+        }
         this.subCartSummary = this.sharedService.getSubjectCartSummary().subscribe((size: any) => { this.cartCount = size; });
     }
 
@@ -112,18 +116,18 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
     };
 
     ngAfterViewInit() {
-        let isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
+        const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
         if (isWindows) {
             // if we are on windows OS we activate the perfectScrollbar function
-            //const sidebar = $('.sidebar-wrapper');
+            // const sidebar = $('.sidebar-wrapper');
             const sidebar = <HTMLElement>document.querySelector('.sidebar-wrapper');
             const psSidebar = new PerfectScrollbar(sidebar);
 
             const mainpanel = <HTMLElement>document.querySelector('.main-panel');
             const psMain = new PerfectScrollbar(mainpanel);
-            //sidebar.perfectScrollbar();
+            // sidebar.perfectScrollbar();
             // if we are on windows OS we activate the perfectScrollbar function
-            //$('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+            // $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
             $('html').addClass('perfect-scrollbar-on');
         } else {
             $('html').addClass('perfect-scrollbar-off');
@@ -132,7 +136,7 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
 
     ngOnInit() {
         this.initialize();
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
+        // this.menuItems = ROUTES.filter(menuItem => menuItem);
 
         this.subscription = this.sidebarService.userItem
             .subscribe((data: any) => {
@@ -145,35 +149,45 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
 
     initialize() {
         this.deliveryService.getCategories(this.city.id).catch((err): any => {
-          this.isLoading = false;
-          this.isError = true;
-          console.log(err);
+            this.isLoading = false;
+            this.isError = true;
+            console.log(err);
         }).subscribe((data: any) => {
-          // let json = JSON.stringify(data);
-          const catArray = data; // JSON.parse(json);
-          // console.log('catgories '+ catArray);
-          if (catArray) {
-            if (catArray.length > 1) {
-              let timeout = 0;
-              catArray.forEach((element: any) => {
-                setTimeout(() => {
-                  this.categories.push(element);
-                }, timeout += 100);
-              });
-              // this.categories = data;
-              this.isAvailable = true;
-              this.isError = false;
+            // let json = JSON.stringify(data);
+            const catArray = data; // JSON.parse(json);
+            // console.log('catgories '+ catArray);
+            if (catArray) {
+                if (catArray.length > 1) {
+                    catArray.forEach((element: any) => {
+                        const child: ChildrenItems = {
+                            path: '/category',
+                            queryParams: {
+                                category: element.categoryId
+                            },
+                            title: element.nameEn,
+                            ab: '-'
+                        };
+                        ROUTES[1].children.push(child);
+                        this.categories.push(element);
+                    });
+
+                    this.menuItems = ROUTES.filter(menuItem => menuItem);
+                    this.updatePS();
+                    console.log(this.menuItems);
+                    // this.categories = data;
+                    this.isAvailable = true;
+                    this.isError = false;
+                } else {
+                    this.isAvailable = false;
+                    this.isError = false;
+                }
             } else {
-              this.isAvailable = false;
-              this.isError = false;
+                this.isAvailable = false;
+                this.isError = false;
             }
-          } else {
-            this.isAvailable = false;
-            this.isError = false;
-          }
-          this.isLoading = false;
+            this.isLoading = false;
         });
-      }
+    }
 
     profilePicError() {
         this.user.profilePicture = '/assets/img/profile_default_grey.webp';
