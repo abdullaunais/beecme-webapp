@@ -3,13 +3,13 @@ import { SidebarService } from './sidebar.service';
 import { SharedService } from '../services/shared.service';
 import { Subscription } from 'rxjs';
 import PerfectScrollbar from 'perfect-scrollbar';
-import { DeliveryService } from "../services/delivery.service";
-import { ObjectStorage } from "../utilities/object-storage";
-import { Constant } from "../services/constant";
+import { DeliveryService } from '../services/delivery.service';
+import { ObjectStorage } from '../utilities/object-storage';
+import { Constant } from '../services/constant';
 
 declare const $: any;
 
-//Metadata
+// Metadata
 export interface RouteInfo {
     path: string;
     title: string;
@@ -28,7 +28,7 @@ export interface ChildrenItems {
     type?: string;
 }
 
-//Menu Items
+// Menu Items
 export const ROUTES: RouteInfo[] = [
     {
         path: '/home',
@@ -42,15 +42,7 @@ export const ROUTES: RouteInfo[] = [
         type: 'sub',
         icontype: 'apps',
         collapse: 'categories',
-        children: [
-            // { path: 'buttons', title: 'Buttons', ab: 'B' }
-            // { path: 'grid', title: 'Grid System', ab: 'GS' },
-            // { path: 'panels', title: 'Panels', ab: 'P' },
-            // { path: 'sweet-alert', title: 'Sweet Alert', ab: 'SA' },
-            // { path: 'notifications', title: 'Notifications', ab: 'N' },
-            // { path: 'icons', title: 'Icons', ab: 'I' },
-            // { path: 'typography', title: 'Typography', ab: 'T' }
-        ]
+        children: []
     }
     //     , {
     //     path: '/categories',
@@ -202,7 +194,7 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
     updatePS(): void {
         if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
             const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
-            let ps = new PerfectScrollbar(elemSidebar, { wheelSpeed: 2, suppressScrollX: true });
+            const ps = new PerfectScrollbar(elemSidebar, { wheelSpeed: 2, suppressScrollX: true });
         }
     }
 

@@ -1,5 +1,7 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 
+declare const $: any;
+
 @Component({
   selector: 'app-shop-info',
   templateUrl: './shop-info.component.html',
@@ -9,4 +11,8 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 export class ShopInfoComponent {
   @Input('shop') shop: any;
   constructor() { }
+
+  openShopModal() {
+    $('#shopModal').modal('show');
+  }
 }
