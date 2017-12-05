@@ -10,10 +10,6 @@
         <div class="row">
 
             <simple-notifications [options]="options"></simple-notifications>
-            <!-- 
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <app-breadcrumb [breadcrumbArray]="breadcrumbArray"></app-breadcrumb>
-            </div> -->
 
 
             <div class="col-lg-3 col-md-4 col-sm-4" (click)="routeToPath('/categories')" style="cursor: pointer">
@@ -25,11 +21,6 @@
                         <p class="category">Categories</p>
                         <h3 class="card-title" style="display: inline-flex;">{{counts?.countCategory}}</h3>
                     </div>
-                    <!--       <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">shop</i> View Available Shops
-                        </div> 
-                    </div> -->
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-4">
@@ -41,11 +32,6 @@
                         <p class="category">Shops</p>
                         <h3 class="card-title" style="display: inline-flex;">{{counts?.countShops}}</h3>
                     </div>
-                    <!--                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">chat_bubble_outline</i> Buy from Shops around you
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-4" (click)="routeToPath('/cart')" style="cursor: pointer">
@@ -57,11 +43,6 @@
                         <p class="category">Items</p>
                         <h3 class="card-title" style="display: inline-flex;">{{counts?.countItems}}</h3>
                     </div>
-                    <!--                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">shopping_cart</i> Checkout Items
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-4 hidden-md hidden-sm" (click)="routeToPath('/orders')" style="cursor: pointer">
@@ -73,11 +54,6 @@
                         <p class="category">My Orders</p>
                         <h3 class="card-title" style="display: inline-flex;">2</h3>
                     </div>
-                    <!--    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">update</i> Just Updated
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -133,7 +109,8 @@
             </p> -->
 
          <!--   <app-category-list></app-category-list> -->
-         <app-shop-list></app-shop-list>
+         <!-- <app-shop-list></app-shop-list> -->
+         <app-item-list></app-item-list>
 
         </div>
     </div>

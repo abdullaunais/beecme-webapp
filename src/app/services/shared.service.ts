@@ -78,7 +78,7 @@ export class SharedService {
     if (cart.length === 0) {
       this.storage.set(Constant.CART_TOTAL, 0);
       console.log('refresh cart total to 0');
-      this.subjectCartSummary.next('0 items');
+      this.subjectCartSummary.next('0 item');
       return;
     }
 
@@ -86,6 +86,7 @@ export class SharedService {
       cartTotal = cartTotal + (item.quantity * item.price);
     }
 
+    //this.city = this.storage.get(Constant.CITY);
     const df = this.storage.get(Constant.CART_SHOP).deliveryCharge;
     cartTotal = cartTotal + df;
     console.log(`refreshFinalTotal calculated FT is ${cartTotal}`);

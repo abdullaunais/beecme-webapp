@@ -56,14 +56,14 @@ export class ItemListComponent {
     this.route.queryParams.subscribe(params => {
 
       console.log(`params ${JSON.stringify(params)}`);
-      if (params['shop']) {
-        this.shop['shopId'] = params['shop'];
+      // if (params['shop']) {
+        this.shop['shopId'] = 22; //params['shop'];
         this.selectedCatId = params['category'];
         if(!this.selectedCatId || this.selectedCatId < 0 ) {
           this.selectedCatId = -1;
         }
         this.initialize();
-      }
+      // }
 
       if (params['shop'] && params['category']) {
         this.breadcrumbArray = [
@@ -78,7 +78,7 @@ export class ItemListComponent {
   }
 
   initialize() {
-    const shopId = this.shop['shopId'];
+    const shopId = 22; //this.shop['shopId'];
     console.log(`params ${shopId} ${this.selectedCatId}`);
     this.deliveryService.getItemByShop(this.selectedCatId, shopId, this.start, this.offset).catch((err): any => {
       this.isLoading = false;
@@ -109,13 +109,13 @@ export class ItemListComponent {
       this.isLoading = false;
     });
 
-    this.deliveryService.getShopById(this.city.id, shopId).catch((err): any => {
-      this.shopLoading = false;
-      // this.isAvailable = false;
-    }).subscribe((shopData) => {
-      this.shop = shopData;
-      this.shopLoading = false;
-    });
+    // this.deliveryService.getShopById(this.city.id, shopId).catch((err): any => {
+    //   this.shopLoading = false;
+    //   // this.isAvailable = false;
+    // }).subscribe((shopData) => {
+    //   this.shop = shopData;
+    //   this.shopLoading = false;
+    // });
   }
 
   paginationChange(val: number) {
@@ -125,7 +125,7 @@ export class ItemListComponent {
     this.isLoading = true;
     this.noMoreItems = false;
     this.items = [];
-    const shopId = this.shop['shopId'];
+    const shopId = 22; // this.shop['shopId'];
     this.deliveryService.getItemByShop(this.selectedCatId, shopId, this.pageStart, this.offset).catch((err): any => {
       this.isLoading = false;
       this.noMoreItems = true;

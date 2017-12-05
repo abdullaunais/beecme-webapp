@@ -152,7 +152,7 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
                 if (catArray.length > 1) {
                     catArray.forEach((element: any) => {
                         const child: ChildrenItems = {
-                            path: '/category',
+                            path: '/itemlist',
                             queryParams: {
                                 category: element.categoryId
                             },
