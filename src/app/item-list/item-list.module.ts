@@ -18,7 +18,8 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
         BreadcrumbModule,
         SimpleNotificationsModule.forRoot()
     ],
-    declarations: [ItemListComponent]
+    declarations: [ItemListComponent],
+    exports: [ItemListComponent]
 })
 
 export class ItemListModule {}
