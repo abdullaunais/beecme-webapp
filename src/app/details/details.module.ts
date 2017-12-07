@@ -9,6 +9,7 @@ import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
 import { DeliveryService } from '../services/delivery.service';
 import { ShopInfoModule } from '../shop-info/shop-info.module';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import {ImageZoomModule} from 'angular2-image-zoom';
 
 @NgModule({
     imports: [
@@ -16,6 +17,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
         RouterModule.forChild(DetailsRoutes),
         FormsModule,
         BreadcrumbModule,
+        ImageZoomModule,
         ShopInfoModule,
         SimpleNotificationsModule.forRoot()
     ],

@@ -186,4 +186,14 @@ export class DetailsComponent {
         }
 
     }
+
+    isNotMobileOrSmall() {
+        console.log(navigator.userAgent);
+        if (/Mobi/.test(navigator.userAgent)) {
+            // is Mobile
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
