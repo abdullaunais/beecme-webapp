@@ -27,9 +27,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     breadcrumbArray: { title: string; icon: string; path: string; }[];
 
     public imageSources: string[] = [
-        './assets/img/login.jpeg',
-        './assets/img/register.jpeg',
-        './assets/img/woods.jpeg',
+        './assets/img/slide_1.jpg',
+        './assets/img/slide_2.jpg',
+        './assets/img/slide_3.jpg',
     ];
 
     public config: ICarouselConfig = {

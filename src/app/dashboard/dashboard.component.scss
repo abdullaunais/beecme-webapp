@@ -4,6 +4,7 @@
     }
     .carousel-wrapper {
         box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14); 
+        object-fit: contain;
         border-radius: 6px;
     }
     #containerIntro {
@@ -15,5 +16,10 @@
     }
     .card-stats .card-header i {
         font-size: 30px;
+    }
+    .slide {
+        background-color: #fff;
+        object-fit: contain !important;
+        height: 400px !important;
     }
 }
