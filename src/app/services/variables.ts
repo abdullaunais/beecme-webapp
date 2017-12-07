@@ -1,11 +1,11 @@
 export class Variables {
     private static instance: Variables;
-    //Assign "new Singleton()" here to avoid lazy initialisation
+    //Assign "new Variables()" here to avoid lazy initialisation
     private title: string;
 
     constructor() {
         if (Variables.instance) {
-            throw new Error("Error - use Singleton.getInstance()");
+            throw new Error("Error - use Variables.getInstance()");
         }
         this.title = 'Home';
     }

@@ -23,6 +23,7 @@ export class SearchListComponent {
   // shop: any = {};
   city: any = {};
   keyword: string = 'search';
+  numberOfResults: number = 0;
 
   items: Array<any> = [];
   constructor(
@@ -60,8 +61,10 @@ export class SearchListComponent {
       this.isLoading = false;
       this.isAvailable = false;
     }).subscribe((data) => {
+      this.items = [];
       console.log(data['itemlist']);
       if (data['itemlist']) {
+        this.numberOfResults = data['itemlist'].length;
         if (data['itemlist'].length > 0) {
           this.isAvailable = true;
           let timeout = 0;

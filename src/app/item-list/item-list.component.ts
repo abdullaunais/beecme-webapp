@@ -66,7 +66,6 @@ export class ItemListComponent implements OnInit {
     this.isAvailable = true;
     this.noMoreItems = false;
 
-    this.items = [];
     const shopId = 22; // this.shop['shopId'];
     console.log(`params ${shopId} ${this.selectedCatId}`);
     this.deliveryService.getItemByShop(this.selectedCatId, shopId, this.start, this.offset).catch((err): any => {
@@ -76,6 +75,7 @@ export class ItemListComponent implements OnInit {
       console.log(data['itemlist']);
       if (data['itemlist']) {
         if (data['itemlist'].length > 0) {
+          this.items = [];
           this.isAvailable = true;
           let timeout = 0;
           data['itemlist'].forEach((item: any) => {
