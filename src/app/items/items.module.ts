@@ -13,6 +13,7 @@ import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
         ItemListModule,
         CommonModule,
         FormsModule,
+        BreadcrumbModule,
         RouterModule.forChild(ItemsRoutes)
     ],
     declarations: [ItemsComponent]

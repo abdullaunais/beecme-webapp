@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-items',
@@ -6,13 +7,19 @@ import { Component, ViewEncapsulation } from '@angular/core';
     encapsulation: ViewEncapsulation.None
 })
 export class ItemsComponent {
-    breadcrumbArray: { title: string; icon: string; path: string; }[];
+    breadcrumbArray: Array<any>;
     constructor(
+        private route: ActivatedRoute,
     ) {
-        this.breadcrumbArray = [
-            {title: 'Home', icon: 'home', path: 'home'},
-            {title: 'Categories', icon: 'apps', path: 'categories'},
-            {title: 'Items', icon: 'apps', path: 'items'}
-        ]
+        this.route.queryParams.subscribe(params => {
+            if (params['category']) {
+                this.breadcrumbArray = [
+                    { title: 'Home', icon: 'home', path: 'home' },
+                    { title: 'Categories', icon: 'apps', path: 'categories' },
+                    { title: 'Items', icon: 'bookmark', path: 'shop', queryParams: { category: params['category'], shop: params['shop'] } }
+                ];
+            }
+        });
+
     }
 }

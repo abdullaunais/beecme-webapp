@@ -6,6 +6,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { DashboardCounts } from '../beans';
 import { Constant } from '../services/constant';
 import { ICarouselConfig, AnimationConfig } from 'angular4-carousel';
+import { Variables } from '../services/variables';
 
 declare const $: any;
 
@@ -61,6 +62,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         private notify: NotificationsService
     ) {
         this.breadcrumbArray = [{ title: 'Home', icon: 'home', path: 'home' }];
+        Variables.getInstance().setTitle('Home');
         this.country = this.storage.get(Constant.COUNTRY);
         this.province = this.storage.get(Constant.PROVINCE);
         this.city = this.storage.get(Constant.CITY);

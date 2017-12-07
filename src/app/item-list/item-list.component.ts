@@ -27,7 +27,6 @@ export class ItemListComponent implements OnInit {
   isLoading: boolean;
   isAvailable: boolean;
   noMoreItems: boolean;
-  shopLoading: boolean;
 
   shop: any = {};
   city: any = {};
@@ -47,38 +46,26 @@ export class ItemListComponent implements OnInit {
     private sharedService: SharedService,
     private notify: NotificationsService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.isLoading = true;
-    this.shopLoading = true;
-    this.isAvailable = true;
-    this.noMoreItems = false;
     this.city = this.storage.get(Constant.CITY);
     this.route.queryParams.subscribe(params => {
-
       console.log(`params ${JSON.stringify(params)}`);
-      // if (params['shop']) {
-        this.shop['shopId'] = 22; //params['shop'];
-        this.selectedCatId = params['category'];
-        if (!this.selectedCatId || this.selectedCatId < 0 ) {
-          this.selectedCatId = -1;
-        }
-        this.initialize();
-      // }
-
-      if (params['shop'] && params['category']) {
-        this.breadcrumbArray = [
-          { title: 'Home', icon: 'home', path: 'home' },
-          { title: 'Categories', icon: 'apps', path: 'categories' },
-          { title: 'Shops', icon: 'store', path: 'category', queryParams: { category: params['category'] } },
-          { title: 'Items', icon: 'bookmark', path: 'shop', queryParams: { category: params['category'], shop: params['shop'] } }
-        ];
+      this.shop['shopId'] = 22; //params['shop'];
+      this.selectedCatId = params['category'];
+      if (!this.selectedCatId || this.selectedCatId < 0) {
+        this.selectedCatId = -1;
       }
+      this.initialize();
     });
   }
 
   initialize() {
+    this.isLoading = true;
+    this.isAvailable = true;
+    this.noMoreItems = false;
+
     this.items = [];
     const shopId = 22; // this.shop['shopId'];
     console.log(`params ${shopId} ${this.selectedCatId}`);
@@ -123,7 +110,7 @@ export class ItemListComponent implements OnInit {
   paginationChange(val: number) {
     this.pageStart += this.offset * val;
     this.start += val;
-    
+
     this.isLoading = true;
     this.noMoreItems = false;
     this.items = [];

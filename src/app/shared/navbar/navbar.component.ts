@@ -8,6 +8,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { ObjectStorage } from '../../utilities/object-storage';
 import { DeliveryService } from '../../services/delivery.service';
 import { Constant } from '../../services/constant';
+import { Variables } from '../../services/variables';
 
 const misc: any = {
     navbar_menu_visible: 0,
@@ -32,6 +33,8 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
     public searchForm = this.fb.group({
         formSearch: ['', [Validators.required]]
     });
+
+    title: string = '';
 
     cartCount: string;
     subCartSummary: Subscription;
@@ -200,8 +203,17 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
     //     if (titlee.indexOf('/details?') !== -1) {
     //         return 'Details';
     //     }
+    //     if (titlee.indexOf('/items?') !== -1) {
+    //         return 'Details';
+    //     }
     //     return 'BeecMe';
     // }
+
+    getTitle() {
+        let variables = Variables.getInstance();
+        this.title = variables.getTitle();
+        return this.title;
+    }
 
     getPath() {
         return this.location.prepareExternalUrl(this.location.path());

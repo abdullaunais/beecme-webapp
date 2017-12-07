@@ -1,10 +1,6 @@
-<div class="row page-item-list">
-        <simple-notifications [options]="options"></simple-notifications>
+<div class="page-item-list">
+    <simple-notifications [options]="options"></simple-notifications>
     <!--
-            <div class="col-lg-12 col-md-12">
-                <app-breadcrumb [breadcrumbArray]="breadcrumbArray"></app-breadcrumb>
-            </div>
-
             <div *ngIf="shopLoading">
                 <div class="loader loader-position-fix">
                     <svg class="circular" viewBox="25 25 50 50">
@@ -25,77 +21,88 @@
                 </div>
             </div>
         -->
-    <div class="col-lg-3 col-md-4 col-sm-4" *ngFor="let item of items">
-        <div class="card card-product">
-            <a [routerLink]="['/details']" [queryParams]="{item: item.itemCode, shop: shop?.shopId}" queryParamsHandling="merge">
-                <div class="card-image card-item-image-wrapper" data-header-animation="true">
-                    <img class="img card-item-image" *ngIf="item.img1" [src]="item?.img1" alt=" ">
-                </div>
-                <div class="card-content">
-                    <div class="card-actions" style="top:-62px;">
-                        <div class="btn btn-default btn-simple card-item-desc">{{item.descriptionEn}}</div>
+
+    <div class="row" *ngIf="isLoading">
+        <div class="loader loader-position-fix" style="position: inherit; margin: 300px auto;">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="10" fill="none" stroke-width="2" stroke-miterlimit="0" />
+            </svg>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="!isLoading">
+        <div class="col-lg-3 col-md-4 col-sm-4" *ngFor="let item of items">
+            <div class="card card-product">
+                <a [routerLink]="['/details']" [queryParams]="{item: item.itemCode, shop: shop?.shopId}" queryParamsHandling="merge">
+                    <div class="card-image card-item-image-wrapper" data-header-animation="true">
+                        <img class="img card-item-image" *ngIf="item.img1" [src]="item?.img1" alt=" ">
                     </div>
-                    <h4 class="card-title">
-                        {{item.nameEn}}
-                    </h4>
-                    <!-- <div class="card-description">
+                    <div class="card-content">
+                        <div class="card-actions" style="top:-62px;">
+                            <div class="btn btn-default btn-simple card-item-desc">{{item.descriptionEn}}</div>
+                        </div>
+                        <h4 class="card-title">
+                            {{item.nameEn}}
+                        </h4>
+                        <!-- <div class="card-description">
                             <button class="btn btn-info cart-item-btn-comment">Add Comment</button>
                         </div> -->
-                    <div class="card-description">
-                        <!-- <div class="pull-left cart-item-price">
+                        <div class="card-description">
+                            <!-- <div class="pull-left cart-item-price">
                                 <span style="font-weight: 300;">2 UNIT X LKR 10 =</span>
                             </div> -->
-                        <div>
-                            <span class="badge badge-info card-item-pricetag">LKR {{item.price}} / {{ item.unit.toUpperCase() }}</span>
-                        </div>
-                        <div style="clear: both;"></div>
-                    </div>
-                </div>
-            </a>
-            <div class="card-footer">
-                <div class="row" style="margin: 0; display: block;">
-                    <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
-                        <div class="card-header card-header-text" style="display: block; padding: 0;">
-                            <table class="col-12" style="padding:0;">
-                                <tr>
-                                    <td class="item-qty-btn-wrapper">
-                                        <button [disabled]="item?.qty < 1" (click)="updateQty(item, -1)" style="margin-right: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </td>
-                                    <td class="item-qty-edit-wrapper">
-                                        <div style="width: 100%;">
-                                            <input [disabled]="item?.qty < 1" type="number" [max]="item.qty" [(ngModel)]="item.selectedQty" class="item-qty-edit" value="1"
-                                                placeholder="Quanity">
-                                        </div>
-                                    </td>
-                                    <td class="item-qty-btn-wrapper">
-                                        <button [disabled]="item?.qty < 1" (click)="updateQty(item, 1)" style="margin-left: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </table>
+                            <div>
+                                <span class="badge badge-info card-item-pricetag">LKR {{item.price}} / {{ item.unit.toUpperCase() }}</span>
+                            </div>
+                            <div style="clear: both;"></div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
-                        <button [disabled]="item?.qty < 1" class="btn btn-primary item-cart-btn" (click)="addToCart(item)">
-                            <i class="fa fa-shopping-cart"></i>
-                            <span>Add to Cart</span>
-                        </button>
-                    </div>
-                    <!-- <div class="col col-lg-9 col-md-9" style="margin: 0; padding: 0; display: block;">
+                </a>
+                <div class="card-footer">
+                    <div class="row" style="margin: 0; display: block;">
+                        <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
+                            <div class="card-header card-header-text" style="display: block; padding: 0;">
+                                <table class="col-12" style="padding:0;">
+                                    <tr>
+                                        <td class="item-qty-btn-wrapper">
+                                            <button [disabled]="item?.qty < 1" (click)="updateQty(item, -1)" style="margin-right: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </td>
+                                        <td class="item-qty-edit-wrapper">
+                                            <div style="width: 100%;">
+                                                <input [disabled]="item?.qty < 1" type="number" [max]="item.qty" [(ngModel)]="item.selectedQty" class="item-qty-edit" value="1"
+                                                    placeholder="Quanity">
+                                            </div>
+                                        </td>
+                                        <td class="item-qty-btn-wrapper">
+                                            <button [disabled]="item?.qty < 1" (click)="updateQty(item, 1)" style="margin-left: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
+                            <button [disabled]="item?.qty < 1" class="btn btn-primary item-cart-btn" (click)="addToCart(item)">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>Add to Cart</span>
+                            </button>
+                        </div>
+                        <!-- <div class="col col-lg-9 col-md-9" style="margin: 0; padding: 0; display: block;">
                                     <input type="number" class="card-item-quantity" placeholder="Quantity" />
                                 </div>
                                 <div class="col col-lg-3 col-md-3" style="margin: 0; padding: 0; display: block;">
                                     <button title="Add to Cart" class="btn btn-primary action-item-add-cart col-9"><i class="fa fa-shopping-cart"></i></button>
                                 </div> -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-sm-12" style="padding: 0 15px;">
+    <div *ngIf="!isLoading" class="col-sm-12" style="padding: 0 15px;">
         <!--Pagination -->
         <nav class="my-4">
             <ul class="pagination pagination-circle pagination-lg pg-blue mb-0">
