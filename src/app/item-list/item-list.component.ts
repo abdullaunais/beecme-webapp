@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { DeliveryService } from '../services/delivery.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ObjectStorage } from '../utilities/object-storage';
@@ -15,7 +15,7 @@ declare var swal: any;
   providers: [DeliveryService],
   encapsulation: ViewEncapsulation.None
 })
-export class ItemListComponent {
+export class ItemListComponent implements OnInit {
   breadcrumbArray: Array<any>;
 
   start: number = 0;
@@ -34,7 +34,7 @@ export class ItemListComponent {
   selectedCatId: number;
 
   public options = {
-    position: ["bottom", "right"],
+    position: ['bottom', 'right'],
     timeOut: 0,
     lastOnBottom: true,
   };
@@ -47,7 +47,9 @@ export class ItemListComponent {
     private sharedService: SharedService,
     private notify: NotificationsService,
     private router: Router
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.isLoading = true;
     this.shopLoading = true;
     this.isAvailable = true;
@@ -59,7 +61,7 @@ export class ItemListComponent {
       // if (params['shop']) {
         this.shop['shopId'] = 22; //params['shop'];
         this.selectedCatId = params['category'];
-        if(!this.selectedCatId || this.selectedCatId < 0 ) {
+        if (!this.selectedCatId || this.selectedCatId < 0 ) {
           this.selectedCatId = -1;
         }
         this.initialize();
@@ -74,11 +76,11 @@ export class ItemListComponent {
         ];
       }
     });
-
   }
 
   initialize() {
-    const shopId = 22; //this.shop['shopId'];
+    this.items = [];
+    const shopId = 22; // this.shop['shopId'];
     console.log(`params ${shopId} ${this.selectedCatId}`);
     this.deliveryService.getItemByShop(this.selectedCatId, shopId, this.start, this.offset).catch((err): any => {
       this.isLoading = false;

@@ -35,8 +35,8 @@ export const AppRoutes: Routes = [
                 path: 'category',
                 loadChildren: './shop-list/shop-list.module#ShopListModule',
             }, {
-                path: 'itemlist',
-                loadChildren: './item-list/item-list.module#ItemListModule',
+                path: 'items',
+                loadChildren: './items/items.module#ItemsModule',
             }, {
                 path: 'details',
                 loadChildren: './details/details.module#DetailsModule',

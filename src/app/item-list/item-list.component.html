@@ -1,9 +1,6 @@
-<div class="main-content">
-    <div class="container-fluid page-item-list">
-        <div class="row">
-            <!--
-            <simple-notifications [options]="options"></simple-notifications>
-
+<div class="row page-item-list">
+        <simple-notifications [options]="options"></simple-notifications>
+    <!--
             <div class="col-lg-12 col-md-12">
                 <app-breadcrumb [breadcrumbArray]="breadcrumbArray"></app-breadcrumb>
             </div>
@@ -28,137 +25,134 @@
                 </div>
             </div>
         -->
-            <div class="col-lg-3 col-md-3 col-sm-6" *ngFor="let item of items">
-                <div class="card card-product">
-                    <a [routerLink]="['/details']" [queryParams]="{item: item.itemCode, shop: shop?.shopId}" queryParamsHandling="merge">
-                        <div class="card-image card-item-image-wrapper" data-header-animation="true">
-                            <img class="img card-item-image" *ngIf="item.img1" [src]="item?.img1" alt=" ">
-                        </div>
-                        <div class="card-content">
-                            <div class="card-actions" style="top:-62px;">
-                                <div class="btn btn-default btn-simple card-item-desc">{{item.descriptionEn}}</div>
-                            </div>
-                            <h4 class="card-title">
-                                {{item.nameEn}}
-                            </h4>
-                            <!-- <div class="card-description">
+    <div class="col-lg-3 col-md-4 col-sm-4" *ngFor="let item of items">
+        <div class="card card-product">
+            <a [routerLink]="['/details']" [queryParams]="{item: item.itemCode, shop: shop?.shopId}" queryParamsHandling="merge">
+                <div class="card-image card-item-image-wrapper" data-header-animation="true">
+                    <img class="img card-item-image" *ngIf="item.img1" [src]="item?.img1" alt=" ">
+                </div>
+                <div class="card-content">
+                    <div class="card-actions" style="top:-62px;">
+                        <div class="btn btn-default btn-simple card-item-desc">{{item.descriptionEn}}</div>
+                    </div>
+                    <h4 class="card-title">
+                        {{item.nameEn}}
+                    </h4>
+                    <!-- <div class="card-description">
                             <button class="btn btn-info cart-item-btn-comment">Add Comment</button>
                         </div> -->
-                            <div class="card-description">
-                                <!-- <div class="pull-left cart-item-price">
+                    <div class="card-description">
+                        <!-- <div class="pull-left cart-item-price">
                                 <span style="font-weight: 300;">2 UNIT X LKR 10 =</span>
                             </div> -->
-                                <div>
-                                    <span class="badge badge-info card-item-pricetag">LKR {{item.price}} / {{ item.unit.toUpperCase() }}</span>
-                                </div>
-                                <div style="clear: both;"></div>
-                            </div>
+                        <div>
+                            <span class="badge badge-info card-item-pricetag">LKR {{item.price}} / {{ item.unit.toUpperCase() }}</span>
                         </div>
-                    </a>
-                    <div class="card-footer">
-                        <div class="row" style="margin: 0; display: block;">
-                            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0; margin-bottom: 10px;">
-                                <div class="card-header card-header-text" style="display: block; padding: 0;">
-                                    <table class="col-12" style="padding:0;">
-                                        <tr>
-                                            <td class="item-qty-btn-wrapper">
-                                                <button [disabled]="item?.qty < 1" (click)="updateQty(item, -1)" style="margin-right: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
-                                                    <i class="fa fa-minus"></i>
-                                                </button>
-                                            </td>
-                                            <td class="item-qty-edit-wrapper">
-                                                <div style="width: 100%;">
-                                                    <input [disabled]="item?.qty < 1" type="number" [max]="item.qty" [(ngModel)]="item.selectedQty" class="item-qty-edit" value="1" placeholder="Quanity">
-                                                </div>
-                                            </td>
-                                            <td class="item-qty-btn-wrapper">
-                                                <button [disabled]="item?.qty < 1" (click)="updateQty(item, 1)" style="margin-left: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
-                                <button [disabled]="item?.qty < 1" class="btn btn-primary item-cart-btn" (click)="addToCart(item)">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <span>Add to Cart</span>
-                                </button>
-                            </div>
-                            <!-- <div class="col col-lg-9 col-md-9" style="margin: 0; padding: 0; display: block;">
+                        <div style="clear: both;"></div>
+                    </div>
+                </div>
+            </a>
+            <div class="card-footer">
+                <div class="row" style="margin: 0; display: block;">
+                    <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
+                        <div class="card-header card-header-text" style="display: block; padding: 0;">
+                            <table class="col-12" style="padding:0;">
+                                <tr>
+                                    <td class="item-qty-btn-wrapper">
+                                        <button [disabled]="item?.qty < 1" (click)="updateQty(item, -1)" style="margin-right: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </td>
+                                    <td class="item-qty-edit-wrapper">
+                                        <div style="width: 100%;">
+                                            <input [disabled]="item?.qty < 1" type="number" [max]="item.qty" [(ngModel)]="item.selectedQty" class="item-qty-edit" value="1"
+                                                placeholder="Quanity">
+                                        </div>
+                                    </td>
+                                    <td class="item-qty-btn-wrapper">
+                                        <button [disabled]="item?.qty < 1" (click)="updateQty(item, 1)" style="margin-left: 10px;" class="btn btn-secondary btn-just-icon item-qty-btn">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
+                        <button [disabled]="item?.qty < 1" class="btn btn-primary item-cart-btn" (click)="addToCart(item)">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Add to Cart</span>
+                        </button>
+                    </div>
+                    <!-- <div class="col col-lg-9 col-md-9" style="margin: 0; padding: 0; display: block;">
                                     <input type="number" class="card-item-quantity" placeholder="Quantity" />
                                 </div>
                                 <div class="col col-lg-3 col-md-3" style="margin: 0; padding: 0; display: block;">
                                     <button title="Add to Cart" class="btn btn-primary action-item-add-cart col-9"><i class="fa fa-shopping-cart"></i></button>
                                 </div> -->
-                        </div>
-                    </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="col-sm-12" style="padding: 0 15px;">
-                <!--Pagination -->
-                <nav class="my-4">
-                    <ul class="pagination pagination-circle pagination-lg pg-blue mb-0">
+    <div class="col-sm-12" style="padding: 0 15px;">
+        <!--Pagination -->
+        <nav class="my-4">
+            <ul class="pagination pagination-circle pagination-lg pg-blue mb-0">
 
-                        <!--First-->
-                        <!-- <li class="page-item disabled">
+                <!--First-->
+                <!-- <li class="page-item disabled">
                             <a class="page-link">First</a>
                         </li> -->
 
-                        <!--Arrow left Disabled -->
-                        <li class="page-item disabled" *ngIf="start < 1">
-                            <a class="page-link" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
+                <!--Arrow left Disabled -->
+                <li class="page-item disabled" *ngIf="start < 1">
+                    <a class="page-link" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
 
-                        <!--Arrow left -->
-                        <li class="page-item" (click)="paginationChange(-1)" *ngIf="start >= 1">
-                            <a class="page-link" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
+                <!--Arrow left -->
+                <li class="page-item" (click)="paginationChange(-1)" *ngIf="start >= 1">
+                    <a class="page-link" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
 
-                        <!--Numbers-->
-                        <li class="page-item cursor-pointer" (click)="paginationChange(-2)" *ngIf="start >= 2">
-                            <a class="page-link">{{start - 1}}</a>
-                        </li>
-                        <li class="page-item cursor-pointer" (click)="paginationChange(-1)" *ngIf="start >= 1">
-                            <a class="page-link">{{start}}</a>
-                        </li>
-                        <li class="page-item cursor-pointer active" (click)="paginationChange(0)" *ngIf="start >= 0">
-                            <a class="page-link">{{start + 1}}</a>
-                        </li>
-                        <li class="page-item cursor-pointer" (click)="paginationChange(1)" *ngIf="start+1 < size">
-                            <a class="page-link">{{start + 2}}</a>
-                        </li>
-                        <li class="page-item cursor-pointer" (click)="paginationChange(2)" *ngIf="start+2 < size">
-                            <a class="page-link">{{start + 3}}</a>
-                        </li>
+                <!--Numbers-->
+                <li class="page-item cursor-pointer" (click)="paginationChange(-2)" *ngIf="start >= 2">
+                    <a class="page-link">{{start - 1}}</a>
+                </li>
+                <li class="page-item cursor-pointer" (click)="paginationChange(-1)" *ngIf="start >= 1">
+                    <a class="page-link">{{start}}</a>
+                </li>
+                <li class="page-item cursor-pointer active" (click)="paginationChange(0)" *ngIf="start >= 0">
+                    <a class="page-link">{{start + 1}}</a>
+                </li>
+                <li class="page-item cursor-pointer" (click)="paginationChange(1)" *ngIf="start+1 < size">
+                    <a class="page-link">{{start + 2}}</a>
+                </li>
+                <li class="page-item cursor-pointer" (click)="paginationChange(2)" *ngIf="start+2 < size">
+                    <a class="page-link">{{start + 3}}</a>
+                </li>
 
-                        <!--Arrow right-->
-                        <li class="page-item">
-                            <a class="page-link" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
+                <!--Arrow right-->
+                <li class="page-item">
+                    <a class="page-link" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
 
-                        <!--Last-->
-                        <!-- <li class="page-item">
+                <!--Last-->
+                <!-- <li class="page-item">
                             <a class="page-link">Last</a>
                         </li> -->
 
-                    </ul>
-                </nav>
-                <!--/Pagination -->
-            </div>
-
-
-        </div>
+            </ul>
+        </nav>
+        <!--/Pagination -->
     </div>
 </div>
