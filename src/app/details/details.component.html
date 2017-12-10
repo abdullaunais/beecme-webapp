@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-5" style="padding-right: 0;">
                             <div class="card-header card-header-text" data-background-color="blue" style="display: block;">
-                                <h4 class="card-title">{{item.nameEn}}</h4>
+                                <h4 class="card-title">{{item.itemCode}} - {{item.nameEn}}</h4>
                                 <!-- <p class="category">Active</p> -->
                             </div>
                             <div *ngIf="item?.qty>0" class="card-header card-header-text" data-background-color="green" class="item-availability">
@@ -48,12 +48,12 @@
 
                             <div class="card-content" style="padding: 15px 5px 15px 20px;">
                                 <h5 class="card-title">{{item.nameEn}}</h5>
-                                <p style="text-align: justify;">
-                                    {{item.descriptionEn}}
-                                </p>
+                               <!-- <p style="text-align: justify;" [InnerHTML]="item.descriptionEn"></p> -->
+                               <div style="text-align: justify;" [innerHTML]="item.descriptionEn"></div>
+
 
                                 <div class="item-comment" *ngIf="item.comment">
-                                    <i class="fa fa-quote-left pull-left"></i> &nbsp;&nbsp;&nbsp; {{item.comment}}
+                                    <i class="fa fa-quote-left pull-left"></i> &nbsp;&nbsp;&nbsp; <div [innerHTML]="item.comment"></div>
                                     <i class="fa fa-quote-right pull-right"></i>
                                 </div>
 
