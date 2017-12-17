@@ -143,14 +143,14 @@
                                             <label>
                                            <!--     <input type="checkbox" (change)="registerForm.controls.formTermsAndConditions = !registerForm.controls.formTermsAndConditions"  formControlName="formTermsAndConditions" (blur)="inputBlur()" name="optionsCheckboxes" checked> I agree to the
                                                 <a id="forminput4" href="#something">terms and conditions</a>. -->
-                                                <input type="checkbox"  formControlName="formTermsAndConditions" (blur)="inputBlur()" name="optionsCheckboxes" checked> I agree to the
+                                                <input type="checkbox"  formControlName="formTermsAndConditions"> I agree to the
                                                 
 
                                             </label>
                                         </div>
                                     </div>
                                     <div class="footer text-center">
-                                        <button [disabled]="registerForm.controls.formTermsAndConditions" type="submit" class="btn btn-primary btn-round">Get Started</button>
+                                        <button [disabled]="registerForm.controls.formTermsAndConditions.value" type="submit" class="btn btn-primary btn-round">Get Started</button>
                                     </div>
                                 </form>
                             </div>
