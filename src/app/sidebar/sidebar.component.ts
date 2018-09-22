@@ -82,6 +82,11 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
     cartCount: number = 0;
     subCartSummary: Subscription;
 
+    start: number = 0;
+    offset: number = 10;
+    catId: number = 36;
+    shops: Array<any> = [];
+
     constructor(
         private sidebarService: SidebarService,
         private sharedService: SharedService,
@@ -140,14 +145,14 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     initialize() {
+
+        /* malhar 20180514
         this.deliveryService.getCategories(this.city.id).catch((err): any => {
             this.isLoading = false;
             this.isError = true;
             console.log(err);
         }).subscribe((data: any) => {
-            // let json = JSON.stringify(data);
             const catArray = data; // JSON.parse(json);
-            // console.log('catgories '+ catArray);
             if (catArray) {
                 if (catArray.length > 1) {
                     catArray.forEach((element: any) => {
@@ -166,7 +171,6 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
                     this.menuItems = ROUTES.filter(menuItem => menuItem);
                     this.updatePS();
                     console.log(this.menuItems);
-                    // this.categories = data;
                     this.isAvailable = true;
                     this.isError = false;
                 } else {
@@ -179,6 +183,46 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
             }
             this.isLoading = false;
         });
+        */
+        
+        // shops list start
+        this.deliveryService.getShops(this.city.id, this.catId, this.start, this.offset).catch((err): any => {
+            this.isLoading = false;
+            this.isError = true;
+            console.log(err);
+        }).subscribe((data: any) => {
+            const shopArray = data; // JSON.parse(json);
+            if (shopArray) {
+                if (shopArray.length > 1) {
+                    shopArray.forEach((element: any) => {
+                        const child: ChildrenItems = {
+                            path: '/shop',
+                            queryParams: {
+                                shop: element.shopId
+                            },
+                            title: element.shopName,
+                            ab: '-'
+                        };
+                        ROUTES[1].children.push(child);
+                        this.categories.push(element);
+                    });
+
+                    this.menuItems = ROUTES.filter(menuItem => menuItem);
+                    this.updatePS();
+                    console.log(this.menuItems);
+                    this.isAvailable = true;
+                    this.isError = false;
+                } else {
+                    this.isAvailable = false;
+                    this.isError = false;
+                }
+            } else {
+                this.isAvailable = false;
+                this.isError = false;
+            }
+            this.isLoading = false;
+        });
+        // shop list end
     }
 
     profilePicError() {
