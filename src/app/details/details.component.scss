@@ -17,11 +17,11 @@
     .item-image-active {
         width: 100%;
         border-radius: 3px;
-        height: 25rem;
-        object-fit: cover;
+        height: auto;
     }
     .item-image-inactive {
         width: 100%;
+        height: auto;
         opacity: 0.4;
         border-radius: 3px;
     }

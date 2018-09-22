@@ -155,9 +155,11 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
             const catArray = data; // JSON.parse(json);
             if (catArray) {
                 if (catArray.length > 1) {
+                    ROUTES[1].children = [];
+                    this.categories = [];
                     catArray.forEach((element: any) => {
                         const child: ChildrenItems = {
-                            path: '/category',
+                            path: '/items',
                             queryParams: {
                                 category: element.categoryId
                             },

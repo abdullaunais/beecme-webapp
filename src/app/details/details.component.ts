@@ -5,6 +5,7 @@ import { ObjectStorage } from '../utilities/object-storage';
 import { SharedService } from '../services/shared.service';
 import { NotificationsService } from 'angular2-notifications';
 import { Constant } from '../services/constant';
+import { Variables } from '../services/variables';
 
 declare var swal: any;
 
@@ -70,10 +71,10 @@ export class DetailsComponent {
                 this.breadcrumbArray = [
                     { title: 'Home', icon: 'home', path: 'home' },
                     { title: 'Categories', icon: 'apps', path: 'categories' },
-                    { title: 'Shops', icon: 'store', path: 'category', queryParams: { category: params['category'] } },
                     { title: 'Items', icon: 'bookmark', path: 'shop', queryParams: { category: params['category'], shop: params['shop'] } },
                     { title: 'Details', icon: 'info', path: 'details', queryParams: { category: params['category'], shop: params['shop'], item: params['item'] } }
                 ];
+                Variables.getInstance().setTitle('Details');
             }
         });
     }
@@ -185,5 +186,15 @@ export class DetailsComponent {
             this.selectedQty += val;
         }
 
+    }
+
+    isNotMobileOrSmall() {
+        // console.log(navigator.userAgent);
+        if (/Mobi/.test(navigator.userAgent)) {
+            // is Mobile
+            return false;
+        } else {
+            return true;
+        }
     }
 }

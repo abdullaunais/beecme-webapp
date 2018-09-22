@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { DeliveryService } from '../services/delivery.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ObjectStorage } from '../utilities/object-storage';
@@ -15,7 +15,7 @@ declare var swal: any;
   providers: [DeliveryService],
   encapsulation: ViewEncapsulation.None
 })
-export class ItemListComponent {
+export class ItemListComponent implements OnInit {
   breadcrumbArray: Array<any>;
 
   start: number = 0;
@@ -27,14 +27,13 @@ export class ItemListComponent {
   isLoading: boolean;
   isAvailable: boolean;
   noMoreItems: boolean;
-  shopLoading: boolean;
 
   shop: any = {};
   city: any = {};
   selectedCatId: number;
 
   public options = {
-    position: ["bottom", "right"],
+    position: ['bottom', 'right'],
     timeOut: 0,
     lastOnBottom: true,
   };
@@ -47,38 +46,27 @@ export class ItemListComponent {
     private sharedService: SharedService,
     private notify: NotificationsService,
     private router: Router
-  ) {
-    this.isLoading = true;
-    this.shopLoading = true;
-    this.isAvailable = true;
-    this.noMoreItems = false;
+  ) { }
+
+  ngOnInit() {
     this.city = this.storage.get(Constant.CITY);
     this.route.queryParams.subscribe(params => {
-
       console.log(`params ${JSON.stringify(params)}`);
-      if (params['shop']) {
-        this.shop['shopId'] = params['shop'];
-        this.selectedCatId = params['category'];
-        if(!this.selectedCatId || this.selectedCatId < 0 ) {
-          this.selectedCatId = -1;
-        }
-        this.initialize();
+      this.shop['shopId'] = 22; //params['shop'];
+      this.selectedCatId = params['category'];
+      if (!this.selectedCatId || this.selectedCatId < 0) {
+        this.selectedCatId = -1;
       }
-
-      if (params['shop'] && params['category']) {
-        this.breadcrumbArray = [
-          { title: 'Home', icon: 'home', path: 'home' },
-          { title: 'Categories', icon: 'apps', path: 'categories' },
-          { title: 'Shops', icon: 'store', path: 'category', queryParams: { category: params['category'] } },
-          { title: 'Items', icon: 'bookmark', path: 'shop', queryParams: { category: params['category'], shop: params['shop'] } }
-        ];
-      }
+      this.initialize();
     });
-
   }
 
   initialize() {
-    const shopId = this.shop['shopId'];
+    this.isLoading = true;
+    this.isAvailable = true;
+    this.noMoreItems = false;
+
+    const shopId = 22; // this.shop['shopId'];
     console.log(`params ${shopId} ${this.selectedCatId}`);
     this.deliveryService.getItemByShop(this.selectedCatId, shopId, this.start, this.offset).catch((err): any => {
       this.isLoading = false;
@@ -87,6 +75,7 @@ export class ItemListComponent {
       console.log(data['itemlist']);
       if (data['itemlist']) {
         if (data['itemlist'].length > 0) {
+          this.items = [];
           this.isAvailable = true;
           let timeout = 0;
           data['itemlist'].forEach((item: any) => {
@@ -109,23 +98,23 @@ export class ItemListComponent {
       this.isLoading = false;
     });
 
-    this.deliveryService.getShopById(this.city.id, shopId).catch((err): any => {
-      this.shopLoading = false;
-      // this.isAvailable = false;
-    }).subscribe((shopData) => {
-      this.shop = shopData;
-      this.shopLoading = false;
-    });
+    // this.deliveryService.getShopById(this.city.id, shopId).catch((err): any => {
+    //   this.shopLoading = false;
+    //   // this.isAvailable = false;
+    // }).subscribe((shopData) => {
+    //   this.shop = shopData;
+    //   this.shopLoading = false;
+    // });
   }
 
   paginationChange(val: number) {
     this.pageStart += this.offset * val;
     this.start += val;
-    
+
     this.isLoading = true;
     this.noMoreItems = false;
     this.items = [];
-    const shopId = this.shop['shopId'];
+    const shopId = 22; // this.shop['shopId'];
     this.deliveryService.getItemByShop(this.selectedCatId, shopId, this.pageStart, this.offset).catch((err): any => {
       this.isLoading = false;
       this.noMoreItems = true;
