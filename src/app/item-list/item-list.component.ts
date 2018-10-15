@@ -68,7 +68,7 @@ export class ItemListComponent implements OnInit {
 
     const shopId = 22; // this.shop['shopId'];
     console.log(`params ${shopId} ${this.selectedCatId}`);
-    this.deliveryService.getItemByShop(this.selectedCatId, shopId, this.start, this.offset).catch((err): any => {
+    this.deliveryService.getItemByCategory(this.selectedCatId, this.start, this.offset).catch((err): any => {
       this.isLoading = false;
       this.isAvailable = false;
     }).subscribe((data) => {
@@ -115,7 +115,7 @@ export class ItemListComponent implements OnInit {
     this.noMoreItems = false;
     this.items = [];
     const shopId = 22; // this.shop['shopId'];
-    this.deliveryService.getItemByShop(this.selectedCatId, shopId, this.pageStart, this.offset).catch((err): any => {
+    this.deliveryService.getItemByCategory(this.selectedCatId, this.pageStart, this.offset).catch((err): any => {
       this.isLoading = false;
       this.noMoreItems = true;
     }).subscribe((data) => {

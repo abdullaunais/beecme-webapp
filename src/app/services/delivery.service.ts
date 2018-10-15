@@ -32,6 +32,8 @@ export class DeliveryService {
   private readonly SEARCH_URL = '/dashboard/search';
   private readonly NOTIFICATIONS_URL = '/notifications';
 
+  private readonly MYSHOP_ITEM_URL = '/msitems';
+
   constructor(
     private http: Http,
     public config: Config,
@@ -107,10 +109,12 @@ export class DeliveryService {
       .catch((err) => this.handleError(err));
   }
 
+ /*
   getItemByShop(categoryId: number, shopId: number, start: number, offset: number): Observable<any> {
     const queryParams = {
       type: 150,
       value: [shopId,categoryId ],
+      catId: categoryId,
       start: start,
       offset: offset
     };
@@ -119,6 +123,19 @@ export class DeliveryService {
       .map((res) => this.extractData(res))
       .catch((err) => this.handleError(err));
   }
+*/
+
+  getItemByCategory(categoryId: number, start: number, offset: number): Observable<any> {
+    const queryParams = {
+      catId: categoryId,
+      start: start,
+      offset: offset
+    };
+    const requestUrl: string = this.serviceRootUrl + this.MYSHOP_ITEM_URL + this.encodeQueryData(queryParams);
+    return this.http.get(requestUrl, this.options)
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
+  }  
 
   getItemById(shopId: number, itemId: number): Observable<any> {
     const requestUrl: string = this.serviceRootUrl + this.ITEM_SHOP_URL + `/${shopId}/${itemId}`;
@@ -146,6 +163,7 @@ export class DeliveryService {
       .catch((err) => this.handleError(err));
   }
 
+  /*
   getItemByCategory(category: number, start: number, offset: number): Observable<any> {
     const queryParams = {
       type: 11,
@@ -158,7 +176,7 @@ export class DeliveryService {
       .map((res) => this.extractData(res))
       .catch((err) => this.handleError(err));
   }
-
+*/
   getOrders(userId: number, start: number, offset: number): Observable<any> {
     const queryParams = {
       type: 32,

@@ -17,7 +17,8 @@ import { ItemListModule } from '../item-list/item-list.module';
     imports: [
         // CategoryListModule,
         // ShopListModule,
-        ItemListModule,
+        // ItemListModule,
+        CategoryListModule,
         CommonModule,
         RouterModule.forChild(DashboardRoutes),
         FormsModule,
