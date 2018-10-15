@@ -43,7 +43,7 @@ export class CategoryListComponent implements OnInit {
       const catArray = data; // JSON.parse(json);
       // console.log('catgories '+ catArray);
       if (catArray) {
-        if (catArray.length > 1) {
+        if (catArray.length > 0) {
           let timeout = 0;
           catArray.forEach((element: any) => {
             setTimeout(() => {

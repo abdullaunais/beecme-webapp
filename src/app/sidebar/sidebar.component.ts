@@ -187,6 +187,7 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
         });
         */
         
+        /* malhar 2018/10/14
         // shops list start
         this.deliveryService.getShops(this.city.id, this.catId, this.start, this.offset).catch((err): any => {
             this.isLoading = false;
@@ -225,6 +226,7 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
             this.isLoading = false;
         });
         // shop list end
+        malhar 2018/10/14 */
     }
 
     profilePicError() {

@@ -49,8 +49,8 @@
   },
   "devDependencies": {
     "@angular/cli": "1.6.1",
+    "@angular-devkit/core": "0.8.3",
     "@angular/compiler-cli": "4.4.6",
-    "@ngtools/webpack": "^1.9.1",
     "@types/bootstrap": "3.3.32",
     "@types/jasmine": "2.5.38",
     "@types/jquery": "1.10.31",

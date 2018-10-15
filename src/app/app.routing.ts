@@ -33,7 +33,8 @@ export const AppRoutes: Routes = [
                 canActivate: [AuthGuardService]
             }, {
                 path: 'category',
-                loadChildren: './shop-list/shop-list.module#ShopListModule',
+                // loadChildren: './shop-list/shop-list.module#ShopListModule',
+                loadChildren: './items/items.module#ItemsModule',
             }, {
                 path: 'items',
                 loadChildren: './items/items.module#ItemsModule',
