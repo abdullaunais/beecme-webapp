@@ -262,7 +262,7 @@ export class Item {
   statusDescAr: string;
   price: number;
   unit: string;
-  sortId: number;
+  sizeId: number;
   img1: string;
   img2: string;
   img3: string;
@@ -286,7 +286,7 @@ export class ItemReq {
   statusDescAr: string;
   price: number;
   unit: string;
-  sortId: number;
+  sizeId: number;
   img1: string;
   img2: string;
   img3: string;

@@ -57,10 +57,19 @@
                                     <i class="fa fa-quote-right pull-right"></i>
                                 </div>
 
-                                <ul *ngFor="let size of itemSize">
-                                   <li> {{size.description}}        </li> 
-                                </ul>
-
+                                <div *ngIf="item.sizeId > 1">
+                                <div *ngFor="let size of itemSize; let indx = index">
+                                    <input #widget
+                                     name='sizeGroup'
+                                     type='radio'
+                                     [id]='size.description'
+                                     [value]='size.description'
+                                     [(ngModel)]='selectedSize.description'
+                                     (change)='sizeChange()'
+                                    /> {{size.description}} 
+                                   <!-- <label [for]=size.description>{{description}}</label> -->
+                                </div>
+                                </div>
                                 
                                 <div style="height: 1px; width:100%; background-color: #eee; margin-bottom: 10px;"></div>
                                 

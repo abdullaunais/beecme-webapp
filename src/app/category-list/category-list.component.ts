@@ -20,6 +20,7 @@ export class CategoryListComponent implements OnInit {
   city: any;
 
   constructor(private deliveryService: DeliveryService, private storage: ObjectStorage) {
+    /*
     this.isLoading = true;
     this.isAvailable = true;
     this.isError = false;
@@ -29,7 +30,7 @@ export class CategoryListComponent implements OnInit {
     } else {
       return;
     }
-
+    */
   }
 
 
@@ -66,6 +67,6 @@ export class CategoryListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initialize();
+    //this.initialize();
   }
 }

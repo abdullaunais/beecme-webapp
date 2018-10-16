@@ -19,12 +19,12 @@ export class DetailsComponent {
     breadcrumbArray: Array<any>;
     item: any = {};
     itemSize: Array<any> ;
-
     selectedQty: number = 1;
-    //city: any;
-
+    
     activeImage: string;
     activeImageId: number = 1;
+
+    selectedSize = { sizeId: -1, itemCode: -1, description: '' }; 
 
     public options = {
         position: Constant.NOTIFICATION_DEFAULT_POSITION,
@@ -66,11 +66,10 @@ export class DetailsComponent {
             }).subscribe((itemSizeData) => {
                 this.itemSize = itemSizeData;
                 console.log(`item details initialize fired for itemCode ${this.item['itemCode']}`);
-                console.log(`itemSizeDat ` + itemSizeData);
                 console.log(`this.itemSize ` + this.itemSize);
                 
             });
-            
+           
 
             if (params['item'] && params['shop'] && params['item']) {
                 this.breadcrumbArray = [
@@ -82,8 +81,12 @@ export class DetailsComponent {
                 Variables.getInstance().setTitle('Details');
             }
         });
+        console.log('item sizeId '+ (this.item.sizeId));
     }
 
+    sizeChange(){
+        console.log("this.selectedSize.description " + this.selectedSize.description);
+    }
     setImage(img: string, id: number) {
         this.activeImage = img;
         this.activeImageId = id;

@@ -63,10 +63,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     ) {
         this.breadcrumbArray = [{ title: 'Home', icon: 'home', path: 'home' }];
         Variables.getInstance().setTitle('Home');
+        /*
         this.country = this.storage.get(Constant.COUNTRY);
         this.province = this.storage.get(Constant.PROVINCE);
         this.city = this.storage.get(Constant.CITY);
         this.initialize();
+        */
     }
 
     initialize() {

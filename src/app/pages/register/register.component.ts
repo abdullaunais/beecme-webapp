@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
     // @ViewChildren('forminput') formInputs;
 
     public registerForm = this.formBuilder.group({
-        formName: ['', [Validators.required, Validators.minLength(4), Validators.pattern(/^[a-zA-Z ]{2,30}$/)]],
+        formName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]], // Validators.pattern(/^[a-zA-Z ]{2,30}$/)]
         formEmail: ['', [Validators.required, Validators.minLength(6), Validators.email]],
         formPhone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(10)]],
         formPassword: ['', [Validators.required, Validators.minLength(6)]],
