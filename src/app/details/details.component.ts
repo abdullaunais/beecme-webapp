@@ -18,10 +18,10 @@ declare var swal: any;
 export class DetailsComponent {
     breadcrumbArray: Array<any>;
     item: any = {};
-    shop: any = {};
+    itemSize: Array<any> ;
 
     selectedQty: number = 1;
-    city: any;
+    //city: any;
 
     activeImage: string;
     activeImageId: number = 1;
@@ -44,9 +44,9 @@ export class DetailsComponent {
     }
 
     initialize() {
-        this.city = this.storage.get(Constant.CITY);
+       // this.city = this.storage.get(Constant.CITY);
         this.route.queryParams.subscribe(params => {
-            this.shop['shopId'] = params['shop'];
+          //  this.shop['shopId'] = params['shop'];
             this.item['itemCode'] = params['item'];
 
             this.deliveryService.getItemById(params['shop'], this.item['itemCode']).catch((err): any => {
@@ -59,13 +59,18 @@ export class DetailsComponent {
                 // this.deliveryService
             });
 
-            this.deliveryService.getShopById(this.city.id, params['shop']).catch((err): any => {
+            
+            this.deliveryService.getSizeListByItemId(this.item['itemCode']).catch((err): any => {
                 // this.isLoading = false;
                 // this.isAvailable = false;
-            }).subscribe((shopData) => {
-                this.shop = shopData;
-                console.log(`item details initialize fired with shopId ${this.shop['shopId']} and itemCode ${this.item['itemCode']}`);
+            }).subscribe((itemSizeData) => {
+                this.itemSize = itemSizeData;
+                console.log(`item details initialize fired for itemCode ${this.item['itemCode']}`);
+                console.log(`itemSizeDat ` + itemSizeData);
+                console.log(`this.itemSize ` + this.itemSize);
+                
             });
+            
 
             if (params['item'] && params['shop'] && params['item']) {
                 this.breadcrumbArray = [

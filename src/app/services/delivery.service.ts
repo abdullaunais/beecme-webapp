@@ -24,7 +24,7 @@ export class DeliveryService {
   private readonly SHOP_URL = '/shops';
   private readonly CATEGORY_URL = '/categories';
   private readonly ITEM_URL = '/items';
-  private readonly ITEM_SHOP_URL = '/shopitems';
+  private readonly ITEM_DETAILS_URL = '/details';
   private readonly SCHEDULE_URL = '/schedules';
   private readonly ORDER_URL = '/carts';
   private readonly REVIEW_URL = '/reviews';
@@ -32,7 +32,8 @@ export class DeliveryService {
   private readonly SEARCH_URL = '/dashboard/search';
   private readonly NOTIFICATIONS_URL = '/notifications';
 
-  private readonly MYSHOP_ITEM_URL = '/msitems';
+  private readonly MYFISH_ITEM_URL = '/mfitems';
+  private readonly MYFISH_ITEM_SIZE_URL = '/mfitemsize';
 
   constructor(
     private http: Http,
@@ -131,19 +132,28 @@ export class DeliveryService {
       start: start,
       offset: offset
     };
-    const requestUrl: string = this.serviceRootUrl + this.MYSHOP_ITEM_URL + this.encodeQueryData(queryParams);
+    const requestUrl: string = this.serviceRootUrl + this.MYFISH_ITEM_URL + this.encodeQueryData(queryParams);
     return this.http.get(requestUrl, this.options)
       .map((res) => this.extractData(res))
       .catch((err) => this.handleError(err));
   }  
 
+  
   getItemById(shopId: number, itemId: number): Observable<any> {
-    const requestUrl: string = this.serviceRootUrl + this.ITEM_SHOP_URL + `/${shopId}/${itemId}`;
+    const requestUrl: string = this.serviceRootUrl + this.ITEM_DETAILS_URL + `/${itemId}`;
     return this.http.get(requestUrl, this.options)
       .map((res) => this.extractData(res))
       .catch((err) => this.handleError(err));
   }
+  
 
+  getSizeListByItemId(itemId: number): Observable<any> {
+    const requestUrl: string = this.serviceRootUrl + this.MYFISH_ITEM_SIZE_URL + `/${itemId}`;
+    return this.http.get(requestUrl, this.options)
+      .map((res) => this.extractData(res))
+      .catch((err) => this.handleError(err));
+  }
+  
   // findItem(itemCode: number): Observable<any> {
   //   const requestUrl: string = this.serviceRootUrl + this.ITEM_URL + `/${itemCode}`;
   //   return this.http.get(requestUrl, this.options)
