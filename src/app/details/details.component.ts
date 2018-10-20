@@ -84,8 +84,9 @@ export class DetailsComponent {
         console.log('item sizeId '+ (this.item.sizeId));
     }
 
-    sizeChange(){
+    sizeChange(p: number){
         console.log("this.selectedSize.description " + this.selectedSize.description);
+        this.item.price = p;
     }
     setImage(img: string, id: number) {
         this.activeImage = img;

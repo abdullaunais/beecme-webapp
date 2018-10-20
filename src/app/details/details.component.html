@@ -65,8 +65,8 @@
                                      [id]='size.description'
                                      [value]='size.description'
                                      [(ngModel)]='selectedSize.description'
-                                     (change)='sizeChange()'
-                                    /> {{size.description}} 
+                                     (change)='sizeChange(size.price)'
+                                    /> {{size.description}} Rs. {{size.price}}
                                    <!-- <label [for]=size.description>{{description}}</label> -->
                                 </div>
                                 </div>
@@ -104,7 +104,7 @@
                                     <button [disabled]="item?.qty < 1" class="btn btn-primary item-cart-btn" (click)="addToCart()">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span class="hidden-md hidden-lg">&nbsp;Add to Cart</span>
-                                        <span>&nbsp;(LKR {{item.price}}/{{item.unit}})</span>
+                                        <span *ngIf="item.price>0">&nbsp;(Rs. {{item.price}}/{{item.unit}})</span>
                                     </button>
                                 </div>
                             </div>

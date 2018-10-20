@@ -86,13 +86,13 @@ export class SharedService {
       cartTotal = cartTotal + (item.quantity * item.price);
     }
 
-    //this.city = this.storage.get(Constant.CITY);
-    const df = this.storage.get(Constant.CART_SHOP).deliveryCharge;
+    const df = 0; //this.storage.get(Constant.CART_SHOP).deliveryCharge;
     cartTotal = cartTotal + df;
     console.log(`refreshFinalTotal calculated FT is ${cartTotal}`);
     this.storage.set(Constant.CART_TOTAL, cartTotal);
     console.log(`cart.length is ${cart.length}`);
-    this.subjectCartSummary.next(cart.length + ' of ' + this.getShop().currency + cartTotal);
+    //this.subjectCartSummary.next(cart.length + ' of ' + this.getShop().currency + cartTotal);
+    this.subjectCartSummary.next(cart.length + ' of Rs. ' +  cartTotal);
     console.log(`refreshFinalTotal updated FT is ${this.getCartTotal()}`);
   }
 

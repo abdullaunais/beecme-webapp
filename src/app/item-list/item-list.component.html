@@ -52,7 +52,7 @@
                                 <span style="font-weight: 300;">2 UNIT X LKR 10 =</span>
                             </div> -->
                             <div>
-                                <span class="badge badge-info card-item-pricetag">LKR {{item.price}} / {{ item.unit.toUpperCase() }}</span>
+                                <span *ngIf="item.price>0" class="badge badge-info card-item-pricetag">Rs. {{item.price}} / {{ item.unit }}</span>
                             </div>
                             <div style="clear: both;"></div>
                         </div>
