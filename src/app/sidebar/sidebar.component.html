@@ -15,8 +15,8 @@
 
     <div class="user">
         <div class="photo">
-            <img *ngIf="user.profilePicture" [src]="isLogin ? user.profilePicture : '/assets/img/profile_default_grey.webp'" (error)="profilePicError()"
-            />
+            <img *ngIf="user.profilePicture" [src]="isLogin ? user.profilePicture : '/assets/img/profile_default_grey.webp'"
+                (error)="profilePicError()" />
             <img *ngIf="!user.profilePicture" [src]="'/assets/img/profile_default_grey.webp'" />
         </div>
         <div class="info">
@@ -26,7 +26,7 @@
                     <b class="caret"></b>
                 </span>
             </a>
-            <div class="collapse" id="collapseExample"> 
+            <div class="collapse" id="collapseExample">
                 <ul class="nav">
                     <li *ngIf="isLogin">
                         <a [routerLink]="['/pages/profile']">
@@ -79,325 +79,326 @@
                 </ul>
             </div>
         </div>
-        <!-- malhar show MyFish categories -->
-        <div class="user">
-            <!--
+    </div>
+    <!-- malhar show MyFish categories -->
+    <!-- <div class="user"> -->
+        <!--
             <div class="photo">
                 <img *ngIf="user.profilePicture" [src]="isLogin ? user.profilePicture : '/assets/img/profile_default_grey.webp'" (error)="profilePicError()"
                 />
                 <img *ngIf="!user.profilePicture" [src]="'/assets/img/profile_default_grey.webp'" />
             </div>
             -->
-           <!-- <div class="info">
+        <!-- <div class="info">
                 <a data-toggle="collapse" href="#collapseMyFish1" class="collapsed"> 
                     <span>
                         Menu
                         <b class="caret"></b>
                     </span>
                 </a> -->
-                <div> 
-                    <ul class="nav">
-                        <li>
-                            <a [routerLink]="['/category']" [queryParams]='{category: 10000}' queryParamsHandling="merge">
+        <!-- <div> -->
+            <!-- <ul class="nav">
+                <li>
+                    <a [routerLink]="['/category']" [queryParams]='{category: 1000}' queryParamsHandling="merge">
+                        <span class="sidebar-mini">
+                            <i class="material-icons">chevron_right</i>
+                        </span>
+                        <span class="sidebar-normal">Live Fish >></span>
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#collapseMyFish12">
+                        <span class="sidebar-mini">
+                            <i class="material-icons">chevron_right</i>
+                        </span>
+                        <span class="sidebar-normal">Fish Food</span>
+                    </a>
+                    <div class="collapse" id="collapseMyFish12">
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 2100}' queryParamsHandling="merge">
                                 <span class="sidebar-mini">
                                     <i class="material-icons">chevron_right</i>
                                 </span>
-                                <span class="sidebar-normal">Live Fish >></span>
+                                <span class="sidebar-mini">Disease Treatment</span>
                             </a>
-                        </li>
-                        <li>
-                            <a data-toggle="collapse" href="#collapseMyFish12" >
+                        </ul>
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 2200}' queryParamsHandling="merge">
                                 <span class="sidebar-mini">
                                     <i class="material-icons">chevron_right</i>
                                 </span>
-                                <span class="sidebar-normal">Fish Food</span>
+                                <span class="sidebar-mini">Feeders</span>
                             </a>
-                            <div class="collapse" id="collapseMyFish12"> 
-                                <ul class="nav">
-                                    <a [routerLink]="['/category']" [queryParams]='{category: 21000}' queryParamsHandling="merge" >
-                                        <span class="sidebar-mini">
-                                            <i class="material-icons">chevron_right</i>
-                                        </span>
-                                        <span class="sidebar-mini">Disease Treatment</span>
-                                    </a>
-                                </ul>
-                                <ul class="nav">
-                                    <a [routerLink]="['/category']" [queryParams]='{category: 22000}' queryParamsHandling="merge">
-                                        <span class="sidebar-mini">
-                                            <i class="material-icons">chevron_right</i>
-                                        </span>
-                                        <span class="sidebar-mini">Feeders</span>
-                                    </a>
-                                </ul>
-                                <ul class="nav">
-                                    <a [routerLink]="['/category']" [queryParams]='{category: 23000}' queryParamsHandling="merge">
-                                        <span class="sidebar-mini">
-                                            <i class="material-icons">chevron_right</i>
-                                        </span>
-                                        <span class="sidebar-mini">Food</span>
-                                    </a>
-                                </ul>
-                                <ul class="nav">
-                                    <a [routerLink]="['/category']" [queryParams]='{category: 24000}' queryParamsHandling="merge">
-                                        <span class="sidebar-mini">
-                                            <i class="material-icons">chevron_right</i>
-                                        </span>
-                                        <span class="sidebar-mini">Water Care</span>
-                                    </a>
-                                </ul>
+                        </ul>
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 2300}' queryParamsHandling="merge">
+                                <span class="sidebar-mini">
+                                    <i class="material-icons">chevron_right</i>
+                                </span>
+                                <span class="sidebar-mini">Food</span>
+                            </a>
+                        </ul>
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 2400}' queryParamsHandling="merge">
+                                <span class="sidebar-mini">
+                                    <i class="material-icons">chevron_right</i>
+                                </span>
+                                <span class="sidebar-mini">Water Care</span>
+                            </a>
+                        </ul>
 
-                            </div>                                        
-                        </li>                        
-                        <li>
-                            <a data-toggle="collapse" href="#collapseMyFish13" class="collapsed">
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#collapseMyFish13" class="collapsed">
+                        <span class="sidebar-mini">
+                            <i class="material-icons">chevron_right</i>
+                        </span>
+                        <span class="sidebar-normal">Aquariums / Tanks</span>
+                    </a>
+                    <div class="collapse" id="collapseMyFish13">
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 3100}' queryParamsHandling="merge">
                                 <span class="sidebar-mini">
                                     <i class="material-icons">chevron_right</i>
                                 </span>
-                                <span class="sidebar-normal">Aquariums / Tanks</span>
+                                <span class="sidebar-mini">Tank</span>
                             </a>
-                            <div class="collapse" id="collapseMyFish13"> 
-                                <ul class="nav">
-                                    <a [routerLink]="['/category']" [queryParams]='{category: 31000}' queryParamsHandling="merge">
-                                        <span class="sidebar-mini">
-                                            <i class="material-icons">chevron_right</i>
-                                        </span>
-                                        <span class="sidebar-mini">Tank</span>
-                                    </a>
-                                </ul>
-                                <ul class="nav">
-                                    <a [routerLink]="['/category']" [queryParams]='{category: 32000}' queryParamsHandling="merge">
-                                        <span class="sidebar-mini">
-                                            <i class="material-icons">chevron_right</i>
-                                        </span>
-                                        <span class="sidebar-mini">Tank Roof</span>
-                                    </a>
-                                </ul>
-                                <ul class="nav">
-                                    <a [routerLink]="['/category']" [queryParams]='{category: 33000}' queryParamsHandling="merge">
-                                        <span class="sidebar-mini">
-                                            <i class="material-icons">chevron_right</i>
-                                        </span>
-                                        <span class="sidebar-mini">Tank Stand</span>
-                                    </a>
-                                </ul>
-                            </div>  
-                        </li>
-                        <li>
-                            <li>
-                            <a data-toggle="collapse" href="#collapseMyFish14" class="collapsed">
+                        </ul>
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 3200}' queryParamsHandling="merge">
                                 <span class="sidebar-mini">
                                     <i class="material-icons">chevron_right</i>
                                 </span>
-                                <span class="sidebar-normal">Filters & Pumps</span>
+                                <span class="sidebar-mini">Tank Roof</span>
                             </a>
-                            <div class="collapse" id="collapseMyFish14"> 
-                                <ul class="nav">
-                                    <a [routerLink]="['/category']" [queryParams]='{category: 41000}' queryParamsHandling="merge">
-                                        <span class="sidebar-mini">
-                                            <i class="material-icons">chevron_right</i>
-                                        </span>
-                                        <span class="sidebar-mini">Air & Water Pumps</span>
-                                    </a>
-                                </ul>
-                                <ul class="nav">
-                                    <a [routerLink]="['/category']" [queryParams]='{category: 42000}' queryParamsHandling="merge">
-                                        <span class="sidebar-mini">
-                                            <i class="material-icons">chevron_right</i>
-                                        </span>
-                                        <span class="sidebar-mini">Filters</span>
-                                    </a>
-                                </ul>
-                                <ul class="nav">
-                                    <a [routerLink]="['/category']" [queryParams]='{category: 43000}' queryParamsHandling="merge">
-                                        <span class="sidebar-mini">
-                                            <i class="material-icons">chevron_right</i>
-                                        </span>
-                                        <span class="sidebar-mini">Filter Media</span>
-                                    </a>
-                                </ul>
-                            </div>                              
-                        </li>
-                        <li>
-                            <a data-toggle="collapse" href="#collapseMyFish15" class="collapsed">
+                        </ul>
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 3300}' queryParamsHandling="merge">
                                 <span class="sidebar-mini">
                                     <i class="material-icons">chevron_right</i>
                                 </span>
-                                <span class="sidebar-normal">Decor Gravel & Substrate</span>
+                                <span class="sidebar-mini">Tank Stand</span>
                             </a>
-                            <div class="collapse" id="collapseMyFish15"> 
-                                <ul class="nav">
-                                    <a [routerLink]="['/category']" [queryParams]='{category: 51000}' queryParamsHandling="merge">
-                                        <span class="sidebar-mini">
-                                            <i class="material-icons">chevron_right</i>
-                                        </span>
-                                        <span class="sidebar-mini">Artificial Plants</span>
-                                    </a>
-                                </ul>
-                                <ul class="nav">
-                                    <a [routerLink]="['/category']" [queryParams]='{category: 52000}' queryParamsHandling="merge">
-                                        <span class="sidebar-mini">
-                                            <i class="material-icons">chevron_right</i>
-                                        </span>
-                                        <span class="sidebar-mini">Aquarium Substrate</span>
-                                    </a>
-                                </ul>
-                                <ul class="nav">
-                                    <a [routerLink]="['/category']" [queryParams]='{category: 53000}' queryParamsHandling="merge">
-                                        <span class="sidebar-mini">
-                                            <i class="material-icons">chevron_right</i>
-                                        </span>
-                                        <span class="sidebar-mini">Backgrounds</span>
-                                    </a>
-                                </ul>
-                                <ul class="nav">
-                                        <a [routerLink]="['/category']" [queryParams]='{category: 54000}' queryParamsHandling="merge">
-                                            <span class="sidebar-mini">
-                                                <i class="material-icons">chevron_right</i>
-                                            </span>
-                                            <span class="sidebar-mini">Gravel, Sand & Stones</span>
-                                        </a>
-                                    </ul>
-                                    <ul class="nav">
-                                            <a [routerLink]="['/category']" [queryParams]='{category: 55000}' queryParamsHandling="merge">
-                                                <span class="sidebar-mini">
-                                                    <i class="material-icons">chevron_right</i>
-                                                </span>
-                                                <span class="sidebar-mini">Live Plants</span>
-                                            </a>
-                                        </ul>
-                                        <ul class="nav">
-                                                <a [routerLink]="['/category']" [queryParams]='{category: 56000}' queryParamsHandling="merge">
-                                                    <span class="sidebar-mini">
-                                                        <i class="material-icons">chevron_right</i>
-                                                    </span>
-                                                    <span class="sidebar-mini">Ornaments</span>
-                                                </a>
-                                            </ul>
-                
-                            </div>                                                          
-                        </li>
-                        <li>
-                            <a data-toggle="collapse" href="#collapseMyFish16" class="collapsed">
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                <li>
+                    <a data-toggle="collapse" href="#collapseMyFish14" class="collapsed">
+                        <span class="sidebar-mini">
+                            <i class="material-icons">chevron_right</i>
+                        </span>
+                        <span class="sidebar-normal">Filters & Pumps</span>
+                    </a>
+                    <div class="collapse" id="collapseMyFish14">
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 4100}' queryParamsHandling="merge">
                                 <span class="sidebar-mini">
                                     <i class="material-icons">chevron_right</i>
                                 </span>
-                                <span class="sidebar-normal">Heating & Lighting</span>
+                                <span class="sidebar-mini">Air & Water Pumps</span>
                             </a>
-                            <div class="collapse" id="collapseMyFish16"> 
-                                <ul class="nav">
-                                    <a [routerLink]="['/category']" [queryParams]='{category: 61000}' queryParamsHandling="merge">
-                                        <span class="sidebar-mini">
-                                            <i class="material-icons">chevron_right</i>
-                                        </span>
-                                        <span class="sidebar-mini">Heaters</span>
-                                    </a>
-                                </ul>
-                                <ul class="nav">
-                                    <a [routerLink]="['/category']" [queryParams]='{category: 62000}' queryParamsHandling="merge">
-                                        <span class="sidebar-mini">
-                                            <i class="material-icons">chevron_right</i>
-                                        </span>
-                                        <span class="sidebar-mini">Lights</span>
-                                    </a>
-                                </ul>
-                            </div>                                                            
-                        </li>                      
+                        </ul>
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 4200}' queryParamsHandling="merge">
+                                <span class="sidebar-mini">
+                                    <i class="material-icons">chevron_right</i>
+                                </span>
+                                <span class="sidebar-mini">Filters</span>
+                            </a>
+                        </ul>
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 4300}' queryParamsHandling="merge">
+                                <span class="sidebar-mini">
+                                    <i class="material-icons">chevron_right</i>
+                                </span>
+                                <span class="sidebar-mini">Filter Media</span>
+                            </a>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#collapseMyFish15" class="collapsed">
+                        <span class="sidebar-mini">
+                            <i class="material-icons">chevron_right</i>
+                        </span>
+                        <span class="sidebar-normal">Decor Gravel & Substrate</span>
+                    </a>
+                    <div class="collapse" id="collapseMyFish15">
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 5100}' queryParamsHandling="merge">
+                                <span class="sidebar-mini">
+                                    <i class="material-icons">chevron_right</i>
+                                </span>
+                                <span class="sidebar-mini">Artificial Plants</span>
+                            </a>
+                        </ul>
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 5200}' queryParamsHandling="merge">
+                                <span class="sidebar-mini">
+                                    <i class="material-icons">chevron_right</i>
+                                </span>
+                                <span class="sidebar-mini">Aquarium Substrate</span>
+                            </a>
+                        </ul>
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 5300}' queryParamsHandling="merge">
+                                <span class="sidebar-mini">
+                                    <i class="material-icons">chevron_right</i>
+                                </span>
+                                <span class="sidebar-mini">Backgrounds</span>
+                            </a>
+                        </ul>
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 5400}' queryParamsHandling="merge">
+                                <span class="sidebar-mini">
+                                    <i class="material-icons">chevron_right</i>
+                                </span>
+                                <span class="sidebar-mini">Gravel, Sand & Stones</span>
+                            </a>
+                        </ul>
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 5500}' queryParamsHandling="merge">
+                                <span class="sidebar-mini">
+                                    <i class="material-icons">chevron_right</i>
+                                </span>
+                                <span class="sidebar-mini">Live Plants</span>
+                            </a>
+                        </ul>
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 5600}' queryParamsHandling="merge">
+                                <span class="sidebar-mini">
+                                    <i class="material-icons">chevron_right</i>
+                                </span>
+                                <span class="sidebar-mini">Ornaments</span>
+                            </a>
+                        </ul>
 
-                    </ul>
-             
-             <!--   </div> -->
-            </div>
-        </div>        
-        <!-- categories end -->
-    </div>
-    <div *ngIf="isMobileMenu()">
-        <form class="navbar-form navbar-right" role="search">
-            <div class="form-group form-search is-empty">
-                <input class="form-control" placeholder="Search" type="text">
-                <span class="material-input"></span>
-                <span class="material-input"></span>
-            </div>
-            <button class="btn btn-white btn-round btn-just-icon" type="submit">
-                <i class="material-icons">search</i>
+                    </div>
+                </li>
+                <li>
+                    <a data-toggle="collapse" href="#collapseMyFish16" class="collapsed">
+                        <span class="sidebar-mini">
+                            <i class="material-icons">chevron_right</i>
+                        </span>
+                        <span class="sidebar-normal">Heating & Lighting</span>
+                    </a>
+                    <div class="collapse" id="collapseMyFish16">
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 6100}' queryParamsHandling="merge">
+                                <span class="sidebar-mini">
+                                    <i class="material-icons">chevron_right</i>
+                                </span>
+                                <span class="sidebar-mini">Heaters</span>
+                            </a>
+                        </ul>
+                        <ul class="nav">
+                            <a [routerLink]="['/category']" [queryParams]='{category: 6200}' queryParamsHandling="merge">
+                                <span class="sidebar-mini">
+                                    <i class="material-icons">chevron_right</i>
+                                </span>
+                                <span class="sidebar-mini">Lights</span>
+                            </a>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul> -->
+
+            <!--   </div> -->
+        <!-- </div>
+    </div> -->
+    <!-- categories end -->
+
+<div *ngIf="isMobileMenu()">
+    <form class="navbar-form navbar-right" role="search">
+        <div class="form-group form-search is-empty">
+            <input class="form-control" placeholder="Search" type="text">
+            <span class="material-input"></span>
+            <span class="material-input"></span>
+        </div>
+        <button class="btn btn-white btn-round btn-just-icon" type="submit">
+            <i class="material-icons">search</i>
+            <div class="ripple-container"></div>
+        </button>
+    </form>
+    <ul class="nav nav-mobile-menu">
+        <li class="">
+            <a [routerLink]="['/cart']" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <i class="material-icons">shopping_cart</i>
+                <span class="notification">{{cartCount}}</span>
+                <p class="hidden-lg hidden-md">Cart Items</p>
                 <div class="ripple-container"></div>
-            </button>
-        </form>
-        <ul class="nav nav-mobile-menu">
-            <li class="">
-                <a [routerLink]="['/cart']" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <i class="material-icons">shopping_cart</i>
-                    <span class="notification">{{cartCount}}</span>
-                    <p class="hidden-lg hidden-md">Cart Items</p>
-                    <div class="ripple-container"></div>
-                </a>
-            </li>
-            <li class="dropdown" *ngIf="isLogin">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                    <i class="material-icons">notifications</i>
-                    <span class="notification">5</span>
-                    <p class="hidden-lg hidden-md">
-                        Notifications
-                        <b class="caret"></b>
-                    </p>
-                    <div class="ripple-container"></div>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="#">Mike John responded to your email</a>
-                    </li>
-                    <li>
-                        <a href="#">You have 5 new tasks</a>
-                    </li>
-                    <li>
-                        <a href="#">You're now friend with Andrew</a>
-                    </li>
-                    <li>
-                        <a href="#">Another Notification</a>
-                    </li>
-                    <li>
-                        <a href="#">Another One</a>
-                    </li>
-                </ul>
-            </li>
-            <!-- <li class="" *ngIf="isLogin">
+            </a>
+        </li>
+        <li class="dropdown" *ngIf="isLogin">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                <i class="material-icons">notifications</i>
+                <span class="notification">5</span>
+                <p class="hidden-lg hidden-md">
+                    Notifications
+                    <b class="caret"></b>
+                </p>
+                <div class="ripple-container"></div>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="#">Mike John responded to your email</a>
+                </li>
+                <li>
+                    <a href="#">You have 5 new tasks</a>
+                </li>
+                <li>
+                    <a href="#">You're now friend with Andrew</a>
+                </li>
+                <li>
+                    <a href="#">Another Notification</a>
+                </li>
+                <li>
+                    <a href="#">Another One</a>
+                </li>
+            </ul>
+        </li>
+        <!-- <li class="" *ngIf="isLogin">
                 <a [routerLink]="['/pages/profile']" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             <i class="material-icons">person</i>
                             <p class="hidden-lg hidden-md">Profile</p>
                         <div class="ripple-container"></div></a>
             </li> -->
-            <li class="separator hidden-lg hidden-md"></li>
-        </ul>
-    </div>
-    <div class="nav-container">
-        <ul class="nav">
-            <li routerLinkActive="active" *ngFor="let menuitem of menuItems">
-                <!--If is a single link-->
-                <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
-                    <i class="material-icons">{{menuitem.icontype}}</i>
-                    <p>{{menuitem.title}}</p>
-                </a>
-                <!--If it have a submenu-->
-                <a data-toggle="collapse" href="#{{menuitem.collapse}}" *ngIf="menuitem.type === 'sub'" (click)="updatePS()">
-                    <i class="material-icons">{{menuitem.icontype}}</i>
-                    <p>{{menuitem.title}}
-                        <b class="caret"></b>
-                    </p>
-                </a>
+        <li class="separator hidden-lg hidden-md"></li>
+    </ul>
+</div>
+<div class="nav-container">
+    <ul class="nav">
+        <li routerLinkActive="active" *ngFor="let menuitem of menuItems">
+            <!--If is a single link-->
+            <a [routerLink]="[menuitem.path]" [queryParams]="menuitem.queryParams" *ngIf="menuitem.type === 'link'">
+                <i [class]="menuitem.icon"></i>
+                <p>{{menuitem.title}}</p>
+            </a>
+            <!--If it have a submenu-->
+            <a data-toggle="collapse"  href="#{{menuitem.collapse}}" *ngIf="menuitem.type === 'sub'" (click)="updatePS()">
+                <i [class]="menuitem.icon"></i>
+                <p>{{menuitem.title}}
+                    <b class="caret"></b>
+                </p>
+            </a>
 
-                <!--Display the submenu items-->
-                <div id="{{menuitem.collapse}}" class="collapse in" *ngIf="menuitem.type === 'sub'">
-                    <ul class="nav">
-                        <li routerLinkActive="active" *ngFor="let childitem of menuitem.children">
-                            <a [routerLink]="[childitem.path]" [queryParams]="childitem.queryParams">
-                                <span class="sidebar-mini">{{childitem.ab}}</span>
-                                <span class="sidebar-normal">{{childitem.title}}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <!-- categories start -->
-            <!-- <ul class="nav">
+            <!--Display the submenu items-->
+            <div id="{{menuitem.collapse}}" class="collapse" *ngIf="menuitem.type === 'sub'">
+                <ul class="nav">
+                    <li routerLinkActive="active" *ngFor="let childitem of menuitem.children">
+                        <a [routerLink]="[childitem.path]" [queryParams]="childitem.queryParams">
+                            <span class="sidebar-mini">{{childitem.ab}}</span>
+                            <span class="sidebar-normal">{{childitem.title}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <!-- categories start -->
+        <!-- <ul class="nav">
                         <li routerLinkActive="active" *ngFor="let category of categories">
                             <a [routerLink]="['/category']" [queryParams]="{category: category.categoryId}" queryParamsHandling="merge">
                                       {{category.nameEn}}
@@ -405,22 +406,21 @@
                               </a>
                         </li>
                     </ul> -->
-            <!-- categories end -->
-            <!-- </li> -->
-            <!-- <li>
+        <!-- categories end -->
+        <!-- </li> -->
+        <!-- <li>
                         <a href="http://md-pro-angular.creative-tim.com/documentation/tutorial?ref=md-pro-archive">
                             <i class="material-icons">school</i>
                             <p>Documentation</p>
                         </a>
                     </li> -->
 
-        
-                </ul>
 
-    </div>
-    <!-- <footer class="footer">
+    </ul>
+
+</div>
+</div>
+<!-- <footer class="footer">
         <img src="assets/img/google-play-badge.png" style="width:100%; padding: 0 10px;" />
         <img src="assets/img/app-store-badge.svg" style="width:100%; padding: 0 26px;" />
     </footer> -->
-
-    </div>

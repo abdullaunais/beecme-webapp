@@ -14,8 +14,9 @@ export interface RouteInfo {
     path: string;
     title: string;
     type: string;
-    icontype: string;
+    icon: string;
     // icon: string;
+    queryParams?: any;
     collapse?: string;
     children?: ChildrenItems[];
 }
@@ -31,18 +32,173 @@ export interface ChildrenItems {
 // Menu Items
 export const ROUTES: RouteInfo[] = [
     {
-        path: '/home',
-        title: 'Home',
+        path: '/category',
+        queryParams: { category: 1000 },
+        title: 'Live Fish',
         type: 'link',
-        icontype: 'dashboard'
+        icon: 'fas fa-fish',
+        // collapse: 'categoryLF',
+        // children: [
+        //     {
+        //         title: 'Live Fish',
+        //         path: '/category',
+        //         queryParams: { category: 1000 },
+        //         ab: '1'
+        //     },
+        // ]
     },
     {
-        path: '/categories',
-        title: 'Categories',
+        path: 'categoryDT',
+        title: 'Fish Food',
         type: 'sub',
-        icontype: 'apps',
-        collapse: 'categories',
-        children: []
+        icon: 'fas fa-cookie-bite',
+        collapse: 'categoryDT',
+        children: [
+            {
+                title: 'Disease Treatment',
+                path: '/category',
+                queryParams: { category: 2100 },
+                ab: '1'
+            },
+            {
+                title: 'Feeders',
+                path: '/category',
+                queryParams: { category: 2200 },
+                ab: '2'
+            },
+            {
+                title: 'Food',
+                path: '/category',
+                queryParams: { category: 2300 },
+                ab: '3'
+            },
+            {
+                title: 'Water Care',
+                path: '/category',
+                queryParams: { category: 2400 },
+                ab: '4'
+            },
+        ]
+    },
+    {
+        path: 'categoryAT',
+        title: 'Aquariums / Tanks',
+        type: 'sub',
+        icon: 'fab fa-servicestack',
+        collapse: 'categoryAT',
+        children: [
+            {
+                title: 'Tank',
+                path: '/category',
+                queryParams: { category: 3100 },
+                ab: '1'
+            },
+            {
+                title: 'Tank Roof',
+                path: '/category',
+                queryParams: { category: 3200 },
+                ab: '2'
+            },
+            {
+                title: 'Tank Stand',
+                path: '/category',
+                queryParams: { category: 3300 },
+                ab: '3'
+            },
+        ]
+    },
+    {
+        path: 'categoryFP',
+        title: 'Filters & Pumps',
+        type: 'sub',
+        icon: 'fas fa-filter',
+        collapse: 'categoryFP',
+        children: [
+            {
+                title: 'Air & Water Pumps',
+                path: '/category',
+                queryParams: { category: 4100 },
+                ab: '1'
+            },
+            {
+                title: 'Filters',
+                path: '/category',
+                queryParams: { category: 4200 },
+                ab: '2'
+            },
+            {
+                title: 'Filter Media',
+                path: '/category',
+                queryParams: { category: 4300 },
+                ab: '3'
+            },
+        ]
+    },
+    {
+        path: '/categoryDGS',
+        title: 'Decor Gravel & Substrate',
+        type: 'sub',
+        icon: 'fas fa-leaf',
+        collapse: 'categoryDGS',
+        children: [
+            {
+                title: 'Artificial Plants',
+                path: '/category',
+                queryParams: { category: 5100 },
+                ab: '1'
+            },
+            {
+                title: 'Aquarium Substrate',
+                path: '/category',
+                queryParams: { category: 5200 },
+                ab: '2'
+            },
+            {
+                title: 'Backgrounds',
+                path: '/category',
+                queryParams: { category: 5300 },
+                ab: '3'
+            },
+            {
+                title: 'Gravel, Sand & Stones',
+                path: '/category',
+                queryParams: { category: 5400 },
+                ab: '4'
+            },
+            {
+                title: 'Live Plants',
+                path: '/category',
+                queryParams: { category: 5500 },
+                ab: '5'
+            },
+            {
+                title: 'Ornaments',
+                path: '/category',
+                queryParams: { category: 5600 },
+                ab: '6'
+            }
+        ]
+    },
+    {
+        path: 'categoryHL',
+        title: 'Heating & Lighting',
+        type: 'sub',
+        icon: 'fas fa-thermometer-quarter',
+        collapse: 'categoryHL',
+        children: [
+            {
+                title: 'Heaters',
+                path: '/category',
+                queryParams: { category: 6100 },
+                ab: '1'
+            },
+            {
+                title: 'Lights',
+                path: '/category',
+                queryParams: { category: 6200 },
+                ab: '2'
+            },
+        ]
     }
     //     , {
     //     path: '/categories',
@@ -133,7 +289,7 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
 
     ngOnInit() {
         this.initialize();
-        // this.menuItems = ROUTES.filter(menuItem => menuItem);
+        this.menuItems = ROUTES.filter(menuItem => menuItem);
 
         this.subscription = this.sidebarService.userItem
             .subscribe((data: any) => {
@@ -186,7 +342,7 @@ export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
             this.isLoading = false;
         });
         */
-        
+
         /* malhar 2018/10/14
         // shops list start
         this.deliveryService.getShops(this.city.id, this.catId, this.start, this.offset).catch((err): any => {
